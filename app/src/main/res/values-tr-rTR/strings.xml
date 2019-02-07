@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Ezan Kuran</string>
+
+    <array name="tab_name">
+        <item>Kuran</item>
+        <item>İmsakiye</item>
+        <item>Daha Fazla</item>
+    </array>
+
+    <string name="quran">Kuran</string>
+    <string name="prayer">Imsakiye</string>
+    <string name="others">Daha Fazla</string>
+
+
+</resources>

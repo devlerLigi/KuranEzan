@@ -1,3 +1,15 @@
 <resources>
-    <string name="app_name">KuranEzan</string>
+    <string name="app_name">Azan Quran</string>
+
+    <array name="tab_name">
+        <item>Quran</item>
+        <item>Prayer</item>
+        <item>Daha Fazla</item>
+    </array>
+
+    <string name="quran">Quran</string>
+    <string name="prayer">Prayer</string>
+    <string name="more">Daha Fazla</string>
+
+
 </resources>
