@@ -62,7 +62,8 @@ public class MainActivity extends FragmentActivity
                 .rootFragmentListener(this, TABS.length)
                 .build();
 
-        switchTab(0);
+        switchTab(1);
+        initSelectedTab(1);
 
         bottomTabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
@@ -86,6 +87,17 @@ public class MainActivity extends FragmentActivity
 
     }
 
+    private void initSelectedTab(int position) {
+        for (int i = 0; i < TABS.length; i++) {
+            TabLayout.Tab selectedTab = bottomTabLayout.getTabAt(i);
+            if (position != i) {
+                selectedTab.getCustomView().setSelected(false);
+            } else {
+                selectedTab.getCustomView().setSelected(true);
+            }
+        }
+    }
+
     private void initToolbar() {
         /*
         setSupportActionBar(toolbar);
@@ -101,6 +113,7 @@ public class MainActivity extends FragmentActivity
                     tab.setCustomView(getTabView(i));
             }
         }
+
     }
 
 
@@ -128,7 +141,24 @@ public class MainActivity extends FragmentActivity
     private void switchTab(int position) {
         mNavController.switchTab(position);
 
-//        updateToolbarTitle(position);
+        updateTab(position);
+//      updateToolbarTitle(position);
+    }
+
+    private void updateTab(int position) {
+
+        for (int i = 0; i < TABS.length; i++) {
+            TabLayout.Tab selectedTab = bottomTabLayout.getTabAt(i);
+            View customView = selectedTab.getCustomView();
+            TextView tabDescription = (TextView) customView.findViewById(R.id.tabDesc);
+
+            if (position != i) {
+                tabDescription.setTextColor(getResources().getColor(R.color.gray));
+            } else {
+                tabDescription.setTextColor(getResources().getColor(R.color.fab_color_pressed));
+            }
+        }
+
     }
 
     @Override
