@@ -12,5 +12,9 @@
     <string name="prayer">Imsakiye</string>
     <string name="others">Daha Fazla</string>
 
+    //More items
+    <string name="zikirmatik">Zikirmatik</string>
+    <string name="kibleBul">Kıble bul</string>
+    <string name="cumaMesajlari">Cuma mesajları</string>
 
 </resources>

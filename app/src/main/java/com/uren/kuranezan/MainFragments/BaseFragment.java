@@ -14,7 +14,7 @@ public class BaseFragment extends Fragment {
     public static final String ARGS_INSTANCE = "ARGS_INSTANCE";
 
 
-    FragmentNavigation mFragmentNavigation;
+    public FragmentNavigation mFragmentNavigation;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -32,12 +32,9 @@ public class BaseFragment extends Fragment {
     }
 
     public interface FragmentNavigation {
-         void pushFragment(Fragment fragment);
+        void pushFragment(Fragment fragment);
+        void pushFragment(Fragment fragment, String animationTag);
     }
-
-
-
-
 
 
 }

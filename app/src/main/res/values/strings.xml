@@ -7,9 +7,16 @@
         <item>Daha Fazla</item>
     </array>
 
+    //Tab descriptions
     <string name="quran">Quran</string>
     <string name="prayer">Prayer</string>
     <string name="more">Daha Fazla</string>
+
+    //More items
+    <string name="zikirmatik">Praymatic</string>
+    <string name="kibleBul">Find Qibla</string>
+    <string name="cumaMesajlari">Friday Messages</string>
+
 
 
 </resources>

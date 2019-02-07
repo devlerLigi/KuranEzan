@@ -35,6 +35,15 @@
             android:layout_weight="1"
             android:gravity="center">
 
+            <com.uren.kuranezan.Utils.ClickableImage.ClickableImageView
+                android:id="@+id/imgBack"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="8dp"
+                android:src="@drawable/icon_back_white"
+                android:visibility="gone" />
+
+
         </RelativeLayout>
 
 
@@ -42,16 +51,16 @@
             android:id="@+id/llMiddle"
             android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:layout_gravity="center"
             android:layout_weight="7.4"
             android:gravity="center"
-            android:layout_gravity="center"
             android:orientation="horizontal">
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:gravity="center"
-                android:layout_gravity="center">
+                android:layout_gravity="center"
+                android:gravity="center">
 
                 <TextView
                     android:id="@+id/txtToolbarTitle"
@@ -59,8 +68,8 @@
                     android:layout_height="match_parent"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentTop="true"
-                    android:gravity="center"
                     android:layout_centerInParent="true"
+                    android:gravity="center"
                     android:textColor="@android:color/white"
                     android:textSize="@dimen/toolbarTextSize" />
 
@@ -76,6 +85,14 @@
             android:layout_margin="2dp"
             android:layout_weight="1"
             android:gravity="center">
+
+            <com.uren.kuranezan.Utils.ClickableImage.ClickableImageView
+                android:id="@+id/imgNext"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="8dp"
+                android:src="@drawable/icon_forward"
+                android:visibility="gone" />
 
         </RelativeLayout>
 

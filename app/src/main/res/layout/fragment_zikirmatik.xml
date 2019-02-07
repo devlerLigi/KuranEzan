@@ -11,8 +11,7 @@
         <include layout="@layout/common_toolbar_layout" />
 
 
-
-
     </LinearLayout>
+
 
 </FrameLayout>

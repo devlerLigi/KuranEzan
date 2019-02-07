@@ -14,9 +14,9 @@ import android.widget.TextView;
 import com.uren.kuranezan.FragmentControllers.FragNavController;
 import com.uren.kuranezan.FragmentControllers.FragmentHistory;
 import com.uren.kuranezan.MainFragments.BaseFragment;
-import com.uren.kuranezan.MainFragments.KuranFragment;
-import com.uren.kuranezan.MainFragments.ImsakiyeFragment;
-import com.uren.kuranezan.MainFragments.DigerFragment;
+import com.uren.kuranezan.MainFragments.TabKuran.KuranFragment;
+import com.uren.kuranezan.MainFragments.TabImsakiye.ImsakiyeFragment;
+import com.uren.kuranezan.MainFragments.TabDiger.DigerFragment;
 import com.uren.kuranezan.Utils.Utils;
 
 import butterknife.BindArray;
@@ -45,6 +45,8 @@ public class MainActivity extends FragmentActivity
     private FragmentHistory fragmentHistory;
     private TextView tabDescription;
 
+    private int initialTabIndex = 1;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,10 +62,12 @@ public class MainActivity extends FragmentActivity
         mNavController = FragNavController.newBuilder(savedInstanceState, getSupportFragmentManager(), R.id.content_frame)
                 .transactionListener(this)
                 .rootFragmentListener(this, TABS.length)
+                .selectedTabIndex(FragNavController.TAB2)
                 .build();
 
-        switchTab(1);
-        initSelectedTab(1);
+        bottomTabLayout.getTabAt(initialTabIndex).select();
+        switchTab(initialTabIndex);
+
 
         bottomTabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
@@ -87,16 +91,6 @@ public class MainActivity extends FragmentActivity
 
     }
 
-    private void initSelectedTab(int position) {
-        for (int i = 0; i < TABS.length; i++) {
-            TabLayout.Tab selectedTab = bottomTabLayout.getTabAt(i);
-            if (position != i) {
-                selectedTab.getCustomView().setSelected(false);
-            } else {
-                selectedTab.getCustomView().setSelected(true);
-            }
-        }
-    }
 
     private void initToolbar() {
         /*
@@ -200,8 +194,8 @@ public class MainActivity extends FragmentActivity
                     switchTab(position);
                     updateTabSelection(position);
                 } else {
-                    switchTab(0);
-                    updateTabSelection(0);
+                    switchTab(initialTabIndex);
+                    updateTabSelection(initialTabIndex);
                     fragmentHistory.emptyStack();
                 }
             }
@@ -234,6 +228,11 @@ public class MainActivity extends FragmentActivity
         if (mNavController != null) {
             mNavController.pushFragment(fragment);
         }
+    }
+
+    @Override
+    public void pushFragment(Fragment fragment, String animationTag) {
+
     }
 
 

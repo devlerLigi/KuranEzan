@@ -31,7 +31,6 @@ public class Utils {
     }
 
 
-
     public static final String getDeviceID(Context context) {
         return Settings.Secure.getString(context.getContentResolver(),
                 Settings.Secure.ANDROID_ID);
@@ -49,7 +48,6 @@ public class Utils {
         return pInfo.versionName;
 
     }
-
 
 
     public static void setButtonBackgroundColor(Context context, Button button, int color) {
@@ -79,7 +77,7 @@ public class Utils {
         Drawable state_pressed = ContextCompat.getDrawable(context, selected);
 
 
-          Bitmap state_normal_bitmap = ((BitmapDrawable)state_normal).getBitmap();
+        Bitmap state_normal_bitmap = ((BitmapDrawable) state_normal).getBitmap();
 
         // Setting alpha directly just didn't work, so we draw a new bitmap!
         Bitmap disabledBitmap = Bitmap.createBitmap(
@@ -92,8 +90,6 @@ public class Utils {
         canvas.drawBitmap(state_normal_bitmap, 0, 0, paint);
 
         BitmapDrawable state_normal_drawable = new BitmapDrawable(context.getResources(), disabledBitmap);
-
-
 
 
         StateListDrawable drawable = new StateListDrawable();
@@ -153,12 +149,6 @@ public class Utils {
         ColorStateList colorStates = new ColorStateList(new int[][]{new int[]{android.R.attr.state_pressed}, new int[]{}}, new int[]{pressed, normal});
         return colorStates;
     }
-
-
-
-
-
-
 
 
 }
