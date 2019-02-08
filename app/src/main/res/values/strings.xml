@@ -10,12 +10,15 @@
     //Tab descriptions
     <string name="quran">Quran</string>
     <string name="prayer">Prayer</string>
-    <string name="more">Daha Fazla</string>
+    <string name="more">More</string>
 
     //More items
     <string name="zikirmatik">Praymatic</string>
     <string name="kibleBul">Find Qibla</string>
     <string name="cumaMesajlari">Friday Messages</string>
+
+    <string name="SAVE">SAVE</string>
+    <string name="MY_DHIKR">MY DHIKR</string>
 
     <array name="surah_name">
         <item>Al Fatihah</item>

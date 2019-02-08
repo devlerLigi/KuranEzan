@@ -17,6 +17,9 @@
     <string name="kibleBul">Kıble bul</string>
     <string name="cumaMesajlari">Cuma mesajları</string>
 
+    <string name="SAVE">KAYDET</string>
+    <string name="MY_DHIKR">ZİKİRLERİM</string>
+
     <array name="surah_name">
         <item>Fâtiha Sûresi</item>
         <item>Bakara Sûresi</item>
