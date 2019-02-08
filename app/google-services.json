@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "857073780676",
+    "firebase_url": "https://quranreadlistenmemorize.firebaseio.com",
+    "project_id": "quranreadlistenmemorize",
+    "storage_bucket": "quranreadlistenmemorize.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:857073780676:android:ad01a1c907a3f3d2",
+        "android_client_info": {
+          "package_name": "com.uren.kuranezan"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "857073780676-8vbd4cibvumlu134juivv3llbsaee19n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC6sBQnnob1qVov7vxB2GNgo7GjEq2hlQo"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
