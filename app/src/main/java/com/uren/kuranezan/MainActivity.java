@@ -11,6 +11,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.crashlytics.android.Crashlytics;
 import com.uren.kuranezan.FragmentControllers.FragNavController;
 import com.uren.kuranezan.FragmentControllers.FragmentHistory;
 import com.uren.kuranezan.MainFragments.BaseFragment;
@@ -22,6 +23,7 @@ import com.uren.kuranezan.Utils.Utils;
 import butterknife.BindArray;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.fabric.sdk.android.Fabric;
 
 public class MainActivity extends FragmentActivity
         implements BaseFragment.FragmentNavigation,
@@ -53,6 +55,7 @@ public class MainActivity extends FragmentActivity
 
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+        Fabric.with(this, new Crashlytics());
 
         initToolbar();
         initTab();
