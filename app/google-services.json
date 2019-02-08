@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "857073780676-b85fedlqt2rpooua7nm800e92sjt0q0p.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.uren.kuranezan",
+            "certificate_hash": "835135492279180c8c9d6517641665756f89cf21"
+          }
+        },
+        {
           "client_id": "857073780676-8vbd4cibvumlu134juivv3llbsaee19n.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -29,8 +37,20 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "857073780676-8vbd4cibvumlu134juivv3llbsaee19n.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "857073780676-4omm62d1cqk0q848vtuj0sf94ui16ohe.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.uren.quranreadlistenmemorize"
+              }
+            }
+          ]
         },
         "ads_service": {
           "status": 2
