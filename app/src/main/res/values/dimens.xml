@@ -2,4 +2,7 @@
     <dimen name="edittextsize">15sp</dimen>
     <dimen name="default_elevation">8dp</dimen>
     <dimen name="toolbarTextSize">20sp</dimen>
+
+    <dimen name="zikirmatikWidth">172dp</dimen>
+    <dimen name="zikirmatikHeigth">90dp</dimen>
 </resources>

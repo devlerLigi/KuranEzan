@@ -47,6 +47,12 @@ public class KibleBulFragment extends BaseFragment
         return mView;
     }
 
+    @Override
+    public void onStart() {
+        getActivity().findViewById(R.id.tabMainLayout).setVisibility(View.VISIBLE);
+        super.onStart();
+    }
+
     private void setToolbar() {
         txtToolbarTitle.setText(getString(R.string.kibleBul));
     }

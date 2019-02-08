@@ -19,6 +19,7 @@
 
     <string name="SAVE">KAYDET</string>
     <string name="MY_DHIKR">ZİKİRLERİM</string>
+    <string name="NIGHT_MODE_MESSAGE">Gece modunda arkaplan rengi değiştirilemez</string>
 
     <array name="surah_name">
         <item>Fâtiha Sûresi</item>

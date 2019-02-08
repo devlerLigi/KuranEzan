@@ -19,6 +19,7 @@
 
     <string name="SAVE">SAVE</string>
     <string name="MY_DHIKR">MY DHIKR</string>
+    <string name="NIGHT_MODE_MESSAGE">Background color cannot be changed in night mode</string>
 
     <array name="surah_name">
         <item>Al Fatihah</item>
@@ -139,7 +140,14 @@
     </array>
 
 
+    <string name="ADMOB_APP_ID">ca-app-pub-7227467199436307~8280076787</string>
+    <!--<string name="ADMOB_BANNER_AD_UNIT_ID">ca-app-pub-7227467199436307/9074283706</string>
+    <string name="ADMOB_INTERSITITIAL_AD_UNIT_ID">ca-app-pub-7227467199436307/6220765946</string>-->
 
+
+    <!--Test-->
+    <string name="ADMOB_BANNER_AD_UNIT_ID">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="ADMOB_INTERSITITIAL_AD_UNIT_ID">ca-app-pub-3940256099942544/1033173712</string>
 
 
 

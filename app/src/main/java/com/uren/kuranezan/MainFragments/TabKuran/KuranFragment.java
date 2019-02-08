@@ -45,6 +45,12 @@ public class KuranFragment extends BaseFragment
     }
 
     @Override
+    public void onStart() {
+        getActivity().findViewById(R.id.tabMainLayout).setVisibility(View.VISIBLE);
+        super.onStart();
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
