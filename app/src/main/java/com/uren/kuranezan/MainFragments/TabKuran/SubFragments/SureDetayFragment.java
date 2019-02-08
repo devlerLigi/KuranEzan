@@ -1,27 +1,28 @@
 package com.uren.kuranezan.MainFragments.TabKuran.SubFragments;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.util.Log;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.uren.kuranezan.MainFragments.BaseFragment;
+import com.uren.kuranezan.MainFragments.TabKuran.Adapters.AyahAdapter;
+import com.uren.kuranezan.Models.Ayahs;
+import com.uren.kuranezan.Models.Quran;
+import com.uren.kuranezan.Models.Surahs;
 import com.uren.kuranezan.R;
+import com.uren.kuranezan.Singleton.QuranOriginal;
+import com.uren.kuranezan.Singleton.QuranTranslation;
+import com.uren.kuranezan.Singleton.QuranTransliteration;
 import com.uren.kuranezan.Utils.ClickableImage.ClickableImageView;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -32,15 +33,23 @@ public class SureDetayFragment extends BaseFragment
 
     View mView;
     private int number;
+    private LinearLayoutManager mLayoutManager;
+    private AyahAdapter ayahAdapter;
 
+    @BindView(R.id.toolbarLayout)
+    Toolbar toolbarLayout;
     @BindView(R.id.txtToolbarTitle)
     TextView txtToolbarTitle;
-    @BindView(R.id.imgBack)
+    @BindView(R.id.imgLeft)
     ClickableImageView imgBack;
+    @BindView(R.id.imgRight)
+    ClickableImageView imgOptions;
+    @BindView(R.id.recyclerView)
+    RecyclerView recyclerView;
 
-    @BindView(R.id.txtSure)
-    TextView txtSure;
-
+    ArrayList<Ayahs> ayahOriginalList = new ArrayList<Ayahs>();
+    ArrayList<Ayahs> ayahTransliterationlList = new ArrayList<Ayahs>();
+    ArrayList<Ayahs> ayahTranslationList = new ArrayList<Ayahs>();
 
     public static SureDetayFragment newInstance(int number) {
         Bundle args = new Bundle();
@@ -66,89 +75,16 @@ public class SureDetayFragment extends BaseFragment
             mView = inflater.inflate(R.layout.fragment_suredetay, container, false);
             ButterKnife.bind(this, mView);
 
-
+            checkBundle();
             setToolbar();
             init();
 
-            checkBundle();
-            setSurah();
-
+            initRecyclerView();
+            setUpRecyclerView();
 
         }
-
 
         return mView;
-    }
-
-
-    private void setSurah() {
-
-        try {
-            JSONObject obj = new JSONObject(loadJSONFromAsset());
-            JSONObject jsonObject = obj.getJSONObject("data");
-            JSONArray jsonArray=  jsonObject.getJSONArray("surahs");
-
-            JSONObject surah = jsonArray.getJSONObject(number);
-
-            JSONArray ayahs = (JSONArray) surah.get("ayahs");
-            Log.i("ayet ", ayahs.toString());
-
-            ArrayList<HashMap<String, String>> formList = new ArrayList<HashMap<String, String>>();
-            HashMap<String, String> m_li;
-
-            String s = "";
-
-            Toast.makeText(getActivity(), "bitti",
-                    Toast.LENGTH_LONG).show();
-
-            for (int i = 0; i < ayahs.length(); i++) {
-                JSONObject jo_inside = ayahs.getJSONObject(i);
-
-                String formula_value = jo_inside.getString("text");
-
-                //Add your values in your `ArrayList` as below:
-                m_li = new HashMap<String, String>();
-                m_li.put("text", formula_value);
-
-                s = s + " " + formula_value;
-
-
-                formList.add(m_li);
-            }
-
-
-            txtSure.setText(s);
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-    }
-
-    public String loadJSONFromAsset() {
-        String json = null;
-        try {
-            InputStream is = getContext().getResources().openRawResource(R.raw.quran_uthmani);
-            int size = is.available();
-            byte[] buffer = new byte[size];
-            is.read(buffer);
-            is.close();
-            json = new String(buffer, "UTF-8");
-        } catch (IOException ex) {
-            ex.printStackTrace();
-            return null;
-        }
-        return json;
-    }
-
-    private void setToolbar() {
-        txtToolbarTitle.setText(getString(R.string.zikirmatik));
-    }
-
-
-    private void init() {
-        imgBack.setVisibility(View.VISIBLE);
-        imgBack.setOnClickListener(this);
     }
 
     private void checkBundle() {
@@ -160,11 +96,83 @@ public class SureDetayFragment extends BaseFragment
         }
     }
 
+    private void setToolbar() {
+        String surahName = getResources().getStringArray(R.array.surah_name)[number];
+        txtToolbarTitle.setText(surahName);
+    }
+
+    private void init() {
+        imgBack.setVisibility(View.VISIBLE);
+        imgOptions.setVisibility(View.VISIBLE);
+        imgBack.setOnClickListener(this);
+        imgOptions.setOnClickListener(this);
+        recyclerView.setOnClickListener(this);
+    }
+
+    private void initRecyclerView() {
+        setLayoutManager();
+        setAdapter();
+    }
+
+    private void setLayoutManager() {
+        mLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
+        recyclerView.setLayoutManager(mLayoutManager);
+    }
+
+    private void setAdapter() {
+        ayahAdapter = new AyahAdapter(getContext());
+        recyclerView.setAdapter(ayahAdapter);
+        //ayahAdapter.setListItemClickListener(this);
+    }
+
+
+    private void setUpRecyclerView() {
+        setAyahListOriginal();
+        setAyahTransliteration();
+        setAyahTranslation();
+        ayahAdapter.addAll(ayahOriginalList, ayahTransliterationlList, ayahTranslationList);
+    }
+
+    private void setAyahListOriginal() {
+        Quran quranOriginal = QuranOriginal.getInstance().getQuranOriginal();
+        Surahs[] surahs = quranOriginal.getData().getSurahs();
+        Ayahs[] ayahs = surahs[number].getAyahs();
+
+        for (int i = 0; i < ayahs.length; i++) {
+            ayahOriginalList.add(ayahs[i]);
+        }
+    }
+
+    private void setAyahTransliteration() {
+        Quran quranTransliteration = QuranTransliteration.getInstance().getQuranTransliteration();
+        Surahs[] surahs = quranTransliteration.getData().getSurahs();
+        Ayahs[] ayahs = surahs[number].getAyahs();
+
+        for (int i = 0; i < ayahs.length; i++) {
+            ayahTransliterationlList.add(ayahs[i]);
+        }
+    }
+
+    private void setAyahTranslation() {
+        Quran quranTranslation = QuranTranslation.getInstance().getQuranTranslation();
+        Surahs[] surahs = quranTranslation.getData().getSurahs();
+        Ayahs[] ayahs = surahs[number].getAyahs();
+
+        for (int i = 0; i < ayahs.length; i++) {
+            ayahTranslationList.add(ayahs[i]);
+        }
+    }
+
+
     @Override
     public void onClick(View view) {
 
         if (view == imgBack) {
             getActivity().onBackPressed();
+        }
+
+        if (view == imgOptions) {
+
         }
 
     }

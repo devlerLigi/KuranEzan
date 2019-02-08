@@ -18,6 +18,9 @@ import com.uren.kuranezan.MainFragments.BaseFragment;
 import com.uren.kuranezan.MainFragments.TabKuran.KuranFragment;
 import com.uren.kuranezan.MainFragments.TabImsakiye.ImsakiyeFragment;
 import com.uren.kuranezan.MainFragments.TabDiger.DigerFragment;
+import com.uren.kuranezan.Singleton.QuranOriginal;
+import com.uren.kuranezan.Singleton.QuranTranslation;
+import com.uren.kuranezan.Singleton.QuranTransliteration;
 import com.uren.kuranezan.Utils.Utils;
 
 import butterknife.BindArray;
@@ -91,9 +94,19 @@ public class MainActivity extends FragmentActivity
             }
         });
 
+        fillInitialClasses();
 
     }
 
+    private void fillInitialClasses() {
+        setQuranModels();
+    }
+
+    private void setQuranModels() {
+        QuranOriginal.getInstance(getBaseContext());
+        QuranTransliteration.getInstance(getBaseContext());
+        QuranTranslation.getInstance(getBaseContext());
+    }
 
     private void initToolbar() {
         /*

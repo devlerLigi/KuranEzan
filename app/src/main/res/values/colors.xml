@@ -38,7 +38,12 @@
     <color name="green">#70c050</color>
     <color name="gray">#808080</color>
 
+    <color name="mushaf2">#eeeade</color>
+    <color name="mushaf3">#ede6d3</color>
+    <color name="mushaf4">#ddcca2</color>
+    <color name="mushaf5">#dcd69c</color>
 
+    <color name="quranTextColor">#455a64</color>
 
 
 </resources>

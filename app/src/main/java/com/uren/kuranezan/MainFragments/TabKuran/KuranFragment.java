@@ -4,6 +4,8 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -19,8 +21,12 @@ import com.squareup.okhttp.Response;
 import com.uren.kuranezan.Interfaces.ListItemClickListener;
 import com.uren.kuranezan.MainFragments.BaseFragment;
 import com.uren.kuranezan.MainFragments.TabKuran.Adapters.SurahAdapter;
+import com.uren.kuranezan.MainFragments.TabKuran.JavaClasses.QuranAsyncProcess;
 import com.uren.kuranezan.MainFragments.TabKuran.SubFragments.SureDetayFragment;
 import com.uren.kuranezan.R;
+import com.uren.kuranezan.Singleton.QuranOriginal;
+import com.uren.kuranezan.Singleton.QuranTranslation;
+import com.uren.kuranezan.Singleton.QuranTransliteration;
 import com.uren.kuranezan.Utils.FileHelper;
 
 import java.io.File;
@@ -66,21 +72,16 @@ public class KuranFragment extends BaseFragment
             ButterKnife.bind(this, mView);
 
             setToolbar();
-            getJson();
+            //getJson();
             //setSurahList();
 
             initRecyclerView();
             setUpRecyclerView();
+
         }
 
         return mView;
     }
-
-
-
-
-
-
 
     private void initRecyclerView() {
         setLayoutManager();
@@ -152,7 +153,6 @@ public class KuranFragment extends BaseFragment
 
     public void generateNoteOnSD(Context context, String sFileName, String sBody) {
 
-
         try {
             FileHelper.saveToFile( sBody);
             Toast.makeText(getContext(), "ok", Toast.LENGTH_SHORT).show();
@@ -180,4 +180,9 @@ public class KuranFragment extends BaseFragment
     public void onListItemClick(String surahName, int clickedPosition) {
         mFragmentNavigation.pushFragment(SureDetayFragment.newInstance(clickedPosition));
     }
+
+
+    /*****************************************************/
+
+
 }

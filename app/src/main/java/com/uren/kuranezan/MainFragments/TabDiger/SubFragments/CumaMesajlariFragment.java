@@ -21,7 +21,7 @@ public class CumaMesajlariFragment extends BaseFragment
 
     @BindView(R.id.txtToolbarTitle)
     TextView txtToolbarTitle;
-    @BindView(R.id.imgBack)
+    @BindView(R.id.imgLeft)
     ClickableImageView imgBack;
 
 

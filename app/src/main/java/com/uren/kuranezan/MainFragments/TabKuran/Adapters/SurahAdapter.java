@@ -30,7 +30,7 @@ public class SurahAdapter extends RecyclerView.Adapter {
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
         View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.surah_list_item, parent, false);
+                .inflate(R.layout.row_surah, parent, false);
 
         RecyclerView.ViewHolder viewHolder = new MyViewHolder(itemView);
 
@@ -47,6 +47,7 @@ public class SurahAdapter extends RecyclerView.Adapter {
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
         LinearLayout llSure;
+        TextView txtSurahNumber;
         TextView txtSurahName;
 
         String surahName;
@@ -56,6 +57,7 @@ public class SurahAdapter extends RecyclerView.Adapter {
             super(view);
 
             llSure = (LinearLayout) view.findViewById(R.id.llSure);
+            txtSurahNumber = (TextView) view.findViewById(R.id.txtSurahNumber);
             txtSurahName = (TextView) view.findViewById(R.id.txtSurahName);
 
             setListeners();
@@ -79,6 +81,7 @@ public class SurahAdapter extends RecyclerView.Adapter {
             this.surahName = surahName;
             this.position = position;
 
+            txtSurahNumber.setText( String.valueOf(position+1) + ". ");
             txtSurahName.setText(surahName);
         }
 

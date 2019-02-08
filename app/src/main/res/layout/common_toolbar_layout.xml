@@ -36,7 +36,7 @@
             android:gravity="center">
 
             <com.uren.kuranezan.Utils.ClickableImage.ClickableImageView
-                android:id="@+id/imgBack"
+                android:id="@+id/imgLeft"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:padding="8dp"
@@ -87,11 +87,11 @@
             android:gravity="center">
 
             <com.uren.kuranezan.Utils.ClickableImage.ClickableImageView
-                android:id="@+id/imgNext"
+                android:id="@+id/imgRight"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:padding="8dp"
-                android:src="@drawable/icon_forward"
+                android:src="@drawable/icon_more_vertical"
                 android:visibility="gone" />
 
         </RelativeLayout>

@@ -17,6 +17,8 @@
     <string name="kibleBul">Find Qibla</string>
     <string name="cumaMesajlari">Friday Messages</string>
 
+    <string name="ayah">Ayah</string>
+
     <array name="surah_name">
         <item>Al Fatihah</item>
         <item>Al Baqarah</item>
