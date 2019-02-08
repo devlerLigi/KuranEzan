@@ -1,19 +1,32 @@
 package com.uren.kuranezan.MainFragments.TabKuran;
 
+import android.content.Context;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.squareup.okhttp.OkHttpClient;
+import com.squareup.okhttp.Request;
+import com.squareup.okhttp.Response;
 import com.uren.kuranezan.Interfaces.ListItemClickListener;
 import com.uren.kuranezan.MainFragments.BaseFragment;
 import com.uren.kuranezan.MainFragments.TabKuran.Adapters.SurahAdapter;
 import com.uren.kuranezan.MainFragments.TabKuran.SubFragments.SureDetayFragment;
 import com.uren.kuranezan.R;
+import com.uren.kuranezan.Utils.FileHelper;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import butterknife.BindArray;
@@ -97,10 +110,7 @@ public class KuranFragment extends BaseFragment
     }
 
     private void getJson() {
-/*
-        btnGetJson.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+
 
                 AsyncTask asyncTask = new AsyncTask() {
 
@@ -127,15 +137,34 @@ public class KuranFragment extends BaseFragment
 
                     @Override
                     protected void onPostExecute(Object o) {
-                        txtJson.setText(o.toString());
+
+                        String s= o.toString();
+                        Toast.makeText(getContext(), s, Toast.LENGTH_SHORT).show();
+                        generateNoteOnSD(getContext(), "fatiha", s );
+
                     }
 
 
                 }.execute();
 
-            }
-        });
-*/
+
+    }
+
+    public void generateNoteOnSD(Context context, String sFileName, String sBody) {
+
+
+        try {
+            FileHelper.saveToFile( sBody);
+            Toast.makeText(getContext(), "ok", Toast.LENGTH_SHORT).show();
+
+            String read =FileHelper.ReadFile(getContext());
+                    Toast.makeText(getContext(), read, Toast.LENGTH_SHORT).show();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            Toast.makeText(getContext(), e.toString(), Toast.LENGTH_SHORT).show();
+        }
+
     }
 
     private void setToolbar() {
