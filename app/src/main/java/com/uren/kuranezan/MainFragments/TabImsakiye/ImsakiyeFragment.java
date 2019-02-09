@@ -34,6 +34,12 @@ public class ImsakiyeFragment extends BaseFragment {
         return view;
     }
 
+    @Override
+    public void onStart() {
+        getActivity().findViewById(R.id.tabMainLayout).setVisibility(View.VISIBLE);
+        super.onStart();
+    }
+
     private void setToolbar() {
         txtToolbarTitle.setText(getString(R.string.prayer));
     }

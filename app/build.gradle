@@ -41,6 +41,12 @@ dependencies {
     implementation 'com.google.firebase:firebase-core:16.0.6'
     implementation 'com.crashlytics.sdk.android:crashlytics:2.9.6'
     implementation 'com.google.code.gson:gson:2.8.5'
+    implementation 'com.google.android.gms:play-services-ads:17.1.2'
+    implementation 'com.google.firebase:firebase-ads:17.1.2'
+
+    implementation 'com.github.bumptech.glide:glide:4.8.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.8.0'
+
 }
 
 apply plugin: 'com.google.gms.google-services'

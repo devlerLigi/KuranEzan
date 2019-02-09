@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.crashlytics.android.Crashlytics;
@@ -41,6 +42,8 @@ public class MainActivity extends FragmentActivity
     String[] TABS;
     @BindView(R.id.bottom_tab_layout)
     TabLayout bottomTabLayout;
+    @BindView(R.id.tabMainLayout)
+    LinearLayout tabMainLayout;
 
     private int[] mTabIconsSelected = {
             R.drawable.icon_kuran,
