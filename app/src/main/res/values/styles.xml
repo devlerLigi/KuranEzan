@@ -31,4 +31,9 @@
 
     </style>
 
+    <style name="customTextStyle" parent="android:Widget.TextView">
+        <item name="android:textColor">@color/style_color_primary</item>
+        <item name="android:textSize">17sp</item>
+    </style>
+
 </resources>

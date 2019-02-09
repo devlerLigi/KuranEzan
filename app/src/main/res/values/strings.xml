@@ -18,6 +18,16 @@
     <string name="cumaMesajlari">Friday Messages</string>
 
     <string name="ayah">Ayah</string>
+    <string name="options">Options</string>
+    <string name="viewOptions">View Options</string>
+    <string name="textOptions">Text Options</string>
+    <string name="language">Language</string>
+    <string name="showTransliteration">Show Transliteration</string>
+    <string name="showTranslation">Show Translation</string>
+    <string name="fontArabic">Arabic Font</string>
+    <string name="fontSizeArabic">Arabic Font Size</string>
+    <string name="fontSizeTransliteration">Transliteration Font Size</string>
+    <string name="fontSizeTranslation">Translation Font Size</string>
 
     <array name="surah_name">
         <item>Al Fatihah</item>

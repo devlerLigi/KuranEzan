@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.uren.kuranezan.Interfaces.ListItemClickListener;
 import com.uren.kuranezan.Models.Ayahs;
 import com.uren.kuranezan.R;
+import com.uren.kuranezan.Utils.Config;
 
 import java.util.ArrayList;
 
@@ -22,12 +23,20 @@ public class AyahAdapter extends RecyclerView.Adapter {
     private Context mContext;
     private ListItemClickListener listItemClickListener;
     private ArrayList<Ayahs> ayahOriginalList, ayahTransliterationlList, ayahTranslationList;
+    boolean showTransliteration, showTranslation;
 
     public AyahAdapter(Context context) {
         this.mContext = context;
         this.ayahOriginalList = new ArrayList<Ayahs>();
         this.ayahTransliterationlList = new ArrayList<Ayahs>();
         this.ayahTranslationList = new ArrayList<Ayahs>();
+
+        setPreferences();
+    }
+
+    private void setPreferences() {
+        showTransliteration = Config.showTransliteration;
+        showTranslation = Config.showTranslation;
     }
 
     @Override
@@ -97,6 +106,25 @@ public class AyahAdapter extends RecyclerView.Adapter {
             } else {
                 llAyah.setBackgroundColor(ContextCompat.getColor(mContext, R.color.mushaf2));
             }
+
+            setOptions();
+        }
+
+        private void setOptions() {
+
+            //Transliteration layout
+            if(!showTransliteration){
+                txtAyahTransliteration.setVisibility(View.GONE);
+            }else{
+                txtAyahTransliteration.setVisibility(View.VISIBLE);
+            }
+            //Translation layout
+            if(!showTranslation){
+                txtAyahTranslation.setVisibility(View.GONE);
+            }else{
+                txtAyahTranslation.setVisibility(View.VISIBLE);
+            }
+
         }
 
         private void setAyahOriginalTypeface() {
@@ -128,6 +156,16 @@ public class AyahAdapter extends RecyclerView.Adapter {
 
     public void setListItemClickListener(ListItemClickListener listItemClickListener) {
         this.listItemClickListener = listItemClickListener;
+    }
+
+    public void showTransliteration(boolean isShow ) {
+        this.showTransliteration=isShow;
+        notifyDataSetChanged();
+    }
+
+    public void showTranslation(boolean isShow ) {
+        this.showTranslation=isShow;
+        notifyDataSetChanged();
     }
 
 }

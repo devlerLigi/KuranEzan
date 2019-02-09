@@ -1,5 +1,6 @@
 package com.uren.kuranezan;
 
+import android.content.SharedPreferences;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -21,6 +22,7 @@ import com.uren.kuranezan.MainFragments.TabDiger.DigerFragment;
 import com.uren.kuranezan.Singleton.QuranOriginal;
 import com.uren.kuranezan.Singleton.QuranTranslation;
 import com.uren.kuranezan.Singleton.QuranTransliteration;
+import com.uren.kuranezan.Utils.Config;
 import com.uren.kuranezan.Utils.Utils;
 
 import butterknife.BindArray;
@@ -51,6 +53,9 @@ public class MainActivity extends FragmentActivity
     private TextView tabDescription;
 
     private int initialTabIndex = 1;
+
+    private SharedPreferences mPreferences;
+    private SharedPreferences.Editor mEditor;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -95,6 +100,7 @@ public class MainActivity extends FragmentActivity
         });
 
         fillInitialClasses();
+        setSharedPreferences();
 
     }
 
@@ -106,6 +112,11 @@ public class MainActivity extends FragmentActivity
         QuranOriginal.getInstance(getBaseContext());
         QuranTransliteration.getInstance(getBaseContext());
         QuranTranslation.getInstance(getBaseContext());
+    }
+
+    private void setSharedPreferences() {
+        Config config = new Config();
+        config.load(this);
     }
 
     private void initToolbar() {

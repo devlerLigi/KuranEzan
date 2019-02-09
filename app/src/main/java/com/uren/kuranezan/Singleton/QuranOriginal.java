@@ -50,7 +50,6 @@ public class QuranOriginal {
             @Override
             public void onSuccess(Quran quran) {
                 setQuranOriginal(quran);
-                Toast.makeText(context, "setQuranOriginal-ok", Toast.LENGTH_SHORT).show();
             }
 
             @Override

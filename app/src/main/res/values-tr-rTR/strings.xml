@@ -18,6 +18,16 @@
     <string name="cumaMesajlari">Cuma mesajları</string>
 
     <string name="ayah">Ayet</string>
+    <string name="options">Seçenekler</string>
+    <string name="viewOptions">Gösterim Seçenekleri</string>
+    <string name="textOptions">Metin Ayarları</string>
+    <string name="language">Dil</string>
+    <string name="showTransliteration">Okunuşu Göster</string>
+    <string name="showTranslation">Meali Göster</string>
+    <string name="fontArabic">Arapça yazı tipi</string>
+    <string name="fontSizeArabic">Arapça metin boyutu</string>
+    <string name="fontSizeTransliteration">Okunuş metin boyutu</string>
+    <string name="fontSizeTranslation">Meal metin boyutu</string>
 
     <array name="surah_name">
         <item>Fâtiha Sûresi</item>

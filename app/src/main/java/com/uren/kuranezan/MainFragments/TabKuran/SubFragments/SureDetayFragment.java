@@ -11,8 +11,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.uren.kuranezan.Interfaces.OptionsCallback;
 import com.uren.kuranezan.MainFragments.BaseFragment;
 import com.uren.kuranezan.MainFragments.TabKuran.Adapters.AyahAdapter;
+import com.uren.kuranezan.MainFragments.TabKuran.JavaClasses.OptionsHelper;
 import com.uren.kuranezan.Models.Ayahs;
 import com.uren.kuranezan.Models.Quran;
 import com.uren.kuranezan.Models.Surahs;
@@ -103,8 +105,8 @@ public class SureDetayFragment extends BaseFragment
 
     private void init() {
         imgBack.setVisibility(View.VISIBLE);
-        imgOptions.setVisibility(View.VISIBLE);
         imgBack.setOnClickListener(this);
+        imgOptions.setVisibility(View.VISIBLE);
         imgOptions.setOnClickListener(this);
         recyclerView.setOnClickListener(this);
     }
@@ -172,8 +174,52 @@ public class SureDetayFragment extends BaseFragment
         }
 
         if (view == imgOptions) {
-
+            imgOptionsClicked();
         }
+
+    }
+
+    private void imgOptionsClicked() {
+        OptionsHelper.OptionsClicked optionsClicked = OptionsHelper.OptionsClicked.getInstance();
+        optionsClicked.setSinglePostItems(mFragmentNavigation);
+        optionsClicked.setProfileRefreshCallback(new OptionsCallback() {
+            @Override
+            public void onLanguageChanged(String language) {
+
+            }
+
+            @Override
+            public void onShowTransliterationChanged(boolean isShow) {
+                ayahAdapter.showTransliteration(isShow);
+            }
+
+            @Override
+            public void onShowTranslationChanged(boolean isShow) {
+                ayahAdapter.showTranslation(isShow);
+            }
+
+            @Override
+            public void onFontArabicChanged(String fontType) {
+
+            }
+
+            @Override
+            public void onFontSizeArabicChanged(float fontSize) {
+
+            }
+
+            @Override
+            public void onFontSizeTransliterationChanged(float fontSize) {
+
+            }
+
+            @Override
+            public void onFontSizeTranslationChanged(float fontSize) {
+
+            }
+        });
+
+        optionsClicked.startOptionsProcess();
 
     }
 }

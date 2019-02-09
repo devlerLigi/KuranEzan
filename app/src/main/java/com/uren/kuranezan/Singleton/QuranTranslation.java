@@ -50,7 +50,6 @@ public class QuranTranslation {
             @Override
             public void onSuccess(Quran quran) {
                 setQuranTranslation(quran);
-                Toast.makeText(context, "setQuranTranslation-ok", Toast.LENGTH_SHORT).show();
             }
 
             @Override
