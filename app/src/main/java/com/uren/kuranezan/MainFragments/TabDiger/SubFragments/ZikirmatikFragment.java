@@ -24,6 +24,8 @@ import com.uren.kuranezan.MainFragments.BaseFragment;
 import com.uren.kuranezan.R;
 import com.uren.kuranezan.Utils.AdMobUtil.AdMobUtils;
 import com.uren.kuranezan.Utils.ClickableImage.ClickableImageView;
+import com.uren.kuranezan.Utils.DialogBoxUtil.DialogBoxUtil;
+import com.uren.kuranezan.Utils.DialogBoxUtil.Interfaces.YesNoDialogBoxCallback;
 import com.uren.kuranezan.Utils.ShapeUtil;
 import com.uren.kuranezan.Utils.ToastMessageUtil;
 
@@ -53,6 +55,10 @@ public class ZikirmatikFragment extends BaseFragment {
     AdView adView;
     @BindView(R.id.mainFragLayout)
     FrameLayout mainFragLayout;
+    @BindView(R.id.tvZikir)
+    TextView tvZikir;
+    @BindView(R.id.btnReset)
+    View btnReset;
 
     boolean vibrationEnabled = false;
     boolean nightModeEnabled = false;
@@ -89,8 +95,7 @@ public class ZikirmatikFragment extends BaseFragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         if (mView == null) {
             mView = inflater.inflate(R.layout.fragment_zikirmatik, container, false);
@@ -176,6 +181,36 @@ public class ZikirmatikFragment extends BaseFragment {
             @Override
             public void onClick(View view) {
                 checkVibration();
+
+                int sayi = Integer.parseInt(tvZikir.getText().toString());
+                sayi++;
+                tvZikir.setText(Integer.toString(sayi));
+            }
+        });
+
+        btnReset.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                int zikirNum = Integer.parseInt(tvZikir.getText().toString());
+
+                if(zikirNum == 0){
+                    ToastMessageUtil.showToastShort(getContext(), getResources().getString(R.string.COUNTER_NUM_IS_ZERO));
+                    return;
+                }
+
+                DialogBoxUtil.showYesNoDialog(getContext(), null, getResources().getString(R.string.WARNING_RESET_COUNTER),
+                        new YesNoDialogBoxCallback() {
+                            @Override
+                            public void yesClick() {
+                                tvZikir.setText(Integer.toString(0));
+                            }
+
+                            @Override
+                            public void noClick() {
+
+                            }
+                        });
             }
         });
     }

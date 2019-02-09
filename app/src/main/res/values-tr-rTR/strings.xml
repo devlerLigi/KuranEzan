@@ -20,6 +20,10 @@
     <string name="SAVE">KAYDET</string>
     <string name="MY_DHIKR">ZİKİRLERİM</string>
     <string name="NIGHT_MODE_MESSAGE">Gece modunda arkaplan rengi değiştirilemez</string>
+    <string name="UPPERYES">EVET</string>
+    <string name="UPPERNO">HAYIR</string>
+    <string name="WARNING_RESET_COUNTER">Sayacı sıfırlamak istediğinize emin misiniz?</string>
+    <string name="COUNTER_NUM_IS_ZERO">Sayaç sayısı 0</string>
 
     <array name="surah_name">
         <item>Fâtiha Sûresi</item>
