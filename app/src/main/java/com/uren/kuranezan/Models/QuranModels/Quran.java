@@ -1,4 +1,4 @@
-package com.uren.kuranezan.Models;
+package com.uren.kuranezan.Models.QuranModels;
 
 public class Quran
 {

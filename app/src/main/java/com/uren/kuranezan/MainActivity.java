@@ -23,6 +23,7 @@ import com.uren.kuranezan.MainFragments.TabDiger.DigerFragment;
 import com.uren.kuranezan.Singleton.QuranOriginal;
 import com.uren.kuranezan.Singleton.QuranTranslation;
 import com.uren.kuranezan.Singleton.QuranTransliteration;
+import com.uren.kuranezan.Singleton.TranslationList;
 import com.uren.kuranezan.Utils.Config;
 import com.uren.kuranezan.Utils.Utils;
 
@@ -109,12 +110,17 @@ public class MainActivity extends FragmentActivity
 
     private void fillInitialClasses() {
         setQuranModels();
+        setLanguageList();
     }
 
     private void setQuranModels() {
         QuranOriginal.getInstance(getBaseContext());
         QuranTransliteration.getInstance(getBaseContext());
         QuranTranslation.getInstance(getBaseContext());
+    }
+
+    private void setLanguageList() {
+        TranslationList.getInstance(getBaseContext());
     }
 
     private void setSharedPreferences() {

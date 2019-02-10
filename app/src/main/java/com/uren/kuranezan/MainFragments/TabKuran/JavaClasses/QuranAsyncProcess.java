@@ -5,7 +5,7 @@ import android.os.AsyncTask;
 
 import com.google.gson.Gson;
 import com.uren.kuranezan.Interfaces.OnEventListener;
-import com.uren.kuranezan.Models.Quran;
+import com.uren.kuranezan.Models.QuranModels.Quran;
 import com.uren.kuranezan.R;
 
 import java.io.BufferedReader;

@@ -5,8 +5,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -15,14 +13,15 @@ import com.uren.kuranezan.Interfaces.OptionsCallback;
 import com.uren.kuranezan.MainFragments.BaseFragment;
 import com.uren.kuranezan.MainFragments.TabKuran.Adapters.AyahAdapter;
 import com.uren.kuranezan.MainFragments.TabKuran.JavaClasses.OptionsHelper;
-import com.uren.kuranezan.Models.Ayahs;
-import com.uren.kuranezan.Models.Quran;
-import com.uren.kuranezan.Models.Surahs;
+import com.uren.kuranezan.Models.QuranModels.Ayahs;
+import com.uren.kuranezan.Models.QuranModels.Quran;
+import com.uren.kuranezan.Models.QuranModels.Surahs;
 import com.uren.kuranezan.R;
 import com.uren.kuranezan.Singleton.QuranOriginal;
 import com.uren.kuranezan.Singleton.QuranTranslation;
 import com.uren.kuranezan.Singleton.QuranTransliteration;
 import com.uren.kuranezan.Utils.ClickableImage.ClickableImageView;
+import com.uren.kuranezan.Utils.Config;
 
 import java.util.ArrayList;
 

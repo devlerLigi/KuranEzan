@@ -11,7 +11,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.uren.kuranezan.Interfaces.ListItemClickListener;
-import com.uren.kuranezan.Models.Ayahs;
+import com.uren.kuranezan.Models.QuranModels.Ayahs;
 import com.uren.kuranezan.R;
 import com.uren.kuranezan.Utils.Config;
 
@@ -118,7 +118,7 @@ public class AyahAdapter extends RecyclerView.Adapter {
             }else{
                 txtAyahTransliteration.setVisibility(View.VISIBLE);
             }
-            //Translation layout
+            //Data layout
             if(!showTranslation){
                 txtAyahTranslation.setVisibility(View.GONE);
             }else{

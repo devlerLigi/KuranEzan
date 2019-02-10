@@ -1,12 +1,22 @@
 package com.uren.kuranezan.Utils.DialogBoxUtil;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.support.annotation.Nullable;
+import android.view.View;
+import android.view.Window;
+import android.widget.Button;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 
 import com.uren.kuranezan.R;
 import com.uren.kuranezan.Utils.CommonUtils;
+import com.uren.kuranezan.Utils.Config;
 import com.uren.kuranezan.Utils.DialogBoxUtil.Interfaces.YesNoDialogBoxCallback;
+
+import java.util.List;
 
 public class DialogBoxUtil {
 
@@ -38,4 +48,49 @@ public class DialogBoxUtil {
         AlertDialog alert = builder.create();
         alert.show();
     }
+
+    public static void showRadioDialogBox(Context context, String title, List<String> stringList, String identifier, final YesNoDialogBoxCallback yesNoDialogBoxCallback) {
+
+        // custom dialog
+        CommonUtils.hideKeyBoard(context);
+        final Dialog dialog = new Dialog(context);
+        dialog.setContentView(R.layout.radiobutton_dialog);
+        dialog.setTitle(title);
+
+        RadioGroup rg = (RadioGroup) dialog.findViewById(R.id.radio_group);
+        Button btnCancel = (Button) dialog.findViewById(R.id.btnCancel);
+        Button btnApply = (Button) dialog.findViewById(R.id.btnApply);
+
+        for (int i = 0; i < stringList.size(); i++) {
+            RadioButton rb = new RadioButton(context); // dynamically creating RadioButton and adding to RadioGroup.
+            rb.setText(stringList.get(i));
+            rg.addView(rb);
+
+            if(stringList.get(i).toLowerCase().equals(Config.lang)){
+
+            }
+
+        }
+
+        dialog.show();
+
+        //set Listeners
+        btnCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+                yesNoDialogBoxCallback.noClick();
+            }
+        });
+
+        btnApply.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+                yesNoDialogBoxCallback.yesClick();
+            }
+        });
+
+    }
+
 }

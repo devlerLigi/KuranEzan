@@ -41,7 +41,7 @@
 
                 </LinearLayout>
 
-                <!-- Language -->
+                <!-- Translations -->
                 <LinearLayout
                     android:id="@+id/llLanguage"
                     android:layout_width="match_parent"
@@ -127,7 +127,7 @@
                     android:alpha="0.5"
                     android:background="@color/gray" />
 
-                <!-- Show Translation -->
+                <!-- Show Data -->
                 <LinearLayout
                     android:id="@+id/llShowTranslation"
                     android:layout_width="match_parent"
@@ -284,7 +284,7 @@
                     android:alpha="0.5"
                     android:background="@color/gray" />
 
-                <!-- Font size Translation -->
+                <!-- Font size Data -->
                 <LinearLayout
                     android:id="@+id/llFontSizeTranslation"
                     android:layout_width="match_parent"

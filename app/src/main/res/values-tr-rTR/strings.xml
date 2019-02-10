@@ -37,6 +37,9 @@
     <string name="WARNING_RESET_COUNTER">Sayacı sıfırlamak istediğinize emin misiniz?</string>
     <string name="COUNTER_NUM_IS_ZERO">Sayaç sayısı 0</string>
 
+    <string name="cancel">İptal</string>
+    <string name="apply">Uygula</string>
+
     <array name="surah_name">
         <item>Fâtiha Sûresi</item>
         <item>Bakara Sûresi</item>
