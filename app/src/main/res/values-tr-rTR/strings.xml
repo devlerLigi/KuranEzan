@@ -30,13 +30,23 @@
     <string name="fontSizeTransliteration">Okunuş metin boyutu</string>
     <string name="fontSizeTranslation">Meal metin boyutu</string>
 
-    <string name="SAVE">KAYDET</string>
-    <string name="MY_DHIKR">ZİKİRLERİM</string>
+    <string name="SAVE">Kaydet</string>
+    <string name="SAVE_ON">Üzerine Yaz</string>
+    <string name="MY_DHIKR">Zikirlerim</string>
     <string name="NIGHT_MODE_MESSAGE">Gece modunda arkaplan rengi değiştirilemez</string>
     <string name="UPPERYES">EVET</string>
     <string name="UPPERNO">HAYIR</string>
     <string name="WARNING_RESET_COUNTER">Sayacı sıfırlamak istediğinize emin misiniz?</string>
     <string name="COUNTER_NUM_IS_ZERO">Sayaç sayısı 0</string>
+    <string name="OK">TAMAM</string>
+    <string name="CANCEL">İPTAL</string>
+    <string name="SAVE_TO_LIST">Listeye Kaydet</string>
+    <string name="PLEASE_GIVE_A_NAME">Lütfen bir isim belirleyin</string>
+    <string name="THERE_IS_SAME_ZIKIR">Aynı zikirden var</string>
+    <string name="CONTINUE">Devam et</string>
+    <string name="DELETE">Sil</string>
+    <string name="DHIKR_WILL_BE_CONTINUED">dhikr will be continued</string>
+    <string name="WAS_RECORDED">Kaydedildi</string>
 
     <string name="cancel">İptal</string>
     <string name="apply">Uygula</string>
