@@ -199,22 +199,22 @@ public class SureDetayFragment extends BaseFragment
 
             @Override
             public void onFontArabicChanged(String fontType) {
-
+                ayahAdapter.updateFontArabic(fontType);
             }
 
             @Override
-            public void onFontSizeArabicChanged(float fontSize) {
-
+            public void onFontSizeArabicChanged(int fontSize) {
+                ayahAdapter.updateFontSizeArabic(fontSize);
             }
 
             @Override
-            public void onFontSizeTransliterationChanged(float fontSize) {
-
+            public void onFontSizeTransliterationChanged(int fontSize) {
+                ayahAdapter.updateFontSizeTransliteration(fontSize);
             }
 
             @Override
-            public void onFontSizeTranslationChanged(float fontSize) {
-
+            public void onFontSizeTranslationChanged(int fontSize) {
+                ayahAdapter.updateFontSizeTranslation(fontSize);
             }
         });
 

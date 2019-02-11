@@ -44,7 +44,7 @@
                     android:textAlignment="textStart"
                     android:textColor="@color/black"
                     android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                    android:textSize="27sp" />
+                    android:textSize="28sp" />
 
                 <TextView
                     android:id="@+id/txtAyahTransliteration"

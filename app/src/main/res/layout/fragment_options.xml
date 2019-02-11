@@ -36,7 +36,7 @@
                         android:layout_marginBottom="5dp"
                         android:layout_marginLeft="10dp"
                         android:gravity="bottom"
-                        android:text="@string/language" />
+                        android:text="@string/translationLanguage" />
 
 
                 </LinearLayout>
@@ -207,116 +207,246 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"
                     android:alpha="0.5"
                     android:background="@color/gray" />
 
-                <!-- Font size Arabic -->
+
+                <!-- FONT SIZE ARABIC -->
                 <LinearLayout
-                    android:id="@+id/llFontSizeArabic"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:background="?attr/selectableItemBackground"
-                    android:orientation="horizontal">
+                    android:background="@color/clearWhite"
+                    android:gravity="bottom">
 
                     <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="25dp"
-                        android:layout_weight="7"
-                        android:gravity="center_vertical"
-                        android:text="@string/fontSizeArabic"
-                        android:textColor="@color/black"
-                        android:textSize="17sp" />
+                        style="@style/customTextStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dp"
+                        android:layout_marginLeft="10dp"
+                        android:gravity="bottom"
+                        android:text="@string/fontSizeArabic" />
 
-                    <ImageView
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginRight="10dp"
-                        android:layout_weight="1"
-                        android:padding="12dp"
-                        android:src="@drawable/icon_forward" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/mushaf2"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="@string/letterA"
+                            android:textSize="20sp" />
+
+                        <SeekBar
+                            android:id="@+id/seekbar1"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginRight="5dp"
+                            android:layout_weight="7"
+                            android:indeterminate="false"
+                            android:max="50"
+                            android:nestedScrollingEnabled="false"
+                            android:progress="28"
+                            android:scrollbarStyle="outsideInset" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/letterA"
+                            android:textSize="40sp" />
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/txtFontSizeArabic"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dp"
+                        android:gravity="center"
+                        android:text="@string/arabicWord"
+                        android:textColor="@color/black"
+                        android:textSize="28sp" />
 
                 </LinearLayout>
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"
                     android:alpha="0.5"
                     android:background="@color/gray" />
 
-                <!-- Font size Transliteration -->
+                <!-- FONT SIZE TRANSLITERATION -->
                 <LinearLayout
-                    android:id="@+id/llFontSizeTransliteration"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:background="?attr/selectableItemBackground"
-                    android:orientation="horizontal">
+                    android:background="@color/clearWhite"
+                    android:gravity="bottom">
 
                     <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="25dp"
-                        android:layout_weight="7"
-                        android:gravity="center_vertical"
-                        android:text="@string/fontSizeTransliteration"
-                        android:textColor="@color/black"
-                        android:textSize="17sp" />
+                        style="@style/customTextStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dp"
+                        android:layout_marginLeft="10dp"
+                        android:gravity="bottom"
+                        android:text="@string/fontSizeTransliteration" />
 
-                    <ImageView
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginRight="10dp"
-                        android:layout_weight="1"
-                        android:padding="12dp"
-                        android:src="@drawable/icon_forward" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/mushaf2"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="@string/letterA"
+                            android:textSize="20sp" />
+
+                        <SeekBar
+                            android:id="@+id/seekbar2"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginRight="5dp"
+                            android:layout_weight="7"
+                            android:indeterminate="false"
+                            android:max="50"
+                            android:nestedScrollingEnabled="false"
+                            android:progress="12"
+                            android:scrollbarStyle="outsideInset" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/letterA"
+                            android:textSize="40sp" />
+
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/txtFontSizeTransliteration"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dp"
+                        android:gravity="center"
+                        android:text="@string/transliterationWord"
+                        android:textColor="@color/black"
+                        android:textSize="12sp" />
 
                 </LinearLayout>
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"
                     android:alpha="0.5"
                     android:background="@color/gray" />
 
-                <!-- Font size Data -->
+                <!-- FONT SIZE TRANSLATION -->
                 <LinearLayout
-                    android:id="@+id/llFontSizeTranslation"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:background="?attr/selectableItemBackground"
-                    android:orientation="horizontal">
+                    android:background="@color/clearWhite"
+                    android:gravity="bottom">
 
                     <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="25dp"
-                        android:layout_weight="7"
-                        android:gravity="center_vertical"
-                        android:text="@string/fontSizeTranslation"
-                        android:textColor="@color/black"
-                        android:textSize="17sp" />
+                        style="@style/customTextStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dp"
+                        android:layout_marginLeft="10dp"
+                        android:gravity="bottom"
+                        android:text="@string/fontSizeTranslation" />
 
-                    <ImageView
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginRight="10dp"
-                        android:layout_weight="1"
-                        android:padding="12dp"
-                        android:src="@drawable/icon_forward" />
 
                 </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/mushaf2"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="@string/letterA"
+                            android:textSize="20sp" />
+
+                        <SeekBar
+                            android:id="@+id/seekbar3"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginRight="5dp"
+                            android:layout_weight="7"
+                            android:indeterminate="false"
+                            android:max="50"
+                            android:nestedScrollingEnabled="false"
+                            android:progress="15"
+                            android:scrollbarStyle="outsideInset" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/letterA"
+                            android:textSize="40sp" />
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/txtFontSizeTranslation"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dp"
+                        android:gravity="center"
+                        android:text="@string/translationWord"
+                        android:textColor="@color/black"
+                        android:textSize="15sp" />
+
+                </LinearLayout>
+
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"
                     android:alpha="0.5"
                     android:background="@color/gray" />
 

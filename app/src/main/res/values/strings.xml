@@ -22,6 +22,7 @@
     <string name="viewOptions">View Options</string>
     <string name="textOptions">Text Options</string>
     <string name="language">Language</string>
+    <string name="translationLanguage">Translation Language</string>
     <string name="showTransliteration">Show Transliteration</string>
     <string name="showTranslation">Show Translation</string>
     <string name="fontArabic">Arabic Font</string>
@@ -39,6 +40,33 @@
 
     <string name="cancel">Cancel</string>
     <string name="apply">Apply</string>
+    <string name="letterA">A</string>
+    <string name="arabicWord">بِسْــمِ اﷲِارَّحْمَنِ ارَّحِيم</string>
+    <string name="transliterationWord">Bismillah-ir-Rahman-ir-Rahim</string>
+    <string name="translationWord">In the name of God, most Gracious, most Compassionate</string>
+
+
+    <string-array name="arabic_font">
+        <item>Amiri</item>
+        <item>Me Quran</item>
+        <item>Noorehira</item>
+        <item>PDMS Islamic</item>
+        <item>PDMS Quran</item>
+        <item>Scheherazade</item>
+        <item>Uthmani</item>
+        <item>Uthmani Ver12</item>
+    </string-array>
+
+    <string-array name="arabic_font_code">
+        <item>amiri.ttf</item>
+        <item>me_quran.ttf</item>
+        <item>noorehira.ttf</item>
+        <item>PDMS_IslamicFont.ttf</item>
+        <item>PDMS_Saleem_QuranFont.ttf</item>
+        <item>Scheherazade-Regular.ttf</item>
+        <item>Uthmani.otf</item>
+        <item>uthmanic_hafs_ver12.otf</item>
+    </string-array>
 
     <array name="surah_name">
         <item>Al Fatihah</item>
@@ -167,8 +195,6 @@
     <!--Test-->
     <string name="ADMOB_BANNER_AD_UNIT_ID">ca-app-pub-3940256099942544/6300978111</string>
     <string name="ADMOB_INTERSITITIAL_AD_UNIT_ID">ca-app-pub-3940256099942544/1033173712</string>
-
-
 
 
 </resources>

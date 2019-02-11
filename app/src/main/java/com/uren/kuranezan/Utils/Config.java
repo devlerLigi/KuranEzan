@@ -27,18 +27,18 @@ public class Config {
     public static final boolean defaultShowTransliteration = true;
     public static final boolean defaultShowTranslation = true;
     public static final String defaultFontArabic = "PDMS_IslamicFont.ttf";
-    public static final String defaultFontSizeArabic = "30";
-    public static final String defaultFontSizeTransliteration = "30";
-    public static final String defaultFontSizeTranslation = "30";
+    public static final int defaultFontSizeArabic = 28;
+    public static final int defaultFontSizeTransliteration = 12;
+    public static final int defaultFontSizeTranslation = 15;
 
     // current variables-bunlar uzerınden ilerlenmeli
     public static String lang;
     public static boolean showTransliteration;
     public static boolean showTranslation;
     public static String fontArabic;
-    public static String fontSizeArabic;
-    public static String fontSizeTransliteration;
-    public static String fontSizeTranslation;
+    public static int fontSizeArabic;
+    public static int fontSizeTransliteration;
+    public static int fontSizeTranslation;
 
     public void load(Context context) {
         Log.d("Config", "Load");
@@ -49,9 +49,9 @@ public class Config {
             showTransliteration = sp.getBoolean(Config.SHOW_TRANSLITERATION, Config.defaultShowTransliteration);
             showTranslation = sp.getBoolean(Config.SHOW_TRANSLATION, Config.defaultShowTranslation);
             fontArabic = sp.getString(Config.FONT_ARABIC, Config.defaultFontArabic);
-            fontSizeArabic = sp.getString(Config.FONT_SIZE_ARABIC, Config.defaultFontSizeArabic);
-            fontSizeTransliteration = sp.getString(Config.FONT_SIZE_TRANSLITERATION, Config.defaultFontSizeTransliteration);
-            fontSizeTranslation = sp.getString(Config.FONT_SIZE_TRANSLATION, Config.defaultFontSizeTranslation);
+            fontSizeArabic = sp.getInt(Config.FONT_SIZE_ARABIC, Config.defaultFontSizeArabic);
+            fontSizeTransliteration = sp.getInt(Config.FONT_SIZE_TRANSLITERATION, Config.defaultFontSizeTransliteration);
+            fontSizeTranslation = sp.getInt(Config.FONT_SIZE_TRANSLATION, Config.defaultFontSizeTranslation);
             Log.d("Config", "Loading Custom");
         } catch (Exception e) {
             loadDefault();
@@ -77,9 +77,9 @@ public class Config {
         ed.putBoolean(SHOW_TRANSLITERATION, showTransliteration);
         ed.putBoolean(SHOW_TRANSLATION, showTranslation);
         ed.putString(FONT_ARABIC, "" + fontArabic);
-        ed.putString(FONT_SIZE_ARABIC, "" + fontSizeArabic);
-        ed.putString(FONT_SIZE_TRANSLITERATION, "" + fontSizeTransliteration);
-        ed.putString(FONT_SIZE_TRANSLATION, "" + fontSizeTranslation);
+        ed.putInt(FONT_SIZE_ARABIC, fontSizeArabic);
+        ed.putInt(FONT_SIZE_TRANSLITERATION, fontSizeTransliteration);
+        ed.putInt(FONT_SIZE_TRANSLATION, fontSizeTranslation);
         ed.commit();
     }
 

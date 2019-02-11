@@ -22,6 +22,7 @@
     <string name="viewOptions">Gösterim Seçenekleri</string>
     <string name="textOptions">Metin Ayarları</string>
     <string name="language">Dil</string>
+    <string name="translation">Meal dili</string>
     <string name="showTransliteration">Okunuşu Göster</string>
     <string name="showTranslation">Meali Göster</string>
     <string name="fontArabic">Arapça yazı tipi</string>
@@ -39,6 +40,10 @@
 
     <string name="cancel">İptal</string>
     <string name="apply">Uygula</string>
+    <string name="letterA">A</string>
+    <string name="arabicWord">بِسْــمِ اﷲِارَّحْمَنِ ارَّحِيم</string>
+    <string name="transliterationWord">Bismillahirrahmanirrahîm</string>
+    <string name="translationWord">Rahman ve Rahim Olan Allah’ın Adı ile</string>
 
     <array name="surah_name">
         <item>Fâtiha Sûresi</item>

@@ -60,13 +60,13 @@ public class OptionsHelper {
         public void onFontArabicChanged(int _numberOfCallback, String fontType){
             optionsCallbackList.get(_numberOfCallback).onFontArabicChanged(fontType);
         }
-        public void onFontSizeArabicChanged(int _numberOfCallback, float fontSize){
+        public void onFontSizeArabicChanged(int _numberOfCallback, int fontSize){
             optionsCallbackList.get(_numberOfCallback).onFontSizeArabicChanged(fontSize);
         }
-        public void onFontSizeTransliterationChanged(int _numberOfCallback, float fontSize){
+        public void onFontSizeTransliterationChanged(int _numberOfCallback, int fontSize){
             optionsCallbackList.get(_numberOfCallback).onFontSizeTransliterationChanged(fontSize);
         }
-        public void onFontSizeTranslationChanged(int _numberOfCallback, float fontSize){
+        public void onFontSizeTranslationChanged(int _numberOfCallback, int fontSize){
             optionsCallbackList.get(_numberOfCallback).onFontSizeTranslationChanged(fontSize);
         }
 

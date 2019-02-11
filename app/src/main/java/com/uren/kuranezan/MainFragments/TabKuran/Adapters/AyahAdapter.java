@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.uren.kuranezan.Interfaces.ListItemClickListener;
 import com.uren.kuranezan.Models.QuranModels.Ayahs;
@@ -24,6 +25,8 @@ public class AyahAdapter extends RecyclerView.Adapter {
     private ListItemClickListener listItemClickListener;
     private ArrayList<Ayahs> ayahOriginalList, ayahTransliterationlList, ayahTranslationList;
     boolean showTransliteration, showTranslation;
+    int fontSizeArabic, fontSizeTransliteration, fontSizeTranslation;
+    String language, fontArabic;
 
     public AyahAdapter(Context context) {
         this.mContext = context;
@@ -35,8 +38,13 @@ public class AyahAdapter extends RecyclerView.Adapter {
     }
 
     private void setPreferences() {
+        language = Config.lang;
         showTransliteration = Config.showTransliteration;
         showTranslation = Config.showTranslation;
+        fontArabic = Config.fontArabic;
+        fontSizeArabic = Config.fontSizeArabic;
+        fontSizeTransliteration = Config.fontSizeTransliteration;
+        fontSizeTranslation = Config.fontSizeTranslation;
     }
 
     @Override
@@ -100,37 +108,51 @@ public class AyahAdapter extends RecyclerView.Adapter {
             txtAyahTranslation.setText(ayahTranslation.getText());
 
             setAyahOriginalTypeface();
+            setBackgroundColor();
+            setOptions();
+        }
+
+        private void setBackgroundColor() {
             if (position % 2 == 0) {
                 llAyah.setBackgroundColor(ContextCompat.getColor(mContext, R.color.mushaf3));
 
             } else {
                 llAyah.setBackgroundColor(ContextCompat.getColor(mContext, R.color.mushaf2));
             }
-
-            setOptions();
         }
 
         private void setOptions() {
 
             //Transliteration layout
-            if(!showTransliteration){
+            if (!showTransliteration) {
                 txtAyahTransliteration.setVisibility(View.GONE);
-            }else{
+            } else {
                 txtAyahTransliteration.setVisibility(View.VISIBLE);
             }
             //Data layout
-            if(!showTranslation){
+            if (!showTranslation) {
                 txtAyahTranslation.setVisibility(View.GONE);
-            }else{
+            } else {
                 txtAyahTranslation.setVisibility(View.VISIBLE);
             }
+
+            txtAyahOriginal.setTextSize(fontSizeArabic);
+            txtAyahTransliteration.setTextSize(fontSizeTransliteration);
+            txtAyahTranslation.setTextSize(fontSizeTranslation);
 
         }
 
         private void setAyahOriginalTypeface() {
 
-            Typeface custom_font = Typeface.createFromAsset(mContext.getAssets(), "uthmanic_hafs_ver12.otf");
-            txtAyahOriginal.setTypeface(custom_font);
+            try {
+                Typeface custom_font = Typeface.createFromAsset(mContext.getAssets(), fontArabic);
+                txtAyahOriginal.setTypeface(custom_font);
+            } catch (Exception e) {
+                Typeface custom_font = Typeface.createFromAsset(mContext.getAssets(), Config.defaultFontArabic);
+                txtAyahOriginal.setTypeface(custom_font);
+                Toast.makeText(mContext, "font bulunamadi", Toast.LENGTH_SHORT).show();
+                e.printStackTrace();
+            }
         }
 
     }
@@ -158,16 +180,31 @@ public class AyahAdapter extends RecyclerView.Adapter {
         this.listItemClickListener = listItemClickListener;
     }
 
-    public void showTransliteration(boolean isShow ) {
-        this.showTransliteration=isShow;
+    public void showTransliteration(boolean isShow) {
+        this.showTransliteration = isShow;
         notifyDataSetChanged();
     }
 
-    public void showTranslation(boolean isShow ) {
-        this.showTranslation=isShow;
+    public void showTranslation(boolean isShow) {
+        this.showTranslation = isShow;
         notifyDataSetChanged();
     }
-
+    public void updateFontArabic(String fontArabic) {
+        this.fontArabic = fontArabic;
+        notifyDataSetChanged();
+    }
+    public void updateFontSizeArabic(int fontSize) {
+        this.fontSizeArabic = fontSize;
+        notifyDataSetChanged();
+    }
+    public void updateFontSizeTransliteration(int fontSize) {
+        this.fontSizeTransliteration = fontSize;
+        notifyDataSetChanged();
+    }
+    public void updateFontSizeTranslation(int fontSize) {
+        this.fontSizeTranslation = fontSize;
+        notifyDataSetChanged();
+    }
 }
 
 

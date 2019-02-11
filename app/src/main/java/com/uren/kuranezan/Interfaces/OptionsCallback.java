@@ -10,10 +10,10 @@ public interface OptionsCallback {
 
     public void onFontArabicChanged(String fontType);
 
-    public void onFontSizeArabicChanged(float fontSize);
+    public void onFontSizeArabicChanged(int fontSize);
 
-    public void onFontSizeTransliterationChanged(float fontSize);
+    public void onFontSizeTransliterationChanged(int fontSize);
 
-    public void onFontSizeTranslationChanged(float fontSize);
+    public void onFontSizeTranslationChanged(int fontSize);
 
 }
