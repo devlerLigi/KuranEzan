@@ -29,13 +29,23 @@
     <string name="fontSizeTransliteration">Transliteration Font Size</string>
     <string name="fontSizeTranslation">Translation Font Size</string>
 
-    <string name="SAVE">SAVE</string>
-    <string name="MY_DHIKR">MY DHIKR</string>
+    <string name="SAVE">Save</string>
+    <string name="SAVE_ON">Save On</string>
+    <string name="MY_DHIKR">My Dhikrs</string>
     <string name="NIGHT_MODE_MESSAGE">Background color cannot be changed in night mode</string>
     <string name="UPPERYES">YES</string>
     <string name="UPPERNO">NO</string>
     <string name="WARNING_RESET_COUNTER">Are you sure you want to reset the counter?</string>
     <string name="COUNTER_NUM_IS_ZERO">Counter count 0</string>
+    <string name="OK">OK</string>
+    <string name="CANCEL">CANCEL</string>
+    <string name="SAVE_TO_LIST">Save To List</string>
+    <string name="PLEASE_GIVE_A_NAME">Please give a name</string>
+    <string name="THERE_IS_SAME_ZIKIR">Have the same dhikr</string>
+    <string name="CONTINUE">Continue</string>
+    <string name="DELETE">Delete</string>
+    <string name="DHIKR_WILL_BE_CONTINUED">zikrine devam edilecek</string>
+    <string name="WAS_RECORDED">Was recorded</string>
 
     <array name="surah_name">
         <item>Al Fatihah</item>

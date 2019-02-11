@@ -57,9 +57,6 @@ public class MainActivity extends FragmentActivity
 
     private int initialTabIndex = 1;
 
-    private SharedPreferences mPreferences;
-    private SharedPreferences.Editor mEditor;
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

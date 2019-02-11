@@ -1,39 +1,49 @@
 package com.uren.kuranezan.MainFragments.TabDiger.SubFragments;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
-import android.support.annotation.RequiresApi;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
+import com.google.gson.Gson;
 import com.uren.kuranezan.MainFragments.BaseFragment;
+import com.uren.kuranezan.MainFragments.TabDiger.SubFragments.Zikirmatik.Interfaces.DhikrReturnCallback;
+import com.uren.kuranezan.MainFragments.TabDiger.Utils.MyZikir;
+import com.uren.kuranezan.MainFragments.TabDiger.Utils.TinyDB;
 import com.uren.kuranezan.R;
 import com.uren.kuranezan.Utils.AdMobUtil.AdMobUtils;
-import com.uren.kuranezan.Utils.ClickableImage.ClickableImageView;
 import com.uren.kuranezan.Utils.DialogBoxUtil.DialogBoxUtil;
 import com.uren.kuranezan.Utils.DialogBoxUtil.Interfaces.YesNoDialogBoxCallback;
 import com.uren.kuranezan.Utils.ShapeUtil;
 import com.uren.kuranezan.Utils.ToastMessageUtil;
 
+import java.text.Format;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 import java.util.Random;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import static com.uren.kuranezan.Constants.StringConstants.MY_ZIKIRS;
 
 public class ZikirmatikFragment extends BaseFragment {
 
@@ -64,6 +74,7 @@ public class ZikirmatikFragment extends BaseFragment {
     boolean nightModeEnabled = false;
 
     private int currentBgColor = R.color.MediumSeaGreen;
+    private MyZikir zikir = null;
 
     int colorList[] = {
             R.color.green,
@@ -113,7 +124,6 @@ public class ZikirmatikFragment extends BaseFragment {
         AdMobUtils.loadBannerAd(adView);
     }
 
-
     private void setShapes() {
         vibrationImgv.setBackground(ShapeUtil.getShape(getResources().getColor(R.color.black_25_transparent),
                 0, GradientDrawable.OVAL, 50, 0));
@@ -155,7 +165,7 @@ public class ZikirmatikFragment extends BaseFragment {
         themeImgv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(nightModeEnabled){
+                if (nightModeEnabled) {
                     ToastMessageUtil.showToastShort(getContext(), getContext().getResources().getString(R.string.NIGHT_MODE_MESSAGE));
                     return;
                 }
@@ -166,14 +176,14 @@ public class ZikirmatikFragment extends BaseFragment {
         saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                saveDhikr();
             }
         });
 
         zikirlerimBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                startMyDhikrsFragment();
             }
         });
 
@@ -194,7 +204,7 @@ public class ZikirmatikFragment extends BaseFragment {
 
                 int zikirNum = Integer.parseInt(tvZikir.getText().toString());
 
-                if(zikirNum == 0){
+                if (zikirNum == 0) {
                     ToastMessageUtil.showToastShort(getContext(), getResources().getString(R.string.COUNTER_NUM_IS_ZERO));
                     return;
                 }
@@ -204,6 +214,8 @@ public class ZikirmatikFragment extends BaseFragment {
                             @Override
                             public void yesClick() {
                                 tvZikir.setText(Integer.toString(0));
+                                zikir = null;
+                                saveBtn.setText(getResources().getString(R.string.SAVE));
                             }
 
                             @Override
@@ -213,6 +225,106 @@ public class ZikirmatikFragment extends BaseFragment {
                         });
             }
         });
+    }
+
+    private void startMyDhikrsFragment(){
+        mFragmentNavigation.pushFragment(new MyDhikrsFragment(new DhikrReturnCallback() {
+            @Override
+            public void onReturn(MyZikir myZikir) {
+                zikir = myZikir;
+                ToastMessageUtil.showToastShort(getContext(), "(" + zikir.getZikirName() + ") " +
+                        getResources().getString(R.string.DHIKR_WILL_BE_CONTINUED));
+                tvZikir.setText(Integer.toString(zikir.getZikirCount()));
+                saveBtn.setText(getResources().getString(R.string.SAVE_ON));
+            }
+        }));
+    }
+
+    private void saveDhikr() {
+
+        if (zikir != null)
+            updateExistingDhikr();
+        else
+            saveNewDhikr();
+    }
+
+    private void saveNewDhikr() {
+        final EditText edittext = new EditText(getContext());
+        AlertDialog.Builder alert = new AlertDialog.Builder(getContext());
+        alert.setMessage(getResources().getString(R.string.PLEASE_GIVE_A_NAME));
+        alert.setTitle(getResources().getString(R.string.SAVE_TO_LIST));
+        alert.setView(edittext);
+
+        alert.setPositiveButton(getResources().getString(R.string.OK), new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+                String zikirName = edittext.getText().toString().trim();
+                int zikirNum = Integer.parseInt(tvZikir.getText().toString());
+
+                if (zikirName.trim().isEmpty()) {
+                    ToastMessageUtil.showToastShort(getContext(), getResources().getString(R.string.PLEASE_GIVE_A_NAME));
+                    return;
+                }
+
+                if (zikirNum == 0) {
+                    ToastMessageUtil.showToastShort(getContext(), getResources().getString(R.string.COUNTER_NUM_IS_ZERO));
+                    return;
+                }
+
+                addZikir(zikirName, zikirNum);
+            }
+        });
+
+        alert.setNegativeButton(getResources().getString(R.string.CANCEL), new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+
+            }
+        });
+
+        alert.show();
+    }
+
+    private void updateExistingDhikr() {
+        TinyDB tinyDB = new TinyDB(getContext());
+        ArrayList<Object> tempList = tinyDB.getListObject(MY_ZIKIRS, MyZikir.class);
+
+        int index = 0;
+        for (Object object : tempList) {
+            MyZikir tempZikir = (MyZikir) object;
+
+            if (tempZikir.getZikirName().trim().equals(zikir.getZikirName().trim())) {
+                int zikirNum = Integer.parseInt(tvZikir.getText().toString());
+                tempZikir.setZikirCount(zikirNum);
+                tempZikir.setZikirTime(convertTime(System.currentTimeMillis()));
+                tempList.set(index, tempZikir);
+                break;
+            }
+            index++;
+        }
+        tinyDB.putListObject(MY_ZIKIRS, tempList);
+        ToastMessageUtil.showToastShort(getContext(), getResources().getString(R.string.WAS_RECORDED));
+    }
+
+    private void addZikir(String zikirName, int zikirNum) {
+        TinyDB tinyDB = new TinyDB(getContext());
+        ArrayList<Object> tempList = tinyDB.getListObject(MY_ZIKIRS, MyZikir.class);
+
+        for (Object object : tempList) {
+            MyZikir zikir = (MyZikir) object;
+
+            if (zikir.getZikirName().equals(zikirName.trim())) {
+                ToastMessageUtil.showToastShort(getContext(), getResources().getString(R.string.THERE_IS_SAME_ZIKIR));
+                return;
+            }
+        }
+
+        MyZikir myZikir = new MyZikir();
+        myZikir.setZikirCount(zikirNum);
+        myZikir.setZikirName(zikirName);
+        myZikir.setZikirTime(convertTime(System.currentTimeMillis()));
+        tempList.add(myZikir);
+        tinyDB.putListObject(MY_ZIKIRS, tempList);
+        tvZikir.setText(Integer.toString(0));
+        startMyDhikrsFragment();
     }
 
     private void setVibrationImage() {
@@ -254,16 +366,21 @@ public class ZikirmatikFragment extends BaseFragment {
         }
     }
 
-    private void changeBackgroundColor(){
+    private void changeBackgroundColor() {
         Random rand = new Random();
 
         int randColor = colorList[rand.nextInt(colorList.length)];
 
-        if(randColor == currentBgColor)
+        if (randColor == currentBgColor)
             changeBackgroundColor();
 
         currentBgColor = randColor;
         mainFragLayout.setBackgroundColor(getResources().getColor(currentBgColor));
     }
 
+    public String convertTime(long time){
+        Date date = new Date(time);
+        Format format = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        return format.format(date);
+    }
 }
