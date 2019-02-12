@@ -1,5 +1,7 @@
 package com.uren.kuranezan.MainFragments.TabImsakiye;
 
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +10,10 @@ import android.widget.TextView;
 
 import com.uren.kuranezan.MainFragments.BaseFragment;
 import com.uren.kuranezan.R;
+
+import java.io.IOException;
+import java.util.List;
+import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -31,6 +37,8 @@ public class ImsakiyeFragment extends BaseFragment {
 
         setToolbar();
 
+        getPrayerTimes();
+
         return view;
     }
 
@@ -42,6 +50,28 @@ public class ImsakiyeFragment extends BaseFragment {
 
     private void setToolbar() {
         txtToolbarTitle.setText(getString(R.string.prayer));
+    }
+
+    private void getPrayerTimes() {
+
+        double lat = 40.568459;
+        double lng = -89.643028;
+
+
+        try {
+            Geocoder gcd = new Geocoder(getContext(), Locale.getDefault());
+            List<Address> addresses = gcd.getFromLocation(lat, lng, 1);
+            if (addresses.size() > 0) {
+
+                System.out.println(addresses.get(0).getLocality());
+            } else {
+                // do your stuff
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
     }
 
 
