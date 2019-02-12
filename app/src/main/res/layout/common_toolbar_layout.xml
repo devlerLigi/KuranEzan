@@ -35,7 +35,15 @@
             android:layout_weight="1"
             android:gravity="center">
 
-            <com.uren.kuranezan.Utils.ClickableImage.ClickableImageView
+            <!--<com.uren.kuranezan.Utils.ClickableImage.ClickableImageView
+                android:id="@+id/imgLeft"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="8dp"
+                android:src="@drawable/icon_back_white"
+                android:visibility="gone" />-->
+
+            <ImageView
                 android:id="@+id/imgLeft"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"

@@ -44,17 +44,21 @@ public class KibleBulFragment extends BaseFragment
     View mView;
 
     private Compass compass;
-    // private ImageView arrowView;
-    private ImageView arrowViewQiblat;
-    private ImageView imageDial;
-    private TextView text_atas;
-    private TextView text_bawah;
+
+    @BindView(R.id.main_image_qiblat)
+    ImageView arrowViewQiblat;
+    @BindView(R.id.main_image_dial)
+    ImageView imageDial;
+    @BindView(R.id.teks_atas)
+    TextView text_atas;
+    @BindView(R.id.teks_bawah)
+    TextView text_bawah;
+
     public Menu menu;
     public MenuItem item;
     private float currentAzimuth;
     SharedPreferences prefs;
     GPSTracker gps;
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -72,6 +76,15 @@ public class KibleBulFragment extends BaseFragment
         }
 
         return mView;
+    }
+
+    private void init() {
+        prefs = getContext().getSharedPreferences("", MODE_PRIVATE);
+        gps = new GPSTracker(getContext());
+        getActivity().getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+        arrowViewQiblat.setVisibility(INVISIBLE);
+        arrowViewQiblat.setVisibility(View.GONE);
+        setupCompass();
     }
 
     @Override
@@ -114,10 +127,12 @@ public class KibleBulFragment extends BaseFragment
         } else {
             text_atas.setText(getResources().getString(R.string.msg_permission_not_granted_yet));
             text_bawah.setText(getResources().getString(R.string.msg_permission_not_granted_yet));
+
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                requestPermissions(
+                requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION},1);
+                /*requestPermissions(
                         new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION},
-                        1);
+                        1);*/
             }
         }
 
@@ -196,7 +211,7 @@ public class KibleBulFragment extends BaseFragment
 
                 } else {
                     Toast.makeText(getContext(), getResources().getString(R.string.toast_permission_required), Toast.LENGTH_LONG).show();
-                    getActivity().onBackPressed();
+                    //getActivity().onBackPressed();
                 }
                 return;
             }
@@ -323,23 +338,6 @@ public class KibleBulFragment extends BaseFragment
             if (item != null)
                 item.setIcon(ContextCompat.getDrawable(getContext(), R.drawable.gps_off));
         }
-    }
-
-    private void init() {
-        prefs = getContext().getSharedPreferences("", MODE_PRIVATE);
-        gps = new GPSTracker(getContext());
-        getActivity().getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-        //////////////////////////////////////////
-        arrowViewQiblat = (ImageView) mView.findViewById(R.id.main_image_qiblat);
-        imageDial = (ImageView) mView.findViewById(R.id.main_image_dial);
-        text_atas = (TextView) mView.findViewById(R.id.teks_atas);
-        text_bawah = (TextView) mView.findViewById(R.id.teks_bawah);
-
-        //////////////////////////////////////////
-        arrowViewQiblat.setVisibility(INVISIBLE);
-        arrowViewQiblat.setVisibility(View.GONE);
-
-        setupCompass();
     }
 
     @Override

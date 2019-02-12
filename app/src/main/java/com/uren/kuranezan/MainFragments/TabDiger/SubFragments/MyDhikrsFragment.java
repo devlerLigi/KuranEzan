@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.android.gms.ads.AdView;
@@ -37,7 +38,7 @@ public class MyDhikrsFragment extends BaseFragment {
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
     @BindView(R.id.imgLeft)
-    ClickableImageView imgLeft;
+    ImageView imgLeft;
     @BindView(R.id.txtToolbarTitle)
     TextView txtToolbarTitle;
 

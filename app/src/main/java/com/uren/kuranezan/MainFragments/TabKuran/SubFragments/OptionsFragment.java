@@ -14,6 +14,7 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
@@ -66,7 +67,7 @@ public class OptionsFragment extends BaseFragment
     @BindView(R.id.txtToolbarTitle)
     TextView txtToolbarTitle;
     @BindView(R.id.imgLeft)
-    ClickableImageView imgBack;
+    ImageView imgBack;
 
     @BindView(R.id.chkShowTransliteration)
     CheckBox chkShowTransliteration;
