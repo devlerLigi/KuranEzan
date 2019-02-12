@@ -15,6 +15,7 @@ public class Config {
 
     //shared preferences KEYS
     public static final String LANG = "lang";
+    public static final String TRANSLITERATION_LANG = "transliterationLang";
     public static final String SHOW_TRANSLATION = "showTranslation";
     public static final String SHOW_TRANSLITERATION = "showTransliteration";
     public static final String FONT_ARABIC = "fontArabic";
@@ -24,6 +25,7 @@ public class Config {
 
     //default values
     public static final String defaultLang = "tr.diyanet";
+    public static final String defaultTransliterationLang = "tr";
     public static final boolean defaultShowTransliteration = true;
     public static final boolean defaultShowTranslation = true;
     public static final String defaultFontArabic = "PDMS_IslamicFont.ttf";
@@ -32,7 +34,8 @@ public class Config {
     public static final int defaultFontSizeTranslation = 15;
 
     // current variables-bunlar uzerınden ilerlenmeli
-    public static String lang;
+    public static String lang; //translation lang
+    public static String transliterationlang;
     public static boolean showTransliteration;
     public static boolean showTranslation;
     public static String fontArabic;
@@ -40,12 +43,16 @@ public class Config {
     public static int fontSizeTransliteration;
     public static int fontSizeTranslation;
 
+    public static Context context;
+
     public void load(Context context) {
+        this.context = context;
         Log.d("Config", "Load");
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
         try {
             loadDefault();
             lang = sp.getString(Config.LANG, Config.defaultLang);
+            transliterationlang = sp.getString(Config.TRANSLITERATION_LANG, Config.defaultTransliterationLang);
             showTransliteration = sp.getBoolean(Config.SHOW_TRANSLITERATION, Config.defaultShowTransliteration);
             showTranslation = sp.getBoolean(Config.SHOW_TRANSLATION, Config.defaultShowTranslation);
             fontArabic = sp.getString(Config.FONT_ARABIC, Config.defaultFontArabic);
@@ -53,6 +60,7 @@ public class Config {
             fontSizeTransliteration = sp.getInt(Config.FONT_SIZE_TRANSLITERATION, Config.defaultFontSizeTransliteration);
             fontSizeTranslation = sp.getInt(Config.FONT_SIZE_TRANSLATION, Config.defaultFontSizeTranslation);
             Log.d("Config", "Loading Custom");
+            //loadDefault();
         } catch (Exception e) {
             loadDefault();
             Log.d("Config", "Exception Loading Defaults");
@@ -61,6 +69,7 @@ public class Config {
 
     public void loadDefault() {
         lang = defaultLang;
+        transliterationlang = defaultTransliterationLang;
         showTransliteration = defaultShowTransliteration;
         showTranslation = defaultShowTranslation;
         fontArabic = defaultFontArabic;
@@ -70,10 +79,11 @@ public class Config {
     }
 
     public static void update(Context context) {
-        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(Config.context);
         SharedPreferences.Editor ed = sp.edit();
         ed.clear();
         ed.putString(LANG, lang);
+        ed.putString(TRANSLITERATION_LANG, transliterationlang);
         ed.putBoolean(SHOW_TRANSLITERATION, showTransliteration);
         ed.putBoolean(SHOW_TRANSLATION, showTranslation);
         ed.putString(FONT_ARABIC, "" + fontArabic);

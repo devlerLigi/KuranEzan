@@ -4,6 +4,8 @@ public interface OptionsCallback {
 
     public void onLanguageChanged(String language);
 
+    public void onTransliterationLanguageChanged(String language);
+
     public void onShowTransliterationChanged(boolean isShow);
 
     public void onShowTranslationChanged(boolean isShow);

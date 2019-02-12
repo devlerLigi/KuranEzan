@@ -205,6 +205,16 @@ public class AyahAdapter extends RecyclerView.Adapter {
         this.fontSizeTranslation = fontSize;
         notifyDataSetChanged();
     }
+
+    public void updateLanguage(ArrayList<Ayahs> ayahTranslationList) {
+        this.ayahTranslationList = ayahTranslationList;
+        notifyDataSetChanged();
+    }
+
+    public void updateTransliterationLanguage(ArrayList<Ayahs> ayahTransliterationlList) {
+        this.ayahTransliterationlList = ayahTransliterationlList;
+        notifyDataSetChanged();
+    }
 }
 
 

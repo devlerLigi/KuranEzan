@@ -78,8 +78,6 @@ public class KuranFragment extends BaseFragment
             ButterKnife.bind(this, mView);
 
             setToolbar();
-            //getJson();
-            //setSurahList();
 
             initRecyclerView();
             setUpRecyclerView();
@@ -116,62 +114,7 @@ public class KuranFragment extends BaseFragment
         }
     }
 
-    private void getJson() {
 
-
-                AsyncTask asyncTask = new AsyncTask() {
-
-                    @Override
-                    protected Object doInBackground(Object[] objects) {
-
-                        OkHttpClient client = new OkHttpClient();
-                        Request request = new Request.Builder()
-                                .url("http://api.alquran.cloud/v1/surah/1")
-                                .build();
-
-                        Response response = null;
-
-
-                        try {
-                            response = client.newCall(request).execute();
-                            return response.body().string();
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-
-                        return null;
-                    }
-
-                    @Override
-                    protected void onPostExecute(Object o) {
-
-                        String s= o.toString();
-                        Toast.makeText(getContext(), s, Toast.LENGTH_SHORT).show();
-                        generateNoteOnSD(getContext(), "fatiha", s );
-
-                    }
-
-
-                }.execute();
-
-
-    }
-
-    public void generateNoteOnSD(Context context, String sFileName, String sBody) {
-
-        try {
-            FileHelper.saveToFile( sBody);
-            Toast.makeText(getContext(), "ok", Toast.LENGTH_SHORT).show();
-
-            String read =FileHelper.ReadFile(getContext());
-                    Toast.makeText(getContext(), read, Toast.LENGTH_SHORT).show();
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            Toast.makeText(getContext(), e.toString(), Toast.LENGTH_SHORT).show();
-        }
-
-    }
 
     private void setToolbar() {
         txtToolbarTitle.setText(getString(R.string.quran));

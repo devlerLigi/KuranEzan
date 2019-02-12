@@ -55,6 +55,8 @@
     <string name="transliterationWord">Bismillah-ir-Rahman-ir-Rahim</string>
     <string name="translationWord">In the name of God, most Gracious, most Compassionate</string>
 
+    <string name="downloadLanguagePAck">Download Language packet?</string>
+
 
     <string-array name="arabic_font">
         <item>Amiri</item>
@@ -76,6 +78,17 @@
         <item>Scheherazade-Regular.ttf</item>
         <item>Uthmani.otf</item>
         <item>uthmanic_hafs_ver12.otf</item>
+    </string-array>
+
+    <string-array name="translation_list">
+        <item>quran_original.json</item>
+        <item>quran_simple_clean.json</item>
+        <item>quran_tajweed.json</item>
+        <item>quran_translation_list.json</item>
+        <item>quran_translation_tr_diyanet.json</item>
+        <item>quran_transliteration_en.json</item>
+        <item>quran_transliteration_tr.json</item>
+        <item>quran_uthmani.json</item>
     </string-array>
 
     <array name="surah_name">

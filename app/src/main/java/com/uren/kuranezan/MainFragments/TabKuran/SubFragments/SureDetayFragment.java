@@ -184,7 +184,30 @@ public class SureDetayFragment extends BaseFragment
         optionsClicked.setProfileRefreshCallback(new OptionsCallback() {
             @Override
             public void onLanguageChanged(String language) {
+                ayahTranslationList.clear();
+                Quran quranTranslation = QuranTranslation.getInstance().getQuranTranslation();
+                Surahs[] surahs = quranTranslation.getData().getSurahs();
+                Ayahs[] ayahs = surahs[number].getAyahs();
 
+                for (int i = 0; i < ayahs.length; i++) {
+                    ayahTranslationList.add(ayahs[i]);
+                }
+
+                ayahAdapter.updateLanguage(ayahTranslationList);
+            }
+
+            @Override
+            public void onTransliterationLanguageChanged(String language) {
+                ayahTransliterationlList.clear();
+                Quran quranTransliteration = QuranTransliteration.getInstance().getQuranTransliteration();
+                Surahs[] surahs = quranTransliteration.getData().getSurahs();
+                Ayahs[] ayahs = surahs[number].getAyahs();
+
+                for (int i = 0; i < ayahs.length; i++) {
+                    ayahTransliterationlList.add(ayahs[i]);
+                }
+
+                ayahAdapter.updateTransliterationLanguage(ayahTransliterationlList);
             }
 
             @Override
