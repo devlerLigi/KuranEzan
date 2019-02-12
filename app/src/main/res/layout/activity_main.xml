@@ -32,6 +32,24 @@
                 android:id="@+id/tabMainLayout"
                 android:orientation="vertical">
 
+                <LinearLayout
+                    android:id="@+id/llSharing"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/clearWhite"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:visibility="gone">
+
+                    <fr.castorflex.android.smoothprogressbar.SmoothProgressBar
+                        android:id="@+id/smoothProgressBar"
+                        style="@style/GradientProgressBar"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:indeterminate="true" />
+
+                </LinearLayout>
+
                 <View
                     android:id="@+id/shadow"
                     android:layout_width="match_parent"

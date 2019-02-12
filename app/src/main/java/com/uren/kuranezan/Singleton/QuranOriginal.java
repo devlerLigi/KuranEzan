@@ -7,6 +7,8 @@ import com.uren.kuranezan.Interfaces.OnEventListener;
 import com.uren.kuranezan.MainFragments.TabKuran.JavaClasses.QuranAsyncProcess;
 import com.uren.kuranezan.Models.QuranModels.Quran;
 
+import static com.uren.kuranezan.Constants.NumericConstants.REQUEST_TYPE_QURAN_ORIGINAL;
+
 public class QuranOriginal {
 
     private static QuranOriginal single_instance = null;
@@ -53,7 +55,7 @@ public class QuranOriginal {
             public void onTaskContinue() {
 
             }
-        }, 1);
+        }, REQUEST_TYPE_QURAN_ORIGINAL, "");
 
         quranAsyncProcess.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, context);
 

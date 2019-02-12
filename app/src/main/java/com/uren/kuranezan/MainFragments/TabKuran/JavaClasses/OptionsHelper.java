@@ -2,10 +2,19 @@ package com.uren.kuranezan.MainFragments.TabKuran.JavaClasses;
 
 import android.content.Context;
 
+import com.google.gson.Gson;
 import com.uren.kuranezan.Interfaces.OptionsCallback;
 import com.uren.kuranezan.MainFragments.BaseFragment;
 import com.uren.kuranezan.MainFragments.TabKuran.SubFragments.OptionsFragment;
+import com.uren.kuranezan.Models.QuranModels.Quran;
+import com.uren.kuranezan.R;
 
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -51,6 +60,9 @@ public class OptionsHelper {
         public void onLanguageChanged(int _numberOfCallback, String language){
             optionsCallbackList.get(_numberOfCallback).onLanguageChanged(language);
         }
+        public void onTransliterationLanguageChanged(int _numberOfCallback, String language){
+            optionsCallbackList.get(_numberOfCallback).onTransliterationLanguageChanged(language);
+        }
         public void onShowTransliterationChanged(int _numberOfCallback, boolean isShow){
             optionsCallbackList.get(_numberOfCallback).onShowTransliterationChanged(isShow);
         }
@@ -72,4 +84,8 @@ public class OptionsHelper {
 
     }
 
+
+    public static class Utils {
+
+    }
 }

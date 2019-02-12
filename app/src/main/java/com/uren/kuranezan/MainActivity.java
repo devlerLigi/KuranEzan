@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.AccelerateInterpolator;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -30,6 +31,7 @@ import com.uren.kuranezan.Utils.Utils;
 import butterknife.BindArray;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import fr.castorflex.android.smoothprogressbar.SmoothProgressBar;
 import io.fabric.sdk.android.Fabric;
 
 public class MainActivity extends FragmentActivity
@@ -45,6 +47,11 @@ public class MainActivity extends FragmentActivity
     TabLayout bottomTabLayout;
     @BindView(R.id.tabMainLayout)
     LinearLayout tabMainLayout;
+
+    @BindView(R.id.llSharing)
+    LinearLayout llSharing;
+    @BindView(R.id.smoothProgressBar)
+    SmoothProgressBar smoothProgressBar;
 
     private int[] mTabIconsSelected = {
             R.drawable.icon_kuran,
@@ -103,8 +110,8 @@ public class MainActivity extends FragmentActivity
             }
         });
 
-        fillInitialClasses();
         setSharedPreferences();
+        fillInitialClasses();
 
     }
 
@@ -115,8 +122,8 @@ public class MainActivity extends FragmentActivity
 
     private void setQuranModels() {
         QuranOriginal.getInstance(getBaseContext());
-        QuranTransliteration.getInstance(getBaseContext());
-        QuranTranslation.getInstance(getBaseContext());
+        QuranTransliteration.getInstance(getBaseContext(), Config.transliterationlang);
+        QuranTranslation.getInstance(getBaseContext(), Config.lang);
     }
 
     private void setLanguageList() {
@@ -325,4 +332,22 @@ public class MainActivity extends FragmentActivity
         getSupportActionBar().setTitle(title);
         */
     }
+
+    public void startProgressBar() {
+
+        //smoothProgressBar.setSmoothProgressDrawableInterpolator(new FastOutSlowInInterpolator());
+        //smoothProgressBar.setSmoothProgressDrawableColors(getResources().getIntArray(R.array.gplus_colors));
+        //smoothProgressBar.setSmoothProgressDrawableInterpolator(new AccelerateInterpolator());
+        //smoothProgressBar.setSmoothProgressDrawableMirrorMode(true);
+        //smoothProgressBar.setSmoothProgressDrawableReversed(true);
+
+        llSharing.setVisibility(View.VISIBLE);
+        smoothProgressBar.progressiveStart();
+    }
+
+    public void stopProgressBar() {
+        llSharing.setVisibility(View.GONE);
+        smoothProgressBar.progressiveStop();
+    }
+
 }
