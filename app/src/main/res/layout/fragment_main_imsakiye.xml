@@ -161,7 +161,8 @@
                         android:gravity="center_vertical"
                         android:text="Değiştir"
                         android:textColor="@color/Blue"
-                        android:textSize="20sp" />
+                        android:textSize="20sp"
+                        android:id="@+id/txtChangeLocation"/>
                 </LinearLayout>
 
 
@@ -375,7 +376,6 @@
 
 
                 </RelativeLayout>
-
 
 
             </LinearLayout>

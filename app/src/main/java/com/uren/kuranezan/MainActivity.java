@@ -75,7 +75,7 @@ public class MainActivity extends FragmentActivity
 
         initToolbar();
         initTab();
-
+/*
         fragmentHistory = new FragmentHistory();
 
         mNavController = FragNavController.newBuilder(savedInstanceState, getSupportFragmentManager(), R.id.content_frame)
@@ -109,7 +109,7 @@ public class MainActivity extends FragmentActivity
 
         setSharedPreferences();
         fillInitialClasses();
-
+*/
     }
 
     private void fillInitialClasses() {

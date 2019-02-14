@@ -12,14 +12,23 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.google.gson.Gson;
 import com.uren.kuranezan.MainFragments.BaseFragment;
+import com.uren.kuranezan.MainFragments.TabImsakiye.SubFragments.BaseListFragment;
+import com.uren.kuranezan.Models.QuranModels.Quran;
 import com.uren.kuranezan.R;
 
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
 import java.util.Locale;
 
 import butterknife.BindDimen;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+
+import static com.uren.kuranezan.Constants.NumericConstants.ITEM_TYPE_ULKE;
 
 public class ImsakiyeFragment extends BaseFragment {
 
@@ -33,6 +42,9 @@ public class ImsakiyeFragment extends BaseFragment {
 
     @BindView(R.id.txtRemaining)
     TextView txtRemaining;
+
+    @BindView(R.id.txtChangeLocation)
+    TextView txtChangeLocation;
 
     private CountDownTimer mCountDownTimer;
     private boolean mTimerRunning;
@@ -48,14 +60,17 @@ public class ImsakiyeFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        if(mView == null){
+        if (mView == null) {
             mView = inflater.inflate(R.layout.fragment_main_imsakiye, container, false);
             ButterKnife.bind(this, mView);
 
             setToolbar();
 
+            init();
             setUI();
             startTimer();
+
+            setPrayerTimes();
         }
 
         return mView;
@@ -70,6 +85,15 @@ public class ImsakiyeFragment extends BaseFragment {
 
     private void setToolbar() {
         //txtToolbarTitle.setText(getString(R.string.prayer));
+    }
+
+    private void init() {
+        txtChangeLocation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mFragmentNavigation.pushFragment(BaseListFragment.newInstance(ITEM_TYPE_ULKE, 0));
+            }
+        });
     }
 
     private void setUI() {
@@ -118,8 +142,12 @@ public class ImsakiyeFragment extends BaseFragment {
 
         txtRemaining.setText(timeLeftFormatted);
 
-
     }
 
+
+    private void setPrayerTimes() {
+
+
+    }
 
 }
