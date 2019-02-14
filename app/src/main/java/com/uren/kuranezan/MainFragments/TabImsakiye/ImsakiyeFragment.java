@@ -97,16 +97,17 @@ public class ImsakiyeFragment extends BaseFragment {
     }
 
     private void setUI() {
-
+/*
         Glide.with(getContext())
                 .load(R.drawable.wallpaper7)
                 .apply(RequestOptions.centerCropTransform())
                 .into(imgBackground);
+
         Glide.with(getContext())
                 .load(R.drawable.gradient_dark)
                 .apply(RequestOptions.centerCropTransform())
                 .into(imgDarkGradient);
-
+*/
 
     }
 

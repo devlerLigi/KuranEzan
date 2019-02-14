@@ -60,7 +60,7 @@ public class Config {
             fontSizeTransliteration = sp.getInt(Config.FONT_SIZE_TRANSLITERATION, Config.defaultFontSizeTransliteration);
             fontSizeTranslation = sp.getInt(Config.FONT_SIZE_TRANSLATION, Config.defaultFontSizeTranslation);
             Log.d("Config", "Loading Custom");
-            //loadDefault();
+            loadDefault();
         } catch (Exception e) {
             loadDefault();
             Log.d("Config", "Exception Loading Defaults");

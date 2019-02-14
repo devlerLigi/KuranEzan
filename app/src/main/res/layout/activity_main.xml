@@ -45,6 +45,7 @@
                         android:id="@+id/smoothProgressBar"
                         style="@style/GradientProgressBar"
                         android:layout_width="match_parent"
+                        app:spb_progressiveStart_activated="false"
                         android:layout_height="wrap_content"
                         android:indeterminate="true" />
 

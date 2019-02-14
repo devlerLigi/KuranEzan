@@ -54,9 +54,9 @@ public class MainActivity extends FragmentActivity
     SmoothProgressBar smoothProgressBar;
 
     private int[] mTabIconsSelected = {
-            R.drawable.icon_kuran,
-            R.drawable.icon_mosque,
-            R.drawable.icon_more
+            R.drawable.icon_kuran2,
+            R.drawable.icon_mosque2,
+            R.drawable.icon_more2
     };
 
     private FragNavController mNavController;
@@ -75,7 +75,7 @@ public class MainActivity extends FragmentActivity
 
         initToolbar();
         initTab();
-/*
+
         fragmentHistory = new FragmentHistory();
 
         mNavController = FragNavController.newBuilder(savedInstanceState, getSupportFragmentManager(), R.id.content_frame)
@@ -109,7 +109,7 @@ public class MainActivity extends FragmentActivity
 
         setSharedPreferences();
         fillInitialClasses();
-*/
+
     }
 
     private void fillInitialClasses() {
