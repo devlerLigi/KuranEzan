@@ -1,17 +1,109 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <include layout="@layout/common_toolbar_layout" />
+
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
         android:orientation="vertical">
 
-        <include layout="@layout/common_toolbar_layout" />
+        <TextView
+            android:id="@+id/locDescTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center"
+            android:layout_marginBottom="5dp"
+            android:text="dfdfdfd"
+            android:textStyle="bold" />
 
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingBottom="16dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:paddingTop="16dp">
+
+            <ImageView
+                android:id="@+id/main_image_dial"
+                android:layout_width="320dp"
+                android:layout_height="320dp"
+                android:layout_centerInParent="true"
+                android:contentDescription="Compass Dial"
+                android:src="@drawable/dial" />
+
+            <ImageView
+                android:id="@+id/main_image_qiblat"
+                android:layout_width="37dp"
+                android:layout_height="240dp"
+                android:layout_centerInParent="true"
+                android:contentDescription="Compass Hands"
+                android:scaleType="fitXY"
+                android:src="@drawable/jarum_qiblat" />
+
+        </RelativeLayout>
 
     </LinearLayout>
 
 
-</FrameLayout>
+    <!--<RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:paddingTop="16dp"
+        android:paddingBottom="16dp">
+
+        <ImageView
+            android:id="@+id/main_image_dial"
+            android:layout_width="320dp"
+            android:layout_height="320dp"
+            android:layout_centerInParent="true"
+            android:contentDescription="Compass Dial"
+            android:src="@drawable/dial" />
+
+        <ImageView
+            android:id="@+id/main_image_qiblat"
+            android:layout_width="37dp"
+            android:layout_height="240dp"
+            android:layout_centerInParent="true"
+            android:contentDescription="Compass Hands"
+            android:scaleType="fitXY"
+            android:src="@drawable/jarum_qiblat" />
+
+        <TextView
+            android:id="@+id/teks_atas"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="60dp"
+            android:textStyle="bold" />
+
+    </RelativeLayout>-->
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/adView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            ads:adSize="SMART_BANNER"
+            ads:adUnitId="@string/ADMOB_BANNER_AD_UNIT_ID"></com.google.android.gms.ads.AdView>
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

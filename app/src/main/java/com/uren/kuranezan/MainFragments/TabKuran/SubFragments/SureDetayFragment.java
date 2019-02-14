@@ -7,6 +7,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.uren.kuranezan.Interfaces.OptionsCallback;
@@ -42,9 +43,9 @@ public class SureDetayFragment extends BaseFragment
     @BindView(R.id.txtToolbarTitle)
     TextView txtToolbarTitle;
     @BindView(R.id.imgLeft)
-    ClickableImageView imgBack;
+    ImageView imgBack;
     @BindView(R.id.imgRight)
-    ClickableImageView imgOptions;
+    ImageView imgOptions;
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
 

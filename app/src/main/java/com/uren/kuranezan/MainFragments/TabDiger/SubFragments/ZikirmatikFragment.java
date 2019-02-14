@@ -69,12 +69,16 @@ public class ZikirmatikFragment extends BaseFragment {
     TextView tvZikir;
     @BindView(R.id.btnReset)
     View btnReset;
+    @BindView(R.id.imageView)
+    ImageView imageView;
 
     boolean vibrationEnabled = false;
     boolean nightModeEnabled = false;
 
     private int currentBgColor = R.color.MediumSeaGreen;
     private MyZikir zikir = null;
+
+    private static final long VIBRATE_TIME  = 200;
 
     int colorList[] = {
             R.color.green,
@@ -112,6 +116,7 @@ public class ZikirmatikFragment extends BaseFragment {
             mView = inflater.inflate(R.layout.fragment_zikirmatik, container, false);
             ButterKnife.bind(this, mView);
             init();
+            setImages();
             setShapes();
             addListeners();
         }
@@ -120,7 +125,7 @@ public class ZikirmatikFragment extends BaseFragment {
     }
 
     private void init() {
-        MobileAds.initialize(getContext(), getActivity().getResources().getString(R.string.ADMOB_APP_ID));
+        MobileAds.initialize(getContext(), getResources().getString(R.string.ADMOB_APP_ID));
         AdMobUtils.loadBannerAd(adView);
     }
 
@@ -135,6 +140,29 @@ public class ZikirmatikFragment extends BaseFragment {
                 0, GradientDrawable.RECTANGLE, 25, 0));
         zikirlerimBtn.setBackground(ShapeUtil.getShape(getResources().getColor(R.color.black_25_transparent),
                 0, GradientDrawable.RECTANGLE, 25, 0));
+    }
+
+    private void setImages() {
+
+        Glide.with(getContext())
+                .load(R.drawable.icon_smartphone)
+                .apply(RequestOptions.fitCenterTransform())
+                .into(vibrationImgv);
+
+        Glide.with(getContext())
+                .load(R.drawable.icon_night_mode_off)
+                .apply(RequestOptions.fitCenterTransform())
+                .into(nightModeImgv);
+
+        Glide.with(getContext())
+                .load(R.drawable.icon_theme)
+                .apply(RequestOptions.fitCenterTransform())
+                .into(themeImgv);
+
+        Glide.with(getContext())
+                .load(R.drawable.zikirmatik)
+                .apply(RequestOptions.fitCenterTransform())
+                .into(imageView);
     }
 
     private void addListeners() {
@@ -356,13 +384,11 @@ public class ZikirmatikFragment extends BaseFragment {
     private void checkVibration() {
         if (vibrationEnabled) {
             Vibrator v = (Vibrator) getContext().getSystemService(Context.VIBRATOR_SERVICE);
-            // Vibrate for 500 milliseconds
+
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                v.vibrate(VibrationEffect.createOneShot(500, VibrationEffect.DEFAULT_AMPLITUDE));
-            } else {
-                //deprecated in API 26
-                v.vibrate(500);
-            }
+                v.vibrate(VibrationEffect.createOneShot(VIBRATE_TIME, VibrationEffect.DEFAULT_AMPLITUDE));
+            } else
+                v.vibrate(VIBRATE_TIME);
         }
     }
 

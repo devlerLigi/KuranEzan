@@ -80,9 +80,14 @@ public class Utils {
         Bitmap state_normal_bitmap = ((BitmapDrawable) state_normal).getBitmap();
 
         // Setting alpha directly just didn't work, so we draw a new bitmap!
-        Bitmap disabledBitmap = Bitmap.createBitmap(
-                state_normal.getIntrinsicWidth(),
-                state_normal.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
+        Bitmap disabledBitmap = null;
+        try {
+            disabledBitmap = Bitmap.createBitmap(
+                    state_normal.getIntrinsicWidth(),
+                    state_normal.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         Canvas canvas = new Canvas(disabledBitmap);
 
         Paint paint = new Paint();

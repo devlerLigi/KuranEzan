@@ -1,6 +1,7 @@
 package com.uren.kuranezan;
 
 import android.content.SharedPreferences;
+import android.graphics.PorterDuff;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -54,9 +55,9 @@ public class MainActivity extends FragmentActivity
     SmoothProgressBar smoothProgressBar;
 
     private int[] mTabIconsSelected = {
-            R.drawable.icon_kuran2,
-            R.drawable.icon_mosque2,
-            R.drawable.icon_more2
+            R.drawable.tab_quran,
+            R.drawable.tab_mosque,
+            R.drawable.icon_more
     };
 
     private FragNavController mNavController;
@@ -108,7 +109,7 @@ public class MainActivity extends FragmentActivity
         });
 
         setSharedPreferences();
-        fillInitialClasses();
+        //fillInitialClasses();
 
     }
 
@@ -143,8 +144,14 @@ public class MainActivity extends FragmentActivity
             for (int i = 0; i < TABS.length; i++) {
                 bottomTabLayout.addTab(bottomTabLayout.newTab());
                 TabLayout.Tab tab = bottomTabLayout.getTabAt(i);
-                if (tab != null)
-                    tab.setCustomView(getTabView(i));
+
+                if(tab != null) {
+                    tab.setIcon(mTabIconsSelected[i]);
+                    tab.setText(TABS[i]);
+                }
+
+                /*if (tab != null)
+                    tab.setCustomView(getTabView(i));*/
             }
         }
 
@@ -183,14 +190,15 @@ public class MainActivity extends FragmentActivity
 
         for (int i = 0; i < TABS.length; i++) {
             TabLayout.Tab selectedTab = bottomTabLayout.getTabAt(i);
-            View customView = selectedTab.getCustomView();
+
+            /*View customView = selectedTab.getCustomView();
             TextView tabDescription = (TextView) customView.findViewById(R.id.tabDesc);
 
             if (position != i) {
                 tabDescription.setTextColor(getResources().getColor(R.color.gray));
             } else {
                 tabDescription.setTextColor(getResources().getColor(R.color.fab_color_pressed));
-            }
+            }*/
         }
 
     }
