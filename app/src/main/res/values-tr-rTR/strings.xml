@@ -47,6 +47,18 @@
     <string name="DELETE">Sil</string>
     <string name="DHIKR_WILL_BE_CONTINUED">dhikr will be continued</string>
     <string name="WAS_RECORDED">Kaydedildi</string>
+    <string name="GOOD_FRIDAY_MESSAGE">HAYIRLI CUMALAR</string>
+
+    <!-- Location Settings constants-->
+    <string name="gpsSettings">GPS Ayarları</string>
+    <string name="gpsSettingMessage">GPS etkin değil. Konumu etkinleştirmek ve almak için ayarlara tıklayın, lütfen GPS"i açtıktan sonra uygulamayı tekrar başlatın.</string>
+    <string name="settings">Ayarlar</string>
+    <string name="msg_permission_not_granted_yet">Konum erişimi henüz mevcut değil</string>
+    <string name="qible_location_access_required">Kıbleyi bulmak için lokasyon erişimi gerekiyor</string>
+    <string name="location_not_ready">Konum hazır değil, lütfen tekrar deneyin.</string>
+    <string name="qibla_direction">Kâbe Yönü:</string>
+    <string name="degree_from_north">derece kuzeyden.</string>
+    <string name="pls_enable_location">Lütfen konumu açıp tekrar deneyin.</string>
 
     <string name="cancel">İptal</string>
     <string name="apply">Uygula</string>

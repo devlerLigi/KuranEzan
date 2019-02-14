@@ -55,8 +55,8 @@ public class MainActivity extends FragmentActivity
     SmoothProgressBar smoothProgressBar;
 
     private int[] mTabIconsSelected = {
-            R.drawable.icon_kuran,
-            R.drawable.icon_mosque,
+            R.drawable.tab_quran,
+            R.drawable.tab_mosque,
             R.drawable.icon_more
     };
 
@@ -109,7 +109,7 @@ public class MainActivity extends FragmentActivity
         });
 
         setSharedPreferences();
-        fillInitialClasses();
+        //fillInitialClasses();
 
     }
 

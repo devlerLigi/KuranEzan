@@ -1,6 +1,7 @@
 package com.uren.kuranezan.MainFragments.TabDiger.SubFragments.KibleBul;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Service;
 import android.content.Context;
@@ -18,11 +19,8 @@ import com.uren.kuranezan.R;
 
 public class GPSTracker extends Service implements LocationListener {
     private final Context mContext;
-    // flag for GPS status
     boolean isGPSEnabled = false;
-    // flag for network status
     boolean isNetworkEnabled = false;
-    // flag for GPS status
     boolean canGetLocation = false;
     Location location; // location
     double latitude; // latitude
@@ -60,7 +58,7 @@ public class GPSTracker extends Service implements LocationListener {
                             LocationManager.NETWORK_PROVIDER,
                             MIN_TIME_BW_UPDATES,
                             MIN_DISTANCE_CHANGE_FOR_UPDATES, this);
-                    Log.d("Network", "Network");
+
                     if (locationManager != null) {
                         location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
                         if (location != null) {
@@ -76,7 +74,7 @@ public class GPSTracker extends Service implements LocationListener {
                                 LocationManager.GPS_PROVIDER,
                                 MIN_TIME_BW_UPDATES,
                                 MIN_DISTANCE_CHANGE_FOR_UPDATES, this);
-                        Log.d("GPS Enabled", "GPS Enabled");
+
                         if (locationManager != null) {
                             location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
                             if (location != null) {
@@ -93,98 +91,74 @@ public class GPSTracker extends Service implements LocationListener {
         return location;
     }
 
-    /**
-     * Stop using GPS listener
-     * Calling this function will stop using GPS in your app
-     */
     public void stopUsingGPS() {
         if (locationManager != null) {
             locationManager.removeUpdates(GPSTracker.this);
         }
     }
 
-    /**
-     * Function to get latitude
-     */
     public double getLatitude() {
         if (location != null) {
             latitude = location.getLatitude();
         }
-        // return latitude
         return latitude;
     }
 
-    /**
-     * Function to get longitude
-     */
     public double getLongitude() {
         if (location != null) {
             longitude = location.getLongitude();
         }
-        // return longitude
         return longitude;
     }
 
-    /**
-     * Function to check GPS/wifi enabled
-     *
-     * @return boolean
-     */
     public boolean canGetLocation() {
         return this.canGetLocation;
     }
 
-    /**
-     * Function to show settings alert dialog
-     * On pressing Settings button will lauch Settings Options
-     */
     public void showSettingsAlert() {
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(mContext);
-        // Setting Dialog Title
-        alertDialog.setTitle(mContext.getResources().getString(R.string.gps_settings_title));
-        // Setting Dialog Message
-        alertDialog.setMessage(mContext.getResources().getString(R.string.gps_settings_text));
-        // On pressing Settings button
-        alertDialog.setPositiveButton(mContext.getResources().getString(R.string.settings_button_ok), new DialogInterface.OnClickListener() {
+        alertDialog.setTitle(mContext.getResources().getString(R.string.gpsSettings));
+        alertDialog.setMessage(mContext.getResources().getString(R.string.gpsSettingMessage));
+        alertDialog.setPositiveButton(mContext.getResources().getString(R.string.settings), new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
                 Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
                 mContext.startActivity(intent);
             }
         });
-        // on pressing cancel button
-        alertDialog.setNegativeButton(mContext.getResources().getString(R.string.settings_button_cancel), new DialogInterface.OnClickListener() {
+
+        alertDialog.setNegativeButton(mContext.getResources().getString(R.string.CANCEL), new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
                 dialog.cancel();
             }
         });
-        // Showing Alert Message
+
         alertDialog.show();
     }
 
     @Override
     public void onLocationChanged(Location location) {
-// TODO Auto-generated method stub
+        // TODO Auto-generated method stub
     }
 
     @Override
     public void onProviderDisabled(String provider) {
-// TODO Auto-generated method stub
+        // TODO Auto-generated method stub
     }
 
     @Override
     public void onProviderEnabled(String provider) {
-// TODO Auto-generated method stub
+        // TODO Auto-generated method stub
 
     }
 
     @Override
     public void onStatusChanged(String provider, int status, Bundle extras) {
-// TODO Auto-generated method stub
+        // TODO Auto-generated method stub
     }
 
     @Override
     public IBinder onBind(Intent intent) {
-// TODO Auto-generated method stub
+        // TODO Auto-generated method stub
         return null;
     }
 }

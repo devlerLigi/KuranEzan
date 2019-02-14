@@ -31,8 +31,7 @@
                     android:layout_height="60dp"
                     android:layout_alignParentTop="true"
                     android:layout_centerHorizontal="true"
-                    android:padding="15dp"
-                    android:src="@drawable/icon_smartphone" />
+                    android:padding="15dp" />
 
             </RelativeLayout>
 
@@ -48,8 +47,7 @@
                     android:layout_height="60dp"
                     android:layout_alignParentTop="true"
                     android:layout_centerHorizontal="true"
-                    android:padding="15dp"
-                    android:src="@drawable/icon_night_mode_off" />
+                    android:padding="15dp" />
 
             </RelativeLayout>
 
@@ -65,8 +63,7 @@
                     android:layout_height="60dp"
                     android:layout_alignParentTop="true"
                     android:layout_centerHorizontal="true"
-                    android:padding="15dp"
-                    android:src="@drawable/icon_theme" />
+                    android:padding="15dp"/>
 
             </RelativeLayout>
 
@@ -97,13 +94,11 @@
                 android:id="@+id/imageView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
                 android:layout_marginTop="20dp"
                 android:padding="40dp"
-                android:scaleType="centerCrop"
-                android:src="@drawable/zikirmatik" />
+                android:scaleType="centerCrop"/>
 
             <View
                 android:id="@+id/btnReset"

@@ -45,7 +45,7 @@ public class SureDetayFragment extends BaseFragment
     @BindView(R.id.imgLeft)
     ImageView imgBack;
     @BindView(R.id.imgRight)
-    ClickableImageView imgOptions;
+    ImageView imgOptions;
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
 

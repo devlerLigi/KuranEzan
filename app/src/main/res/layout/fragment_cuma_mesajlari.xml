@@ -10,8 +10,215 @@
 
         <include layout="@layout/common_toolbar_layout" />
 
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/rlphotoComplete">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/photoImgv"
+                    android:src="@drawable/islam1"
+                    android:scaleType="fitXY"/>
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/gradient_bg"></FrameLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="70dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/messageTv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginBottom="30dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:gravity="center"
+                        android:textColor="@color/White"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/fridayMessageTv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="@string/GOOD_FRIDAY_MESSAGE"
+                        android:textColor="@color/White"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentTop="true">
+
+                <FrameLayout
+                    android:id="@+id/seekbarLayout"
+                    android:layout_width="32dp"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="10dp"
+                    android:paddingBottom="5dp"
+                    android:paddingTop="5dp"
+                    android:visibility="visible">
+
+                    <SeekBar
+                        android:id="@+id/seekbar"
+                        android:layout_width="140dp"
+                        android:layout_height="30dp"
+                        android:layout_gravity="center"
+                        android:progressTint="@color/White"
+                        android:rotation="270"
+                        android:thumbTint="@color/White"
+                        android:thumbTintMode="src_in" />
+
+                </FrameLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_margin="5dp"
+                        android:orientation="horizontal"
+                        android:id="@+id/llPhoto">
+
+                        <ImageView
+                            android:id="@+id/photoBackImgv"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:padding="15dp"
+                            android:src="@drawable/icon_back_white" />
+
+                        <ImageView
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:layout_marginLeft="10dp"
+                            android:padding="15dp"
+                            android:src="@drawable/icon_photo" />
+
+                        <ImageView
+                            android:id="@+id/photoForwardImgv"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:layout_marginLeft="10dp"
+                            android:padding="15dp"
+                            android:src="@drawable/icon_forward_white" />
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:orientation="horizontal"
+                        android:id="@+id/llText">
+
+                        <ImageView
+                            android:id="@+id/textBackImgv"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:padding="15dp"
+                            android:src="@drawable/icon_back_white" />
+
+                        <ImageView
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:layout_marginLeft="10dp"
+                            android:padding="15dp"
+                            android:src="@drawable/icon_text" />
+
+                        <ImageView
+                            android:id="@+id/textForwardImgv"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:layout_marginLeft="10dp"
+                            android:padding="15dp"
+                            android:src="@drawable/icon_forward_white" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:orientation="horizontal"
+                        android:id="@+id/llColor">
+
+                        <ImageView
+                            android:id="@+id/colorBackImgv"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:padding="15dp"
+                            android:src="@drawable/icon_back_white" />
+
+                        <ImageView
+                            android:id="@+id/colorPaletteImgv"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:layout_marginLeft="10dp"
+                            android:padding="15dp"
+                            android:src="@drawable/icon_color_palette" />
+
+                        <ImageView
+                            android:id="@+id/colorForwardImgv"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:layout_marginLeft="10dp"
+                            android:padding="15dp"
+                            android:src="@drawable/icon_forward_white" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/adView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    ads:adSize="SMART_BANNER"
+                    ads:adUnitId="@string/ADMOB_BANNER_AD_UNIT_ID"></com.google.android.gms.ads.AdView>
+
+            </RelativeLayout>
+
+        </RelativeLayout>
 
     </LinearLayout>
-
 
 </FrameLayout>

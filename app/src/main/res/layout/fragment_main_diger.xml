@@ -43,8 +43,7 @@
                     <ImageView
                         android:id="@+id/imgZikirmatik"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/icon_zikirmatik" />
+                        android:layout_height="wrap_content" />
 
                 </LinearLayout>
 
@@ -65,8 +64,7 @@
                     android:layout_height="match_parent"
                     android:layout_marginRight="10dp"
                     android:layout_weight="0.5"
-                    android:padding="12dp"
-                    android:src="@drawable/icon_forward" />
+                    android:padding="12dp"/>
 
 
             </LinearLayout>
@@ -100,8 +98,7 @@
                     <ImageView
                         android:id="@+id/imgKibleBul"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/icon_kible_bul" />
+                        android:layout_height="wrap_content" />
 
                 </LinearLayout>
 
@@ -122,8 +119,7 @@
                     android:layout_height="match_parent"
                     android:layout_marginRight="10dp"
                     android:layout_weight="0.5"
-                    android:padding="12dp"
-                    android:src="@drawable/icon_forward" />
+                    android:padding="12dp" />
 
 
             </LinearLayout>
@@ -157,8 +153,7 @@
                     <ImageView
                         android:id="@+id/imgCumaMesajlari"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/icon_cuma_mesajlari" />
+                        android:layout_height="wrap_content" />
 
                 </LinearLayout>
 
@@ -179,8 +174,7 @@
                     android:layout_height="match_parent"
                     android:layout_marginRight="10dp"
                     android:layout_weight="0.5"
-                    android:padding="12dp"
-                    android:src="@drawable/icon_forward" />
+                    android:padding="12dp" />
 
 
             </LinearLayout>
