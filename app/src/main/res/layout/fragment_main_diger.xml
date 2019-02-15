@@ -64,7 +64,8 @@
                     android:layout_height="match_parent"
                     android:layout_marginRight="10dp"
                     android:layout_weight="0.5"
-                    android:padding="12dp"/>
+                    android:padding="12dp"
+                    android:src="@drawable/icon_forward"/>
 
 
             </LinearLayout>
@@ -119,7 +120,8 @@
                     android:layout_height="match_parent"
                     android:layout_marginRight="10dp"
                     android:layout_weight="0.5"
-                    android:padding="12dp" />
+                    android:padding="12dp"
+                    android:src="@drawable/icon_forward"/>
 
 
             </LinearLayout>
@@ -174,7 +176,62 @@
                     android:layout_height="match_parent"
                     android:layout_marginRight="10dp"
                     android:layout_weight="0.5"
-                    android:padding="12dp" />
+                    android:padding="12dp"
+                    android:src="@drawable/icon_forward"/>
+
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:alpha="0.5"
+                android:background="@color/gray" />
+
+            <!-- Dini Bilgiler -->
+            <LinearLayout
+                android:id="@+id/llDiniBilgiler"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_weight="5"
+                android:background="?attr/selectableItemBackground"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:padding="5dp"
+                    android:gravity="center">
+
+                    <ImageView
+                        android:id="@+id/imgDiniBilgiler"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="3"
+                    android:gravity="center_vertical"
+                    android:text="@string/diniBilgiler"
+                    android:textColor="@color/black"
+                    android:textSize="17sp" />
+
+
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="0.5"
+                    android:padding="12dp"
+                    android:src="@drawable/icon_forward"/>
 
 
             </LinearLayout>

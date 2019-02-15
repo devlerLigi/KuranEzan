@@ -24,7 +24,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:id="@+id/photoImgv"
-                    android:src="@drawable/islam1"
                     android:scaleType="fitXY"/>
 
                 <FrameLayout
@@ -65,6 +64,18 @@
                 </LinearLayout>
 
             </RelativeLayout>
+
+            <Button
+                android:id="@+id/finishButton"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_margin="10dp"
+                android:text="@string/FINISH"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textStyle="normal|bold|italic" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -114,23 +125,21 @@
                             android:id="@+id/photoBackImgv"
                             android:layout_width="50dp"
                             android:layout_height="50dp"
-                            android:padding="15dp"
-                            android:src="@drawable/icon_back_white" />
+                            android:padding="15dp" />
 
                         <ImageView
                             android:layout_width="50dp"
                             android:layout_height="50dp"
                             android:layout_marginLeft="10dp"
                             android:padding="15dp"
-                            android:src="@drawable/icon_photo" />
+                            android:id="@+id/iconPhotoImgv"/>
 
                         <ImageView
                             android:id="@+id/photoForwardImgv"
                             android:layout_width="50dp"
                             android:layout_height="50dp"
                             android:layout_marginLeft="10dp"
-                            android:padding="15dp"
-                            android:src="@drawable/icon_forward_white" />
+                            android:padding="15dp" />
 
                     </LinearLayout>
 
@@ -146,23 +155,21 @@
                             android:id="@+id/textBackImgv"
                             android:layout_width="50dp"
                             android:layout_height="50dp"
-                            android:padding="15dp"
-                            android:src="@drawable/icon_back_white" />
+                            android:padding="15dp" />
 
                         <ImageView
                             android:layout_width="50dp"
                             android:layout_height="50dp"
                             android:layout_marginLeft="10dp"
                             android:padding="15dp"
-                            android:src="@drawable/icon_text" />
+                            android:id="@+id/iconTextImgv"/>
 
                         <ImageView
                             android:id="@+id/textForwardImgv"
                             android:layout_width="50dp"
                             android:layout_height="50dp"
                             android:layout_marginLeft="10dp"
-                            android:padding="15dp"
-                            android:src="@drawable/icon_forward_white" />
+                            android:padding="15dp" />
 
                     </LinearLayout>
 
@@ -177,24 +184,21 @@
                             android:id="@+id/colorBackImgv"
                             android:layout_width="50dp"
                             android:layout_height="50dp"
-                            android:padding="15dp"
-                            android:src="@drawable/icon_back_white" />
+                            android:padding="15dp"/>
 
                         <ImageView
                             android:id="@+id/colorPaletteImgv"
                             android:layout_width="50dp"
                             android:layout_height="50dp"
                             android:layout_marginLeft="10dp"
-                            android:padding="15dp"
-                            android:src="@drawable/icon_color_palette" />
+                            android:padding="15dp" />
 
                         <ImageView
                             android:id="@+id/colorForwardImgv"
                             android:layout_width="50dp"
                             android:layout_height="50dp"
                             android:layout_marginLeft="10dp"
-                            android:padding="15dp"
-                            android:src="@drawable/icon_forward_white" />
+                            android:padding="15dp" />
 
                     </LinearLayout>
 

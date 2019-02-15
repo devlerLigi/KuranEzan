@@ -15,5 +15,18 @@ public class StringConstants {
     public static final String PRAYER_TIMES_LIST_URL_PREFIX = "https://ezanvakti.herokuapp.com/vakitler?ilce=";
     public static final String MY_ZIKIRS = "MY_ZIKIRS";
 
+    //Dini bilgiler files
+    public static final String file_ibadet_nedir = "ibadet_nedir";
+    public static final String file_imanin_sartlari = "imanin_sartlari";
+    public static final String file_islamin_sartlari = "islamin_sartlari";
+    public static final String file_otuziki_farz = "otuziki_farz";
+    public static final String file_ellidort_farz = "ellidort_farz";
+    public static final String file_farz_nedir = "farz_nedir";
+    public static final String file_sunnet_nedir = "sunnet_nedir";
+    public static final String file_vacip_nedir = "vacip_nedir";
+    public static final String file_kelimei_sahadet = "kelimei_sahadet";
+    public static final String file_ezan = "ezan";
+
+
 
 }

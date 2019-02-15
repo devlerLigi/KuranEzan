@@ -16,6 +16,25 @@
     <string name="zikirmatik">Praymatic</string>
     <string name="kibleBul">Find Qibla</string>
     <string name="cumaMesajlari">Friday Messages</string>
+    <string name="diniBilgiler">Religious information</string>
+
+    //Dini Bilgiler
+    <string name="IBADET_NEDIR">What is Worship</string>
+    <string name="IMANIN_SARTLARI">Conditions of admission</string>
+    <string name="ISLAMIN_SARTLARI">Terms of Islam</string>
+    <string name="OTUZIKI_FARZ">32 assumptions</string>
+    <string name="ELLIDORT_FARZ">54 assumptions</string>
+    <string name="FARZ_NEDIR">What is supposed</string>
+    <string name="SUNNET_NEDIR">What is Circumcision</string>
+    <string name="VACIP_NEDIR">What is Vacip</string>
+    <string name="KELIMEI_SAHADET">Islamic confession of faith</string>
+    <string name="EZAN">Call to prayer</string>
+    <string name="KELIMEI_TEVHID">Word-i Tawhid</string>
+    <string name="NAMAZ_REKATLARI">Prayer Credits</string>
+    <string name="ABDEST_NASIL_ALINIR">How to get the ablution</string>
+    <string name="ERKEKLER_NAMAZ_NASIL">Men\'s How to Make Prayers</string>
+    <string name="KADINLAR_NAMAZ_NASIL">Ladies How to Make Prayer</string>
+
 
     <string name="ayah">Ayah</string>
     <string name="options">Options</string>
@@ -48,6 +67,10 @@
     <string name="DHIKR_WILL_BE_CONTINUED">zikrine devam edilecek</string>
     <string name="WAS_RECORDED">Was recorded</string>
     <string name="GOOD_FRIDAY_MESSAGE">HAVE A GOOD FRIDAY</string>
+    <string name="FINISH">Finish</string>
+    <string name="WHATSAPP_NOT_INSTALLED">Whatsapp have not been installed</string>
+    <string name="UNEXPECTED_ERROR">Unexpected error occurred</string>
+    <string name="SHARE">Share</string>
 
     <!-- Location Settings constants-->
     <string name="gpsSettings">GPS Settings</string>
