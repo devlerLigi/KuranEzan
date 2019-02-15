@@ -1,6 +1,11 @@
 package com.uren.kuranezan.Models.QuranModels;
 
-public class Ayahs
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import java.io.Serializable;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class Ayahs  implements Serializable
 {
     private String number;
 

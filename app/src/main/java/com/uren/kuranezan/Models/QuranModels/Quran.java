@@ -1,6 +1,8 @@
 package com.uren.kuranezan.Models.QuranModels;
 
-public class Quran
+import java.io.Serializable;
+
+public class Quran  implements Serializable
 {
     private String code;
 

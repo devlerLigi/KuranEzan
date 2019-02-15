@@ -6,6 +6,7 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -109,19 +110,21 @@ public class MainActivity extends FragmentActivity
         });
 
         setSharedPreferences();
-        //fillInitialClasses();
+        fillInitialClasses();
 
     }
 
     private void fillInitialClasses() {
-        setQuranModels();
+        //setQuranModels();
         setLanguageList();
     }
 
     private void setQuranModels() {
+        /*
         QuranOriginal.getInstance(getBaseContext());
         QuranTransliteration.getInstance(getBaseContext(), Config.transliterationlang);
         QuranTranslation.getInstance(getBaseContext(), Config.lang);
+        */
     }
 
     private void setLanguageList() {
@@ -149,8 +152,8 @@ public class MainActivity extends FragmentActivity
                     tab.setIcon(mTabIconsSelected[i]);
                     tab.setText(TABS[i]);
                 }
-
-                /*if (tab != null)
+/*
+                if (tab != null)
                     tab.setCustomView(getTabView(i));*/
             }
         }
@@ -190,15 +193,20 @@ public class MainActivity extends FragmentActivity
 
         for (int i = 0; i < TABS.length; i++) {
             TabLayout.Tab selectedTab = bottomTabLayout.getTabAt(i);
-
-            /*View customView = selectedTab.getCustomView();
+/*
+            View customView = selectedTab.getCustomView();
             TextView tabDescription = (TextView) customView.findViewById(R.id.tabDesc);
+            ImageView icon = (ImageView) customView.findViewById(R.id.tab_icon);
 
             if (position != i) {
+                icon.setColorFilter(ContextCompat.getColor(this, R.color.gray), android.graphics.PorterDuff.Mode.SRC_IN);
                 tabDescription.setTextColor(getResources().getColor(R.color.gray));
             } else {
+                icon.setColorFilter(ContextCompat.getColor(this, R.color.fab_color_pressed), android.graphics.PorterDuff.Mode.SRC_IN);
                 tabDescription.setTextColor(getResources().getColor(R.color.fab_color_pressed));
-            }*/
+            }
+
+            */
         }
 
     }

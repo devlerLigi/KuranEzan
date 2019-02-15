@@ -3,6 +3,7 @@ package com.uren.kuranezan.Singleton;
 import android.content.Context;
 import android.os.AsyncTask;
 
+import com.uren.kuranezan.Interfaces.CompleteCallback;
 import com.uren.kuranezan.Interfaces.OnEventListener;
 import com.uren.kuranezan.MainFragments.TabKuran.JavaClasses.QuranAsyncProcess;
 import com.uren.kuranezan.Models.QuranModels.Quran;
@@ -14,15 +15,19 @@ import static com.uren.kuranezan.Constants.NumericConstants.REQUEST_TYPE_QURAN_T
 public class QuranTranslation {
 
     private static QuranTranslation single_instance = null;
+    private static CompleteCallback<Quran> mCompleteCallback;
+    private static boolean finished = false;
     private Quran quranTranslation;
 
     private QuranTranslation(Context context, String lang) {
         parseJson(context, lang);
     }
 
-    public static QuranTranslation getInstance(Context context, String lang) {
-        if (single_instance == null)
+    public static QuranTranslation getInstance(Context context, String lang, CompleteCallback<Quran> completeCallback) {
+        if (single_instance == null) {
+            mCompleteCallback = completeCallback;
             single_instance = new QuranTranslation(context, lang);
+        }
 
         return single_instance;
     }
@@ -51,12 +56,14 @@ public class QuranTranslation {
         QuranAsyncProcess quranAsyncProcess = new QuranAsyncProcess(new OnEventListener<Quran>() {
             @Override
             public void onSuccess(Quran quran) {
+                finished = true;
                 setQuranTranslation(quran);
+                mCompleteCallback.onComplete(quran);
             }
 
             @Override
             public void onFailure(Exception e) {
-
+                mCompleteCallback.onFailed(e);
             }
 
             @Override
@@ -69,8 +76,23 @@ public class QuranTranslation {
 
     }
 
-    public static void reset(){
+    public static void reset() {
         single_instance = null;
     }
 
+    public static boolean isFinished() {
+        return finished;
+    }
+
+    public static void setFinished(boolean finished) {
+        QuranTranslation.finished = finished;
+    }
+
+    public static CompleteCallback<Quran> getCompleteCallback() {
+        return mCompleteCallback;
+    }
+
+    public static void setCompleteCallback(CompleteCallback<Quran> mCompleteCallback) {
+        QuranTranslation.mCompleteCallback = mCompleteCallback;
+    }
 }

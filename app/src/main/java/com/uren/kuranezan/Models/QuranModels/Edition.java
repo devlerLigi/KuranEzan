@@ -1,6 +1,8 @@
 package com.uren.kuranezan.Models.QuranModels;
 
-public class Edition
+import java.io.Serializable;
+
+public class Edition implements Serializable
 {
     private String identifier;
 

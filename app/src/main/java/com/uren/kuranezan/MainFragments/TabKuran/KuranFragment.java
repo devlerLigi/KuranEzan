@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -40,8 +41,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 
-public class KuranFragment extends BaseFragment
-        implements ListItemClickListener {
+public class KuranFragment extends BaseFragment implements ListItemClickListener {
 
     View mView;
     private LinearLayoutManager mLayoutManager;
@@ -51,11 +51,8 @@ public class KuranFragment extends BaseFragment
     TextView txtToolbarTitle;
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
-
-    ArrayList<String> surahNameList = new ArrayList<String>();
-
-    @BindArray(R.array.surah_name)
-    String[] surahName;
+    @BindView(R.id.progressBar)
+    ProgressBar progressBar;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -78,13 +75,18 @@ public class KuranFragment extends BaseFragment
             ButterKnife.bind(this, mView);
 
             setToolbar();
+            new AsyncInsertData().execute();
 
             initRecyclerView();
-            setUpRecyclerView();
+            //setUpRecyclerView();
 
         }
 
         return mView;
+    }
+
+    private void setToolbar() {
+        txtToolbarTitle.setText(getString(R.string.quran));
     }
 
     private void initRecyclerView() {
@@ -103,35 +105,67 @@ public class KuranFragment extends BaseFragment
         surahAdapter.setListItemClickListener(this);
     }
 
-    private void setUpRecyclerView() {
-
-        for(int i=0; i<surahName.length; i++){
-            surahNameList.add(surahName[i]);
-        }
-
-        if (surahNameList != null && surahNameList.size() > 0) {
-            surahAdapter.addAll(surahNameList);
-        }
-    }
-
-
-
-    private void setToolbar() {
-        txtToolbarTitle.setText(getString(R.string.quran));
-    }
-
     @Override
     public void onDestroyView() {
         super.onDestroyView();
     }
 
     @Override
-    public void onListItemClick(String surahName, int clickedPosition) {
+    public void onListItemClick(String name, int clickedPosition) {
         mFragmentNavigation.pushFragment(SureDetayFragment.newInstance(clickedPosition));
     }
 
 
     /*****************************************************/
+    private class AsyncInsertData extends AsyncTask<Void, Void, Void> {
 
+        @Override
+        protected void onPreExecute() {
+            recyclerView.setVisibility(View.GONE);
+            progressBar.setVisibility(View.VISIBLE);
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+
+            Log.d("onInBackground()", "Data Inserting ");
+
+
+            final String[] surahName = getResources().getStringArray(R.array.surah_name);
+            final ArrayList<String> surahNameList = new ArrayList<String>();
+
+            for (int i = 0; i < surahName.length; i++) {
+                surahNameList.add(surahName[i]);
+            }
+
+            getActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    // WORK on UI thread here
+                    setUpRecyclerView(surahNameList);
+                }
+            });
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void result) {
+            super.onPostExecute(result);
+            Log.d("MainActivity", "Data Inserted ");
+            recyclerView.setVisibility(View.VISIBLE);
+            progressBar.setVisibility(View.GONE);
+        }
+
+
+        private void setUpRecyclerView(ArrayList<String> surahNameList) {
+
+            if (surahNameList != null && surahNameList.size() > 0) {
+                surahAdapter.addAll(surahNameList);
+            }
+        }
+
+
+    }
 
 }

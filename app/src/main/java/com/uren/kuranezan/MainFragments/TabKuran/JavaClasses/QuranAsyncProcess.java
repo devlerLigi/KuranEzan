@@ -2,8 +2,10 @@ package com.uren.kuranezan.MainFragments.TabKuran.JavaClasses;
 
 import android.content.Context;
 import android.os.AsyncTask;
+import android.util.Log;
 import android.widget.Toast;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import com.uren.kuranezan.Interfaces.OnEventListener;
 import com.uren.kuranezan.Models.QuranModels.Quran;
@@ -40,31 +42,52 @@ public class QuranAsyncProcess extends AsyncTask<Context, Void, Quran> {
     @Override
     protected Quran doInBackground(Context... contexts) {
 
+        long lStartTime = System.currentTimeMillis();
+
         Context context = contexts[0];
+        ObjectMapper mapper = new ObjectMapper();
+        Quran quran= null;
+
+        String TAG="";
 
         if (requestType == REQUEST_TYPE_QURAN_ORIGINAL) {
-            return setQuranOriginal(context);
+            quran = setQuranOriginal(context, mapper);
+            TAG = "ORIGINAL";
         } else if (requestType == REQUEST_TYPE_QURAN_TRANSLITERATION) {
-            return setQuranTransliteration(context);
+            quran = setQuranTransliteration(context, mapper);
+            TAG = "TRANSLITERATION";
         } else if (requestType == REQUEST_TYPE_QURAN_TRANSLATION_DEFAULT) {
-            return setQuranTranslation(context);
+            quran = setQuranTranslation(context, mapper);
+            TAG = "TRANSLATION";
         } else if (requestType == REQUEST_TYPE_QURAN_TRANSLATION_OTHER) {
-            return selectedQuranTranslation(context);
+            quran = selectedQuranTranslation(context, mapper);
+            TAG = "TRANSLATION";
         } else {
             //do nothing..
         }
 
-        return null;
+        long lEndTime = System.currentTimeMillis();
+        long output = lEndTime - lStartTime;
+        Log.i(TAG, String.valueOf(output));
+
+        return quran;
     }
 
-    private Quran setQuranOriginal(Context context) {
+    private Quran setQuranOriginal(Context context, ObjectMapper mapper) {
+
         InputStream raw = context.getResources().openRawResource(R.raw.quran_uthmani);
         Reader rd = new BufferedReader(new InputStreamReader(raw));
         // Now do the magic.
-        return new Gson().fromJson(rd, Quran.class);
+        // return new Gson().fromJson(rd, Quran.class); /*gson*/
+        try {
+            return mapper.readValue(rd, Quran.class);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
-    private Quran setQuranTransliteration(Context context) {
+    private Quran setQuranTransliteration(Context context, ObjectMapper mapper) {
         int rawNum;
         if (identifier.equals(Config.defaultTransliterationLang)) {
             rawNum = R.raw.quran_transliteration_tr;
@@ -75,17 +98,29 @@ public class QuranAsyncProcess extends AsyncTask<Context, Void, Quran> {
         InputStream raw = context.getResources().openRawResource(rawNum);
         Reader rd = new BufferedReader(new InputStreamReader(raw));
         // Now do the magic.
-        return new Gson().fromJson(rd, Quran.class);
+        //return new Gson().fromJson(rd, Quran.class);
+        try {
+            return mapper.readValue(rd, Quran.class);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
-    private Quran setQuranTranslation(Context context) {
+    private Quran setQuranTranslation(Context context, ObjectMapper mapper) {
         InputStream raw = context.getResources().openRawResource(R.raw.quran_translation_tr_diyanet);
         Reader rd = new BufferedReader(new InputStreamReader(raw));
         // Now do the magic.
-        return new Gson().fromJson(rd, Quran.class);
+        //return new Gson().fromJson(rd, Quran.class);
+        try {
+            return mapper.readValue(rd, Quran.class);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
-    private Quran selectedQuranTranslation(Context context) {
+    private Quran selectedQuranTranslation(Context context, ObjectMapper mapper) {
 
         String fileName = getInternalFileName();
         FileInputStream fis = null;
@@ -93,8 +128,15 @@ public class QuranAsyncProcess extends AsyncTask<Context, Void, Quran> {
             fis = context.openFileInput(fileName);
             Reader rd = new BufferedReader(new InputStreamReader(fis));
             // Now do the magic.
-            Quran quran = new Gson().fromJson(rd, Quran.class);
-            return quran;
+            //return new Gson().fromJson(rd, Quran.class);
+
+            try {
+                return mapper.readValue(rd, Quran.class);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return null;
+
         } catch (Exception e) {
             e.printStackTrace();
             return null;
