@@ -1,4 +1,4 @@
-package com.uren.kuranezan.MainFragments.TabDiger.SubFragments.Zikirmatik.Interfaces;
+package com.uren.kuranezan.MainFragments.TabDiger.SubFragments.Interfaces;
 
 import com.uren.kuranezan.MainFragments.TabDiger.Utils.MyZikir;
 

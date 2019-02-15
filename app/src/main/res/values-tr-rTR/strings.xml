@@ -34,6 +34,12 @@
     <string name="ABDEST_NASIL_ALINIR">Abdest Nasıl Alınır</string>
     <string name="ERKEKLER_NAMAZ_NASIL">Erkekler Nasıl Namaz Kılar</string>
     <string name="KADINLAR_NAMAZ_NASIL">Kadınlar Nasıl Namaz Kılar</string>
+    <string name="ISLAM_NEDIR">İslam</string>
+    <string name="NAMAZ">Namaz</string>
+    <string name="ORUC">Oruç</string>
+    <string name="ZEKAT">Zekat</string>
+    <string name="ADAK">Adak</string>
+    <string name="ESMAUL_HUSNA">Esma-ül Husna</string>
 
     <string name="ayah">Ayet</string>
     <string name="options">Seçenekler</string>

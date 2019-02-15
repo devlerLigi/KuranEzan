@@ -10,8 +10,11 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
 import com.uren.kuranezan.MainFragments.BaseFragment;
 import com.uren.kuranezan.R;
+import com.uren.kuranezan.Utils.AdMobUtil.AdMobUtils;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -34,6 +37,8 @@ public class DiniBilgilerContentFragment extends BaseFragment
     TextView txtToolbarTitle;
     @BindView(R.id.textView)
     TextView textView;
+    @BindView(R.id.adView)
+    AdView adView;
 
     private String title;
     private int rawItem;
@@ -70,6 +75,9 @@ public class DiniBilgilerContentFragment extends BaseFragment
     }
 
     private void init() {
+        MobileAds.initialize(getContext(), getResources().getString(R.string.ADMOB_APP_ID));
+        AdMobUtils.loadBannerAd(adView);
+        AdMobUtils.loadInterstitialAd(getContext());
         imgLeft.setVisibility(View.VISIBLE);
         imgLeft.setOnClickListener(this);
     }

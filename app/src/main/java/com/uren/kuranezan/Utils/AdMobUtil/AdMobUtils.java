@@ -22,38 +22,33 @@ public class AdMobUtils {
             @Override
             public void onAdLoaded() {
                 // Code to be executed when an ad finishes loading.
-                System.out.println("adload onAdLoaded");
             }
 
             @Override
             public void onAdFailedToLoad(int errorCode) {
                 // Code to be executed when an ad request fails.
-                System.out.println("adload onAdFailedToLoad errorCode:" + errorCode);
             }
 
             @Override
             public void onAdOpened() {
                 // Code to be executed when an ad opens an overlay that
                 // covers the screen.
-                System.out.println("adload onAdOpened");
             }
 
             @Override
             public void onAdLeftApplication() {
                 // Code to be executed when the user has left the app.
-                System.out.println("adload onAdLeftApplication");
             }
 
             @Override
             public void onAdClosed() {
                 // Code to be executed when when the user is about to return
                 // to the app after tapping on an ad.
-                System.out.println("adload onAdClosed");
             }
         });
     }
 
-    public static void loadInterstitialAd(Context context, final AdLoadCallback adLoadCallback) {
+    public static void loadInterstitialAd(Context context) {
 
         Random rand = new Random();
         int value = rand.nextInt(5);
@@ -69,7 +64,6 @@ public class AdMobUtils {
             public void onAdLoaded() {
                 // Code to be executed when an ad finishes loading.
                 mInterstitialAd.show();
-                adLoadCallback.onLoaded(true);
             }
 
             @Override
@@ -89,7 +83,6 @@ public class AdMobUtils {
 
             @Override
             public void onAdClosed() {
-                adLoadCallback.onClosed();
                 // Code to be executed when when the interstitial ad is closed.
             }
         });

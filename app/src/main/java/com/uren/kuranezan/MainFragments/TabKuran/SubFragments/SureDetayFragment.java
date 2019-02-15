@@ -17,6 +17,8 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
 import com.google.gson.Gson;
 import com.uren.kuranezan.Interfaces.CompleteCallback;
 import com.uren.kuranezan.Interfaces.OptionsCallback;
@@ -31,6 +33,7 @@ import com.uren.kuranezan.R;
 import com.uren.kuranezan.Singleton.QuranOriginal;
 import com.uren.kuranezan.Singleton.QuranTranslation;
 import com.uren.kuranezan.Singleton.QuranTransliteration;
+import com.uren.kuranezan.Utils.AdMobUtil.AdMobUtils;
 import com.uren.kuranezan.Utils.ClickableImage.ClickableImageView;
 import com.uren.kuranezan.Utils.Config;
 
@@ -76,6 +79,8 @@ public class SureDetayFragment extends BaseFragment
     TextView txtDot;
     @BindView(R.id.llExplanation)
     LinearLayout llExplanation;
+    @BindView(R.id.adView)
+    AdView adView;
 
     ArrayList<Ayahs> ayahOriginalList = new ArrayList<Ayahs>();
     ArrayList<Ayahs> ayahTransliterationlList = new ArrayList<Ayahs>();
@@ -96,6 +101,12 @@ public class SureDetayFragment extends BaseFragment
     }
 
     public SureDetayFragment() {
+    }
+
+    @Override
+    public void onStart() {
+        getActivity().findViewById(R.id.tabMainLayout).setVisibility(View.GONE);
+        super.onStart();
     }
 
     @Override
@@ -353,6 +364,8 @@ public class SureDetayFragment extends BaseFragment
     }
 
     private void init() {
+        MobileAds.initialize(getContext(), getActivity().getResources().getString(R.string.ADMOB_APP_ID));
+        AdMobUtils.loadBannerAd(adView);
         imgBack.setVisibility(View.VISIBLE);
         imgBack.setOnClickListener(this);
         imgOptions.setVisibility(View.VISIBLE);

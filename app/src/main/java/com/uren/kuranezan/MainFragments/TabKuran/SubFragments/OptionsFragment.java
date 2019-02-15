@@ -24,6 +24,8 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
 import com.google.gson.Gson;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
@@ -39,6 +41,7 @@ import com.uren.kuranezan.R;
 import com.uren.kuranezan.Singleton.QuranTranslation;
 import com.uren.kuranezan.Singleton.QuranTransliteration;
 import com.uren.kuranezan.Singleton.TranslationList;
+import com.uren.kuranezan.Utils.AdMobUtil.AdMobUtils;
 import com.uren.kuranezan.Utils.ClickableImage.ClickableImageView;
 import com.uren.kuranezan.Utils.Config;
 
@@ -100,9 +103,10 @@ public class OptionsFragment extends BaseFragment
     TextView txtFontSizeTransliteration;
     @BindView(R.id.txtFontSizeTranslation)
     TextView txtFontSizeTranslation;
-
     @BindView(R.id.progressBar)
     ProgressBar progressBar;
+    @BindView(R.id.adView)
+    AdView adView;
 
     private static final int REQUEST_TYPE_LANGUAGE = 1;
     private static final int REQUEST_TYPE_FONT_ARABIC = 2;
@@ -123,6 +127,12 @@ public class OptionsFragment extends BaseFragment
         StrictMode.setThreadPolicy(policy);
 
         super.onCreate(savedInstanceState);
+    }
+
+    @Override
+    public void onStart() {
+        getActivity().findViewById(R.id.tabMainLayout).setVisibility(View.GONE);
+        super.onStart();
     }
 
     @Override
@@ -154,6 +164,9 @@ public class OptionsFragment extends BaseFragment
     }
 
     private void init() {
+        MobileAds.initialize(getContext(), getActivity().getResources().getString(R.string.ADMOB_APP_ID));
+        AdMobUtils.loadBannerAd(adView);
+        AdMobUtils.loadInterstitialAd(getContext());
         imgBack.setVisibility(View.VISIBLE);
         imgBack.setOnClickListener(this);
         chkShowTransliteration.setChecked(Config.showTransliteration);

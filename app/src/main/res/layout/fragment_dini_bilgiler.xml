@@ -10,607 +10,864 @@
 
         <include layout="@layout/common_toolbar_layout" />
 
-        <android.support.v4.widget.NestedScrollView
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-            <LinearLayout
-                android:id="@+id/llContent"
+            <android.support.v4.widget.NestedScrollView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:descendantFocusability="blocksDescendants"
-                android:orientation="vertical">
+                android:layout_height="0dp"
+                android:layout_weight="10">
 
-                <!-- Ibadet Nedir -->
                 <LinearLayout
-                    android:id="@+id/llibadet"
+                    android:id="@+id/llContent"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:layout_marginBottom="5dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_weight="5"
-                    android:background="?attr/selectableItemBackground"
-                    android:orientation="horizontal">
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:descendantFocusability="blocksDescendants"
+                    android:orientation="vertical">
 
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
+                    <!-- Islam Nedir -->
+                    <LinearLayout
+                        android:id="@+id/llislam"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginBottom="5dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_weight="5"
+                        android:background="?attr/selectableItemBackground"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="10dp"
+                            android:layout_weight="4"
+                            android:gravity="center_vertical"
+                            android:text="@string/ISLAM_NEDIR"
+                            android:textColor="@color/black"
+                            android:textSize="17sp" />
+
+                        <ImageView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginRight="10dp"
+                            android:layout_weight="0.5"
+                            android:padding="12dp"
+                            android:src="@drawable/icon_forward" />
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
                         android:layout_marginLeft="10dp"
-                        android:layout_weight="4"
-                        android:gravity="center_vertical"
-                        android:text="@string/IBADET_NEDIR"
-                        android:textColor="@color/black"
-                        android:textSize="17sp" />
+                        android:layout_marginRight="20dp"
+                        android:alpha="0.5"
+                        android:background="@color/gray" />
 
-                    <ImageView
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginRight="10dp"
-                        android:layout_weight="0.5"
-                        android:padding="12dp"
-                        android:src="@drawable/icon_forward" />
+                    <!-- Ibadet Nedir -->
+                    <LinearLayout
+                        android:id="@+id/llibadet"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginBottom="5dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_weight="5"
+                        android:background="?attr/selectableItemBackground"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="10dp"
+                            android:layout_weight="4"
+                            android:gravity="center_vertical"
+                            android:text="@string/IBADET_NEDIR"
+                            android:textColor="@color/black"
+                            android:textSize="17sp" />
+
+                        <ImageView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginRight="10dp"
+                            android:layout_weight="0.5"
+                            android:padding="12dp"
+                            android:src="@drawable/icon_forward" />
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="20dp"
+                        android:alpha="0.5"
+                        android:background="@color/gray" />
+
+                    <!-- Imanin Sartlari -->
+                    <LinearLayout
+                        android:id="@+id/llImaninSartlari"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginBottom="5dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_weight="5"
+                        android:background="?attr/selectableItemBackground"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="10dp"
+                            android:layout_weight="4"
+                            android:gravity="center_vertical"
+                            android:text="@string/IMANIN_SARTLARI"
+                            android:textColor="@color/black"
+                            android:textSize="17sp" />
+
+                        <ImageView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginRight="10dp"
+                            android:layout_weight="0.5"
+                            android:padding="12dp"
+                            android:src="@drawable/icon_forward" />
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="20dp"
+                        android:alpha="0.5"
+                        android:background="@color/gray" />
+
+                    <!-- Islamin Nedir -->
+                    <LinearLayout
+                        android:id="@+id/llIslaminSartlari"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginBottom="5dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_weight="5"
+                        android:background="?attr/selectableItemBackground"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="10dp"
+                            android:layout_weight="4"
+                            android:gravity="center_vertical"
+                            android:text="@string/ISLAMIN_SARTLARI"
+                            android:textColor="@color/black"
+                            android:textSize="17sp" />
+
+                        <ImageView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginRight="10dp"
+                            android:layout_weight="0.5"
+                            android:padding="12dp"
+                            android:src="@drawable/icon_forward" />
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="20dp"
+                        android:alpha="0.5"
+                        android:background="@color/gray" />
+
+                    <!-- Esmaul Husna -->
+                    <LinearLayout
+                        android:id="@+id/llEsmaulHusna"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginBottom="5dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_weight="5"
+                        android:background="?attr/selectableItemBackground"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="10dp"
+                            android:layout_weight="4"
+                            android:gravity="center_vertical"
+                            android:text="@string/ESMAUL_HUSNA"
+                            android:textColor="@color/black"
+                            android:textSize="17sp" />
+
+                        <ImageView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginRight="10dp"
+                            android:layout_weight="0.5"
+                            android:padding="12dp"
+                            android:src="@drawable/icon_forward" />
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="20dp"
+                        android:alpha="0.5"
+                        android:background="@color/gray" />
+
+                    <!-- 32 Farz -->
+                    <LinearLayout
+                        android:id="@+id/ll32farz"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginBottom="5dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_weight="5"
+                        android:background="?attr/selectableItemBackground"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="10dp"
+                            android:layout_weight="4"
+                            android:gravity="center_vertical"
+                            android:text="@string/OTUZIKI_FARZ"
+                            android:textColor="@color/black"
+                            android:textSize="17sp" />
+
+                        <ImageView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginRight="10dp"
+                            android:layout_weight="0.5"
+                            android:padding="12dp"
+                            android:src="@drawable/icon_forward" />
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="20dp"
+                        android:alpha="0.5"
+                        android:background="@color/gray" />
+
+                    <!-- 54 Farz -->
+                    <LinearLayout
+                        android:id="@+id/ll54Farz"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginBottom="5dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_weight="5"
+                        android:background="?attr/selectableItemBackground"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="10dp"
+                            android:layout_weight="4"
+                            android:gravity="center_vertical"
+                            android:text="@string/ELLIDORT_FARZ"
+                            android:textColor="@color/black"
+                            android:textSize="17sp" />
+
+                        <ImageView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginRight="10dp"
+                            android:layout_weight="0.5"
+                            android:padding="12dp"
+                            android:src="@drawable/icon_forward" />
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="20dp"
+                        android:alpha="0.5"
+                        android:background="@color/gray" />
+
+                    <!-- Farz Nedir -->
+                    <LinearLayout
+                        android:id="@+id/llFarzNedir"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginBottom="5dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_weight="5"
+                        android:background="?attr/selectableItemBackground"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="10dp"
+                            android:layout_weight="4"
+                            android:gravity="center_vertical"
+                            android:text="@string/FARZ_NEDIR"
+                            android:textColor="@color/black"
+                            android:textSize="17sp" />
+
+                        <ImageView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginRight="10dp"
+                            android:layout_weight="0.5"
+                            android:padding="12dp"
+                            android:src="@drawable/icon_forward" />
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="20dp"
+                        android:alpha="0.5"
+                        android:background="@color/gray" />
+
+                    <!-- Sunnet Nedir -->
+                    <LinearLayout
+                        android:id="@+id/llSunnetNedir"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginBottom="5dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_weight="5"
+                        android:background="?attr/selectableItemBackground"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="10dp"
+                            android:layout_weight="4"
+                            android:gravity="center_vertical"
+                            android:text="@string/SUNNET_NEDIR"
+                            android:textColor="@color/black"
+                            android:textSize="17sp" />
+
+                        <ImageView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginRight="10dp"
+                            android:layout_weight="0.5"
+                            android:padding="12dp"
+                            android:src="@drawable/icon_forward" />
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="20dp"
+                        android:alpha="0.5"
+                        android:background="@color/gray" />
+
+                    <!-- Vacip Nedir -->
+                    <LinearLayout
+                        android:id="@+id/llVacipNedir"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginBottom="5dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_weight="5"
+                        android:background="?attr/selectableItemBackground"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="10dp"
+                            android:layout_weight="4"
+                            android:gravity="center_vertical"
+                            android:text="@string/VACIP_NEDIR"
+                            android:textColor="@color/black"
+                            android:textSize="17sp" />
+
+                        <ImageView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginRight="10dp"
+                            android:layout_weight="0.5"
+                            android:padding="12dp"
+                            android:src="@drawable/icon_forward" />
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="20dp"
+                        android:alpha="0.5"
+                        android:background="@color/gray" />
+
+                    <!-- Kelimei sahadet -->
+                    <LinearLayout
+                        android:id="@+id/llKelimeiSahadet"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginBottom="5dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_weight="5"
+                        android:background="?attr/selectableItemBackground"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="10dp"
+                            android:layout_weight="4"
+                            android:gravity="center_vertical"
+                            android:text="@string/KELIMEI_SAHADET"
+                            android:textColor="@color/black"
+                            android:textSize="17sp" />
+
+                        <ImageView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginRight="10dp"
+                            android:layout_weight="0.5"
+                            android:padding="12dp"
+                            android:src="@drawable/icon_forward" />
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="20dp"
+                        android:alpha="0.5"
+                        android:background="@color/gray" />
+
+                    <!-- Ezan -->
+                    <LinearLayout
+                        android:id="@+id/llEzan"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginBottom="5dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_weight="5"
+                        android:background="?attr/selectableItemBackground"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="10dp"
+                            android:layout_weight="4"
+                            android:gravity="center_vertical"
+                            android:text="@string/EZAN"
+                            android:textColor="@color/black"
+                            android:textSize="17sp" />
+
+                        <ImageView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginRight="10dp"
+                            android:layout_weight="0.5"
+                            android:padding="12dp"
+                            android:src="@drawable/icon_forward" />
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="20dp"
+                        android:alpha="0.5"
+                        android:background="@color/gray" />
+
+                    <!-- kelimei tevhid -->
+                    <LinearLayout
+                        android:id="@+id/llkelimeiTevhid"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginBottom="5dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_weight="5"
+                        android:background="?attr/selectableItemBackground"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="10dp"
+                            android:layout_weight="4"
+                            android:gravity="center_vertical"
+                            android:text="@string/KELIMEI_TEVHID"
+                            android:textColor="@color/black"
+                            android:textSize="17sp" />
+
+                        <ImageView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginRight="10dp"
+                            android:layout_weight="0.5"
+                            android:padding="12dp"
+                            android:src="@drawable/icon_forward" />
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="20dp"
+                        android:alpha="0.5"
+                        android:background="@color/gray" />
+
+                    <!-- Namaz  -->
+                    <LinearLayout
+                        android:id="@+id/llNamaz"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginBottom="5dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_weight="5"
+                        android:background="?attr/selectableItemBackground"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="10dp"
+                            android:layout_weight="4"
+                            android:gravity="center_vertical"
+                            android:text="@string/NAMAZ"
+                            android:textColor="@color/black"
+                            android:textSize="17sp" />
+
+                        <ImageView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginRight="10dp"
+                            android:layout_weight="0.5"
+                            android:padding="12dp"
+                            android:src="@drawable/icon_forward" />
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="20dp"
+                        android:alpha="0.5"
+                        android:background="@color/gray" />
+
+                    <!-- Namaz rekatlari -->
+                    <LinearLayout
+                        android:id="@+id/llNamazRekatlari"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginBottom="5dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_weight="5"
+                        android:background="?attr/selectableItemBackground"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="10dp"
+                            android:layout_weight="4"
+                            android:gravity="center_vertical"
+                            android:text="@string/NAMAZ_REKATLARI"
+                            android:textColor="@color/black"
+                            android:textSize="17sp" />
+
+                        <ImageView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginRight="10dp"
+                            android:layout_weight="0.5"
+                            android:padding="12dp"
+                            android:src="@drawable/icon_forward" />
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="20dp"
+                        android:alpha="0.5"
+                        android:background="@color/gray" />
+
+                    <!-- Oruc  -->
+                    <LinearLayout
+                        android:id="@+id/llOruc"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginBottom="5dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_weight="5"
+                        android:background="?attr/selectableItemBackground"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="10dp"
+                            android:layout_weight="4"
+                            android:gravity="center_vertical"
+                            android:text="@string/ORUC"
+                            android:textColor="@color/black"
+                            android:textSize="17sp" />
+
+                        <ImageView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginRight="10dp"
+                            android:layout_weight="0.5"
+                            android:padding="12dp"
+                            android:src="@drawable/icon_forward" />
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="20dp"
+                        android:alpha="0.5"
+                        android:background="@color/gray" />
+
+                    <!-- Zekat  -->
+                    <LinearLayout
+                        android:id="@+id/llZekat"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginBottom="5dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_weight="5"
+                        android:background="?attr/selectableItemBackground"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="10dp"
+                            android:layout_weight="4"
+                            android:gravity="center_vertical"
+                            android:text="@string/ZEKAT"
+                            android:textColor="@color/black"
+                            android:textSize="17sp" />
+
+                        <ImageView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginRight="10dp"
+                            android:layout_weight="0.5"
+                            android:padding="12dp"
+                            android:src="@drawable/icon_forward" />
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="20dp"
+                        android:alpha="0.5"
+                        android:background="@color/gray" />
+
+                    <!-- Adak  -->
+                    <LinearLayout
+                        android:id="@+id/llAdak"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginBottom="5dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_weight="5"
+                        android:background="?attr/selectableItemBackground"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="10dp"
+                            android:layout_weight="4"
+                            android:gravity="center_vertical"
+                            android:text="@string/ADAK"
+                            android:textColor="@color/black"
+                            android:textSize="17sp" />
+
+                        <ImageView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginRight="10dp"
+                            android:layout_weight="0.5"
+                            android:padding="12dp"
+                            android:src="@drawable/icon_forward" />
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="20dp"
+                        android:alpha="0.5"
+                        android:background="@color/gray" />
+
+                    <!-- Abdest nasil alnir -->
+                    <LinearLayout
+                        android:id="@+id/llAbdestNasilAlinir"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginBottom="5dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_weight="5"
+                        android:background="?attr/selectableItemBackground"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="10dp"
+                            android:layout_weight="4"
+                            android:gravity="center_vertical"
+                            android:text="@string/ABDEST_NASIL_ALINIR"
+                            android:textColor="@color/black"
+                            android:textSize="17sp" />
+
+                        <ImageView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginRight="10dp"
+                            android:layout_weight="0.5"
+                            android:padding="12dp"
+                            android:src="@drawable/icon_forward" />
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="20dp"
+                        android:alpha="0.5"
+                        android:background="@color/gray" />
+
+                    <!-- Erkekler nasil kilar -->
+                    <LinearLayout
+                        android:id="@+id/llErkeklerdeNamaz"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginBottom="5dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_weight="5"
+                        android:background="?attr/selectableItemBackground"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="10dp"
+                            android:layout_weight="4"
+                            android:gravity="center_vertical"
+                            android:text="@string/ERKEKLER_NAMAZ_NASIL"
+                            android:textColor="@color/black"
+                            android:textSize="17sp" />
+
+                        <ImageView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginRight="10dp"
+                            android:layout_weight="0.5"
+                            android:padding="12dp"
+                            android:src="@drawable/icon_forward" />
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="20dp"
+                        android:alpha="0.5"
+                        android:background="@color/gray" />
+
+                    <!-- kadinlar nasil kilar -->
+                    <LinearLayout
+                        android:id="@+id/llKadinlarNamaz"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginBottom="5dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_weight="5"
+                        android:background="?attr/selectableItemBackground"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="10dp"
+                            android:layout_weight="4"
+                            android:gravity="center_vertical"
+                            android:text="@string/KADINLAR_NAMAZ_NASIL"
+                            android:textColor="@color/black"
+                            android:textSize="17sp" />
+
+                        <ImageView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginRight="10dp"
+                            android:layout_weight="0.5"
+                            android:padding="12dp"
+                            android:src="@drawable/icon_forward" />
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="20dp"
+                        android:alpha="0.5"
+                        android:background="@color/gray" />
 
                 </LinearLayout>
 
-                <View
+            </android.support.v4.widget.NestedScrollView>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1">
+
+                <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/adView"
                     android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="20dp"
-                    android:alpha="0.5"
-                    android:background="@color/gray" />
-
-                <!-- Imanin Sartlari -->
-                <LinearLayout
-                    android:id="@+id/llImaninSartlari"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:layout_marginBottom="5dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_weight="5"
-                    android:background="?attr/selectableItemBackground"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="10dp"
-                        android:layout_weight="4"
-                        android:gravity="center_vertical"
-                        android:text="@string/IMANIN_SARTLARI"
-                        android:textColor="@color/black"
-                        android:textSize="17sp" />
-
-                    <ImageView
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginRight="10dp"
-                        android:layout_weight="0.5"
-                        android:padding="12dp"
-                        android:src="@drawable/icon_forward" />
-
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="20dp"
-                    android:alpha="0.5"
-                    android:background="@color/gray" />
-
-                <!-- Islamin Nedir -->
-                <LinearLayout
-                    android:id="@+id/llIslaminSartlari"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:layout_marginBottom="5dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_weight="5"
-                    android:background="?attr/selectableItemBackground"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="10dp"
-                        android:layout_weight="4"
-                        android:gravity="center_vertical"
-                        android:text="@string/ISLAMIN_SARTLARI"
-                        android:textColor="@color/black"
-                        android:textSize="17sp" />
-
-                    <ImageView
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginRight="10dp"
-                        android:layout_weight="0.5"
-                        android:padding="12dp"
-                        android:src="@drawable/icon_forward" />
-
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="20dp"
-                    android:alpha="0.5"
-                    android:background="@color/gray" />
-
-                <!-- 32 Farz -->
-                <LinearLayout
-                    android:id="@+id/ll32farz"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:layout_marginBottom="5dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_weight="5"
-                    android:background="?attr/selectableItemBackground"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="10dp"
-                        android:layout_weight="4"
-                        android:gravity="center_vertical"
-                        android:text="@string/OTUZIKI_FARZ"
-                        android:textColor="@color/black"
-                        android:textSize="17sp" />
-
-                    <ImageView
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginRight="10dp"
-                        android:layout_weight="0.5"
-                        android:padding="12dp"
-                        android:src="@drawable/icon_forward" />
-
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="20dp"
-                    android:alpha="0.5"
-                    android:background="@color/gray" />
-
-                <!-- 54 Farz -->
-                <LinearLayout
-                    android:id="@+id/ll54Farz"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:layout_marginBottom="5dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_weight="5"
-                    android:background="?attr/selectableItemBackground"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="10dp"
-                        android:layout_weight="4"
-                        android:gravity="center_vertical"
-                        android:text="@string/ELLIDORT_FARZ"
-                        android:textColor="@color/black"
-                        android:textSize="17sp" />
-
-                    <ImageView
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginRight="10dp"
-                        android:layout_weight="0.5"
-                        android:padding="12dp"
-                        android:src="@drawable/icon_forward" />
-
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="20dp"
-                    android:alpha="0.5"
-                    android:background="@color/gray" />
-
-                <!-- Farz Nedir -->
-                <LinearLayout
-                    android:id="@+id/llFarzNedir"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:layout_marginBottom="5dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_weight="5"
-                    android:background="?attr/selectableItemBackground"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="10dp"
-                        android:layout_weight="4"
-                        android:gravity="center_vertical"
-                        android:text="@string/FARZ_NEDIR"
-                        android:textColor="@color/black"
-                        android:textSize="17sp" />
-
-                    <ImageView
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginRight="10dp"
-                        android:layout_weight="0.5"
-                        android:padding="12dp"
-                        android:src="@drawable/icon_forward" />
-
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="20dp"
-                    android:alpha="0.5"
-                    android:background="@color/gray" />
-
-                <!-- Sunnet Nedir -->
-                <LinearLayout
-                    android:id="@+id/llSunnetNedir"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:layout_marginBottom="5dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_weight="5"
-                    android:background="?attr/selectableItemBackground"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="10dp"
-                        android:layout_weight="4"
-                        android:gravity="center_vertical"
-                        android:text="@string/SUNNET_NEDIR"
-                        android:textColor="@color/black"
-                        android:textSize="17sp" />
-
-                    <ImageView
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginRight="10dp"
-                        android:layout_weight="0.5"
-                        android:padding="12dp"
-                        android:src="@drawable/icon_forward" />
-
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="20dp"
-                    android:alpha="0.5"
-                    android:background="@color/gray" />
-
-                <!-- Vacip Nedir -->
-                <LinearLayout
-                    android:id="@+id/llVacipNedir"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:layout_marginBottom="5dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_weight="5"
-                    android:background="?attr/selectableItemBackground"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="10dp"
-                        android:layout_weight="4"
-                        android:gravity="center_vertical"
-                        android:text="@string/VACIP_NEDIR"
-                        android:textColor="@color/black"
-                        android:textSize="17sp" />
-
-                    <ImageView
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginRight="10dp"
-                        android:layout_weight="0.5"
-                        android:padding="12dp"
-                        android:src="@drawable/icon_forward" />
-
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="20dp"
-                    android:alpha="0.5"
-                    android:background="@color/gray" />
-
-                <!-- Kelimei sahadet -->
-                <LinearLayout
-                    android:id="@+id/llKelimeiSahadet"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:layout_marginBottom="5dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_weight="5"
-                    android:background="?attr/selectableItemBackground"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="10dp"
-                        android:layout_weight="4"
-                        android:gravity="center_vertical"
-                        android:text="@string/KELIMEI_SAHADET"
-                        android:textColor="@color/black"
-                        android:textSize="17sp" />
-
-                    <ImageView
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginRight="10dp"
-                        android:layout_weight="0.5"
-                        android:padding="12dp"
-                        android:src="@drawable/icon_forward" />
-
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="20dp"
-                    android:alpha="0.5"
-                    android:background="@color/gray" />
-
-                <!-- Ezan -->
-                <LinearLayout
-                    android:id="@+id/llEzan"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:layout_marginBottom="5dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_weight="5"
-                    android:background="?attr/selectableItemBackground"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="10dp"
-                        android:layout_weight="4"
-                        android:gravity="center_vertical"
-                        android:text="@string/EZAN"
-                        android:textColor="@color/black"
-                        android:textSize="17sp" />
-
-                    <ImageView
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginRight="10dp"
-                        android:layout_weight="0.5"
-                        android:padding="12dp"
-                        android:src="@drawable/icon_forward" />
-
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="20dp"
-                    android:alpha="0.5"
-                    android:background="@color/gray" />
-
-                <!-- kelimei tevhid -->
-                <LinearLayout
-                    android:id="@+id/llkelimeiTevhid"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:layout_marginBottom="5dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_weight="5"
-                    android:background="?attr/selectableItemBackground"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="10dp"
-                        android:layout_weight="4"
-                        android:gravity="center_vertical"
-                        android:text="@string/KELIMEI_TEVHID"
-                        android:textColor="@color/black"
-                        android:textSize="17sp" />
-
-                    <ImageView
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginRight="10dp"
-                        android:layout_weight="0.5"
-                        android:padding="12dp"
-                        android:src="@drawable/icon_forward" />
-
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="20dp"
-                    android:alpha="0.5"
-                    android:background="@color/gray" />
-
-                <!-- Namaz rekatlari -->
-                <LinearLayout
-                    android:id="@+id/llNamazRekatlari"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:layout_marginBottom="5dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_weight="5"
-                    android:background="?attr/selectableItemBackground"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="10dp"
-                        android:layout_weight="4"
-                        android:gravity="center_vertical"
-                        android:text="@string/NAMAZ_REKATLARI"
-                        android:textColor="@color/black"
-                        android:textSize="17sp" />
-
-                    <ImageView
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginRight="10dp"
-                        android:layout_weight="0.5"
-                        android:padding="12dp"
-                        android:src="@drawable/icon_forward" />
-
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="20dp"
-                    android:alpha="0.5"
-                    android:background="@color/gray" />
-
-                <!-- Abdest nasil alnir -->
-                <LinearLayout
-                    android:id="@+id/llAbdestNasilAlinir"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:layout_marginBottom="5dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_weight="5"
-                    android:background="?attr/selectableItemBackground"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="10dp"
-                        android:layout_weight="4"
-                        android:gravity="center_vertical"
-                        android:text="@string/ABDEST_NASIL_ALINIR"
-                        android:textColor="@color/black"
-                        android:textSize="17sp" />
-
-                    <ImageView
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginRight="10dp"
-                        android:layout_weight="0.5"
-                        android:padding="12dp"
-                        android:src="@drawable/icon_forward" />
-
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="20dp"
-                    android:alpha="0.5"
-                    android:background="@color/gray" />
-
-                <!-- Erkekler nasil kilar -->
-                <LinearLayout
-                    android:id="@+id/llErkeklerdeNamaz"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:layout_marginBottom="5dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_weight="5"
-                    android:background="?attr/selectableItemBackground"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="10dp"
-                        android:layout_weight="4"
-                        android:gravity="center_vertical"
-                        android:text="@string/ERKEKLER_NAMAZ_NASIL"
-                        android:textColor="@color/black"
-                        android:textSize="17sp" />
-
-                    <ImageView
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginRight="10dp"
-                        android:layout_weight="0.5"
-                        android:padding="12dp"
-                        android:src="@drawable/icon_forward" />
-
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="20dp"
-                    android:alpha="0.5"
-                    android:background="@color/gray" />
-
-                <!-- kadinlar nasil kilar -->
-                <LinearLayout
-                    android:id="@+id/llKadinlarNamaz"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:layout_marginBottom="5dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_weight="5"
-                    android:background="?attr/selectableItemBackground"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="10dp"
-                        android:layout_weight="4"
-                        android:gravity="center_vertical"
-                        android:text="@string/KADINLAR_NAMAZ_NASIL"
-                        android:textColor="@color/black"
-                        android:textSize="17sp" />
-
-                    <ImageView
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginRight="10dp"
-                        android:layout_weight="0.5"
-                        android:padding="12dp"
-                        android:src="@drawable/icon_forward" />
-
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="20dp"
-                    android:alpha="0.5"
-                    android:background="@color/gray" />
-
-            </LinearLayout>
-
-        </android.support.v4.widget.NestedScrollView>
-
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    ads:adSize="SMART_BANNER"
+                    ads:adUnitId="@string/ADMOB_BANNER_AD_UNIT_ID"></com.google.android.gms.ads.AdView>
+
+            </RelativeLayout>
+
+        </LinearLayout>
 
     </LinearLayout>
 

@@ -34,6 +34,12 @@
     <string name="ABDEST_NASIL_ALINIR">How to get the ablution</string>
     <string name="ERKEKLER_NAMAZ_NASIL">Men\'s How to Make Prayers</string>
     <string name="KADINLAR_NAMAZ_NASIL">Ladies How to Make Prayer</string>
+    <string name="ISLAM_NEDIR">Islam</string>
+    <string name="NAMAZ">Prayer</string>
+    <string name="ORUC">Fast</string>
+    <string name="ZEKAT">Alms</string>
+    <string name="ADAK">Vow</string>
+    <string name="ESMAUL_HUSNA">Esma-ul Husna</string>
 
 
     <string name="ayah">Ayah</string>
