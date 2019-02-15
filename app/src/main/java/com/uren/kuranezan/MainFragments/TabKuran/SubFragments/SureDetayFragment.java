@@ -3,6 +3,7 @@ package com.uren.kuranezan.MainFragments.TabKuran.SubFragments;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -11,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -20,6 +22,7 @@ import com.uren.kuranezan.Interfaces.CompleteCallback;
 import com.uren.kuranezan.Interfaces.OptionsCallback;
 import com.uren.kuranezan.MainFragments.BaseFragment;
 import com.uren.kuranezan.MainFragments.TabKuran.Adapters.AyahAdapter;
+import com.uren.kuranezan.MainFragments.TabKuran.JavaClasses.InternalStorage;
 import com.uren.kuranezan.MainFragments.TabKuran.JavaClasses.OptionsHelper;
 import com.uren.kuranezan.Models.QuranModels.Ayahs;
 import com.uren.kuranezan.Models.QuranModels.Quran;
@@ -69,12 +72,20 @@ public class SureDetayFragment extends BaseFragment
     RecyclerView recyclerView;
     @BindView(R.id.progressBar)
     ProgressBar progressBar;
+    @BindView(R.id.txtDot)
+    TextView txtDot;
+    @BindView(R.id.llExplanation)
+    LinearLayout llExplanation;
 
     ArrayList<Ayahs> ayahOriginalList = new ArrayList<Ayahs>();
     ArrayList<Ayahs> ayahTransliterationlList = new ArrayList<Ayahs>();
     ArrayList<Ayahs> ayahTranslationList = new ArrayList<Ayahs>();
 
     List<AsyncTask<Void, Void, Void>> asyncTasks = new ArrayList<AsyncTask<Void, Void, Void>>();
+    private CountDownTimer mCountDownTimer;
+    private boolean mTimerRunning;
+    private long mTimeLeftInMillis = START_TIME_IN_MILLIS;
+    private static final long START_TIME_IN_MILLIS = 2000;
 
     public static SureDetayFragment newInstance(int number) {
         Bundle args = new Bundle();
@@ -126,12 +137,14 @@ public class SureDetayFragment extends BaseFragment
 
         recyclerView.setVisibility(View.GONE);
         progressBar.setVisibility(View.VISIBLE);
+        llExplanation.setVisibility(View.VISIBLE);
+        startTimer();
 
         setOriginal();
         setTransliteration();
         setTranslation();
-    }
 
+    }
 
     private void setOriginal() {
 
@@ -145,6 +158,7 @@ public class SureDetayFragment extends BaseFragment
                 public void onComplete(Quran quranOriginal) {
                     Log.i("original-2", "listener1 den set edildi");
                     setAyahOriginal(quranOriginal);
+                    saveInternal(quranOriginal);
                 }
 
                 @Override
@@ -163,6 +177,7 @@ public class SureDetayFragment extends BaseFragment
                     public void onComplete(Quran quranOriginal) {
                         Log.i("original-2", "listener2 den set edildi");
                         setAyahOriginal(quranOriginal);
+                        saveInternal(quranOriginal);
                     }
 
                     @Override
@@ -173,6 +188,34 @@ public class SureDetayFragment extends BaseFragment
             }
         }
 
+    }
+
+    private Quran readFromInternal() {
+
+        Quran cachedEntries = null;
+
+        // Retrieve the list from internal storage
+        try {
+            cachedEntries = (Quran) InternalStorage.readObject(getContext(), "quranOriginal");
+            Log.i("cache", "readFromInternal");
+            return cachedEntries;
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
+    private void saveInternal(Quran quranOriginal) {
+        // Save the list of entries to internal storage
+        try {
+            InternalStorage.writeObject(getContext(), "quranOriginal", quranOriginal);
+            Log.i("cache", "saveInternal");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private void setAyahOriginal(Quran quranOriginal) {
@@ -336,6 +379,8 @@ public class SureDetayFragment extends BaseFragment
     private void setUpRecyclerView() {
         recyclerView.setVisibility(View.VISIBLE);
         progressBar.setVisibility(View.GONE);
+        llExplanation.setVisibility(View.GONE);
+        mCountDownTimer.cancel();
 
         ayahAdapter.addAll(ayahOriginalList, ayahTransliterationlList, ayahTranslationList);
     }
@@ -785,5 +830,41 @@ public class SureDetayFragment extends BaseFragment
 
 
     }*/
+
+    /********************************************/
+
+    private void startTimer() {
+
+        txtDot.setText("");
+        mCountDownTimer = new CountDownTimer(mTimeLeftInMillis, 500) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                mTimeLeftInMillis = millisUntilFinished;
+
+                if (mTimeLeftInMillis / 500 == 1) {
+                    txtDot.setText("...");
+                } else if (mTimeLeftInMillis / 500 == 2) {
+                    txtDot.setText("..");
+                } else if (mTimeLeftInMillis / 500 == 3) {
+                    txtDot.setText(".");
+                } else {
+                    txtDot.setText("");
+                }
+
+            }
+
+            @Override
+            public void onFinish() {
+                mTimerRunning = false;
+                mTimeLeftInMillis = START_TIME_IN_MILLIS;
+                txtDot.setText("");
+                startTimer();
+            }
+        }.start();
+
+        mTimerRunning = true;
+    }
+
+
 
 }

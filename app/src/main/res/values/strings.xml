@@ -68,7 +68,7 @@
     <string name="translationWord">In the name of God, most Gracious, most Compassionate</string>
 
     <string name="downloadLanguagePAck">Download Language packet?</string>
-
+    <string name="loading">Loading</string>
 
     <string-array name="arabic_font">
         <item>Amiri</item>

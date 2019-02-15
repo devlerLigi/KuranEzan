@@ -58,12 +58,16 @@ public class QuranTranslation {
             public void onSuccess(Quran quran) {
                 finished = true;
                 setQuranTranslation(quran);
-                mCompleteCallback.onComplete(quran);
+                if (mCompleteCallback != null) {
+                    mCompleteCallback.onComplete(quran);
+                }
             }
 
             @Override
             public void onFailure(Exception e) {
-                mCompleteCallback.onFailed(e);
+                if (mCompleteCallback != null) {
+                    mCompleteCallback.onFailed(e);
+                }
             }
 
             @Override

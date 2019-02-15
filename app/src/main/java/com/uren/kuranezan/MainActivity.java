@@ -1,6 +1,7 @@
 package com.uren.kuranezan;
 
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -66,6 +67,8 @@ public class MainActivity extends FragmentActivity
     private TextView tabDescription;
 
     private int initialTabIndex = 1;
+    private int selectedTabColor, unSelectedTabColor;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -74,6 +77,9 @@ public class MainActivity extends FragmentActivity
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         Fabric.with(this, new Crashlytics());
+
+        unSelectedTabColor = this.getResources().getColor(R.color.DarkGray);
+        selectedTabColor = this.getResources().getColor(R.color.fab_color_pressed);
 
         initToolbar();
         initTab();
@@ -88,13 +94,13 @@ public class MainActivity extends FragmentActivity
 
         bottomTabLayout.getTabAt(initialTabIndex).select();
         switchTab(initialTabIndex);
+        updateTabSelection(initialTabIndex);
 
 
         bottomTabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-                fragmentHistory.push(tab.getPosition());
-                switchTab(tab.getPosition());
+                tabSelectionControl(tab);
             }
 
             @Override
@@ -105,26 +111,14 @@ public class MainActivity extends FragmentActivity
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
                 mNavController.clearStack();
-                switchTab(tab.getPosition());
+                tabSelectionControl(tab);
             }
         });
 
         setSharedPreferences();
-        fillInitialClasses();
-
-    }
-
-    private void fillInitialClasses() {
-        //setQuranModels();
         setLanguageList();
-    }
 
-    private void setQuranModels() {
-        /*
-        QuranOriginal.getInstance(getBaseContext());
-        QuranTransliteration.getInstance(getBaseContext(), Config.transliterationlang);
-        QuranTranslation.getInstance(getBaseContext(), Config.lang);
-        */
+
     }
 
     private void setLanguageList() {
@@ -142,6 +136,11 @@ public class MainActivity extends FragmentActivity
         */
     }
 
+    public void tabSelectionControl(TabLayout.Tab tab) {
+        fragmentHistory.push(tab.getPosition());
+        switchAndUpdateTabSelection(tab.getPosition());
+    }
+
     private void initTab() {
         if (bottomTabLayout != null) {
             for (int i = 0; i < TABS.length; i++) {
@@ -156,6 +155,9 @@ public class MainActivity extends FragmentActivity
                 if (tab != null)
                     tab.setCustomView(getTabView(i));*/
             }
+            bottomTabLayout.getTabAt(initialTabIndex).getIcon().setColorFilter(selectedTabColor, PorterDuff.Mode.SRC_IN);
+            //bottomTabLayout.setTabTextColors(unSelectedTabColor, selectedTabColor);
+
         }
 
     }
@@ -247,28 +249,34 @@ public class MainActivity extends FragmentActivity
             } else {
                 if (fragmentHistory.getStackSize() > 1) {
                     int position = fragmentHistory.popPrevious();
-                    switchTab(position);
-                    updateTabSelection(position);
+                    switchAndUpdateTabSelection(position);
                 } else {
-                    switchTab(initialTabIndex);
-                    updateTabSelection(initialTabIndex);
+                    switchAndUpdateTabSelection(initialTabIndex);
                     fragmentHistory.emptyStack();
                 }
             }
         }
     }
 
+    public void switchAndUpdateTabSelection(int position) {
+        switchTab(position);
+        updateTabSelection(position);
+    }
 
     private void updateTabSelection(int currentTab) {
 
         for (int i = 0; i < TABS.length; i++) {
             TabLayout.Tab selectedTab = bottomTabLayout.getTabAt(i);
+
             if (currentTab != i) {
-                selectedTab.getCustomView().setSelected(false);
+                //selectedTab.getCustomView().setSelected(false);
+                selectedTab.getIcon().setColorFilter(unSelectedTabColor, PorterDuff.Mode.SRC_IN);
             } else {
-                selectedTab.getCustomView().setSelected(true);
+                //selectedTab.getCustomView().setSelected(true);
+                selectedTab.getIcon().setColorFilter(selectedTabColor, PorterDuff.Mode.SRC_IN);
             }
         }
+
     }
 
     @Override

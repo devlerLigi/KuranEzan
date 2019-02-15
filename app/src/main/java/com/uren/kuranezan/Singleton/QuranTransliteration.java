@@ -49,12 +49,16 @@ public class QuranTransliteration {
             public void onSuccess(Quran quran) {
                 finished = true;
                 setQuranTransliteration(quran);
-                mCompleteCallback.onComplete(quran);
+                if (mCompleteCallback != null) {
+                    mCompleteCallback.onComplete(quran);
+                }
             }
 
             @Override
             public void onFailure(Exception e) {
-                mCompleteCallback.onFailed(e);
+                if (mCompleteCallback != null) {
+                    mCompleteCallback.onFailed(e);
+                }
             }
 
             @Override

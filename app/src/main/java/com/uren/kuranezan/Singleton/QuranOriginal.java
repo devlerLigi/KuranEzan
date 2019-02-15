@@ -49,12 +49,17 @@ public class QuranOriginal {
             public void onSuccess(Quran quran) {
                 finished=true;
                 setQuranOriginal(quran);
-                mCompleteCallback.onComplete(quran);
+                if(mCompleteCallback != null){
+                    mCompleteCallback.onComplete(quran);
+                }
+
             }
 
             @Override
             public void onFailure(Exception e) {
-                mCompleteCallback.onFailed(e);
+                if(mCompleteCallback != null){
+                    mCompleteCallback.onFailed(e);
+                }
             }
 
             @Override

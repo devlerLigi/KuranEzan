@@ -68,6 +68,7 @@
     <string name="translationWord">Rahman ve Rahim Olan Allah’ın Adı ile</string>
 
     <string name="downloadLanguagePAck">Dil paketi yüklensin mi?</string>
+    <string name="loading">Yükleniyor</string>
 
     <array name="surah_name">
         <item>Fâtiha Sûresi</item>

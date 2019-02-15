@@ -28,6 +28,7 @@ import com.uren.kuranezan.R;
 import com.uren.kuranezan.Singleton.QuranOriginal;
 import com.uren.kuranezan.Singleton.QuranTranslation;
 import com.uren.kuranezan.Singleton.QuranTransliteration;
+import com.uren.kuranezan.Utils.Config;
 import com.uren.kuranezan.Utils.FileHelper;
 
 import java.io.File;
@@ -146,6 +147,9 @@ public class KuranFragment extends BaseFragment implements ListItemClickListener
                 }
             });
 
+
+            setQuranModels();
+
             return null;
         }
 
@@ -163,6 +167,14 @@ public class KuranFragment extends BaseFragment implements ListItemClickListener
             if (surahNameList != null && surahNameList.size() > 0) {
                 surahAdapter.addAll(surahNameList);
             }
+        }
+
+        private void setQuranModels() {
+
+            QuranOriginal.getInstance(getActivity(), null);
+            QuranTransliteration.getInstance(getActivity(), Config.transliterationlang,null);
+            QuranTranslation.getInstance(getActivity(), Config.lang,null);
+
         }
 
 
