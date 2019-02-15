@@ -12,6 +12,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.uren.kuranezan.MainFragments.BaseFragment;
 import com.uren.kuranezan.MainFragments.TabDiger.SubFragments.CumaMesajlariFragment;
+import com.uren.kuranezan.MainFragments.TabDiger.SubFragments.DiniBilgiler.DiniBilgilerFragment;
 import com.uren.kuranezan.MainFragments.TabDiger.SubFragments.KibleBulFragment;
 import com.uren.kuranezan.MainFragments.TabDiger.SubFragments.ZikirmatikFragment;
 import com.uren.kuranezan.R;
@@ -34,19 +35,17 @@ public class DigerFragment extends BaseFragment
     LinearLayout llKibleBul;
     @BindView(R.id.llCumaMesajlari)
     LinearLayout llCumaMesajlari;
+    @BindView(R.id.llDiniBilgiler)
+    LinearLayout llDiniBilgiler;
 
     @BindView(R.id.imgZikirmatik)
     ImageView imgZikirmatik;
-    @BindView(R.id.imgForward1)
-    ImageView imgForward1;
     @BindView(R.id.imgKibleBul)
     ImageView imgKibleBul;
-    @BindView(R.id.imgForward2)
-    ImageView imgForward2;
     @BindView(R.id.imgCumaMesajlari)
     ImageView imgCumaMesajlari;
-    @BindView(R.id.imgForward3)
-    ImageView imgForward3;
+    @BindView(R.id.imgDiniBilgiler)
+    ImageView imgDiniBilgiler;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -65,7 +64,6 @@ public class DigerFragment extends BaseFragment
         if (mView == null) {
             mView = inflater.inflate(R.layout.fragment_main_diger, container, false);
             ButterKnife.bind(this, mView);
-
             setToolbar();
             setImages();
             init();
@@ -81,19 +79,9 @@ public class DigerFragment extends BaseFragment
                 .into(imgZikirmatik);
 
         Glide.with(getContext())
-                .load(R.drawable.icon_forward)
-                .apply(RequestOptions.fitCenterTransform())
-                .into(imgForward1);
-
-        Glide.with(getContext())
                 .load(R.drawable.icon_kible_bul)
                 .apply(RequestOptions.fitCenterTransform())
                 .into(imgKibleBul);
-
-        Glide.with(getContext())
-                .load(R.drawable.icon_forward)
-                .apply(RequestOptions.fitCenterTransform())
-                .into(imgForward2);
 
         Glide.with(getContext())
                 .load(R.drawable.icon_cuma_mesajlari)
@@ -101,9 +89,9 @@ public class DigerFragment extends BaseFragment
                 .into(imgCumaMesajlari);
 
         Glide.with(getContext())
-                .load(R.drawable.icon_forward)
+                .load(R.drawable.dini_bilgiler)
                 .apply(RequestOptions.fitCenterTransform())
-                .into(imgForward3);
+                .into(imgDiniBilgiler);
     }
 
     private void setToolbar() {
@@ -114,6 +102,7 @@ public class DigerFragment extends BaseFragment
         llZikirmatik.setOnClickListener(this);
         llKibleBul.setOnClickListener(this);
         llCumaMesajlari.setOnClickListener(this);
+        llDiniBilgiler.setOnClickListener(this);
     }
 
     @Override
@@ -129,6 +118,10 @@ public class DigerFragment extends BaseFragment
 
         if(view == llCumaMesajlari){
             mFragmentNavigation.pushFragment(new CumaMesajlariFragment());
+        }
+
+        if(view == llDiniBilgiler){
+            mFragmentNavigation.pushFragment(new DiniBilgilerFragment());
         }
     }
 }

@@ -1,5 +1,6 @@
 package com.uren.kuranezan.MainFragments.TabDiger.SubFragments;
 
+import android.graphics.Bitmap;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
@@ -7,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -19,9 +21,11 @@ import com.bumptech.glide.request.RequestOptions;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
 import com.uren.kuranezan.MainFragments.BaseFragment;
+import com.uren.kuranezan.MainFragments.TabDiger.SubFragments.CumaMesajlari.CumaMesajiPhotoFragment;
 import com.uren.kuranezan.MainFragments.TabDiger.SubFragments.CumaMesajlari.CumaMesajlariContent;
 import com.uren.kuranezan.R;
 import com.uren.kuranezan.Utils.AdMobUtil.AdMobUtils;
+import com.uren.kuranezan.Utils.BitmapConversion;
 import com.uren.kuranezan.Utils.ClickableImage.ClickableImageView;
 import com.uren.kuranezan.Utils.ShapeUtil;
 
@@ -76,6 +80,12 @@ public class CumaMesajlariFragment extends BaseFragment
     FrameLayout seekbarLayout;
     @BindView(R.id.seekbar)
     SeekBar seekbar;
+    @BindView(R.id.finishButton)
+    Button finishButton;
+    @BindView(R.id.iconPhotoImgv)
+    ImageView iconPhotoImgv;
+    @BindView(R.id.iconTextImgv)
+    ImageView iconTextImgv;
 
     CumaMesajlariContent cumaMesajlariContent;
 
@@ -105,6 +115,7 @@ public class CumaMesajlariFragment extends BaseFragment
             setToolbar();
             setShapes();
             init();
+            setImages();
             setSeekbar();
             setItems();
         }
@@ -131,6 +142,49 @@ public class CumaMesajlariFragment extends BaseFragment
                 0, GradientDrawable.RECTANGLE, 15, 0));
         seekbarLayout.setBackground(ShapeUtil.getShape(getResources().getColor(R.color.transparentBlack),
                 0, GradientDrawable.RECTANGLE, 15, 0));
+        finishButton.setBackground(ShapeUtil.getShape(getResources().getColor(R.color.transparentBlack),
+                getResources().getColor(R.color.White), GradientDrawable.RECTANGLE, 15, 2));
+    }
+
+    private void setImages(){
+        Glide.with(getContext())
+                .load(R.drawable.icon_back_white)
+                .apply(RequestOptions.fitCenterTransform())
+                .into(photoBackImgv);
+        Glide.with(getContext())
+                .load(R.drawable.icon_photo)
+                .apply(RequestOptions.fitCenterTransform())
+                .into(iconPhotoImgv);
+        Glide.with(getContext())
+                .load(R.drawable.icon_forward_white)
+                .apply(RequestOptions.fitCenterTransform())
+                .into(photoForwardImgv);
+
+        Glide.with(getContext())
+                .load(R.drawable.icon_back_white)
+                .apply(RequestOptions.fitCenterTransform())
+                .into(textBackImgv);
+        Glide.with(getContext())
+                .load(R.drawable.icon_text)
+                .apply(RequestOptions.fitCenterTransform())
+                .into(iconTextImgv);
+        Glide.with(getContext())
+                .load(R.drawable.icon_forward_white)
+                .apply(RequestOptions.fitCenterTransform())
+                .into(textForwardImgv);
+
+        Glide.with(getContext())
+                .load(R.drawable.icon_back_white)
+                .apply(RequestOptions.fitCenterTransform())
+                .into(colorBackImgv);
+        Glide.with(getContext())
+                .load(R.drawable.icon_color_palette)
+                .apply(RequestOptions.fitCenterTransform())
+                .into(colorPaletteImgv);
+        Glide.with(getContext())
+                .load(R.drawable.icon_forward_white)
+                .apply(RequestOptions.fitCenterTransform())
+                .into(colorForwardImgv);
     }
 
     private void init() {
@@ -143,6 +197,7 @@ public class CumaMesajlariFragment extends BaseFragment
         textForwardImgv.setOnClickListener(this);
         colorBackImgv.setOnClickListener(this);
         colorForwardImgv.setOnClickListener(this);
+        finishButton.setOnClickListener(this);
 
         MobileAds.initialize(getContext(), getResources().getString(R.string.ADMOB_APP_ID));
         AdMobUtils.loadBannerAd(adView);
@@ -210,6 +265,11 @@ public class CumaMesajlariFragment extends BaseFragment
         if (view == colorForwardImgv) {
             colorForwardImgv.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.image_click));
             setTextColor(INCREASE);
+        }
+
+        if(view == finishButton){
+            Bitmap bitmap = BitmapConversion.getScreenShot(rlphotoComplete);
+            mFragmentNavigation.pushFragment(new CumaMesajiPhotoFragment(bitmap));
         }
     }
 
