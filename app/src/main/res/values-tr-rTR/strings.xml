@@ -91,6 +91,18 @@
 
     <string name="downloadLanguagePAck">Dil paketi yüklensin mi?</string>
     <string name="loading">Yükleniyor</string>
+    <string name="country">Ülke</string>
+    <string name="city">Şehir</string>
+    <string name="county">İlçe</string>
+
+    <string name="imsak">İmsak</string>
+    <string name="gunes">Güneş</string>
+    <string name="ogle">Öğle</string>
+    <string name="ikindi">İkindi</string>
+    <string name="aksam">Akşam</string>
+    <string name="yatsi">Yatsı</string>
+    <string name="today">Bugün</string>
+    <string name="setLocation">Konumunuz @ilce@? olarak ayarlansın mı?</string>
 
     <array name="surah_name">
         <item>Fâtiha Sûresi</item>

@@ -1,4 +1,4 @@
-package com.uren.kuranezan.MainFragments.TabImsakiye.Adapters;
+package com.uren.kuranezan.MainFragments.TabNamazVakti.Adapters;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -53,13 +53,14 @@ public class BaseListAdapter extends RecyclerView.Adapter {
         LinearLayout llItem;
         TextView txtItemName;
 
+        Object object;
         String itemName;
         int position;
 
         public MyViewHolder(View view) {
             super(view);
 
-            llItem = (LinearLayout) view.findViewById(R.id.llSure);
+            llItem = (LinearLayout) view.findViewById(R.id.llItem);
             txtItemName = (TextView) view.findViewById(R.id.txtItemName);
 
             setListeners();
@@ -67,6 +68,12 @@ public class BaseListAdapter extends RecyclerView.Adapter {
 
         private void setListeners() {
 
+            llItem.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    listItemClickListener.onListItemClick(object, position);
+                }
+            });
 
         }
 
@@ -74,17 +81,18 @@ public class BaseListAdapter extends RecyclerView.Adapter {
         public void setData(Object object, int position) {
 
             this.position = position;
+            this.object = object;
 
-            if(object instanceof Ulke){
+            if (object instanceof Ulke) {
                 Ulke ulke = (Ulke) object;
                 setUlke(ulke);
-            }else if(object instanceof Sehir){
+            } else if (object instanceof Sehir) {
                 Sehir sehir = (Sehir) object;
                 setSehir(sehir);
-            }else if(object instanceof Ilce){
+            } else if (object instanceof Ilce) {
                 Ilce ilce = (Ilce) object;
                 setIlce(ilce);
-            }else{
+            } else {
                 return;
             }
 
@@ -116,7 +124,7 @@ public class BaseListAdapter extends RecyclerView.Adapter {
 
     public void addObject(List<Object> objectList) {
 
-        if(baseList != null ){
+        if (baseList != null) {
             this.baseList.addAll(objectList);
         }
     }

@@ -112,7 +112,7 @@ public class KuranFragment extends BaseFragment implements ListItemClickListener
     }
 
     @Override
-    public void onListItemClick(String name, int clickedPosition) {
+    public void onListItemClick(Object object, int clickedPosition) {
         mFragmentNavigation.pushFragment(SureDetayFragment.newInstance(clickedPosition));
     }
 

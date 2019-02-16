@@ -125,24 +125,24 @@
                     android:orientation="vertical">
 
                     <TextView
+                        android:id="@+id/txtCountry"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="Türkiye"
                         android:textColor="@color/white" />
 
                     <TextView
+                        android:id="@+id/txtCity"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="İzmir"
                         android:textColor="@color/white" />
 
                     <TextView
+                        android:id="@+id/txtCounty"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="Çeşme"
                         android:textColor="@color/white" />
 
                 </LinearLayout>
@@ -156,13 +156,13 @@
 
 
                     <TextView
+                        android:id="@+id/txtChangeLocation"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:gravity="center_vertical"
                         android:text="Değiştir"
                         android:textColor="@color/Blue"
-                        android:textSize="20sp"
-                        android:id="@+id/txtChangeLocation"/>
+                        android:textSize="20sp" />
                 </LinearLayout>
 
 
@@ -174,51 +174,53 @@
                 android:layout_height="0dp"
                 android:layout_marginBottom="10dp"
                 android:layout_weight="5"
-                android:orientation="vertical"
-                android:background="@drawable/view3">
+                android:background="@drawable/view3"
+                android:orientation="vertical">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="1.5"
-                    android:orientation="vertical"
-                    android:gravity="center">
+                    android:gravity="center"
+                    android:orientation="vertical">
 
                     <TextView
+                        android:id="@+id/txtDate"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="13.02.2019"
-                        android:textSize="17sp"
-                        android:textColor="@color/white"/>
+                        android:text="@string/today"
+                        android:textColor="@color/white"
+                        android:textSize="17sp" />
 
                 </LinearLayout>
 
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:orientation="horizontal"
                     android:layout_marginLeft="20dp"
-                    android:layout_marginRight="30dp">
+                    android:layout_marginRight="30dp"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:gravity="center"
-                        android:text="İmsak"
-                        android:textStyle="bold"
+                        android:text="@string/imsak"
+                        android:textColor="@color/white"
                         android:textSize="17sp"
-                        android:textColor="@color/white"/>
+                        android:textStyle="bold" />
 
                     <TextView
+                        android:id="@+id/txtImsakTime"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:gravity="center"
                         android:layout_alignParentRight="true"
-                        android:text="06:40"
-                        android:textStyle="bold"
+                        android:gravity="center"
+                        android:text="@string/zeroTime"
+                        android:textColor="@color/white"
                         android:textSize="17sp"
-                        android:textColor="@color/white"/>
+                        android:textStyle="bold" />
 
 
                 </RelativeLayout>
@@ -226,29 +228,30 @@
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:orientation="horizontal"
                     android:layout_marginLeft="20dp"
-                    android:layout_marginRight="30dp">
+                    android:layout_marginRight="30dp"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:gravity="center"
-                        android:text="Güneş"
-                        android:textStyle="bold"
+                        android:text="@string/gunes"
+                        android:textColor="@color/white"
                         android:textSize="17sp"
-                        android:textColor="@color/white"/>
+                        android:textStyle="bold" />
 
                     <TextView
+                        android:id="@+id/txtGunesTime"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:gravity="center"
                         android:layout_alignParentRight="true"
-                        android:text="08:01"
-                        android:textStyle="bold"
+                        android:gravity="center"
+                        android:text="@string/zeroTime"
+                        android:textColor="@color/white"
                         android:textSize="17sp"
-                        android:textColor="@color/white"/>
+                        android:textStyle="bold" />
 
 
                 </RelativeLayout>
@@ -256,29 +259,30 @@
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:orientation="horizontal"
                     android:layout_marginLeft="20dp"
-                    android:layout_marginRight="30dp">
+                    android:layout_marginRight="30dp"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:gravity="center"
-                        android:text="Öğle"
-                        android:textStyle="bold"
+                        android:text="@string/ogle"
+                        android:textColor="@color/white"
                         android:textSize="17sp"
-                        android:textColor="@color/white"/>
+                        android:textStyle="bold" />
 
                     <TextView
+                        android:id="@+id/txtOgleTime"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:gravity="center"
                         android:layout_alignParentRight="true"
-                        android:text="13:24"
-                        android:textStyle="bold"
+                        android:gravity="center"
+                        android:text="@string/zeroTime"
+                        android:textColor="@color/white"
                         android:textSize="17sp"
-                        android:textColor="@color/white"/>
+                        android:textStyle="bold" />
 
 
                 </RelativeLayout>
@@ -286,29 +290,30 @@
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:orientation="horizontal"
                     android:layout_marginLeft="20dp"
-                    android:layout_marginRight="30dp">
+                    android:layout_marginRight="30dp"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:gravity="center"
-                        android:text="İkindi"
-                        android:textStyle="bold"
+                        android:text="@string/ikindi"
+                        android:textColor="@color/white"
                         android:textSize="17sp"
-                        android:textColor="@color/white"/>
+                        android:textStyle="bold" />
 
                     <TextView
+                        android:id="@+id/txtIkindiTime"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:gravity="center"
                         android:layout_alignParentRight="true"
-                        android:text="16:29"
-                        android:textStyle="bold"
+                        android:gravity="center"
+                        android:text="@string/zeroTime"
+                        android:textColor="@color/white"
                         android:textSize="17sp"
-                        android:textColor="@color/white"/>
+                        android:textStyle="bold" />
 
 
                 </RelativeLayout>
@@ -316,32 +321,33 @@
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="15dp"
                     android:layout_weight="1"
+                    android:background="@drawable/custom_border"
                     android:orientation="horizontal"
                     android:paddingLeft="10dp"
-                    android:layout_marginLeft="10dp"
-                    android:background="@drawable/custom_border"
-                    android:paddingRight="15dp"
-                    android:layout_marginRight="15dp">
+                    android:paddingRight="15dp">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:gravity="center"
-                        android:text="Akşam"
-                        android:textStyle="bold"
+                        android:text="@string/aksam"
+                        android:textColor="@color/white"
                         android:textSize="17sp"
-                        android:textColor="@color/white"/>
+                        android:textStyle="bold" />
 
                     <TextView
+                        android:id="@+id/txtAksamTime"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:gravity="center"
                         android:layout_alignParentRight="true"
-                        android:text="18:57"
-                        android:textStyle="bold"
+                        android:gravity="center"
+                        android:text="@string/zeroTime"
+                        android:textColor="@color/white"
                         android:textSize="17sp"
-                        android:textColor="@color/white"/>
+                        android:textStyle="bold" />
 
 
                 </RelativeLayout>
@@ -349,30 +355,31 @@
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:orientation="horizontal"
-                    android:layout_marginLeft="20dp"
                     android:layout_marginBottom="10dp"
-                    android:layout_marginRight="30dp">
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="30dp"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:gravity="center"
-                        android:text="Yatsı"
-                        android:textStyle="bold"
+                        android:text="@string/yatsi"
+                        android:textColor="@color/white"
                         android:textSize="17sp"
-                        android:textColor="@color/white"/>
+                        android:textStyle="bold" />
 
                     <TextView
+                        android:id="@+id/txtYatsiTime"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:gravity="center"
                         android:layout_alignParentRight="true"
-                        android:text="20:14"
-                        android:textStyle="bold"
+                        android:gravity="center"
+                        android:text="@string/zeroTime"
+                        android:textColor="@color/white"
                         android:textSize="17sp"
-                        android:textColor="@color/white"/>
+                        android:textStyle="bold" />
 
 
                 </RelativeLayout>

@@ -12,6 +12,7 @@ public class NumericConstants {
     public static final int ITEM_TYPE_ULKE = 1;
     public static final int ITEM_TYPE_SEHIR = 2;
     public static final int ITEM_TYPE_ILCE = 3;
+    public static final int ITEM_TYPE_NAMAZ_VAKITLERI = 4;
 
 
 }

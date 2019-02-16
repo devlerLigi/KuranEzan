@@ -1,17 +1,13 @@
 package com.uren.kuranezan;
 
-import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
-import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.animation.AccelerateInterpolator;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -22,11 +18,8 @@ import com.uren.kuranezan.FragmentControllers.FragNavController;
 import com.uren.kuranezan.FragmentControllers.FragmentHistory;
 import com.uren.kuranezan.MainFragments.BaseFragment;
 import com.uren.kuranezan.MainFragments.TabKuran.KuranFragment;
-import com.uren.kuranezan.MainFragments.TabImsakiye.ImsakiyeFragment;
+import com.uren.kuranezan.MainFragments.TabNamazVakti.NamazVaktiFragment;
 import com.uren.kuranezan.MainFragments.TabDiger.DigerFragment;
-import com.uren.kuranezan.Singleton.QuranOriginal;
-import com.uren.kuranezan.Singleton.QuranTranslation;
-import com.uren.kuranezan.Singleton.QuranTransliteration;
 import com.uren.kuranezan.Singleton.TranslationList;
 import com.uren.kuranezan.Utils.Config;
 import com.uren.kuranezan.Utils.Utils;
@@ -336,7 +329,7 @@ public class MainActivity extends FragmentActivity
             case FragNavController.TAB1:
                 return new KuranFragment();
             case FragNavController.TAB2:
-                return new ImsakiyeFragment();
+                return new NamazVaktiFragment();
             case FragNavController.TAB3:
                 return new DigerFragment();
 

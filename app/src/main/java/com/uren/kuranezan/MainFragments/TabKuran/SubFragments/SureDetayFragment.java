@@ -158,7 +158,6 @@ public class SureDetayFragment extends BaseFragment
                 public void onComplete(Quran quranOriginal) {
                     Log.i("original-2", "listener1 den set edildi");
                     setAyahOriginal(quranOriginal);
-                    saveInternal(quranOriginal);
                 }
 
                 @Override
@@ -177,7 +176,6 @@ public class SureDetayFragment extends BaseFragment
                     public void onComplete(Quran quranOriginal) {
                         Log.i("original-2", "listener2 den set edildi");
                         setAyahOriginal(quranOriginal);
-                        saveInternal(quranOriginal);
                     }
 
                     @Override

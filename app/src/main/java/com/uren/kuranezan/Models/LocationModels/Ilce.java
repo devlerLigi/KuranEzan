@@ -1,6 +1,8 @@
 package com.uren.kuranezan.Models.LocationModels;
 
-public class Ilce
+import java.io.Serializable;
+
+public class Ilce implements Serializable
 {
     private String IlceID;
 

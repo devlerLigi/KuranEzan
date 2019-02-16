@@ -22,6 +22,10 @@ public class Config {
     public static final String FONT_SIZE_ARABIC = "fontSizeArabic";
     public static final String FONT_SIZE_TRANSLITERATION = "fontSizeTransliteration";
     public static final String FONT_SIZE_TRANSLATION = "fontSizeTranslation";
+    public static final String COUNTRY = "country";
+    public static final String CITY = "city";
+    public static final String COUNTY = "county";
+    public static final String COUNTY_CODE = "countyCode";
 
     //default values
     public static final String defaultLang = "tr.diyanet";
@@ -32,6 +36,10 @@ public class Config {
     public static final int defaultFontSizeArabic = 28;
     public static final int defaultFontSizeTransliteration = 12;
     public static final int defaultFontSizeTranslation = 15;
+    public static final String defaultCountry = "";
+    public static final String defaultCity = "";
+    public static final String defaultCounty = "";
+    public static final String defaultCountyCode = "";
 
     // current variables-bunlar uzerınden ilerlenmeli
     public static String lang; //translation lang
@@ -42,6 +50,10 @@ public class Config {
     public static int fontSizeArabic;
     public static int fontSizeTransliteration;
     public static int fontSizeTranslation;
+    public static String country;
+    public static String city;
+    public static String county;
+    public static String countyCode;
 
     public static Context context;
 
@@ -59,8 +71,12 @@ public class Config {
             fontSizeArabic = sp.getInt(Config.FONT_SIZE_ARABIC, Config.defaultFontSizeArabic);
             fontSizeTransliteration = sp.getInt(Config.FONT_SIZE_TRANSLITERATION, Config.defaultFontSizeTransliteration);
             fontSizeTranslation = sp.getInt(Config.FONT_SIZE_TRANSLATION, Config.defaultFontSizeTranslation);
+            country = sp.getString(Config.COUNTRY, Config.defaultCountry);
+            city = sp.getString(Config.CITY, Config.defaultCity);
+            county = sp.getString(Config.COUNTY, Config.defaultCounty);
+            countyCode = sp.getString(Config.COUNTY_CODE, Config.defaultCountyCode);
             Log.d("Config", "Loading Custom");
-            loadDefault();
+            //loadDefault();
         } catch (Exception e) {
             loadDefault();
             Log.d("Config", "Exception Loading Defaults");
@@ -76,6 +92,10 @@ public class Config {
         fontSizeArabic = defaultFontSizeArabic;
         fontSizeTransliteration = defaultFontSizeTransliteration;
         fontSizeTranslation = defaultFontSizeTranslation;
+        country = defaultCountry;
+        city = defaultCity;
+        county = defaultCounty;
+        countyCode = defaultCountyCode;
     }
 
     public static void update(Context context) {
@@ -90,6 +110,10 @@ public class Config {
         ed.putInt(FONT_SIZE_ARABIC, fontSizeArabic);
         ed.putInt(FONT_SIZE_TRANSLITERATION, fontSizeTransliteration);
         ed.putInt(FONT_SIZE_TRANSLATION, fontSizeTranslation);
+        ed.putString(COUNTRY, country);
+        ed.putString(CITY, city);
+        ed.putString(COUNTY, county);
+        ed.putString(COUNTY_CODE, countyCode);
         ed.commit();
     }
 

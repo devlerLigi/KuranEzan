@@ -1,6 +1,8 @@
 package com.uren.kuranezan.Models.LocationModels;
 
-public class Sehir
+import java.io.Serializable;
+
+public class Sehir implements Serializable
 {
     private String SehirAdiEn;
 

@@ -5,11 +5,17 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.util.Log;
 import android.view.inputmethod.InputMethodManager;
 
 import com.uren.kuranezan.R;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Random;
+import java.util.TimeZone;
 
 public class CommonUtils {
 
@@ -30,6 +36,22 @@ public class CommonUtils {
         }
 
         return false;
+    }
+
+    public static Date fromISO8601UTC(String dateStr) {
+
+        TimeZone tz = TimeZone.getTimeZone("UTC");
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+        df.setTimeZone(tz);
+
+        try {
+            return df.parse(dateStr);
+        } catch (ParseException e) {
+            Log.e("dateError", "Date Parse error");
+            e.printStackTrace();
+        }
+
+        return null;
     }
 
 }
