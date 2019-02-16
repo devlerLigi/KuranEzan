@@ -143,6 +143,8 @@ public class CumaMesajlariFragment extends BaseFragment
                 0, GradientDrawable.RECTANGLE, 15, 0));
         finishButton.setBackground(ShapeUtil.getShape(getResources().getColor(R.color.transparentBlack),
                 getResources().getColor(R.color.White), GradientDrawable.RECTANGLE, 15, 2));
+        imgvMore.setBackground(ShapeUtil.getShape(getResources().getColor(R.color.transparentBlack),
+                0, GradientDrawable.RECTANGLE, 15, 0));
     }
 
     private void openMoreMenu(){
