@@ -20,7 +20,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
         android:text="@string/app_name"
-        android:textColor="@color/Gray"
+        android:textColor="@color/White"
         android:textStyle="bold|italic"
         android:textSize="25sp"/>
 

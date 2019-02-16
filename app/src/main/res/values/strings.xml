@@ -41,6 +41,13 @@
     <string name="ADAK">Vow</string>
     <string name="ESMAUL_HUSNA">Esma-ul Husna</string>
 
+    //Cuma mesaji more settings
+    <string name="CUMA_BACK_IMAGE">Background picture</string>
+    <string name="CUMA_DUZ_TEMA">Flat theme</string>
+    <string name="CUMA_HAZIR_MESSAGE">Default message</string>
+    <string name="CUMA_MSG_COLOR">Message color</string>
+    <string name="CUMA_MSG_SIZE">Message size</string>
+    <string name="CUMA_MSG_KENDIN_YAZ">Write yourself</string>
 
     <string name="ayah">Ayah</string>
     <string name="options">Options</string>
@@ -77,6 +84,7 @@
     <string name="WHATSAPP_NOT_INSTALLED">Whatsapp have not been installed</string>
     <string name="UNEXPECTED_ERROR">Unexpected error occurred</string>
     <string name="SHARE">Share</string>
+    <string name="WRITE_SOMETHING">Write something...</string>
 
     <!-- Location Settings constants-->
     <string name="gpsSettings">GPS Settings</string>
