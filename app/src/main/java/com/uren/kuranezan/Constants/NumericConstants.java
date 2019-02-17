@@ -18,5 +18,14 @@ public class NumericConstants {
     public static final int REQUEST_TYPE_READ_PRAYER_TIMES = 1;
     public static final int REQUEST_TYPE_GET_PRAYER_TIMES_FROM_SERVER = 2;
 
+    //Prayer times enum
+    public static final int PRAYER_TIME_IMSAK = 1;
+    public static final int PRAYER_TIME_GUNES = 2;
+    public static final int PRAYER_TIME_OGLE = 3;
+    public static final int PRAYER_TIME_IKINDI = 4;
+    public static final int PRAYER_TIME_AKSAM = 5;
+    public static final int PRAYER_TIME_YATSI = 6;
+    public static final int PRAYER_TIME_ERTESI_GUN_IMSAK = 7;
+
 
 }

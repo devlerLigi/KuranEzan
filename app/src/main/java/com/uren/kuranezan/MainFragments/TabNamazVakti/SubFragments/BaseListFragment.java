@@ -273,11 +273,11 @@ public class BaseListFragment extends BaseFragment
                 if (prayerTimes != null) {
                     PrayerTimesList.getInstance().setPrayerTimes(prayerTimes);
                     updateConfig();
-                    NamazHelper.NamazVaktiRefresh.namazVaktiRefreshStart();
 
                     getActivity().runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
+                            NamazHelper.NamazVaktiRefresh.namazVaktiRefreshStart();
                             ((MainActivity) getActivity()).reSelectCurrentTab();
                         }
                     });

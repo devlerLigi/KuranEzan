@@ -86,7 +86,6 @@ public class ImsakiyeFragment extends BaseFragment
 
     @BindArray(R.array.months)
     String[] aylar;
-
     public static ImsakiyeFragment newInstance(String toolbarTitle) {
         Bundle args = new Bundle();
         args.putString("toolbarTitle", toolbarTitle);

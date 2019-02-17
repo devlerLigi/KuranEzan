@@ -15,12 +15,16 @@
             <ImageView
                 android:id="@+id/imgBackground"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:scaleType="fitXY"
+                android:src="@drawable/islam3" />
 
             <ImageView
                 android:id="@+id/imgDarkGradient"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:scaleType="fitXY"
+                android:src="@drawable/gradient_dark" />
 
         </RelativeLayout>
 
@@ -87,91 +91,130 @@
                 android:background="@drawable/view2"
                 android:orientation="horizontal">
 
+                <RelativeLayout
+                    android:id="@+id/relLocationSelected"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
 
-                <LinearLayout
-                    android:layout_width="0dp"
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1.3"
+                            android:gravity="center_vertical"
+                            android:orientation="vertical"
+                            android:paddingLeft="20dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/country"
+                                android:textColor="@color/white" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/city"
+                                android:textColor="@color/white" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/county"
+                                android:textColor="@color/white" />
+
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="2"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/txtCountry"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:autoSizeTextType="uniform"
+                                android:gravity="center"
+                                android:maxLines="1"
+                                android:textColor="@color/white" />
+
+                            <TextView
+                                android:id="@+id/txtCity"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:autoSizeTextType="uniform"
+                                android:gravity="center"
+                                android:maxLines="1"
+                                android:textColor="@color/white" />
+
+                            <TextView
+                                android:id="@+id/txtCounty"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:autoSizeTextType="uniform"
+                                android:gravity="center"
+                                android:maxLines="1"
+                                android:textColor="@color/white" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1.3"
+                            android:gravity="center"
+                            android:orientation="horizontal">
+
+
+                            <TextView
+                                android:id="@+id/txtChangeLocation"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:maxLines="1"
+                                android:padding="10dp"
+                                android:text="@string/change"
+                                android:textColor="@color/style_color_accent"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/relLocationUnselected"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1.3"
-                    android:gravity="center_vertical"
-                    android:orientation="vertical"
-                    android:paddingLeft="20dp">
+                    android:visibility="gone">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/country"
-                        android:textColor="@color/white" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/city"
-                        android:textColor="@color/white" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/county"
-                        android:textColor="@color/white" />
-
-                </LinearLayout>
-
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="2"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/txtCountry"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:autoSizeTextType="uniform"
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
                         android:gravity="center"
-                        android:maxLines="1"
-                        android:textColor="@color/white" />
+                        android:orientation="horizontal">
 
-                    <TextView
-                        android:id="@+id/txtCity"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:autoSizeTextType="uniform"
-                        android:gravity="center"
-                        android:maxLines="1"
-                        android:textColor="@color/white" />
-
-                    <TextView
-                        android:id="@+id/txtCounty"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:autoSizeTextType="uniform"
-                        android:gravity="center"
-                        android:maxLines="1"
-                        android:textColor="@color/white" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1.3"
-                    android:gravity="center"
-                    android:orientation="horizontal">
+                        <Button
+                            android:id="@+id/btnSelectLocation"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@color/style_color_accent"
+                            android:text="@string/selectLocation"
+                            android:textColor="@color/white"/>
 
 
-                    <TextView
-                        android:id="@+id/txtChangeLocation"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:autoSizeTextType="uniform"
-                        android:gravity="center"
-                        android:maxLines="1"
-                        android:padding="1dp"
-                        android:text="@string/change"
-                        android:textColor="@color/style_color_accent" />
-                </LinearLayout>
+                    </LinearLayout>
+
+                </RelativeLayout>
 
 
             </LinearLayout>
@@ -201,29 +244,39 @@
                         android:textColor="@color/white"
                         android:textSize="17sp" />
 
-                    <TextView
-                        android:id="@+id/txtImsakiye"
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
+                        android:layout_height="match_parent"
                         android:layout_toRightOf="@id/txtDate"
-                        android:autoSizeTextType="uniform"
-                        android:gravity="center"
-                        android:maxLines="1"
-                        android:padding="1dp"
-                        android:text="@string/imsakiye"
-                        android:textColor="@color/style_color_accent" />
+                        android:gravity="center">
+
+
+                        <TextView
+                            android:id="@+id/txtImsakiye"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:maxLines="1"
+                            android:padding="10dp"
+                            android:text="@string/imsakiye"
+                            android:textColor="@color/style_color_accent"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
 
 
                 </RelativeLayout>
 
                 <RelativeLayout
+                    android:id="@+id/relImsak"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="30dp"
+                    android:layout_marginEnd="15dp"
+                    android:layout_marginStart="10dp"
                     android:layout_weight="1"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:paddingEnd="15dp"
+                    android:paddingStart="10dp">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -249,12 +302,15 @@
                 </RelativeLayout>
 
                 <RelativeLayout
+                    android:id="@+id/relGunes"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="30dp"
+                    android:layout_marginEnd="15dp"
+                    android:layout_marginStart="10dp"
                     android:layout_weight="1"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:paddingEnd="15dp"
+                    android:paddingStart="10dp">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -280,12 +336,15 @@
                 </RelativeLayout>
 
                 <RelativeLayout
+                    android:id="@+id/relOgle"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="30dp"
+                    android:layout_marginEnd="15dp"
+                    android:layout_marginStart="10dp"
                     android:layout_weight="1"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:paddingEnd="15dp"
+                    android:paddingStart="10dp">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -311,12 +370,15 @@
                 </RelativeLayout>
 
                 <RelativeLayout
+                    android:id="@+id/relIkindi"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="30dp"
+                    android:layout_marginEnd="15dp"
+                    android:layout_marginStart="10dp"
                     android:layout_weight="1"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:paddingEnd="15dp"
+                    android:paddingStart="10dp">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -342,15 +404,15 @@
                 </RelativeLayout>
 
                 <RelativeLayout
+                    android:id="@+id/relAksam"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="15dp"
+                    android:layout_marginEnd="15dp"
+                    android:layout_marginStart="10dp"
                     android:layout_weight="1"
-                    android:background="@drawable/custom_border"
                     android:orientation="horizontal"
-                    android:paddingLeft="10dp"
-                    android:paddingRight="15dp">
+                    android:paddingEnd="15dp"
+                    android:paddingStart="10dp">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -376,13 +438,16 @@
                 </RelativeLayout>
 
                 <RelativeLayout
+                    android:id="@+id/relYatsi"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_marginBottom="10dp"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="30dp"
+                    android:layout_marginEnd="15dp"
+                    android:layout_marginStart="10dp"
                     android:layout_weight="1"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:paddingEnd="15dp"
+                    android:paddingStart="10dp">
 
                     <TextView
                         android:layout_width="wrap_content"

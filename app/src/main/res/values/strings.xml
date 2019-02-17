@@ -108,6 +108,7 @@
     <string name="zeroTime">00:00</string>
     <string name="setLocation">Do yo want to set your location as @ilce@?</string>
     <string name="imsakiye">Full List</string>
+    <string name="selectLocation">Choose Location</string>
 
     <string-array name="months">
         <item>January</item>

@@ -106,6 +106,7 @@
     <string name="today">Bugün</string>
     <string name="setLocation">Konumunuz @ilce@ olarak ayarlansın mı?</string>
     <string name="imsakiye">İmsakiye</string>
+    <string name="selectLocation">Konum Seç</string>
 
     <string-array name="months">
         <item>Ocak</item>

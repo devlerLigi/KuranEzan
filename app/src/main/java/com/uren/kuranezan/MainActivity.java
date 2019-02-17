@@ -365,13 +365,9 @@ public class MainActivity extends FragmentActivity
     }
 
     public void reSelectCurrentTab() {
-
         TabLayout.Tab tabAt = bottomTabLayout.getTabAt(bottomTabLayout.getSelectedTabPosition());
-
-        int x = tabAt.getPosition();
-        String a;
-
-
+        mNavController.clearStack();
+        tabSelectionControl(tabAt);
     }
 
 }
