@@ -115,7 +115,7 @@ public class NamazVaktiFragment extends BaseFragment
     private static final long START_TIME_IN_MILLIS = 60000;
 
     private PrayerTimes[] prayerTimes;
-    private boolean downloadFromServer = false;
+    private boolean downloadedFromServer = false;
     private boolean prayerTimesSet = false;
     private long targetDifference;
 
@@ -238,7 +238,7 @@ public class NamazVaktiFragment extends BaseFragment
             public void onComplete(PrayerTimes[] p) {
                 if (p != null) {
                     prayerTimes = p;
-                    downloadFromServer = true;
+                    downloadedFromServer = true;
                     Log.i("prayerTime ", "serverdan alindi");
                     setPrayerTimes();
                     updateCountDown();
@@ -259,7 +259,7 @@ public class NamazVaktiFragment extends BaseFragment
 
     private void startTimer() {
 
-        if(mCountDownTimer != null){
+        if (mCountDownTimer != null) {
             mCountDownTimer.cancel();
         }
 
@@ -328,7 +328,7 @@ public class NamazVaktiFragment extends BaseFragment
                 prayerTimesSet = true;
             } else {
                 Log.i("gunKontrolu", "lokaldeki dosyada geçerli gün yok!");
-                if (!downloadFromServer) {
+                if (!downloadedFromServer) {
                     getPrayerTimesFromServer();
                 }
             }
@@ -364,7 +364,7 @@ public class NamazVaktiFragment extends BaseFragment
             ImsakiyeClicked();
         }
 
-        if(view == btnSelectLocation){
+        if (view == btnSelectLocation) {
             changeLocationClicked();
         }
 
@@ -390,9 +390,6 @@ public class NamazVaktiFragment extends BaseFragment
 
         mTimeLeftInMillis = targetDifference;
         startTimer();
-
-
-
 
         /*
         if(targetPrayerTime == PRAYER_TIME_IMSAK){
@@ -459,6 +456,17 @@ public class NamazVaktiFragment extends BaseFragment
                 target = PRAYER_TIME_ERTESI_GUN_IMSAK; // ertesi gun imsak
                 relYatsi.setBackgroundColor(getResources().getColor(R.color.style_color_accent));
                 //todo ertesi gün imsak vakti fark bulunacak
+                PrayerTimes nextDayPrayerTimes = getNextDayPrayerTimes();
+
+                if(nextDayPrayerTimes != null){
+                    Date prayerNextDayImsak = dateFormat.parse(nextDayPrayerTimes.getMiladiTarihKisa() + " " + currentPrayerTime.getImsak());
+                    targetDifference = prayerNextDayImsak.getTime() - currentDate.getTime();
+                }else{
+                    if (!downloadedFromServer) {
+                        getPrayerTimesFromServer();
+                    }
+                }
+
             } else {
                 target = PRAYER_TIME_IMSAK; //imsak
                 relImsak.setBackgroundColor(getResources().getColor(R.color.style_color_accent));
@@ -471,6 +479,27 @@ public class NamazVaktiFragment extends BaseFragment
         }
 
         return target;
+
+    }
+
+    private PrayerTimes getNextDayPrayerTimes() {
+
+        Calendar calendar = Calendar.getInstance();
+        Date currentDate = calendar.getTime();
+
+        calendar.setTime(currentDate);
+        calendar.add(Calendar.DAY_OF_MONTH, 1);
+        Date nextDate = calendar.getTime();
+        SimpleDateFormat df = new SimpleDateFormat("dd.MM.yyyy", Locale.getDefault());
+        String formattedDate = df.format(nextDate);
+
+        for (int i = 0; i < prayerTimes.length; i++) {
+            if (prayerTimes[i].getMiladiTarihKisa().equals(formattedDate)) {
+                return prayerTimes[i];
+            }
+        }
+
+        return null;
 
     }
 
