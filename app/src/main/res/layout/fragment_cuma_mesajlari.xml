@@ -11,24 +11,25 @@
         <include layout="@layout/common_toolbar_layout" />
 
         <RelativeLayout
+            android:id="@+id/rlMain"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-
             <RelativeLayout
+                android:id="@+id/rlphotoComplete"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/rlphotoComplete">
+                android:layout_height="match_parent">
 
                 <ImageView
+                    android:id="@+id/photoImgv"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:id="@+id/photoImgv"
-                    android:scaleType="fitXY"/>
+                    android:scaleType="fitXY" />
 
                 <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:id="@+id/gradientLayout"
                     android:background="@drawable/gradient_bg"></FrameLayout>
 
                 <LinearLayout
@@ -38,6 +39,24 @@
                     android:layout_centerHorizontal="true"
                     android:layout_marginBottom="70dp"
                     android:orientation="vertical">
+
+
+                    <EditText
+                        android:id="@+id/edittext"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginBottom="30dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:gravity="center"
+                        android:textColor="@color/White"
+                        android:textStyle="bold"
+                        android:background="@null"
+                        android:visibility="gone"
+                        android:hint="@string/WRITE_SOMETHING"
+                        android:textColorHint="@color/White"/>
+
 
                     <TextView
                         android:id="@+id/messageTv"
@@ -49,7 +68,8 @@
                         android:layout_marginRight="10dp"
                         android:gravity="center"
                         android:textColor="@color/White"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        android:visibility="visible"/>
 
                     <TextView
                         android:id="@+id/fridayMessageTv"
@@ -77,138 +97,88 @@
                 android:textColor="@color/white"
                 android:textStyle="normal|bold|italic" />
 
+            <FrameLayout
+                android:id="@+id/seekbarLayout"
+                android:layout_width="32dp"
+                android:layout_height="170dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignStart="@+id/finishButton"
+                android:layout_marginTop="59dp"
+                android:paddingBottom="5dp"
+                android:paddingTop="5dp"
+                android:visibility="visible">
+
+                <SeekBar
+                    android:id="@+id/seekbar"
+                    android:layout_width="140dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center"
+                    android:progressTint="@color/White"
+                    android:rotation="270"
+                    android:thumbTint="@color/White"
+                    android:thumbTintMode="src_in" />
+
+            </FrameLayout>
+
+            <ImageView
+                android:id="@+id/imgvMore"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="15dp"
+                android:padding="7dp"
+                android:src="@drawable/icon_more_vertical" />
+
             <LinearLayout
+                android:id="@+id/llSelection"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_alignEnd="@+id/imgvMore"
+                android:layout_below="@+id/imgvMore"
+                android:layout_marginTop="10dp"
                 android:orientation="horizontal"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentTop="true">
+                android:visibility="gone">
 
-                <FrameLayout
-                    android:id="@+id/seekbarLayout"
-                    android:layout_width="32dp"
-                    android:layout_height="match_parent"
-                    android:layout_alignParentStart="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginRight="10dp"
-                    android:paddingBottom="5dp"
-                    android:paddingTop="5dp"
-                    android:visibility="visible">
+                <ImageView
+                    android:id="@+id/itemBackImgv"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:padding="15dp" />
 
-                    <SeekBar
-                        android:id="@+id/seekbar"
-                        android:layout_width="140dp"
-                        android:layout_height="30dp"
-                        android:layout_gravity="center"
-                        android:progressTint="@color/White"
-                        android:rotation="270"
-                        android:thumbTint="@color/White"
-                        android:thumbTintMode="src_in" />
+                <ImageView
+                    android:id="@+id/iconSelectionImgv"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="10dp"
+                    android:padding="15dp" />
 
-                </FrameLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:layout_alignParentTop="true"
-                        android:layout_margin="5dp"
-                        android:orientation="horizontal"
-                        android:id="@+id/llPhoto">
-
-                        <ImageView
-                            android:id="@+id/photoBackImgv"
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:padding="15dp" />
-
-                        <ImageView
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:layout_marginLeft="10dp"
-                            android:padding="15dp"
-                            android:id="@+id/iconPhotoImgv"/>
-
-                        <ImageView
-                            android:id="@+id/photoForwardImgv"
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:layout_marginLeft="10dp"
-                            android:padding="15dp" />
-
-                    </LinearLayout>
-
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="5dp"
-                        android:orientation="horizontal"
-                        android:id="@+id/llText">
-
-                        <ImageView
-                            android:id="@+id/textBackImgv"
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:padding="15dp" />
-
-                        <ImageView
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:layout_marginLeft="10dp"
-                            android:padding="15dp"
-                            android:id="@+id/iconTextImgv"/>
-
-                        <ImageView
-                            android:id="@+id/textForwardImgv"
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:layout_marginLeft="10dp"
-                            android:padding="15dp" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="5dp"
-                        android:orientation="horizontal"
-                        android:id="@+id/llColor">
-
-                        <ImageView
-                            android:id="@+id/colorBackImgv"
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:padding="15dp"/>
-
-                        <ImageView
-                            android:id="@+id/colorPaletteImgv"
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:layout_marginLeft="10dp"
-                            android:padding="15dp" />
-
-                        <ImageView
-                            android:id="@+id/colorForwardImgv"
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:layout_marginLeft="10dp"
-                            android:padding="15dp" />
-
-                    </LinearLayout>
-
-                </LinearLayout>
+                <ImageView
+                    android:id="@+id/itemForwardImgv"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="10dp"
+                    android:padding="15dp" />
 
             </LinearLayout>
 
+            <ProgressBar xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/progressBar"
+                style="@android:style/Widget.DeviceDefault.Light.ProgressBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center"
+                android:visibility="gone">
+            </ProgressBar>
+
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true">
 
                 <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
                     android:id="@+id/adView"

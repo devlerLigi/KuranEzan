@@ -34,6 +34,20 @@
     <string name="ABDEST_NASIL_ALINIR">Abdest Nasıl Alınır</string>
     <string name="ERKEKLER_NAMAZ_NASIL">Erkekler Nasıl Namaz Kılar</string>
     <string name="KADINLAR_NAMAZ_NASIL">Kadınlar Nasıl Namaz Kılar</string>
+    <string name="ISLAM_NEDIR">İslam</string>
+    <string name="NAMAZ">Namaz</string>
+    <string name="ORUC">Oruç</string>
+    <string name="ZEKAT">Zekat</string>
+    <string name="ADAK">Adak</string>
+    <string name="ESMAUL_HUSNA">Esma-ül Husna</string>
+
+    //Cuma mesaji more settings
+    <string name="CUMA_BACK_IMAGE">Arkaplan resim</string>
+    <string name="CUMA_DUZ_TEMA">Düz tema</string>
+    <string name="CUMA_HAZIR_MESSAGE">Hazır mesaj</string>
+    <string name="CUMA_MSG_COLOR">Mesaj rengi</string>
+    <string name="CUMA_MSG_SIZE">Mesaj boyutu</string>
+    <string name="CUMA_MSG_KENDIN_YAZ">Kendin yaz</string>
 
     <string name="ayah">Ayet</string>
     <string name="options">Seçenekler</string>
@@ -70,6 +84,7 @@
     <string name="WHATSAPP_NOT_INSTALLED">Whatsapp yüklü değil</string>
     <string name="UNEXPECTED_ERROR">Beklenmeyen hata oluştu</string>
     <string name="SHARE">Paylaş</string>
+    <string name="WRITE_SOMETHING">Bir şeyler yaz...</string>
 
     <!-- Location Settings constants-->
     <string name="gpsSettings">GPS Ayarları</string>

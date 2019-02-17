@@ -3,20 +3,16 @@ package com.uren.kuranezan.MainFragments.TabDiger.Adapters;
 
 import android.content.Context;
 import android.graphics.PorterDuff;
-import android.graphics.drawable.GradientDrawable;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.AnimationUtils;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 
-import com.uren.kuranezan.MainFragments.TabDiger.SubFragments.Zikirmatik.Interfaces.DhikrReturnCallback;
+import com.uren.kuranezan.MainFragments.TabDiger.SubFragments.Interfaces.DhikrReturnCallback;
 import com.uren.kuranezan.MainFragments.TabDiger.Utils.MyZikir;
 import com.uren.kuranezan.MainFragments.TabDiger.Utils.TinyDB;
 import com.uren.kuranezan.R;

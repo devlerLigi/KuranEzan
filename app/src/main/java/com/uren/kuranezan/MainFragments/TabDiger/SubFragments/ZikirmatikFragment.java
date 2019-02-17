@@ -21,9 +21,8 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
-import com.google.gson.Gson;
 import com.uren.kuranezan.MainFragments.BaseFragment;
-import com.uren.kuranezan.MainFragments.TabDiger.SubFragments.Zikirmatik.Interfaces.DhikrReturnCallback;
+import com.uren.kuranezan.MainFragments.TabDiger.SubFragments.Interfaces.DhikrReturnCallback;
 import com.uren.kuranezan.MainFragments.TabDiger.Utils.MyZikir;
 import com.uren.kuranezan.MainFragments.TabDiger.Utils.TinyDB;
 import com.uren.kuranezan.R;
@@ -37,7 +36,6 @@ import java.text.Format;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import java.util.Random;
 
 import butterknife.BindView;
@@ -78,7 +76,7 @@ public class ZikirmatikFragment extends BaseFragment {
     private int currentBgColor = R.color.MediumSeaGreen;
     private MyZikir zikir = null;
 
-    private static final long VIBRATE_TIME  = 200;
+    private static final long VIBRATE_TIME  = 150;
 
     int colorList[] = {
             R.color.green,

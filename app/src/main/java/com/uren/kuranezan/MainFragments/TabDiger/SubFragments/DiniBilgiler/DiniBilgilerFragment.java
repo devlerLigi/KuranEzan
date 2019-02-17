@@ -77,6 +77,22 @@ public class DiniBilgilerFragment extends BaseFragment
     @BindView(R.id.llKadinlarNamaz)
     LinearLayout llKadinlarNamaz;
 
+    @BindView(R.id.llislam)
+    LinearLayout llislam;
+    @BindView(R.id.llNamaz)
+    LinearLayout llNamaz;
+    @BindView(R.id.llOruc)
+    LinearLayout llOruc;
+    @BindView(R.id.llZekat)
+    LinearLayout llZekat;
+    @BindView(R.id.llAdak)
+    LinearLayout llAdak;
+    @BindView(R.id.llEsmaulHusna)
+    LinearLayout llEsmaulHusna;
+
+    @BindView(R.id.adView)
+    AdView adView;
+
     public DiniBilgilerFragment() {
 
     }
@@ -111,6 +127,9 @@ public class DiniBilgilerFragment extends BaseFragment
     }
 
     private void init() {
+        MobileAds.initialize(getContext(), getResources().getString(R.string.ADMOB_APP_ID));
+        AdMobUtils.loadBannerAd(adView);
+        AdMobUtils.loadInterstitialAd(getContext());
         imgLeft.setVisibility(View.VISIBLE);
         llibadet.setOnClickListener(this);
         llImaninSartlari.setOnClickListener(this);
@@ -128,6 +147,12 @@ public class DiniBilgilerFragment extends BaseFragment
         llErkeklerdeNamaz.setOnClickListener(this);
         llKadinlarNamaz.setOnClickListener(this);
         imgLeft.setOnClickListener(this);
+        llislam.setOnClickListener(this);
+        llNamaz.setOnClickListener(this);
+        llOruc.setOnClickListener(this);
+        llZekat.setOnClickListener(this);
+        llAdak.setOnClickListener(this);
+        llEsmaulHusna.setOnClickListener(this);
     }
 
     @Override
@@ -200,6 +225,36 @@ public class DiniBilgilerFragment extends BaseFragment
         if (view == llKadinlarNamaz) {
             startBilgiContentFragment(getResources().getString(R.string.KADINLAR_NAMAZ_NASIL),
                     R.raw.kadinlarda_namaz);
+        }
+
+        if (view == llislam) {
+            startBilgiContentFragment(getResources().getString(R.string.ISLAM_NEDIR),
+                    R.raw.islam);
+        }
+
+        if (view == llNamaz) {
+            startBilgiContentFragment(getResources().getString(R.string.NAMAZ),
+                    R.raw.namaz);
+        }
+
+        if (view == llOruc) {
+            startBilgiContentFragment(getResources().getString(R.string.ORUC),
+                    R.raw.oruc);
+        }
+
+        if (view == llZekat) {
+            startBilgiContentFragment(getResources().getString(R.string.ZEKAT),
+                    R.raw.zekat);
+        }
+
+        if (view == llAdak) {
+            startBilgiContentFragment(getResources().getString(R.string.ADAK),
+                    R.raw.adak);
+        }
+
+        if(view == llEsmaulHusna){
+            startBilgiContentFragment(getResources().getString(R.string.ESMAUL_HUSNA),
+                    R.raw.esmaul_husna);
         }
     }
 

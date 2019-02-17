@@ -14,12 +14,11 @@ import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
 import com.uren.kuranezan.MainFragments.BaseFragment;
 import com.uren.kuranezan.MainFragments.TabDiger.Adapters.MyDhikrsAdapter;
-import com.uren.kuranezan.MainFragments.TabDiger.SubFragments.Zikirmatik.Interfaces.DhikrReturnCallback;
+import com.uren.kuranezan.MainFragments.TabDiger.SubFragments.Interfaces.DhikrReturnCallback;
 import com.uren.kuranezan.MainFragments.TabDiger.Utils.MyZikir;
 import com.uren.kuranezan.MainFragments.TabDiger.Utils.TinyDB;
 import com.uren.kuranezan.R;
 import com.uren.kuranezan.Utils.AdMobUtil.AdMobUtils;
-import com.uren.kuranezan.Utils.ClickableImage.ClickableImageView;
 
 import java.util.ArrayList;
 
@@ -67,7 +66,6 @@ public class MyDhikrsFragment extends BaseFragment {
             mView = inflater.inflate(R.layout.fragment_my_dhikrs, container, false);
             ButterKnife.bind(this, mView);
             init();
-            setShapes();
             addListeners();
             setDhikrAdapter();
         }
@@ -80,11 +78,7 @@ public class MyDhikrsFragment extends BaseFragment {
         txtToolbarTitle.setText(getResources().getString(R.string.MY_DHIKR));
         MobileAds.initialize(getContext(), getActivity().getResources().getString(R.string.ADMOB_APP_ID));
         AdMobUtils.loadBannerAd(adView);
-    }
-
-
-    private void setShapes() {
-
+        AdMobUtils.loadInterstitialAd(getContext());
     }
 
     private void addListeners() {

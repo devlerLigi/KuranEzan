@@ -3,15 +3,20 @@ package com.uren.kuranezan.MainFragments.TabDiger.SubFragments;
 import android.graphics.Bitmap;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.PopupMenu;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
@@ -47,25 +52,8 @@ public class CumaMesajlariFragment extends BaseFragment
     @BindView(R.id.adView)
     AdView adView;
 
-    @BindView(R.id.photoBackImgv)
-    ImageView photoBackImgv;
-    @BindView(R.id.photoForwardImgv)
-    ImageView photoForwardImgv;
-    @BindView(R.id.textBackImgv)
-    ImageView textBackImgv;
-    @BindView(R.id.textForwardImgv)
-    ImageView textForwardImgv;
-    @BindView(R.id.colorBackImgv)
-    ImageView colorBackImgv;
-    @BindView(R.id.colorForwardImgv)
-    ImageView colorForwardImgv;
-
-    @BindView(R.id.llPhoto)
-    LinearLayout llPhoto;
-    @BindView(R.id.llText)
-    LinearLayout llText;
-    @BindView(R.id.llColor)
-    LinearLayout llColor;
+    @BindView(R.id.llSelection)
+    LinearLayout llSelection;
 
     @BindView(R.id.photoImgv)
     ImageView photoImgv;
@@ -73,8 +61,13 @@ public class CumaMesajlariFragment extends BaseFragment
     TextView messageTv;
     @BindView(R.id.fridayMessageTv)
     TextView fridayMessageTv;
-    @BindView(R.id.colorPaletteImgv)
-    ImageView colorPaletteImgv;
+
+    @BindView(R.id.itemBackImgv)
+    ImageView itemBackImgv;
+    @BindView(R.id.iconSelectionImgv)
+    ImageView iconSelectionImgv;
+    @BindView(R.id.itemForwardImgv)
+    ImageView itemForwardImgv;
 
     @BindView(R.id.seekbarLayout)
     FrameLayout seekbarLayout;
@@ -82,16 +75,26 @@ public class CumaMesajlariFragment extends BaseFragment
     SeekBar seekbar;
     @BindView(R.id.finishButton)
     Button finishButton;
-    @BindView(R.id.iconPhotoImgv)
-    ImageView iconPhotoImgv;
-    @BindView(R.id.iconTextImgv)
-    ImageView iconTextImgv;
+
+    @BindView(R.id.imgvMore)
+    ImageView imgvMore;
+    @BindView(R.id.rlMain)
+    RelativeLayout rlMain;
+    @BindView(R.id.gradientLayout)
+    FrameLayout gradientLayout;
+    @BindView(R.id.edittext)
+    EditText edittext;
+    @BindView(R.id.progressBar)
+    ProgressBar progressBar;
 
     CumaMesajlariContent cumaMesajlariContent;
 
     private int messageIndex = 0;
-    private int colorIndex = 0;
+    private int textColorIndex = 0;
     private int imageIndex = 0;
+    private int themeColorIndex = 0;
+
+    private int selectionId = 0;
 
     private static final int INCREASE = 0;
     private static final int DECREASE = 1;
@@ -134,70 +137,94 @@ public class CumaMesajlariFragment extends BaseFragment
     }
 
     private void setShapes() {
-        llPhoto.setBackground(ShapeUtil.getShape(getResources().getColor(R.color.transparentBlack),
-                0, GradientDrawable.RECTANGLE, 15, 0));
-        llText.setBackground(ShapeUtil.getShape(getResources().getColor(R.color.transparentBlack),
-                0, GradientDrawable.RECTANGLE, 15, 0));
-        llColor.setBackground(ShapeUtil.getShape(getResources().getColor(R.color.transparentBlack),
+        llSelection.setBackground(ShapeUtil.getShape(getResources().getColor(R.color.transparentBlack),
                 0, GradientDrawable.RECTANGLE, 15, 0));
         seekbarLayout.setBackground(ShapeUtil.getShape(getResources().getColor(R.color.transparentBlack),
                 0, GradientDrawable.RECTANGLE, 15, 0));
         finishButton.setBackground(ShapeUtil.getShape(getResources().getColor(R.color.transparentBlack),
                 getResources().getColor(R.color.White), GradientDrawable.RECTANGLE, 15, 2));
+        imgvMore.setBackground(ShapeUtil.getShape(getResources().getColor(R.color.transparentBlack),
+                0, GradientDrawable.RECTANGLE, 15, 0));
+    }
+
+    private void openMoreMenu(){
+        PopupMenu popupMenu = new PopupMenu(getContext(), imgvMore);
+        popupMenu.inflate(R.menu.cuma_mesaj_menu);
+
+        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                selectionId = item.getItemId();
+                switch (item.getItemId()) {
+                    case R.id.arkaplanImage:
+                        photoImgv.setVisibility(View.VISIBLE);
+                        rlphotoComplete.setBackgroundColor(getResources().getColor(R.color.White));
+                        setSelectionVisibility();
+                        setSelectionImage(R.drawable.icon_photo);
+                        break;
+                    case R.id.duzTema:
+                        photoImgv.setVisibility(View.GONE);
+                        setSelectionVisibility();
+                        setSelectionImage(R.drawable.icon_color_palette);
+                        break;
+
+                    case R.id.hazirMessage:
+                        edittext.setVisibility(View.GONE);
+                        messageTv.setVisibility(View.VISIBLE);
+                        setSelectionVisibility();
+                        setSelectionImage(R.drawable.icon_text);
+                        break;
+
+                    case R.id.mesajColor:
+                        setSelectionVisibility();
+                        setSelectionImage(R.drawable.icon_text_color);
+                        break;
+
+                    case R.id.kendinYaz:
+                        edittext.setVisibility(View.VISIBLE);
+                        messageTv.setVisibility(View.GONE);
+                        break;
+                }
+                return false;
+            }
+        });
+        popupMenu.show();
+    }
+
+    private void setSelectionImage(int itemId){
+        Glide.with(getContext())
+                .load(itemId)
+                .apply(RequestOptions.fitCenterTransform())
+                .into(iconSelectionImgv);
+    }
+
+    private void setSelectionVisibility() {
+        if(llSelection.getVisibility() == View.GONE)
+            llSelection.setVisibility(View.VISIBLE);
     }
 
     private void setImages(){
         Glide.with(getContext())
-                .load(R.drawable.icon_back_white)
+                .load(R.drawable.icon_more_vertical)
                 .apply(RequestOptions.fitCenterTransform())
-                .into(photoBackImgv);
-        Glide.with(getContext())
-                .load(R.drawable.icon_photo)
-                .apply(RequestOptions.fitCenterTransform())
-                .into(iconPhotoImgv);
-        Glide.with(getContext())
-                .load(R.drawable.icon_forward_white)
-                .apply(RequestOptions.fitCenterTransform())
-                .into(photoForwardImgv);
-
+                .into(imgvMore);
         Glide.with(getContext())
                 .load(R.drawable.icon_back_white)
                 .apply(RequestOptions.fitCenterTransform())
-                .into(textBackImgv);
-        Glide.with(getContext())
-                .load(R.drawable.icon_text)
-                .apply(RequestOptions.fitCenterTransform())
-                .into(iconTextImgv);
+                .into(itemBackImgv);
         Glide.with(getContext())
                 .load(R.drawable.icon_forward_white)
                 .apply(RequestOptions.fitCenterTransform())
-                .into(textForwardImgv);
-
-        Glide.with(getContext())
-                .load(R.drawable.icon_back_white)
-                .apply(RequestOptions.fitCenterTransform())
-                .into(colorBackImgv);
-        Glide.with(getContext())
-                .load(R.drawable.icon_color_palette)
-                .apply(RequestOptions.fitCenterTransform())
-                .into(colorPaletteImgv);
-        Glide.with(getContext())
-                .load(R.drawable.icon_forward_white)
-                .apply(RequestOptions.fitCenterTransform())
-                .into(colorForwardImgv);
+                .into(itemForwardImgv);
     }
 
     private void init() {
         imgLeft.setVisibility(View.VISIBLE);
         imgLeft.setOnClickListener(this);
-
-        photoBackImgv.setOnClickListener(this);
-        photoForwardImgv.setOnClickListener(this);
-        textBackImgv.setOnClickListener(this);
-        textForwardImgv.setOnClickListener(this);
-        colorBackImgv.setOnClickListener(this);
-        colorForwardImgv.setOnClickListener(this);
+        imgvMore.setOnClickListener(this);
         finishButton.setOnClickListener(this);
+        itemBackImgv.setOnClickListener(this);
+        itemForwardImgv.setOnClickListener(this);
 
         MobileAds.initialize(getContext(), getResources().getString(R.string.ADMOB_APP_ID));
         AdMobUtils.loadBannerAd(adView);
@@ -210,6 +237,7 @@ public class CumaMesajlariFragment extends BaseFragment
                 .apply(RequestOptions.fitCenterTransform())
                 .into(photoImgv);
         messageTv.setText(cumaMesajlariContent.getTR_FRIDAY_MESSAGES()[messageIndex]);
+        rlphotoComplete.setBackgroundColor(getResources().getColor(R.color.White));
     }
 
     private void setSeekbar(){
@@ -218,6 +246,9 @@ public class CumaMesajlariFragment extends BaseFragment
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 if (messageTv != null)
                     messageTv.setTextSize(progress);
+
+                if (edittext != null)
+                    edittext.setTextSize(progress);
             }
 
             @Override
@@ -237,39 +268,59 @@ public class CumaMesajlariFragment extends BaseFragment
             getActivity().onBackPressed();
         }
 
-        if (view == photoBackImgv) {
-            photoBackImgv.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.image_click));
-            setPhotoImage(DECREASE);
-        }
-
-        if (view == photoForwardImgv) {
-            photoForwardImgv.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.image_click));
-            setPhotoImage(INCREASE);
-        }
-
-        if (view == textBackImgv) {
-            textBackImgv.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.image_click));
-            setPhotoMessage(DECREASE);
-        }
-
-        if (view == textForwardImgv) {
-            textForwardImgv.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.image_click));
-            setPhotoMessage(INCREASE);
-        }
-
-        if (view == colorBackImgv) {
-            colorBackImgv.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.image_click));
-            setTextColor(DECREASE);
-        }
-
-        if (view == colorForwardImgv) {
-            colorForwardImgv.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.image_click));
-            setTextColor(INCREASE);
-        }
-
         if(view == finishButton){
-            Bitmap bitmap = BitmapConversion.getScreenShot(rlphotoComplete);
-            mFragmentNavigation.pushFragment(new CumaMesajiPhotoFragment(bitmap));
+            progressBar.setVisibility(View.VISIBLE);
+            if(edittext.getVisibility() == View.VISIBLE){
+                messageTv.setText(edittext.getText().toString());
+                edittext.setVisibility(View.GONE);
+                messageTv.setVisibility(View.VISIBLE);
+            }
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        progressBar.setVisibility(View.GONE);
+                        Bitmap bitmap = BitmapConversion.getScreenShot(rlphotoComplete);
+                        mFragmentNavigation.pushFragment(new CumaMesajiPhotoFragment(bitmap));
+                    } catch (Exception e) {
+                        progressBar.setVisibility(View.GONE);
+                        e.printStackTrace();
+                    }
+                }
+            }, 1500);
+        }
+
+        if(view == imgvMore){
+            imgvMore.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.image_click));
+            openMoreMenu();
+        }
+
+        if(view == itemBackImgv){
+            itemBackImgv.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.image_click));
+
+            if(selectionId == R.id.arkaplanImage){
+                setPhotoImage(DECREASE);
+            }else if(selectionId == R.id.hazirMessage){
+                setPhotoMessage(DECREASE);
+            } else if(selectionId == R.id.mesajColor){
+                setTextColor(DECREASE);
+            }else if(selectionId == R.id.duzTema){
+                setThemeColor(DECREASE);
+            }
+        }
+
+        if(view == itemForwardImgv){
+            itemForwardImgv.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.image_click));
+
+            if(selectionId == R.id.arkaplanImage){
+                setPhotoImage(INCREASE);
+            } else if(selectionId == R.id.hazirMessage){
+                setPhotoMessage(INCREASE);
+            }else if(selectionId == R.id.mesajColor){
+                setTextColor(INCREASE);
+            }else if(selectionId == R.id.duzTema){
+                setThemeColor(INCREASE);
+            }
         }
     }
 
@@ -312,21 +363,42 @@ public class CumaMesajlariFragment extends BaseFragment
 
     private void setTextColor(int type){
         if (type == INCREASE) {
-            if (colorIndex == (cumaMesajlariContent.getFRIDAY_TEXT_COLORS().length - 1))
-                colorIndex = 0;
+            if (textColorIndex == (cumaMesajlariContent.getFRIDAY_TEXT_COLORS().length - 1))
+                textColorIndex = 0;
             else
-                colorIndex++;
+                textColorIndex++;
         } else if (type == DECREASE) {
-            if (colorIndex == 0)
-                colorIndex = cumaMesajlariContent.getFRIDAY_TEXT_COLORS().length - 1;
+            if (textColorIndex == 0)
+                textColorIndex = cumaMesajlariContent.getFRIDAY_TEXT_COLORS().length - 1;
             else
-                colorIndex--;
+                textColorIndex--;
         }
 
-        int colorCode = cumaMesajlariContent.getFRIDAY_TEXT_COLORS()[colorIndex];
+        int colorCode = cumaMesajlariContent.getFRIDAY_TEXT_COLORS()[textColorIndex];
 
-        colorPaletteImgv.setColorFilter(ContextCompat.getColor(getActivity(), colorCode), android.graphics.PorterDuff.Mode.SRC_IN);
         messageTv.setTextColor(getActivity().getResources().getColor(colorCode));
+        edittext.setTextColor(getActivity().getResources().getColor(colorCode));
         fridayMessageTv.setTextColor(getActivity().getResources().getColor(colorCode));
+    }
+
+    private void setThemeColor(int type){
+        if (type == INCREASE) {
+            if (themeColorIndex == (cumaMesajlariContent.getFRIDAY_TEXT_COLORS().length - 1))
+                themeColorIndex = 0;
+            else
+                themeColorIndex++;
+        } else if (type == DECREASE) {
+            if (themeColorIndex == 0)
+                themeColorIndex = cumaMesajlariContent.getFRIDAY_TEXT_COLORS().length - 1;
+            else
+                themeColorIndex--;
+        }
+
+        int colorCode = cumaMesajlariContent.getFRIDAY_TEXT_COLORS()[themeColorIndex];
+
+        //photoImgv.setBackgroundColor(getResources().getColor(colorCode));
+
+        photoImgv.setVisibility(View.GONE);
+        rlphotoComplete.setBackgroundColor(getResources().getColor(colorCode));
     }
 }

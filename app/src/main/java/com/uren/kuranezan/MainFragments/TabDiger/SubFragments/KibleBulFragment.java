@@ -25,6 +25,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
 import com.uren.kuranezan.MainFragments.BaseFragment;
@@ -84,6 +86,7 @@ public class KibleBulFragment extends BaseFragment {
             mView = inflater.inflate(R.layout.fragment_kible_bul, container, false);
             ButterKnife.bind(this, mView);
             setListeners();
+            setImages();
             init();
         }
 
@@ -101,6 +104,17 @@ public class KibleBulFragment extends BaseFragment {
         arrowViewQiblat.setVisibility(INVISIBLE);
         arrowViewQiblat.setVisibility(View.GONE);
         setupCompass();
+    }
+
+    private void setImages(){
+        Glide.with(getContext())
+                .load(R.drawable.dial)
+                .apply(RequestOptions.fitCenterTransform())
+                .into(imageDial);
+        Glide.with(getContext())
+                .load(R.drawable.jarum_qiblat)
+                .apply(RequestOptions.fitCenterTransform())
+                .into(arrowViewQiblat);
     }
 
     private void setListeners(){
