@@ -4,7 +4,7 @@
 
     <array name="tab_name">
         <item>Kuran</item>
-        <item>İmsakiye</item>
+        <item>Namaz Vakitleri</item>
         <item>Daha Fazla</item>
     </array>
 
@@ -94,7 +94,9 @@
     <string name="country">Ülke</string>
     <string name="city">Şehir</string>
     <string name="county">İlçe</string>
+    <string name="change">Değiştir</string>
 
+    <string name="date">Tarih</string>
     <string name="imsak">İmsak</string>
     <string name="gunes">Güneş</string>
     <string name="ogle">Öğle</string>
@@ -102,7 +104,23 @@
     <string name="aksam">Akşam</string>
     <string name="yatsi">Yatsı</string>
     <string name="today">Bugün</string>
-    <string name="setLocation">Konumunuz @ilce@? olarak ayarlansın mı?</string>
+    <string name="setLocation">Konumunuz @ilce@ olarak ayarlansın mı?</string>
+    <string name="imsakiye">İmsakiye</string>
+
+    <string-array name="months">
+        <item>Ocak</item>
+        <item>Şubat</item>
+        <item>Mart</item>
+        <item>Nisan</item>
+        <item>Mayıs</item>
+        <item>Haziran</item>
+        <item>Temmuz</item>
+        <item>Ağustos</item>
+        <item>Eylül</item>
+        <item>Ekim</item>
+        <item>Kasım</item>
+        <item>Aralık</item>
+    </string-array>
 
     <array name="surah_name">
         <item>Fâtiha Sûresi</item>

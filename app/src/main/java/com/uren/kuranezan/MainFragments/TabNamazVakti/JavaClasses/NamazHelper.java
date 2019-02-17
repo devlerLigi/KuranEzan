@@ -1,9 +1,29 @@
 package com.uren.kuranezan.MainFragments.TabNamazVakti.JavaClasses;
 
-import com.uren.kuranezan.Interfaces.NamazVaktiCallback;
+import android.content.Context;
+import android.util.Log;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
+import com.squareup.okhttp.OkHttpClient;
+import com.squareup.okhttp.Request;
+import com.squareup.okhttp.Response;
+import com.uren.kuranezan.Interfaces.NamazVaktiCallback;
+import com.uren.kuranezan.Models.PrayerTimeModels.PrayerTimes;
+
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.Reader;
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.uren.kuranezan.Constants.StringConstants.PRAYER_TIMES_INTERNAL_FILE_PREFIX;
+import static com.uren.kuranezan.Constants.StringConstants.PRAYER_TIMES_LIST_URL_PREFIX;
+import static com.uren.kuranezan.Constants.StringConstants.SELECTED_COUNTY_CODE;
 
 public class NamazHelper {
 
@@ -36,5 +56,6 @@ public class NamazHelper {
         }
 
     }
+
 
 }

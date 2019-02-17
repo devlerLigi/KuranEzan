@@ -76,9 +76,10 @@ public class KuranFragment extends BaseFragment implements ListItemClickListener
             ButterKnife.bind(this, mView);
 
             setToolbar();
+            initRecyclerView();
             new AsyncInsertData().execute();
 
-            initRecyclerView();
+
             //setUpRecyclerView();
 
         }

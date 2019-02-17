@@ -14,9 +14,11 @@ import com.uren.kuranezan.Interfaces.NamazVaktiCallback;
 import com.uren.kuranezan.MainFragments.BaseFragment;
 import com.uren.kuranezan.MainFragments.TabNamazVakti.JavaClasses.NamazHelper;
 import com.uren.kuranezan.MainFragments.TabNamazVakti.SubFragments.BaseListFragment;
+import com.uren.kuranezan.MainFragments.TabNamazVakti.SubFragments.ImsakiyeFragment;
 import com.uren.kuranezan.Models.PrayerTimeModels.PrayerTimes;
 import com.uren.kuranezan.R;
 import com.uren.kuranezan.Singleton.PrayerTimesList;
+import com.uren.kuranezan.Utils.ClickableImage.ClickableImageView;
 import com.uren.kuranezan.Utils.Config;
 
 import java.text.DateFormat;
@@ -24,14 +26,16 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
-import java.util.TimeZone;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 import static com.uren.kuranezan.Constants.NumericConstants.ITEM_TYPE_ULKE;
+import static com.uren.kuranezan.Constants.NumericConstants.REQUEST_TYPE_GET_PRAYER_TIMES_FROM_SERVER;
+import static com.uren.kuranezan.Constants.NumericConstants.REQUEST_TYPE_READ_PRAYER_TIMES;
 
-public class NamazVaktiFragment extends BaseFragment {
+public class NamazVaktiFragment extends BaseFragment
+        implements View.OnClickListener {
 
     View mView;
     //@BindView(R.id.txtToolbarTitle)
@@ -56,6 +60,10 @@ public class NamazVaktiFragment extends BaseFragment {
     TextView txtChangeLocation;
 
     //View 3
+    @BindView(R.id.txtDate)
+    TextView txtDate;
+    @BindView(R.id.txtImsakiye)
+    TextView txtImsakiye;
     @BindView(R.id.txtImsakTime)
     TextView txtImsakTime;
     @BindView(R.id.txtGunesTime)
@@ -75,6 +83,7 @@ public class NamazVaktiFragment extends BaseFragment {
     private static final long START_TIME_IN_MILLIS = 60000;
 
     private PrayerTimes[] prayerTimes;
+    private boolean downloadFromServer = false;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -89,74 +98,23 @@ public class NamazVaktiFragment extends BaseFragment {
             mView = inflater.inflate(R.layout.fragment_main_namaz_vakti, container, false);
             ButterKnife.bind(this, mView);
 
-            setToolbar();
-
-            init();
             setUI();
-            startTimer();
+            init();
 
             setLocationInfo();
-            getPrayerTimes();
+            getPrayerTimesFromLocal();
+            startTimer();
+
 
         }
 
         return mView;
     }
 
-    private void getPrayerTimes() {
-        PrayerTimesList.getInstance(getActivity(), new CompleteCallback<PrayerTimes[]>() {
-            @Override
-            public void onComplete(PrayerTimes[] p) {
-                prayerTimes = p;
-                //setPrayerTimes();
-            }
-
-            @Override
-            public void onFailed(Exception e) {
-
-            }
-        });
-    }
-
-
     @Override
     public void onStart() {
         getActivity().findViewById(R.id.tabMainLayout).setVisibility(View.VISIBLE);
         super.onStart();
-    }
-
-    private void setToolbar() {
-        //txtToolbarTitle.setText(getString(R.string.prayer));
-    }
-
-    private void init() {
-
-        setRefreshListener();
-
-        txtChangeLocation.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String title = getString(R.string.country);
-                mFragmentNavigation.pushFragment(BaseListFragment.newInstance(ITEM_TYPE_ULKE, 0, title));
-            }
-        });
-    }
-
-    private void setRefreshListener() {
-
-        NamazHelper.NamazVaktiRefresh.getInstance().setNamazVaktiCallback(new NamazVaktiCallback() {
-            @Override
-            public void onNamazVaktiRefresh() {
-
-                if (PrayerTimesList.getInstance().getPrayerTimes() != null) {
-                    setLocationInfo();
-                    setPrayerTimes();
-                }
-
-            }
-
-
-        });
     }
 
     private void setUI() {
@@ -173,6 +131,69 @@ public class NamazVaktiFragment extends BaseFragment {
 */
 
     }
+
+    private void init() {
+        setRefreshListener();
+        txtChangeLocation.setOnClickListener(this);
+        txtImsakiye.setOnClickListener(this);
+    }
+
+    private void setLocationInfo() {
+        txtCountry.setText(Config.country);
+        txtCity.setText(Config.city);
+        txtCounty.setText(Config.county);
+    }
+
+
+    private void getPrayerTimesFromLocal() {
+        PrayerTimesList.getInstance().getAsyncPrayerTimes(getActivity(), new CompleteCallback<PrayerTimes[]>() {
+            @Override
+            public void onComplete(PrayerTimes[] p) {
+
+                if (p != null) {
+                    Log.i("prayerTime ", "lokalden alindi");
+                    prayerTimes = p;
+                    setPrayerTimes();
+                } else {
+                    Log.i("prayerTime ", "lokalden alinamadi");
+                    getPrayerTimesFromServer();
+                }
+
+            }
+
+            @Override
+            public void onFailed(Exception e) {
+                Log.e("error", e.toString());
+                getPrayerTimesFromServer();
+            }
+        }, REQUEST_TYPE_READ_PRAYER_TIMES, Config.countyCode);
+
+    }
+
+    private void getPrayerTimesFromServer() {
+
+        PrayerTimesList.getInstance().getAsyncPrayerTimes(getActivity(), new CompleteCallback<PrayerTimes[]>() {
+            @Override
+            public void onComplete(PrayerTimes[] p) {
+                if (p != null) {
+                    prayerTimes = p;
+                    downloadFromServer = true;
+                    Log.i("prayerTime ", "serverdan alindi");
+                    setPrayerTimes();
+
+                } else {
+                    Log.i("prayerTime ", "serverdan alinamadi");
+                }
+            }
+
+            @Override
+            public void onFailed(Exception e) {
+            }
+        }, REQUEST_TYPE_GET_PRAYER_TIMES_FROM_SERVER, Config.countyCode);
+
+    }
+
+    /***************************************************************************/
 
     private void startTimer() {
 
@@ -208,6 +229,17 @@ public class NamazVaktiFragment extends BaseFragment {
 
     }
 
+    private void setRefreshListener() {
+        NamazHelper.NamazVaktiRefresh.getInstance().setNamazVaktiCallback(new NamazVaktiCallback() {
+            @Override
+            public void onNamazVaktiRefresh() {
+                if (PrayerTimesList.getInstance().getPrayerTimes() != null) {
+                    setLocationInfo();
+                    setPrayerTimes();
+                }
+            }
+        });
+    }
 
     private void setPrayerTimes() {
 
@@ -217,23 +249,25 @@ public class NamazVaktiFragment extends BaseFragment {
             prayerTimes = instance.getPrayerTimes();
 
             PrayerTimes currentDate = getCurrentPrayerTime();
-
-            txtImsakTime.setText(currentDate.getImsak());
-            txtGunesTime.setText(currentDate.getGunes());
-            txtOgleTime.setText(currentDate.getOgle());
-            txtIkindiTime.setText(currentDate.getIkindi());
-            txtAksamTime.setText(currentDate.getAksam());
-            txtYatsiTime.setText(currentDate.getYatsi());
+            if (currentDate != null) {
+                txtDate.setText(currentDate.getMiladiTarihKisa());
+                txtImsakTime.setText(currentDate.getImsak());
+                txtGunesTime.setText(currentDate.getGunes());
+                txtOgleTime.setText(currentDate.getOgle());
+                txtIkindiTime.setText(currentDate.getIkindi());
+                txtAksamTime.setText(currentDate.getAksam());
+                txtYatsiTime.setText(currentDate.getYatsi());
+            } else {
+                Log.i("gunKontrolu", "lokaldeki dosyada geçerli gün yok!");
+                if (!downloadFromServer) {
+                    getPrayerTimesFromServer();
+                }
+            }
 
         }
 
     }
 
-    private void setLocationInfo() {
-        txtCountry.setText(Config.country);
-        txtCity.setText(Config.city);
-        txtCounty.setText(Config.county);
-    }
 
     private PrayerTimes getCurrentPrayerTime() {
 
@@ -249,5 +283,31 @@ public class NamazVaktiFragment extends BaseFragment {
 
         return null;
     }
+
+    @Override
+    public void onClick(View view) {
+
+        if (view == txtChangeLocation) {
+            changeLocationClicked();
+        }
+
+        if (view == txtImsakiye) {
+            ImsakiyeClicked();
+        }
+
+    }
+
+    private void changeLocationClicked() {
+        String title = getString(R.string.country);
+        mFragmentNavigation.pushFragment(BaseListFragment.newInstance(ITEM_TYPE_ULKE, 0, title));
+    }
+
+    private void ImsakiyeClicked() {
+        if(PrayerTimesList.getInstance()!=null && PrayerTimesList.getInstance().getPrayerTimes()!= null){
+            String title = getString(R.string.imsakiye);
+            mFragmentNavigation.pushFragment(ImsakiyeFragment.newInstance(title));
+        }
+    }
+
 
 }

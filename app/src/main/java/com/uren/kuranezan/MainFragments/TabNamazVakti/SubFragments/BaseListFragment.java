@@ -19,6 +19,7 @@ import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
 import com.uren.kuranezan.Interfaces.ListItemClickListener;
+import com.uren.kuranezan.MainActivity;
 import com.uren.kuranezan.MainFragments.BaseFragment;
 import com.uren.kuranezan.MainFragments.TabNamazVakti.Adapters.BaseListAdapter;
 import com.uren.kuranezan.MainFragments.TabNamazVakti.JavaClasses.NamazHelper;
@@ -274,6 +275,14 @@ public class BaseListFragment extends BaseFragment
                     updateConfig();
                     NamazHelper.NamazVaktiRefresh.namazVaktiRefreshStart();
 
+                    getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            ((MainActivity) getActivity()).reSelectCurrentTab();
+                        }
+                    });
+
+
                 }
 
             }
@@ -440,7 +449,7 @@ public class BaseListFragment extends BaseFragment
                 String content = response.body().string();
                 Gson gson = new Gson();
                 PrayerTimes[] prayerTimes = gson.fromJson(content, PrayerTimes[].class);
-                saveFileToInternal(getActivity(), content, prayerTimes[0]);
+                saveFileToInternal(getActivity(), content);
                 return prayerTimes;
             } catch (Exception e) {
                 e.printStackTrace();
@@ -449,11 +458,11 @@ public class BaseListFragment extends BaseFragment
             return null;
         }
 
-        private void saveFileToInternal(Context context, String file, PrayerTimes prayerTime) {
+        private void saveFileToInternal(Context context, String file) {
 
             String fileContents = file;
             FileOutputStream fos = null;
-            String fileName = getInternalFileName(prayerTime.getMiladiTarihKisa());
+            String fileName = getInternalFileName();
 
             try {
                 fos = context.openFileOutput(fileName, Context.MODE_PRIVATE);
@@ -476,13 +485,12 @@ public class BaseListFragment extends BaseFragment
             }
         }
 
-        private String getInternalFileName(String identifier) {
-            return PRAYER_TIMES_INTERNAL_FILE_PREFIX + getFileIdentifier(identifier) + ".json";
+        private String getInternalFileName() {
+            return PRAYER_TIMES_INTERNAL_FILE_PREFIX + getFileIdentifier() + ".json";
         }
 
-        private String getFileIdentifier(String identifier) {
-            //return identifier.replace(".", "");
-            return "";
+        private String getFileIdentifier() {
+            return SELECTED_COUNTY_CODE;
         }
 
     }
