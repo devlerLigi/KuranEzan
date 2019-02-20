@@ -26,6 +26,13 @@ public class NumericConstants {
     public static final int PRAYER_TIME_AKSAM = 5;
     public static final int PRAYER_TIME_YATSI = 6;
     public static final int PRAYER_TIME_ERTESI_GUN_IMSAK = 7;
+    public static final int PRAYER_TIME_BEFORE_IMSAK= 11;
+    public static final int PRAYER_TIME_BEFORE_GUNES = 21;
+    public static final int PRAYER_TIME_BEFORE_OGLE = 31;
+    public static final int PRAYER_TIME_BEFORE_IKINDI = 41;
+    public static final int PRAYER_TIME_BEFORE_AKSAM = 51;
+    public static final int PRAYER_TIME_BEFORE_YATSI = 61;
+    public static final int PRAYER_TIME_ERTESI_GUN_BEFORE_IMSAK = 71;
 
 
 }

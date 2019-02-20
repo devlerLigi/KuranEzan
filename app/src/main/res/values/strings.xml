@@ -123,6 +123,16 @@
     <string name="setLocation">Do yo want to set your location as @ilce@?</string>
     <string name="imsakiye">Full List</string>
     <string name="selectLocation">Choose Location</string>
+    <string name="alarm">Alarm</string>
+
+    <string-array name="prayerTimes">
+        <item>Fajr</item>
+        <item>Sunrise</item>
+        <item>Dhuhr</item>
+        <item>Asr</item>
+        <item>Maghrib</item>
+        <item>Isha</item>
+    </string-array>
 
     <string-array name="months">
         <item>January</item>

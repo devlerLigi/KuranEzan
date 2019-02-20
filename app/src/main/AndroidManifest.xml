@@ -8,6 +8,10 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.SET_ALARM" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.EXPAND_STATUS_BAR" />
 
     <application
         android:allowBackup="true"
@@ -27,7 +31,8 @@
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="@string/ADMOB_APP_ID" />
 
-        <activity android:name=".SplashScreenActivity"
+        <activity
+            android:name=".SplashScreenActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -35,8 +40,39 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity"
-            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".MainActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".MainFragments.TabNamazVakti.AlarmManagement.RepeatingActivity"></activity>
+
+        <receiver
+            android:name=".MainFragments.TabNamazVakti.AlarmManagement.NotificationReceiver"
+            android:process=":remote" />
+
+        <receiver
+            android:name=".MainFragments.TabNamazVakti.AlarmManagement.DeviceBootReceiver"
+            android:enabled="false">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+
+        <receiver
+            android:name=".MainFragments.TabNamazVakti.AlarmManagement.NotifyMe.ActionReceiver"
+            android:enabled="true" />
+        <receiver
+            android:name=".MainFragments.TabNamazVakti.AlarmManagement.NotifyMe.DeletePendingIntent"
+            android:enabled="true"/>
+
+        <receiver android:name=".MainFragments.TabNamazVakti.AlarmManagement.NotifyMe.NotificationPublisher" />
+        <receiver android:name=".MainFragments.TabNamazVakti.AlarmManagement.NotifyMe.BootNotifyMe">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+
+                <category android:name="android.intent.category.HOME" />
+            </intent-filter>
+        </receiver>
+
     </application>
 
 </manifest>

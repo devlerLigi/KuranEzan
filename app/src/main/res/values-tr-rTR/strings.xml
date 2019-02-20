@@ -122,6 +122,17 @@
     <string name="setLocation">Konumunuz @ilce@ olarak ayarlansın mı?</string>
     <string name="imsakiye">İmsakiye</string>
     <string name="selectLocation">Konum Seç</string>
+    <string name="alarm">Alarm</string>
+
+    <string-array name="prayerTimes">
+        <item>İmsak</item>
+        <item>Güneş</item>
+        <item>Öğle</item>
+        <item>İkindi</item>
+        <item>Akşam</item>
+        <item>Yatsı</item>
+    </string-array>
+
 
     <string-array name="months">
         <item>Ocak</item>

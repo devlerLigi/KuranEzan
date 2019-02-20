@@ -5,6 +5,8 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.util.Log;
 
+import com.uren.kuranezan.Utils.ClickableImage.ClickableImageView;
+
 public class Config {
 
     public static final int FONT_QALAM_MAJEED = 0;
@@ -26,6 +28,27 @@ public class Config {
     public static final String CITY = "city";
     public static final String COUNTY = "county";
     public static final String COUNTY_CODE = "countyCode";
+    public static final String NOTIF_TIME = "notifTime";
+    public static final String TARGET_PRAYER_TIME = "targetPrayerTime";
+
+    public static final String NOTIF_BEFORE_IMSAK = "notifBeforeImsak";
+    public static final String NOTIF_EXACT_IMSAK = "notifExactImsak";
+    public static final String NOTIF_BEFORE_GUNES = "notifBeforeGunes";
+    public static final String NOTIF_EXACT_GUNES_ = "notifExactGunes";
+    public static final String NOTIF_BEFORE_OGLE = "notifBeforeOgle";
+    public static final String NOTIF_EXACT_OGLE = "notifExactOgle";
+    public static final String NOTIF_BEFORE_IKINDI = "notifBeforeIkindi";
+    public static final String NOTIF_EXACT_IKINDI = "notifExactIkindi";
+    public static final String NOTIF_BEFORE_AKSAM = "notifBeforeAksam";
+    public static final String NOTIF_EXACT_AKSAM = "notifExactAksam";
+    public static final String NOTIF_BEFORE_YATSI = "notifBeforeYatsi";
+    public static final String NOTIF_EXACT_YATSI = "notifExactYatsi";
+    public static final String TIME_NOTIF_BEFORE_IMSAK = "timeNotifBeforeImsak";
+    public static final String TIME_NOTIF_BEFORE_GUNES = "timeNotifBeforeGunes";
+    public static final String TIME_NOTIF_BEFORE_OGLE = "timeNotifBeforeOgle";
+    public static final String TIME_NOTIF_BEFORE_IKINDI = "timeNotifBeforeIkindi";
+    public static final String TIME_NOTIF_BEFORE_AKSAM = "timeNotifBeforeAksam";
+    public static final String TIME_NOTIF_BEFORE_YATSI = "timeNotifBeforeYatsi";
 
     //default values
     public static final String defaultLang = "tr.diyanet";
@@ -40,6 +63,12 @@ public class Config {
     public static final String defaultCity = "";
     public static final String defaultCounty = "";
     public static final String defaultCountyCode = "";
+    public static final long defaultNotifTime = 0;
+    public static final int defaultTargetPrayerTime = 0;
+
+    public static final boolean defaultNotifBefore = false;
+    public static final boolean defaultNotifExact = true;
+    public static final int defaultTimeBefore = 5;
 
     // current variables-bunlar uzerınden ilerlenmeli
     public static String lang; //translation lang
@@ -54,6 +83,27 @@ public class Config {
     public static String city;
     public static String county;
     public static String countyCode;
+    public static long notifTime;
+    public static int targetPrayerTime;
+
+    public static boolean notifBeforeImsak;
+    public static boolean notifExactImsak;
+    public static boolean notifBeforeGunes;
+    public static boolean notifExactGunes;
+    public static boolean notifBeforeOgle;
+    public static boolean notifExactOgle;
+    public static boolean notifBeforeIkindi;
+    public static boolean notifExactIkindi;
+    public static boolean notifBeforeAksam;
+    public static boolean notifExactAksam;
+    public static boolean notifBeforeYatsi;
+    public static boolean notifExactYatsi;
+    public static int timeBeforeImsak;
+    public static int timeBeforeGunes;
+    public static int timeBeforeOgle;
+    public static int timeBeforeIkindi;
+    public static int timeBeforeAksam;
+    public static int timeBeforeYatsi;
 
     public static Context context;
 
@@ -75,6 +125,31 @@ public class Config {
             city = sp.getString(Config.CITY, Config.defaultCity);
             county = sp.getString(Config.COUNTY, Config.defaultCounty);
             countyCode = sp.getString(Config.COUNTY_CODE, Config.defaultCountyCode);
+            notifTime = sp.getLong(Config.NOTIF_TIME, Config.defaultNotifTime);
+            targetPrayerTime = sp.getInt(Config.TARGET_PRAYER_TIME, Config.defaultTargetPrayerTime);
+
+            //Notif items
+            notifBeforeImsak = sp.getBoolean(Config.NOTIF_BEFORE_IMSAK, Config.defaultNotifBefore);
+            notifBeforeGunes = sp.getBoolean(Config.NOTIF_BEFORE_GUNES, Config.defaultNotifBefore);
+            notifBeforeOgle = sp.getBoolean(Config.NOTIF_BEFORE_OGLE, Config.defaultNotifBefore);
+            notifBeforeIkindi = sp.getBoolean(Config.NOTIF_BEFORE_IKINDI, Config.defaultNotifBefore);
+            notifBeforeAksam = sp.getBoolean(Config.NOTIF_BEFORE_AKSAM, Config.defaultNotifBefore);
+            notifBeforeYatsi = sp.getBoolean(Config.NOTIF_BEFORE_YATSI, Config.defaultNotifBefore);
+
+            notifExactImsak = sp.getBoolean(Config.NOTIF_EXACT_IMSAK, Config.defaultNotifExact);
+            notifExactGunes = sp.getBoolean(Config.NOTIF_EXACT_GUNES_, Config.defaultNotifExact);
+            notifExactOgle = sp.getBoolean(Config.NOTIF_EXACT_OGLE, Config.defaultNotifExact);
+            notifExactIkindi = sp.getBoolean(Config.NOTIF_EXACT_IKINDI, Config.defaultNotifExact);
+            notifExactAksam = sp.getBoolean(Config.NOTIF_EXACT_AKSAM, Config.defaultNotifExact);
+            notifExactYatsi = sp.getBoolean(Config.NOTIF_EXACT_YATSI, Config.defaultNotifExact);
+
+            timeBeforeImsak = sp.getInt(Config.TIME_NOTIF_BEFORE_IMSAK, Config.defaultTimeBefore);
+            timeBeforeGunes = sp.getInt(Config.TIME_NOTIF_BEFORE_GUNES, Config.defaultTimeBefore);
+            timeBeforeOgle = sp.getInt(Config.TIME_NOTIF_BEFORE_OGLE, Config.defaultTimeBefore);
+            timeBeforeIkindi = sp.getInt(Config.TIME_NOTIF_BEFORE_IKINDI, Config.defaultTimeBefore);
+            timeBeforeAksam = sp.getInt(Config.TIME_NOTIF_BEFORE_AKSAM, Config.defaultTimeBefore);
+            timeBeforeYatsi = sp.getInt(Config.TIME_NOTIF_BEFORE_YATSI, Config.defaultTimeBefore);
+
             Log.d("Config", "Loading Custom");
             //loadDefault();
         } catch (Exception e) {
@@ -96,6 +171,8 @@ public class Config {
         city = defaultCity;
         county = defaultCounty;
         countyCode = defaultCountyCode;
+        notifTime = defaultNotifTime;
+        targetPrayerTime = defaultTargetPrayerTime;
     }
 
     public static void update(Context context) {
@@ -114,6 +191,36 @@ public class Config {
         ed.putString(CITY, city);
         ed.putString(COUNTY, county);
         ed.putString(COUNTY_CODE, countyCode);
+        ed.commit();
+    }
+
+    public static void updateNotif(Context context) {
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(Config.context);
+        SharedPreferences.Editor ed = sp.edit();
+        ed.putLong(NOTIF_TIME, notifTime);
+        ed.putInt(TARGET_PRAYER_TIME, targetPrayerTime);
+
+        ed.putBoolean(NOTIF_BEFORE_IMSAK, notifBeforeImsak);
+        ed.putBoolean(NOTIF_BEFORE_GUNES, notifBeforeGunes);
+        ed.putBoolean(NOTIF_BEFORE_OGLE, notifBeforeOgle);
+        ed.putBoolean(NOTIF_BEFORE_IKINDI, notifBeforeIkindi);
+        ed.putBoolean(NOTIF_BEFORE_AKSAM, notifBeforeAksam);
+        ed.putBoolean(NOTIF_BEFORE_YATSI, notifBeforeYatsi);
+
+        ed.putBoolean(NOTIF_EXACT_IMSAK, notifExactImsak);
+        ed.putBoolean(NOTIF_EXACT_GUNES_, notifExactGunes);
+        ed.putBoolean(NOTIF_EXACT_OGLE, notifExactOgle);
+        ed.putBoolean(NOTIF_EXACT_IKINDI, notifExactIkindi);
+        ed.putBoolean(NOTIF_EXACT_AKSAM, notifExactAksam);
+        ed.putBoolean(NOTIF_EXACT_YATSI, notifExactYatsi);
+
+        ed.putInt(TIME_NOTIF_BEFORE_IMSAK, timeBeforeImsak);
+        ed.putInt(TIME_NOTIF_BEFORE_GUNES, timeBeforeGunes);
+        ed.putInt(TIME_NOTIF_BEFORE_OGLE, timeBeforeOgle);
+        ed.putInt(TIME_NOTIF_BEFORE_IKINDI, timeBeforeIkindi);
+        ed.putInt(TIME_NOTIF_BEFORE_AKSAM, timeBeforeAksam);
+        ed.putInt(TIME_NOTIF_BEFORE_YATSI, timeBeforeYatsi);
+
         ed.commit();
     }
 
