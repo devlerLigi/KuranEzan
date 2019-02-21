@@ -50,4 +50,9 @@
         <item name="android:textSize">12sp</item>
     </style>
 
+    <style name="notifDetailTextView" parent="android:Widget.TextView">
+        <item name="android:textSize">17sp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
 </resources>

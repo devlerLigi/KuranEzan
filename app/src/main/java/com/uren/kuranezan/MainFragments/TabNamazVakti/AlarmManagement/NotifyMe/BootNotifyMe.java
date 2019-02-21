@@ -10,6 +10,6 @@ public class BootNotifyMe extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         Log.i("neredeyiz", "BootNotifyMe");
-        NotifyMe.setNextNotifTime(context);
+        NotifyMe.setNotifications(context);
     }
 }

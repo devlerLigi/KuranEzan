@@ -38,4 +38,18 @@ public class StringConstants {
     public static String SELECTED_COUNTY = "";
     public static String SELECTED_COUNTY_CODE = "";
 
+    //Notification keys
+    public static String key_prayerTimeImsak = "prayerTimeImsak";
+    public static String key_prayerTimeGunes = "prayerTimeGunes";
+    public static String key_prayerTimeOgle = "prayerTimeOgle";
+    public static String key_prayerTimeIkindi = "prayerTimeIkindi";
+    public static String key_prayerTimeAksam = "prayerTimeAksam";
+    public static String key_prayerTimeYatsi = "prayerTimeYatsi";
+    public static String key_prayerTimeBeforeImsak = "prayerTimeBeforeImsak";
+    public static String key_prayerTimeBeforeGunes = "prayerTimeBeforeGunes";
+    public static String key_prayerTimeBeforeOgle = "prayerTimeBeforeOgle";
+    public static String key_prayerTimeBeforeIkindi = "prayerTimeBeforeIkindi";
+    public static String key_prayerTimeBeforeAksam = "prayerTimeBegoreAksam";
+    public static String key_prayerTimeBeforeYatsi = "prayerTimeBeforeYatsi";
+
 }

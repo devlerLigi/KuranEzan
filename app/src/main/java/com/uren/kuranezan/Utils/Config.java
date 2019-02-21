@@ -49,6 +49,19 @@ public class Config {
     public static final String TIME_NOTIF_BEFORE_IKINDI = "timeNotifBeforeIkindi";
     public static final String TIME_NOTIF_BEFORE_AKSAM = "timeNotifBeforeAksam";
     public static final String TIME_NOTIF_BEFORE_YATSI = "timeNotifBeforeYatsi";
+    public static final String MELODY_BEFORE_IMSAK = "melodyBeforeImsak";
+    public static final String MELODY_IMSAK = "melodyImsak";
+    public static final String MELODY_BEFORE_GUNES = "melodyBeforeGunes";
+    public static final String MELODY_GUNES = "melodyGunes";
+    public static final String MELODY_BEFORE_OGLE = "melodyBeforeOgle";
+    public static final String MELODY_OGLE = "melodyOgle";
+    public static final String MELODY_BEFORE_IKINDI = "melodyBeforeIkindi";
+    public static final String MELODY_IKINDI = "melodyIkindi";
+    public static final String MELODY_BEFORE_AKSAM = "melodyBeforeAksam";
+    public static final String MELODY_AKSAM = "melodyAksam";
+    public static final String MELODY_BEFORE_YATSI = "melodyBeforeYatsi";
+    public static final String MELODY_YATSI = "melodyYatsi";
+
 
     //default values
     public static final String defaultLang = "tr.diyanet";
@@ -67,8 +80,9 @@ public class Config {
     public static final int defaultTargetPrayerTime = 0;
 
     public static final boolean defaultNotifBefore = false;
-    public static final boolean defaultNotifExact = true;
+    public static final boolean defaultNotifExact = false;
     public static final int defaultTimeBefore = 5;
+    public static final int defaultMelodyIndex = 0;
 
     // current variables-bunlar uzerınden ilerlenmeli
     public static String lang; //translation lang
@@ -104,6 +118,19 @@ public class Config {
     public static int timeBeforeIkindi;
     public static int timeBeforeAksam;
     public static int timeBeforeYatsi;
+    public static int melodyBeforeImsak;
+    public static int melodyImsak;
+    public static int melodyBeforeGunes;
+    public static int melodyGunes;
+    public static int melodyBeforeOgle;
+    public static int melodyOgle;
+    public static int melodyBeforeIkindi;
+    public static int melodyIkindi;
+    public static int melodyBeforeAksam;
+    public static int melodyAksam;
+    public static int melodyBeforeYatsi;
+    public static int melodyYatsi;
+
 
     public static Context context;
 
@@ -149,6 +176,19 @@ public class Config {
             timeBeforeIkindi = sp.getInt(Config.TIME_NOTIF_BEFORE_IKINDI, Config.defaultTimeBefore);
             timeBeforeAksam = sp.getInt(Config.TIME_NOTIF_BEFORE_AKSAM, Config.defaultTimeBefore);
             timeBeforeYatsi = sp.getInt(Config.TIME_NOTIF_BEFORE_YATSI, Config.defaultTimeBefore);
+
+            melodyBeforeImsak = sp.getInt(Config.MELODY_BEFORE_IMSAK, Config.defaultMelodyIndex);
+            melodyImsak = sp.getInt(Config.MELODY_IMSAK, Config.defaultMelodyIndex);
+            melodyBeforeGunes = sp.getInt(Config.MELODY_BEFORE_GUNES, Config.defaultMelodyIndex);
+            melodyGunes = sp.getInt(Config.MELODY_GUNES, Config.defaultMelodyIndex);
+            melodyBeforeOgle = sp.getInt(Config.MELODY_BEFORE_OGLE, Config.defaultMelodyIndex);
+            melodyOgle = sp.getInt(Config.MELODY_OGLE, Config.defaultMelodyIndex);
+            melodyBeforeIkindi = sp.getInt(Config.MELODY_BEFORE_IKINDI, Config.defaultMelodyIndex);
+            melodyIkindi = sp.getInt(Config.MELODY_IKINDI, Config.defaultMelodyIndex);
+            melodyBeforeAksam = sp.getInt(Config.MELODY_BEFORE_AKSAM, Config.defaultMelodyIndex);
+            melodyAksam = sp.getInt(Config.MELODY_AKSAM, Config.defaultMelodyIndex);
+            melodyBeforeYatsi = sp.getInt(Config.MELODY_BEFORE_YATSI, Config.defaultMelodyIndex);
+            melodyYatsi = sp.getInt(Config.MELODY_YATSI, Config.defaultMelodyIndex);
 
             Log.d("Config", "Loading Custom");
             //loadDefault();
@@ -220,6 +260,20 @@ public class Config {
         ed.putInt(TIME_NOTIF_BEFORE_IKINDI, timeBeforeIkindi);
         ed.putInt(TIME_NOTIF_BEFORE_AKSAM, timeBeforeAksam);
         ed.putInt(TIME_NOTIF_BEFORE_YATSI, timeBeforeYatsi);
+
+        ed.putInt(MELODY_BEFORE_IMSAK, melodyBeforeImsak);
+        ed.putInt(MELODY_IMSAK, melodyImsak);
+        ed.putInt(MELODY_BEFORE_GUNES, melodyBeforeGunes);
+        ed.putInt(MELODY_GUNES, melodyGunes);
+        ed.putInt(MELODY_BEFORE_OGLE, melodyBeforeOgle);
+        ed.putInt(MELODY_OGLE, melodyOgle);
+        ed.putInt(MELODY_BEFORE_IKINDI, melodyBeforeIkindi);
+        ed.putInt(MELODY_IKINDI, melodyIkindi);
+        ed.putInt(MELODY_BEFORE_AKSAM, melodyBeforeAksam);
+        ed.putInt(MELODY_AKSAM, melodyAksam);
+        ed.putInt(MELODY_BEFORE_YATSI, melodyBeforeYatsi);
+        ed.putInt(MELODY_YATSI, melodyYatsi);
+
 
         ed.commit();
     }

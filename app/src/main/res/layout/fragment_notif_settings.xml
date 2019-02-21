@@ -26,11 +26,10 @@
                     android:id="@+id/llContent"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
                     android:descendantFocusability="blocksDescendants"
                     android:orientation="vertical">
 
-                    <!-- LANGUAGE OPTIONS -->
+                    <!-- NOTIFICATION OPTIONS -->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
@@ -42,39 +41,65 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="5dp"
-                            android:layout_marginLeft="10dp"
+                            android:layout_marginStart="10dp"
                             android:gravity="bottom"
-                            android:text="@string/translationLanguage" />
-
+                            android:text="@string/timeNotifications" />
 
                     </LinearLayout>
 
-                    <!-- Translations -->
+                    <!-- İmsak -->
                     <LinearLayout
-                        android:id="@+id/llLanguage"
+                        android:id="@+id/llImsak"
                         android:layout_width="match_parent"
-                        android:layout_height="50dp"
+                        android:layout_height="wrap_content"
                         android:background="?attr/selectableItemBackground"
-                        android:orientation="horizontal">
+                        android:orientation="vertical">
 
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_marginLeft="25dp"
-                            android:layout_weight="7"
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@color/lightMetalic"
                             android:gravity="center_vertical"
-                            android:text="@string/language"
-                            android:textColor="@color/black"
-                            android:textSize="17sp" />
+                            android:orientation="horizontal"
+                            android:paddingTop="3dp"
+                            android:paddingBottom="3dp">
 
-                        <ImageView
-                            android:id="@+id/imgForward1"
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_marginRight="10dp"
-                            android:layout_weight="1"
-                            android:padding="12dp"
-                            android:src="@drawable/icon_forward" />
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="20dp"
+                                android:layout_weight="7"
+                                android:gravity="center_vertical"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/imsakNotifSettings"
+                                    android:textColor="@color/black"
+                                    android:textSize="17sp" />
+
+                                <TextView
+                                    android:id="@+id/txtImsakNotifDetail"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="5dp"
+                                    android:textColor="@color/gray"
+                                    android:textSize="13sp" />
+
+
+                            </LinearLayout>
+
+
+                            <ImageView
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_marginEnd="10dp"
+                                android:layout_weight="1"
+                                android:padding="12dp"
+                                android:src="@drawable/icon_forward" />
+
+                        </LinearLayout>
 
                     </LinearLayout>
 
@@ -84,12 +109,315 @@
                         android:alpha="0.5"
                         android:background="@color/gray" />
 
-                    <Button
-                        android:id="@+id/btnNotif"
+                    <!-- Güneş -->
+                    <LinearLayout
+                        android:id="@+id/llGunes"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Bildirimleri Aç" />
+                        android:background="?attr/selectableItemBackground"
+                        android:orientation="vertical">
 
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@color/clearWhite"
+                            android:gravity="center_vertical"
+                            android:paddingTop="3dp"
+                            android:paddingBottom="3dp"
+                            android:orientation="horizontal">
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="20dp"
+                                android:layout_weight="7"
+                                android:gravity="center_vertical"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/gunesNotifSettings"
+                                    android:textColor="@color/black"
+                                    android:textSize="17sp" />
+
+                                <TextView
+                                    android:id="@+id/txtGunesNotifDetail"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="5dp"
+                                    android:textColor="@color/gray"
+                                    android:textSize="13sp" />
+
+
+                            </LinearLayout>
+
+
+                            <ImageView
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_marginEnd="10dp"
+                                android:layout_weight="1"
+                                android:padding="12dp"
+                                android:src="@drawable/icon_forward" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:alpha="0.5"
+                        android:background="@color/gray" />
+
+                    <!-- Öğle -->
+                    <LinearLayout
+                        android:id="@+id/llOgle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="?attr/selectableItemBackground"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@color/lightMetalic"
+                            android:gravity="center_vertical"
+                            android:paddingTop="3dp"
+                            android:paddingBottom="3dp"
+                            android:orientation="horizontal">
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="20dp"
+                                android:layout_weight="7"
+                                android:gravity="center_vertical"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/ogleNotifSettings"
+                                    android:textColor="@color/black"
+                                    android:textSize="17sp" />
+
+                                <TextView
+                                    android:id="@+id/txtOgleNotifDetail"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="5dp"
+                                    android:textColor="@color/gray"
+                                    android:textSize="13sp" />
+
+
+                            </LinearLayout>
+
+
+                            <ImageView
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_marginEnd="10dp"
+                                android:layout_weight="1"
+                                android:padding="12dp"
+                                android:src="@drawable/icon_forward" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:alpha="0.5"
+                        android:background="@color/gray" />
+
+                    <!-- İkindi -->
+                    <LinearLayout
+                        android:id="@+id/llIkindi"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="?attr/selectableItemBackground"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@color/clearWhite"
+                            android:gravity="center_vertical"
+                            android:paddingTop="3dp"
+                            android:paddingBottom="3dp"
+                            android:orientation="horizontal">
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="20dp"
+                                android:layout_weight="7"
+                                android:gravity="center_vertical"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/ikindiNotifSettings"
+                                    android:textColor="@color/black"
+                                    android:textSize="17sp" />
+
+                                <TextView
+                                    android:id="@+id/txtIkindiNotifDetail"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="5dp"
+                                    android:textColor="@color/gray"
+                                    android:textSize="13sp" />
+
+
+                            </LinearLayout>
+
+
+                            <ImageView
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_marginEnd="10dp"
+                                android:layout_weight="1"
+                                android:padding="12dp"
+                                android:src="@drawable/icon_forward" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:alpha="0.5"
+                        android:background="@color/gray" />
+
+                    <!-- Aksam -->
+                    <LinearLayout
+                        android:id="@+id/llAksam"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="?attr/selectableItemBackground"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@color/lightMetalic"
+                            android:gravity="center_vertical"
+                            android:paddingTop="3dp"
+                            android:paddingBottom="3dp"
+                            android:orientation="horizontal">
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="20dp"
+                                android:layout_weight="7"
+                                android:gravity="center_vertical"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/aksamNotifSettings"
+                                    android:textColor="@color/black"
+                                    android:textSize="17sp" />
+
+                                <TextView
+                                    android:id="@+id/txtAksamNotifDetail"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="5dp"
+                                    android:textColor="@color/gray"
+                                    android:textSize="13sp" />
+
+
+                            </LinearLayout>
+
+
+                            <ImageView
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_marginEnd="10dp"
+                                android:layout_weight="1"
+                                android:padding="12dp"
+                                android:src="@drawable/icon_forward" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:alpha="0.5"
+                        android:background="@color/gray" />
+
+                    <!-- Yatsı -->
+                    <LinearLayout
+                        android:id="@+id/llYatsi"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="?attr/selectableItemBackground"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@color/clearWhite"
+                            android:paddingTop="3dp"
+                            android:paddingBottom="3dp"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="20dp"
+                                android:layout_weight="7"
+                                android:gravity="center_vertical"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/yatsiNotifSettings"
+                                    android:textColor="@color/black"
+                                    android:textSize="17sp" />
+
+                                <TextView
+                                    android:id="@+id/txtYatsiNotifDetail"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="5dp"
+                                    android:textColor="@color/gray"
+                                    android:textSize="13sp" />
+
+
+                            </LinearLayout>
+
+
+                            <ImageView
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_marginEnd="10dp"
+                                android:layout_weight="1"
+                                android:padding="12dp"
+                                android:src="@drawable/icon_forward" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:alpha="0.5"
+                        android:background="@color/gray" />
 
                 </LinearLayout>
 

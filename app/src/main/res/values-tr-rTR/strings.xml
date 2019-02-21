@@ -123,6 +123,31 @@
     <string name="imsakiye">İmsakiye</string>
     <string name="selectLocation">Konum Seç</string>
     <string name="alarm">Alarm</string>
+    <string name="timeNotifications">Namaz Vakti Bildirimleri</string>
+
+    <string name="imsakNotifSettings">İmsak Vakti Uyarıları</string>
+    <string name="gunesNotifSettings">Güneş Vakti Uyarıları</string>
+    <string name="ogleNotifSettings">Öğle Vakti Uyarıları</string>
+    <string name="ikindiNotifSettings">İkindi Vakti Uyarıları</string>
+    <string name="aksamNotifSettings">Akşam Vakti Uyarıları</string>
+    <string name="yatsiNotifSettings">Yatsı Vakti Uyarıları</string>
+    <string name="before">Önce:</string>
+    <string name="exactime">Vaktinde:</string>
+    <string name="enabled">Açık</string>
+    <string name="disabled">Kapalı</string>
+
+    <string name="notifSituation">Durumu</string>
+    <string name="notifTime">Uyarı Süresi</string>
+    <string name="notifMelody">Uyarı Melodisi</string>
+    <string name="adjustNotificationDetail">Bildirim Detayı Ayarla</string>
+    <string name="headerTextBefore">Vaktinden Önce Uyarı</string>
+    <string name="headerTextExact">Vaktinde Uyarı</string>
+    <string name="minutes">dakika</string>
+    <string name="time">Vakti</string>
+    <string name="minutesRemain">dakika kaldı!</string>
+    <string name="remainder">Hatırlatma</string>
+    <string name="dismiss">Kapat</string>
+    <string name="display">Görüntüle</string>
 
     <string-array name="prayerTimes">
         <item>İmsak</item>
@@ -147,6 +172,27 @@
         <item>Ekim</item>
         <item>Kasım</item>
         <item>Aralık</item>
+    </string-array>
+
+    <string-array name="sounds">
+        <item>Varsayılan</item>
+        <item>Melodi 1</item>
+        <item>Kuş sesi</item>
+        <item>Güzel Islam 1</item>
+        <item>Güzel Islam 2</item>
+        <item>El Habib</item>
+        <item>Allahu Allahu</item>
+        <item>Ayet El Kürsi</item>
+        <item>Bismillah 1</item>
+        <item>Bismillah 2</item>
+        <item>Bismillahillezi</item>
+        <item>Ezan 1</item>
+        <item>Ezan 2</item>
+        <item>Ezan 3</item>
+        <item>Esselatu Hayrun Minen Nevm</item>
+        <item>Lebbeyk</item>
+        <item>Allah'ın İsimleri</item>
+        <item>Quran</item>
     </string-array>
 
     <array name="surah_name">

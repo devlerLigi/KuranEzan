@@ -61,6 +61,7 @@ public class MainActivity extends FragmentActivity
 
     private int initialTabIndex = 1;
     private int selectedTabColor, unSelectedTabColor;
+    public static String PACKAGE_NAME;
 
 
     @Override
@@ -71,6 +72,7 @@ public class MainActivity extends FragmentActivity
         ButterKnife.bind(this);
         Fabric.with(this, new Crashlytics());
 
+        PACKAGE_NAME = getApplicationContext().getPackageName();
         unSelectedTabColor = this.getResources().getColor(R.color.DarkGray);
         selectedTabColor = this.getResources().getColor(R.color.fab_color_pressed);
 

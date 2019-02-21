@@ -338,6 +338,9 @@
 
     <color name="quranTextColor">#455a64</color>
     <color name="clearWhite">#ECEFF1</color>
+    <color name="metalic">#B2B2B2</color>
+    <color name="darkMetalic">#999999</color>
+    <color name="lightMetalic">#E5E5E5</color>
 
     <integer-array name="gplus_colors">
         <item>@color/gplus_color_1</item>

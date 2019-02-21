@@ -413,16 +413,6 @@ public class NamazVaktiFragment extends BaseFragment
 
         for (int i = 0; i < prayerTimes.length; i++) {
             if (prayerTimes[i].getMiladiTarihKisa().equals(formattedDate)) {
-
-
-                prayerTimes[i].setImsak("06:31");
-                prayerTimes[i].setGunes("06:32");
-                prayerTimes[i].setOgle("06:33");
-                prayerTimes[i].setIkindi("06:34");
-                prayerTimes[i].setAksam("06:35");
-                prayerTimes[i].setYatsi("06:36");
-
-
                 return prayerTimes[i];
             }
         }
@@ -473,7 +463,7 @@ public class NamazVaktiFragment extends BaseFragment
 
         PrayerTimes prayerTimes = getCurrentPrayerTime();
 
-        if(prayerTimes != null){
+        if (prayerTimes != null) {
             int targetPrayerTime = getNextPrayerTime(prayerTimes);
 
             mTimeLeftInMillis = targetDifference;
@@ -590,10 +580,11 @@ public class NamazVaktiFragment extends BaseFragment
         Calendar now = Calendar.getInstance();
         now.setTimeInMillis(Config.notifTime);
 
+        NotifyMe.setNotifications(getContext());
 
-        NotifyMe.setNotif(getContext(), Config.notifTime);
+        //NotifyMe.setNotif(getContext(), Config.notifTime);
 
-        Log.i("notifTime", String.valueOf(now));
+        //Log.i("notifTime", String.valueOf(now));
 
         //NotifyMe.isValid(getContext(), 3);
         //NotifyMe.isValid(getContext(), 4);

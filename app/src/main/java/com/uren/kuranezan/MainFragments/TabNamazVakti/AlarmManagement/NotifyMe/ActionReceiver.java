@@ -31,7 +31,7 @@ public class ActionReceiver extends BroadcastReceiver {
             Intent it = new Intent(Intent.ACTION_CLOSE_SYSTEM_DIALOGS);
             context.sendBroadcast(it);
         }
-
+/*
         if(intent.getBooleanExtra("dismiss",true)){
             Log.i("neredeyiz", "Action Receiver-2");
             Notification.NotificationDBHelper mDbHelper = new Notification.NotificationDBHelper(context);
@@ -41,12 +41,13 @@ public class ActionReceiver extends BroadcastReceiver {
             NotificationManager mNotificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
             mNotificationManager.cancel(Integer.parseInt(notificationId));
         }
-
-        if(intent.getBooleanExtra("close",true)){
+*/
+        if(intent.getBooleanExtra("dismiss",true)){
             Log.i("neredeyiz", "Action Receiver-close");
             NotificationManager mNotificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
             mNotificationManager.cancel(Integer.parseInt(notificationId));
         }
+
     }
 }
 

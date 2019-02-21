@@ -6,6 +6,7 @@ import android.app.PendingIntent;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.annotation.StringRes;
@@ -13,6 +14,7 @@ import android.support.annotation.UiThread;
 import android.util.Log;
 
 import com.uren.kuranezan.Interfaces.CompleteCallback;
+import com.uren.kuranezan.MainActivity;
 import com.uren.kuranezan.MainFragments.TabNamazVakti.AlarmManagement.RepeatingActivity;
 import com.uren.kuranezan.Models.PrayerTimeModels.PrayerTimes;
 import com.uren.kuranezan.R;
@@ -35,8 +37,6 @@ import static com.uren.kuranezan.Constants.NumericConstants.PRAYER_TIME_BEFORE_I
 import static com.uren.kuranezan.Constants.NumericConstants.PRAYER_TIME_BEFORE_IMSAK;
 import static com.uren.kuranezan.Constants.NumericConstants.PRAYER_TIME_BEFORE_OGLE;
 import static com.uren.kuranezan.Constants.NumericConstants.PRAYER_TIME_BEFORE_YATSI;
-import static com.uren.kuranezan.Constants.NumericConstants.PRAYER_TIME_ERTESI_GUN_BEFORE_IMSAK;
-import static com.uren.kuranezan.Constants.NumericConstants.PRAYER_TIME_ERTESI_GUN_IMSAK;
 import static com.uren.kuranezan.Constants.NumericConstants.PRAYER_TIME_GUNES;
 import static com.uren.kuranezan.Constants.NumericConstants.PRAYER_TIME_IKINDI;
 import static com.uren.kuranezan.Constants.NumericConstants.PRAYER_TIME_IMSAK;
@@ -44,6 +44,18 @@ import static com.uren.kuranezan.Constants.NumericConstants.PRAYER_TIME_OGLE;
 import static com.uren.kuranezan.Constants.NumericConstants.PRAYER_TIME_YATSI;
 import static com.uren.kuranezan.Constants.NumericConstants.REQUEST_TYPE_GET_PRAYER_TIMES_FROM_SERVER;
 import static com.uren.kuranezan.Constants.NumericConstants.REQUEST_TYPE_READ_PRAYER_TIMES;
+import static com.uren.kuranezan.Constants.StringConstants.key_prayerTimeAksam;
+import static com.uren.kuranezan.Constants.StringConstants.key_prayerTimeBeforeGunes;
+import static com.uren.kuranezan.Constants.StringConstants.key_prayerTimeBeforeIkindi;
+import static com.uren.kuranezan.Constants.StringConstants.key_prayerTimeBeforeImsak;
+import static com.uren.kuranezan.Constants.StringConstants.key_prayerTimeBeforeOgle;
+import static com.uren.kuranezan.Constants.StringConstants.key_prayerTimeBeforeYatsi;
+import static com.uren.kuranezan.Constants.StringConstants.key_prayerTimeBeforeAksam;
+import static com.uren.kuranezan.Constants.StringConstants.key_prayerTimeGunes;
+import static com.uren.kuranezan.Constants.StringConstants.key_prayerTimeIkindi;
+import static com.uren.kuranezan.Constants.StringConstants.key_prayerTimeImsak;
+import static com.uren.kuranezan.Constants.StringConstants.key_prayerTimeOgle;
+import static com.uren.kuranezan.Constants.StringConstants.key_prayerTimeYatsi;
 import static com.uren.kuranezan.MainFragments.TabNamazVakti.AlarmManagement.NotifyMe.Notification.NotificationEntry.NOTIFICATION_ACTIONS;
 import static com.uren.kuranezan.MainFragments.TabNamazVakti.AlarmManagement.NotifyMe.Notification.NotificationEntry.NOTIFICATION_ACTIONS_COLLAPSE;
 import static com.uren.kuranezan.MainFragments.TabNamazVakti.AlarmManagement.NotifyMe.Notification.NotificationEntry.NOTIFICATION_ACTIONS_DISMISS;
@@ -67,11 +79,20 @@ public class NotifyMe {
 
     protected final Builder builder;
     private static String strSeparator = "__,__";
+    private static String content = "";
 
     private static PrayerTimes[] prayerTimesList;
     private static PrayerTimes currentDayPrayerTimes;
     private static PrayerTimes nextDayPrayerTimes;
     private static boolean downloadedFromServer = false;
+
+    //Current date prayer times notif
+    private static Date currentDateImsak, currentDateGunes, currentDateOgle, currentDateIkindi, currentDateAksam, currentDateYatsi;
+    private static Date currentDateBeforeImsak, currentDateBeforeGunes, currentDateBeforeOgle, currentDateBeforeIkindi, currentDateBeforeAksam, currentDateBeforeYatsi;
+
+    //Next date prayer times notif
+    private static Date nextDateImsak, nextDateGunes, nextDateOgle, nextDateIkindi, nextDateAksam, nextDateYatsi;
+    private static Date nextDateBeforeImsak, nextDateBeforeGunes, nextDateBeforeOgle, nextDateBeforeIkindi, nextDateBeforeAksam, nextDateBeforeYatsi;
 
 
     protected NotifyMe(Builder builder) {
@@ -103,138 +124,6 @@ public class NotifyMe {
         long id = db.insert(TABLE_NAME, null, values);
         db.close();
         scheduleNotification(builder.context, String.valueOf(id), cal.getTimeInMillis());
-    }
-
-    public static void setNotif(Context context, long time) {
-
-        Log.i("setNotifStart", "ok");
-
-        Notification.NotificationDBHelper mDbHelper = new Notification.NotificationDBHelper(context);
-        SQLiteDatabase db = mDbHelper.getWritableDatabase();
-
-        Cursor cursor = db.rawQuery("SELECT * FROM " + Notification.NotificationEntry.TABLE_NAME + " WHERE 1=1", null);
-
-        List<Integer> myList = new ArrayList<>();
-        if (cursor.moveToFirst()) {
-            while (!cursor.isAfterLast()) {
-                int id = cursor.getInt(cursor.getColumnIndex(Notification.NotificationEntry._ID));
-                myList.add(id);
-                cursor.moveToNext();
-            }
-        }
-
-        cursor.close();
-        db.close();
-
-        if (myList.size() == 0) {
-            createNotif(context, time);
-        } else if (myList.size() == 1) {
-            updateNotifTime(context, time, myList.get(0));
-        } else {
-            cancelAll(context, myList);
-            createNotif(context, time);
-        }
-
-        Log.i("Notif set", "successful");
-        getNotifId(context);
-
-    }
-
-    private static void getNotifId(Context context) {
-        Notification.NotificationDBHelper mDbHelper = new Notification.NotificationDBHelper(context);
-        SQLiteDatabase db = mDbHelper.getWritableDatabase();
-
-        Cursor cursor = db.rawQuery("SELECT * FROM " + Notification.NotificationEntry.TABLE_NAME + " WHERE 1=1", null);
-
-        List<Integer> myList = new ArrayList<>();
-        if (cursor.moveToFirst()) {
-            while (!cursor.isAfterLast()) {
-                int id = cursor.getInt(cursor.getColumnIndex(Notification.NotificationEntry._ID));
-                myList.add(id);
-                Log.i("valid-notifID", String.valueOf(id));
-                cursor.moveToNext();
-            }
-        }
-
-        cursor.close();
-        db.close();
-
-    }
-
-    private static void createNotif(Context context, long time) {
-
-        Log.i("createNotif", "ok");
-
-        Calendar now = Calendar.getInstance();
-        now.setTimeInMillis(time);
-
-        Intent intent = new Intent(context, RepeatingActivity.class);
-        intent.putExtra("test", "I am a String");
-        NotifyMe notifyMe = new NotifyMe.Builder(context)
-                .title("Başlık1")
-                .content("İçerik 1")
-                .color(255, 0, 0, 255)
-                .led_color(255, 255, 255, 255)
-                .time(now)
-                .key("test")
-                .addCloseAction(new Intent(), "Tamam", true)
-                .large_icon(R.mipmap.ic_launcher_round)
-                .build();
-
-    }
-
-    private static void updateNotifTime(Context context, long time, int notificationId) {
-
-        Log.i("updateNotifTime", "ok");
-        Notification.NotificationDBHelper mDbHelper = new Notification.NotificationDBHelper(context);
-        SQLiteDatabase db = mDbHelper.getWritableDatabase();
-        ContentValues values = new ContentValues();
-        values.put(NOTIFICATION_TIME, time);
-        db.update(TABLE_NAME, values, Notification.NotificationEntry._ID + " = " + notificationId, null);
-        db.close();
-
-        Calendar now = Calendar.getInstance();
-        now.setTimeInMillis(time);
-
-        scheduleNotification(context, String.valueOf(notificationId), now.getTimeInMillis());
-    }
-
-    private static void cancelAll(Context context, List<Integer> myList) {
-
-        Log.i("cancelAll", "ok");
-
-        try {
-            NotificationManager mNotificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-            Notification.NotificationDBHelper mDbHelper = new Notification.NotificationDBHelper(context);
-            SQLiteDatabase db = mDbHelper.getWritableDatabase();
-
-            for (int i = 0; i < myList.size(); i++) {
-                int id = myList.get(i);
-                db.delete(TABLE_NAME, Notification.NotificationEntry._ID + " = " + id, null);
-                mNotificationManager.cancel(id);
-            }
-
-            db.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-    }
-
-    public static void isValid(Context context, int notificationId) {
-
-        Notification.NotificationDBHelper mDbHelper = new Notification.NotificationDBHelper(context);
-        SQLiteDatabase db = mDbHelper.getWritableDatabase();
-
-        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE " + Notification.NotificationEntry._ID + " = " + notificationId, null);
-
-        if (cursor.getCount() > 0) {
-            Log.i("id bulundu", String.valueOf(notificationId));
-        } else {
-            Log.i("id bulunamadı", String.valueOf(notificationId));
-        }
-        cursor.close();
-        db.close();
     }
 
 
@@ -308,8 +197,8 @@ public class NotifyMe {
         intent.putExtra(NOTIFICATION_ID, notificationId);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(context, Integer.parseInt(notificationId), intent, PendingIntent.FLAG_UPDATE_CURRENT);
         alarmManager.set(AlarmManager.RTC_WAKEUP, time, pendingIntent);
-        Log.i("***scheduleNotification", "ok");
-        Log.i("notifId", notificationId);
+        Log.i("TAKIP_SCHEDULE", "OK");
+        Log.i("TAKIP_NOTIF_ID", notificationId);
     }
 
 
@@ -361,9 +250,6 @@ public class NotifyMe {
             return this;
         }
 
-        public Builder addCloseAction(Intent intent, String text, boolean close) {
-            return addAction(intent, text, close);
-        }
 
         public Builder addAction(Intent intent, String text) {
             return addAction(intent, text, true, true);
@@ -464,17 +350,52 @@ public class NotifyMe {
 
     }
 
-    public static void setNextNotifTime(Context context) {
+    public static void setNotifications(Context context) {
 
         Config config = new Config();
         config.load(context);
 
-        String x = Config.countyCode;
-        Log.i("countyCode", x);
+        if (Config.notifBeforeImsak || Config.notifExactImsak || Config.notifBeforeGunes || Config.notifExactGunes ||
+                Config.notifBeforeOgle || Config.notifExactOgle || Config.notifBeforeIkindi || Config.notifExactIkindi ||
+                Config.notifBeforeAksam || Config.notifExactAksam || Config.notifBeforeYatsi || Config.notifExactYatsi) {
+            Log.i("notifSituation", "open");
+            if (!Config.countyCode.equals("")) {
+                getPrayerTimesFromLocal(context);
+            }
 
-        if (!Config.countyCode.equals("")) {
-            getPrayerTimesFromLocal(context);
+        } else {
+            Log.i("log", "1");
+            deleteAll(context);
+            Log.i("notifSituation", "closed");
         }
+
+        printActiveNotifications(context);
+
+    }
+
+    private static void printActiveNotifications(Context context) {
+
+        Log.i("TUM_NOTIFLER", "printAll");
+        try {
+            NotificationManager mNotificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+            Notification.NotificationDBHelper mDbHelper = new Notification.NotificationDBHelper(context);
+            SQLiteDatabase db = mDbHelper.getWritableDatabase();
+            Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE 1=1", null);
+
+            while (cursor.moveToNext()) {
+                int id = cursor.getInt(cursor.getColumnIndex(Notification.NotificationEntry._ID));
+                String key = cursor.getString(cursor.getColumnIndex(Notification.NotificationEntry.NOTIFICATION_CUSTOM_ID));
+                String time = cursor.getString(cursor.getColumnIndex(Notification.NotificationEntry.NOTIFICATION_TIME));
+
+                Log.i("id: " + id, "key: " + key + " time: " + time);
+            }
+
+            cursor.close();
+            db.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 
     private static void getPrayerTimesFromLocal(final Context context) {
@@ -527,264 +448,38 @@ public class NotifyMe {
     private static void startOperation(Context context) {
 
         if (prayerTimesList != null) {
-            currentDayPrayerTimes = getCurrentDayPrayerTimes(context);
 
-            if (currentDayPrayerTimes != null) {
-                getNextPrayerTime(context);
+            currentDayPrayerTimes = setCurrentDatePrayeTimes(context);
+            nextDayPrayerTimes = setNextDatePrayerTimes(context);
+
+            if (currentDayPrayerTimes != null && nextDayPrayerTimes != null) {
+                convertCurrentDatePrayerTimesToDate(context);
+                convertNextDatePrayerTimesToDate(context);
+
+                adjustNotificationTimes(context);
             }
 
         }
 
-
     }
 
-    private static PrayerTimes getCurrentDayPrayerTimes(Context context) {
+    private static PrayerTimes setCurrentDatePrayeTimes(Context context) {
 
-        Date c = Calendar.getInstance().getTime();
+        Date current = Calendar.getInstance().getTime();
         SimpleDateFormat df = new SimpleDateFormat("dd.MM.yyyy", Locale.getDefault());
-        String formattedDate = df.format(c);
+        String formattedDate = df.format(current);
 
         for (int i = 0; i < prayerTimesList.length; i++) {
             if (prayerTimesList[i].getMiladiTarihKisa().equals(formattedDate)) {
-
-                prayerTimesList[i].setImsak("06:31");
-                prayerTimesList[i].setGunes("06:32");
-                prayerTimesList[i].setOgle("06:33");
-                prayerTimesList[i].setIkindi("06:34");
-                prayerTimesList[i].setAksam("06:35");
-                prayerTimesList[i].setYatsi("06:36");
-
-
                 return prayerTimesList[i];
             }
         }
 
         return null;
-    }
-
-    private static void getNextPrayerTime(Context context) {
-
-        int target = 0;
-        long nextPrayerTimeInMillis = 0;
-
-        String pattern = "dd.MM.yyyy HH:mm";
-        SimpleDateFormat dateFormat = new SimpleDateFormat(pattern);
-        try {
-            //Date one = dateFormat.parse(currentTime);
-            Date prayer1 = dateFormat.parse(currentDayPrayerTimes.getMiladiTarihKisa() + " " + currentDayPrayerTimes.getImsak());
-            Date prayer2 = dateFormat.parse(currentDayPrayerTimes.getMiladiTarihKisa() + " " + currentDayPrayerTimes.getGunes());
-            Date prayer3 = dateFormat.parse(currentDayPrayerTimes.getMiladiTarihKisa() + " " + currentDayPrayerTimes.getOgle());
-            Date prayer4 = dateFormat.parse(currentDayPrayerTimes.getMiladiTarihKisa() + " " + currentDayPrayerTimes.getIkindi());
-            Date prayer5 = dateFormat.parse(currentDayPrayerTimes.getMiladiTarihKisa() + " " + currentDayPrayerTimes.getAksam());
-            Date prayer6 = dateFormat.parse(currentDayPrayerTimes.getMiladiTarihKisa() + " " + currentDayPrayerTimes.getYatsi());
-
-
-            long ms;
-            Calendar calendar = Calendar.getInstance();
-
-            //Vakit onceleri
-            ms = prayer1.getTime() - Config.timeBeforeGunes * 60 * 1000;
-            calendar.setTimeInMillis(ms);
-            Date prayer11 = calendar.getTime();
-
-            ms = prayer2.getTime() - Config.timeBeforeOgle * 60 * 1000;
-            calendar.setTimeInMillis(ms);
-            Date prayer21 = calendar.getTime();
-
-            ms = prayer3.getTime() - Config.timeBeforeIkindi * 60 * 1000;
-            calendar.setTimeInMillis(ms);
-            Date prayer31 = calendar.getTime();
-
-            ms = prayer4.getTime() - Config.timeBeforeAksam * 60 * 1000;
-            calendar.setTimeInMillis(ms);
-            Date prayer41 = calendar.getTime();
-
-            ms = prayer5.getTime() - Config.timeBeforeYatsi * 60 * 1000;
-            calendar.setTimeInMillis(ms);
-            Date prayer51 = calendar.getTime();
-
-            ms = prayer6.getTime() - Config.timeBeforeImsak * 60 * 1000;
-            calendar.setTimeInMillis(ms);
-            Date prayer61 = calendar.getTime();
-
-            Date currentDate = Calendar.getInstance().getTime();
-
-            Log.i("imsak", currentDayPrayerTimes.getImsak());
-            Log.i("gunes", currentDayPrayerTimes.getGunes());
-            Log.i("ogle", currentDayPrayerTimes.getOgle());
-            Log.i("ikindi", currentDayPrayerTimes.getIkindi());
-            Log.i("aksam", currentDayPrayerTimes.getAksam());
-            Log.i("yatsi", currentDayPrayerTimes.getYatsi());
-
-
-            /* GUNES  */
-            if (currentDate.compareTo(prayer1) > 0 && currentDate.compareTo(prayer21) <= 0 && Config.notifBeforeGunes) {
-                target = PRAYER_TIME_BEFORE_GUNES;
-                nextPrayerTimeInMillis = prayer11.getTime();
-                setData(context, target, nextPrayerTimeInMillis);
-                Log.i("nextNotifTime", "gunes oncesi");
-                return;
-            }
-
-            if (currentDate.compareTo(prayer1) > 0 && currentDate.compareTo(prayer2) <= 0 && Config.notifExactGunes) {
-                target = PRAYER_TIME_GUNES; //gunes
-                nextPrayerTimeInMillis = prayer2.getTime();
-                setData(context, target, nextPrayerTimeInMillis);
-                Log.i("nextNotifTime", "gunes");
-                return;
-            }
-
-            /* OGLE  */
-            if (currentDate.compareTo(prayer2) > 0 && currentDate.compareTo(prayer31) <= 0 && Config.notifBeforeOgle) {
-                target = PRAYER_TIME_BEFORE_OGLE;
-                nextPrayerTimeInMillis = prayer31.getTime();
-                setData(context, target, nextPrayerTimeInMillis);
-                Log.i("nextNotifTime", "öğle oncesi");
-                return;
-            }
-
-            if (currentDate.compareTo(prayer2) > 0 && currentDate.compareTo(prayer3) <= 0 && Config.notifExactOgle) {
-                target = PRAYER_TIME_OGLE; //gunes
-                nextPrayerTimeInMillis = prayer3.getTime();
-                setData(context, target, nextPrayerTimeInMillis);
-                Log.i("nextNotifTime", "öğle");
-                return;
-            }
-
-            /* IKINDI  */
-            if (currentDate.compareTo(prayer3) > 0 && currentDate.compareTo(prayer41) <= 0 && Config.notifBeforeIkindi) {
-                target = PRAYER_TIME_BEFORE_IKINDI;
-                nextPrayerTimeInMillis = prayer41.getTime();
-                setData(context, target, nextPrayerTimeInMillis);
-                Log.i("nextNotifTime", "ikindi oncesi");
-                return;
-            }
-
-            if (currentDate.compareTo(prayer3) > 0 && currentDate.compareTo(prayer4) <= 0 && Config.notifExactIkindi) {
-                target = PRAYER_TIME_IKINDI; //gunes
-                nextPrayerTimeInMillis = prayer4.getTime();
-                setData(context, target, nextPrayerTimeInMillis);
-                Log.i("nextNotifTime", "ikindi");
-                return;
-            }
-
-            /* AKSAM  */
-            if (currentDate.compareTo(prayer4) > 0 && currentDate.compareTo(prayer51) <= 0 && Config.notifBeforeAksam) {
-                target = PRAYER_TIME_BEFORE_AKSAM;
-                nextPrayerTimeInMillis = prayer51.getTime();
-                setData(context, target, nextPrayerTimeInMillis);
-                Log.i("nextNotifTime", "akşam oncesi");
-                return;
-            }
-
-
-            if (currentDate.compareTo(prayer4) > 0 && currentDate.compareTo(prayer5) <= 0 && Config.notifExactAksam) {
-                target = PRAYER_TIME_AKSAM; //gunes
-                nextPrayerTimeInMillis = prayer5.getTime();
-                setData(context, target, nextPrayerTimeInMillis);
-                Log.i("nextNotifTime", "akşam");
-                return;
-            }
-
-            /* YATSI  */
-            if (currentDate.compareTo(prayer5) > 0 && currentDate.compareTo(prayer61) <= 0 && Config.notifBeforeYatsi) {
-                target = PRAYER_TIME_BEFORE_YATSI;
-                nextPrayerTimeInMillis = prayer61.getTime();
-                setData(context, target, nextPrayerTimeInMillis);
-                Log.i("nextNotifTime", "yatsı oncesi");
-                return;
-            }
-
-
-            if (currentDate.compareTo(prayer5) > 0 && currentDate.compareTo(prayer6) <= 0 && Config.notifExactYatsi) {
-                target = PRAYER_TIME_YATSI; //gunes
-                nextPrayerTimeInMillis = prayer6.getTime();
-                setData(context, target, nextPrayerTimeInMillis);
-                Log.i("nextNotifTime", "yatsı");
-                return;
-            }
-
-            /* ERTESI GUN IMSAK  */
-            if (currentDate.compareTo(prayer6) > 0 && (Config.notifBeforeImsak || Config.notifExactImsak)) {
-
-                nextDayPrayerTimes = getNextDayPrayerTimes(context);
-                if (nextDayPrayerTimes != null) {
-                    Date prayerNextDayImsak = dateFormat.parse(nextDayPrayerTimes.getMiladiTarihKisa() + " " + nextDayPrayerTimes.getImsak());
-
-                    ms = prayerNextDayImsak.getTime() - Config.timeBeforeImsak * 60 * 1000;
-                    calendar.setTimeInMillis(ms);
-                    Date prayer71 = calendar.getTime();
-
-                    if (currentDate.compareTo(prayer71) <= 0 && Config.notifBeforeImsak) {
-                        target = PRAYER_TIME_ERTESI_GUN_BEFORE_IMSAK;
-                        nextPrayerTimeInMillis = prayer71.getTime();
-                        setData(context, target, nextPrayerTimeInMillis);
-                        Log.i("nextNotifTime", "ertesi gün imsak oncesi");
-                        return;
-                    }
-
-                    if (currentDate.compareTo(prayerNextDayImsak) <= 0 && Config.notifExactImsak) {
-                        target = PRAYER_TIME_ERTESI_GUN_IMSAK;
-                        nextPrayerTimeInMillis = prayerNextDayImsak.getTime();
-                        setData(context, target, nextPrayerTimeInMillis);
-                        Log.i("nextNotifTime", "ertesi gün imsak oncesi");
-                        return;
-                    }
-                } else {
-                    if (!downloadedFromServer) {
-                        getPrayerTimesFromServer(context);
-                    }
-                }
-
-            }
-
-
-            //Tüm bunların dışında birşey ise hedef vakit aynı gün içerisindeki imsaktır..
-            if (currentDate.compareTo(prayer11) <= 0 && Config.notifBeforeImsak) {
-                target = PRAYER_TIME_BEFORE_IMSAK;
-                nextPrayerTimeInMillis = prayer11.getTime();
-                setData(context, target, nextPrayerTimeInMillis);
-                Log.i("nextNotifTime", "imsak oncesi");
-                return;
-            }
-
-            if (currentDate.compareTo(prayer1) <= 0 && Config.notifExactImsak) {
-                target = PRAYER_TIME_IMSAK; //gunes
-                nextPrayerTimeInMillis = prayer1.getTime();
-                setData(context, target, nextPrayerTimeInMillis);
-                Log.i("nextNotifTime", "imsak");
-                return;
-            }
-
-
-        } catch (ParseException e) {
-            Log.e("parseError", e.toString());
-        }
-
-        return;
 
     }
 
-    private static void setData(Context context, int target, long nextPrayerTimeInMillis) {
-
-        Config.notifTime = nextPrayerTimeInMillis;
-        Config.targetPrayerTime = target;
-        Config.updateNotif(context);
-        Log.i("nextNotifTime", "set edildi");
-        Log.i("notifTime", String.valueOf(Config.notifTime));
-        Log.i("targetPrayerTime", String.valueOf(Config.targetPrayerTime));
-        updateNotif(context);
-
-
-    }
-
-
-    private static void evaluateTarget(Context context) {
-
-
-    }
-
-    private static PrayerTimes getNextDayPrayerTimes(Context context) {
+    private static PrayerTimes setNextDatePrayerTimes(Context context) {
 
         Calendar calendar = Calendar.getInstance();
         Date currentDate = calendar.getTime();
@@ -805,13 +500,508 @@ public class NotifyMe {
 
     }
 
-    private static void updateNotif(Context context) {
+    private static void convertCurrentDatePrayerTimesToDate(Context context) {
+
+        String pattern = "dd.MM.yyyy HH:mm";
+        SimpleDateFormat dateFormat = new SimpleDateFormat(pattern);
+
+        try {
+            currentDateImsak = dateFormat.parse(currentDayPrayerTimes.getMiladiTarihKisa() + " " + currentDayPrayerTimes.getImsak());
+            currentDateGunes = dateFormat.parse(currentDayPrayerTimes.getMiladiTarihKisa() + " " + currentDayPrayerTimes.getGunes());
+            currentDateOgle = dateFormat.parse(currentDayPrayerTimes.getMiladiTarihKisa() + " " + currentDayPrayerTimes.getOgle());
+            currentDateIkindi = dateFormat.parse(currentDayPrayerTimes.getMiladiTarihKisa() + " " + currentDayPrayerTimes.getIkindi());
+            currentDateAksam = dateFormat.parse(currentDayPrayerTimes.getMiladiTarihKisa() + " " + currentDayPrayerTimes.getAksam());
+            currentDateYatsi = dateFormat.parse(currentDayPrayerTimes.getMiladiTarihKisa() + " " + currentDayPrayerTimes.getYatsi());
+
+            long miliseconds;
+            Calendar calendar = Calendar.getInstance();
+
+            //Vakit onceleri
+            miliseconds = currentDateImsak.getTime() - Config.timeBeforeImsak * 60 * 1000;
+            calendar.setTimeInMillis(miliseconds);
+            currentDateBeforeImsak = calendar.getTime();
+
+
+            miliseconds = currentDateGunes.getTime() - Config.timeBeforeGunes * 60 * 1000;
+            calendar.setTimeInMillis(miliseconds);
+            currentDateBeforeGunes = calendar.getTime();
+
+            miliseconds = currentDateOgle.getTime() - Config.timeBeforeOgle * 60 * 1000;
+            calendar.setTimeInMillis(miliseconds);
+            currentDateBeforeOgle = calendar.getTime();
+
+            miliseconds = currentDateIkindi.getTime() - Config.timeBeforeIkindi * 60 * 1000;
+            calendar.setTimeInMillis(miliseconds);
+            currentDateBeforeOgle = calendar.getTime();
+
+            miliseconds = currentDateAksam.getTime() - Config.timeBeforeAksam * 60 * 1000;
+            calendar.setTimeInMillis(miliseconds);
+            currentDateBeforeAksam = calendar.getTime();
+
+            miliseconds = currentDateYatsi.getTime() - Config.timeBeforeYatsi * 60 * 1000;
+            calendar.setTimeInMillis(miliseconds);
+            currentDateBeforeYatsi = calendar.getTime();
+
+        } catch (ParseException e) {
+            Log.e("parseError", e.toString());
+        }
+
+    }
+
+    private static void convertNextDatePrayerTimesToDate(Context context) {
+        String pattern = "dd.MM.yyyy HH:mm";
+        SimpleDateFormat dateFormat = new SimpleDateFormat(pattern);
+
+        try {
+            nextDateImsak = dateFormat.parse(nextDayPrayerTimes.getMiladiTarihKisa() + " " + nextDayPrayerTimes.getImsak());
+            nextDateGunes = dateFormat.parse(nextDayPrayerTimes.getMiladiTarihKisa() + " " + nextDayPrayerTimes.getGunes());
+            nextDateOgle = dateFormat.parse(nextDayPrayerTimes.getMiladiTarihKisa() + " " + nextDayPrayerTimes.getOgle());
+            nextDateIkindi = dateFormat.parse(nextDayPrayerTimes.getMiladiTarihKisa() + " " + nextDayPrayerTimes.getIkindi());
+            nextDateAksam = dateFormat.parse(nextDayPrayerTimes.getMiladiTarihKisa() + " " + nextDayPrayerTimes.getAksam());
+            nextDateYatsi = dateFormat.parse(nextDayPrayerTimes.getMiladiTarihKisa() + " " + nextDayPrayerTimes.getYatsi());
+
+            long miliseconds;
+            Calendar calendar = Calendar.getInstance();
+
+            //Vakit onceleri
+            miliseconds = nextDateImsak.getTime() - Config.timeBeforeImsak * 60 * 1000;
+            calendar.setTimeInMillis(miliseconds);
+            nextDateBeforeImsak = calendar.getTime();
+
+
+            miliseconds = nextDateGunes.getTime() - Config.timeBeforeGunes * 60 * 1000;
+            calendar.setTimeInMillis(miliseconds);
+            nextDateBeforeGunes = calendar.getTime();
+
+            miliseconds = nextDateOgle.getTime() - Config.timeBeforeOgle * 60 * 1000;
+            calendar.setTimeInMillis(miliseconds);
+            nextDateBeforeOgle = calendar.getTime();
+
+            miliseconds = nextDateIkindi.getTime() - Config.timeBeforeIkindi * 60 * 1000;
+            calendar.setTimeInMillis(miliseconds);
+            nextDateBeforeOgle = calendar.getTime();
+
+            miliseconds = nextDateAksam.getTime() - Config.timeBeforeAksam * 60 * 1000;
+            calendar.setTimeInMillis(miliseconds);
+            nextDateBeforeAksam = calendar.getTime();
+
+            miliseconds = nextDateYatsi.getTime() - Config.timeBeforeYatsi * 60 * 1000;
+            calendar.setTimeInMillis(miliseconds);
+            nextDateBeforeYatsi = calendar.getTime();
+
+        } catch (ParseException e) {
+            Log.e("parseError", e.toString());
+        }
+
+    }
+
+    private static void adjustNotificationTimes(Context context) {
+
+        int target = 0;
+        long nextNotifTimeInMillis = 0;
+        Date currentDate = Calendar.getInstance().getTime();
+
+
+        //imsak öncesi
+        if (Config.notifBeforeImsak) {
+            if (currentDate.compareTo(currentDateBeforeImsak) <= 0) {
+                nextNotifTimeInMillis = currentDateBeforeImsak.getTime();
+            } else {
+                nextNotifTimeInMillis = nextDateBeforeImsak.getTime();
+            }
+            target = PRAYER_TIME_BEFORE_IMSAK;
+            mapNotification(context, target, nextNotifTimeInMillis);
+        }
+
+        //imsak zamanı
+        if (Config.notifExactImsak) {
+            if (currentDate.compareTo(currentDateImsak) <= 0) {
+                nextNotifTimeInMillis = currentDateImsak.getTime();
+            } else {
+                nextNotifTimeInMillis = nextDateImsak.getTime();
+            }
+            target = PRAYER_TIME_IMSAK;
+            mapNotification(context, target, nextNotifTimeInMillis);
+        }
+
+        //güneş öncesi
+        if (Config.notifBeforeGunes) {
+            if (currentDate.compareTo(currentDateBeforeGunes) <= 0) {
+                nextNotifTimeInMillis = currentDateBeforeGunes.getTime();
+            } else {
+                nextNotifTimeInMillis = nextDateBeforeGunes.getTime();
+            }
+            target = PRAYER_TIME_BEFORE_GUNES;
+            mapNotification(context, target, nextNotifTimeInMillis);
+        }
+
+        //güneş zamanı
+        if (Config.notifExactGunes) {
+            if (currentDate.compareTo(currentDateGunes) <= 0) {
+                nextNotifTimeInMillis = currentDateGunes.getTime();
+            } else {
+                nextNotifTimeInMillis = nextDateGunes.getTime();
+            }
+            target = PRAYER_TIME_GUNES;
+            mapNotification(context, target, nextNotifTimeInMillis);
+        }
+
+        //öğle öncesi
+        if (Config.notifBeforeOgle) {
+            if (currentDate.compareTo(currentDateBeforeOgle) <= 0) {
+                nextNotifTimeInMillis = currentDateBeforeOgle.getTime();
+            } else {
+                nextNotifTimeInMillis = nextDateBeforeOgle.getTime();
+            }
+            target = PRAYER_TIME_BEFORE_OGLE;
+            mapNotification(context, target, nextNotifTimeInMillis);
+        }
+
+        //öğle zamanı
+        if (Config.notifExactOgle) {
+            if (currentDate.compareTo(currentDateOgle) <= 0) {
+                nextNotifTimeInMillis = currentDateOgle.getTime();
+            } else {
+                nextNotifTimeInMillis = nextDateOgle.getTime();
+            }
+            target = PRAYER_TIME_OGLE;
+            mapNotification(context, target, nextNotifTimeInMillis);
+        }
+
+        //ikindi öncesi
+        if (Config.notifBeforeIkindi) {
+            if (currentDate.compareTo(currentDateBeforeIkindi) <= 0) {
+                nextNotifTimeInMillis = currentDateBeforeIkindi.getTime();
+            } else {
+                nextNotifTimeInMillis = nextDateBeforeIkindi.getTime();
+            }
+            target = PRAYER_TIME_BEFORE_IKINDI;
+            mapNotification(context, target, nextNotifTimeInMillis);
+        }
+
+        //ikindi zamanı
+        if (Config.notifExactIkindi) {
+            if (currentDate.compareTo(currentDateIkindi) <= 0) {
+                nextNotifTimeInMillis = currentDateIkindi.getTime();
+            } else {
+                nextNotifTimeInMillis = nextDateIkindi.getTime();
+            }
+            target = PRAYER_TIME_IKINDI;
+            mapNotification(context, target, nextNotifTimeInMillis);
+        }
+
+        //akşam öncesi
+        if (Config.notifBeforeAksam) {
+            if (currentDate.compareTo(currentDateBeforeAksam) <= 0) {
+                nextNotifTimeInMillis = currentDateBeforeAksam.getTime();
+            } else {
+                nextNotifTimeInMillis = nextDateBeforeAksam.getTime();
+            }
+            target = PRAYER_TIME_BEFORE_AKSAM;
+            mapNotification(context, target, nextNotifTimeInMillis);
+        }
+
+        //akşam zamanı
+        if (Config.notifExactAksam) {
+            if (currentDate.compareTo(currentDateAksam) <= 0) {
+                nextNotifTimeInMillis = currentDateAksam.getTime();
+            } else {
+                nextNotifTimeInMillis = nextDateAksam.getTime();
+            }
+            target = PRAYER_TIME_AKSAM;
+            mapNotification(context, target, nextNotifTimeInMillis);
+        }
+
+        //yatsı öncesi
+        if (Config.notifBeforeYatsi) {
+            if (currentDate.compareTo(currentDateBeforeYatsi) <= 0) {
+                nextNotifTimeInMillis = currentDateBeforeYatsi.getTime();
+            } else {
+                nextNotifTimeInMillis = nextDateBeforeYatsi.getTime();
+            }
+            target = PRAYER_TIME_BEFORE_YATSI;
+            mapNotification(context, target, nextNotifTimeInMillis);
+        }
+
+        //yatsı zamanı
+        if (Config.notifExactYatsi) {
+            if (currentDate.compareTo(currentDateYatsi) <= 0) {
+                nextNotifTimeInMillis = currentDateYatsi.getTime();
+            } else {
+                nextNotifTimeInMillis = nextDateYatsi.getTime();
+            }
+            target = PRAYER_TIME_YATSI;
+            mapNotification(context, target, nextNotifTimeInMillis);
+        }
+
+
+    }
+
+    private static void mapNotification(Context context, int target, long nextNotifTimeInMillis) {
+
+        String key = getKeyFromTarget(context, target);
+        List<Integer> notifList = getNotifList(context, key);
+
+        if (notifList.size() == 0) {
+            createNotif(context, key, nextNotifTimeInMillis);
+        } else if (notifList.size() == 1) {
+            updateNotif(context, notifList.get(0), nextNotifTimeInMillis, key);
+        } else {
+            deleteAll(context, notifList);
+            createNotif(context, key, nextNotifTimeInMillis);
+        }
+
+    }
+
+    private static List<Integer> getNotifList(Context context, String key) {
+
+        try {
+            NotificationManager mNotificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+            Notification.NotificationDBHelper mDbHelper = new Notification.NotificationDBHelper(context);
+            SQLiteDatabase db = mDbHelper.getWritableDatabase();
+
+            Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE custom_id = ? ", new String[]{key});
+
+            List<Integer> myList = new ArrayList<>();
+            if (cursor.moveToFirst()) {
+                while (!cursor.isAfterLast()) {
+                    int id = cursor.getInt(cursor.getColumnIndex(Notification.NotificationEntry._ID));
+                    myList.add(id);
+                    cursor.moveToNext();
+                }
+            }
+            cursor.close();
+            db.close();
+
+            return myList;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
+    private static String getKeyFromTarget(Context context, int target) {
+
+        if (target == PRAYER_TIME_IMSAK) {
+            Resources resources = context.getResources();
+            content = resources.getStringArray(R.array.prayerTimes)[0] + " " + resources.getString(R.string.time);
+            return key_prayerTimeImsak;
+        } else if (target == PRAYER_TIME_GUNES) {
+            Resources resources = context.getResources();
+            content = resources.getStringArray(R.array.prayerTimes)[1] + " " + resources.getString(R.string.time);
+            return key_prayerTimeGunes;
+        } else if (target == PRAYER_TIME_OGLE) {
+            Resources resources = context.getResources();
+            content = resources.getStringArray(R.array.prayerTimes)[2] + " " + resources.getString(R.string.time);
+            return key_prayerTimeOgle;
+        } else if (target == PRAYER_TIME_IKINDI) {
+            Resources resources = context.getResources();
+            content = resources.getStringArray(R.array.prayerTimes)[3] + " " + resources.getString(R.string.time);
+            return key_prayerTimeIkindi;
+        } else if (target == PRAYER_TIME_AKSAM) {
+            Resources resources = context.getResources();
+            content = resources.getStringArray(R.array.prayerTimes)[4] + " " + resources.getString(R.string.time);
+            return key_prayerTimeAksam;
+        } else if (target == PRAYER_TIME_YATSI) {
+            Resources resources = context.getResources();
+            content = resources.getStringArray(R.array.prayerTimes)[5] + " " + resources.getString(R.string.time);
+            return key_prayerTimeYatsi;
+        } else if (target == PRAYER_TIME_BEFORE_IMSAK) {
+            Resources resources = context.getResources();
+            content = resources.getStringArray(R.array.prayerTimes)[0] + " " + resources.getString(R.string.time)
+                    + " - " + Config.timeBeforeImsak + " " + resources.getString(R.string.minutesRemain);
+            return key_prayerTimeBeforeImsak;
+        } else if (target == PRAYER_TIME_BEFORE_GUNES) {
+            Resources resources = context.getResources();
+            content = resources.getStringArray(R.array.prayerTimes)[1] + " " + resources.getString(R.string.time)
+                    + " - " + Config.timeBeforeGunes + " " + resources.getString(R.string.minutesRemain);
+            return key_prayerTimeBeforeGunes;
+        } else if (target == PRAYER_TIME_BEFORE_OGLE) {
+            Resources resources = context.getResources();
+            content = resources.getStringArray(R.array.prayerTimes)[2] + " " + resources.getString(R.string.time)
+                    + " - " + Config.timeBeforeOgle + " " + resources.getString(R.string.minutesRemain);
+            return key_prayerTimeBeforeOgle;
+        } else if (target == PRAYER_TIME_BEFORE_IKINDI) {
+            Resources resources = context.getResources();
+            content = resources.getStringArray(R.array.prayerTimes)[3] + " " + resources.getString(R.string.time)
+                    + " - " + Config.timeBeforeIkindi + " " + resources.getString(R.string.minutesRemain);
+            return key_prayerTimeBeforeIkindi;
+        } else if (target == PRAYER_TIME_BEFORE_AKSAM) {
+            Resources resources = context.getResources();
+            content = resources.getStringArray(R.array.prayerTimes)[4] + " " + resources.getString(R.string.time)
+                    + " - " + Config.timeBeforeAksam + " " + resources.getString(R.string.minutesRemain);
+            return key_prayerTimeBeforeAksam;
+        } else if (target == PRAYER_TIME_BEFORE_YATSI) {
+            Resources resources = context.getResources();
+            content = resources.getStringArray(R.array.prayerTimes)[5] + " " + resources.getString(R.string.time)
+                    + " - " + Config.timeBeforeYatsi + " " + resources.getString(R.string.minutesRemain);
+            return key_prayerTimeBeforeYatsi;
+        } else {
+            return "undefined";
+        }
+
+    }
+
+    /**********************************************************/
+    private static void createNotif(Context context, String key, long nextNotifTimeInMillis) {
 
         Calendar now = Calendar.getInstance();
-        now.setTimeInMillis(Config.notifTime);
+        now.setTimeInMillis(nextNotifTimeInMillis);
+        String title = context.getResources().getString(R.string.remainder);
+        String actionDismiss = context.getResources().getString(R.string.dismiss);
+        String actionDisplay = context.getResources().getString(R.string.display);
 
-        NotifyMe.setNotif(context, Config.notifTime);
-        Log.i("notifTime", String.valueOf(now));
+        Log.i("TAKIP_OPERATION", "CREATE_NOTIF");
+        Log.i("TAKIP_KEY", key);
+        Log.i("TAKIP_NOTIFTARIHI", now.toString());
+
+        Intent intent = new Intent(context, MainActivity.class);
+        intent.putExtra("test", "I am a String");
+        NotifyMe notifyMe = new NotifyMe.Builder(context)
+                .title(title)
+                .content(content)
+                .color(255, 0, 0, 255)
+                .led_color(255, 255, 255, 255)
+                .time(now)
+                .key(key)
+                .addAction(intent,actionDisplay,true,false)
+                .addAction(new Intent(), actionDismiss, false, false)
+                .large_icon(R.mipmap.app_icon)
+                .build();
+
+    }
+
+
+    private static void updateNotif(Context context, Integer notificationId, long nextNotifTimeInMillis, String key) {
+
+        Notification.NotificationDBHelper mDbHelper = new Notification.NotificationDBHelper(context);
+        SQLiteDatabase db = mDbHelper.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(NOTIFICATION_TIME, nextNotifTimeInMillis);
+        values.put(NOTIFICATION_CONTENT_TEXT, content);
+        db.update(TABLE_NAME, values, Notification.NotificationEntry._ID + " = " + notificationId, null);
+        db.close();
+
+        Calendar now = Calendar.getInstance();
+        now.setTimeInMillis(nextNotifTimeInMillis);
+
+        Log.i("TAKIP_OPERATION", "UPDATE_NOTIF");
+        Log.i("TAKIP_KEY", key);
+        Log.i("TAKIP_NOTIFTARIHI", now.toString());
+
+        scheduleNotification(context, String.valueOf(notificationId), now.getTimeInMillis());
+    }
+
+
+    private static void deleteAll(Context context, List<Integer> notifList) {
+
+        try {
+            NotificationManager mNotificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+            Notification.NotificationDBHelper mDbHelper = new Notification.NotificationDBHelper(context);
+            SQLiteDatabase db = mDbHelper.getWritableDatabase();
+
+            for (int i = 0; i < notifList.size(); i++) {
+                int id = notifList.get(i);
+                db.delete(TABLE_NAME, Notification.NotificationEntry._ID + " = " + id, null);
+                mNotificationManager.cancel(id);
+            }
+
+            db.close();
+            Log.i("deleteAll", "ok");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static void deleteAll(Context context) {
+
+        try {
+
+            NotificationManager mNotificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+            Notification.NotificationDBHelper mDbHelper = new Notification.NotificationDBHelper(context);
+            SQLiteDatabase db = mDbHelper.getWritableDatabase();
+            Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE 1=1", null);
+
+            while (cursor.moveToNext()) {
+                int id = cursor.getInt(cursor.getColumnIndex(Notification.NotificationEntry._ID));
+                db.delete(TABLE_NAME, Notification.NotificationEntry._ID + " = " + id, null);
+                mNotificationManager.cancel(id);
+            }
+
+            cursor.close();
+            db.close();
+            Log.i("deleteAll", "ok");
+        } catch (Exception e) {
+            e.printStackTrace();
+            Log.e("deleteAll-Error", e.toString());
+        }
+    }
+
+    /**********************************************************/
+
+    public static int getSound(Context context, String key) {
+        Config config = new Config();
+        config.load(context);
+
+        int soundId;
+
+        if (key.equals(key_prayerTimeBeforeImsak)) {
+            soundId = Config.melodyBeforeImsak;
+        } else if (key.equals(key_prayerTimeImsak)) {
+            soundId = Config.melodyImsak;
+        } else if (key.equals(key_prayerTimeBeforeGunes)) {
+            soundId = Config.melodyBeforeGunes;
+        } else if (key.equals(key_prayerTimeGunes)) {
+            soundId = Config.melodyGunes;
+        } else if (key.equals(key_prayerTimeBeforeOgle)) {
+            soundId = Config.melodyBeforeOgle;
+        } else if (key.equals(key_prayerTimeOgle)) {
+            soundId = Config.melodyOgle;
+        } else if (key.equals(key_prayerTimeBeforeIkindi)) {
+            soundId = Config.melodyBeforeIkindi;
+        } else if (key.equals(key_prayerTimeIkindi)) {
+            soundId = Config.melodyIkindi;
+        } else if (key.equals(key_prayerTimeBeforeAksam)) {
+            soundId = Config.melodyBeforeAksam;
+        } else if (key.equals(key_prayerTimeAksam)) {
+            soundId = Config.melodyAksam;
+        } else if (key.equals(key_prayerTimeBeforeYatsi)) {
+            soundId = Config.melodyBeforeYatsi;
+        } else if (key.equals(key_prayerTimeYatsi)) {
+            soundId = Config.melodyBeforeYatsi;
+        } else {
+            soundId = 0;
+        }
+
+        return soundId;
+    }
+
+    public static int getRawItem(int soundId) {
+
+        final int[] rawID =
+                {0,
+                        R.raw.notif_nice_ringtone,
+                        R.raw.notif_bird_chirping,
+                        R.raw.notif_beatiful_islam,
+                        R.raw.notif_islam,
+                        R.raw.notif_al_habib_almostafa,
+                        R.raw.notif_allahu_allahu,
+                        R.raw.notif_ayat_al_kursi,
+                        R.raw.notif_bismillah,
+                        R.raw.notif_bismillah_2,
+                        R.raw.notif_bismillahillezi,
+                        R.raw.notif_ezan1,
+                        R.raw.notif_ezan2,
+                        R.raw.notif_ezan3,
+                        R.raw.notif_fajar_alarm,
+                        R.raw.notif_haj_labbaik,
+                        R.raw.notif_99_names_of_allah_1,
+                        R.raw.notif_quran
+                };
+
+        return rawID[soundId];
 
     }
 

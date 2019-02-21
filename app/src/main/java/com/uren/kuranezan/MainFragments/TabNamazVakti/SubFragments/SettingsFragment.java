@@ -1,64 +1,34 @@
 package com.uren.kuranezan.MainFragments.TabNamazVakti.SubFragments;
 
-import android.app.AlarmManager;
-import android.app.Dialog;
-import android.app.PendingIntent;
-import android.content.ComponentName;
-import android.content.Context;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
-import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.StrictMode;
-import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
-import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
+
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ProgressBar;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
-import android.widget.ScrollView;
-import android.widget.SeekBar;
 import android.widget.TextView;
 
-import com.google.android.gms.ads.AdView;
-import com.google.android.gms.ads.MobileAds;
-import com.uren.kuranezan.Interfaces.OnEventListener;
 import com.uren.kuranezan.MainFragments.BaseFragment;
-import com.uren.kuranezan.MainFragments.TabKuran.JavaClasses.AsyncLangProcess;
-import com.uren.kuranezan.MainFragments.TabKuran.JavaClasses.OptionsHelper;
-import com.uren.kuranezan.MainFragments.TabNamazVakti.AlarmManagement.DeviceBootReceiver;
-import com.uren.kuranezan.MainFragments.TabNamazVakti.AlarmManagement.NotificationReceiver;
-import com.uren.kuranezan.Models.QuranModels.Quran;
-import com.uren.kuranezan.Models.TranslationModels.Data;
-import com.uren.kuranezan.Models.TranslationModels.Translations;
 import com.uren.kuranezan.R;
-import com.uren.kuranezan.Singleton.QuranTranslation;
-import com.uren.kuranezan.Singleton.TranslationList;
-import com.uren.kuranezan.Utils.AdMobUtil.AdMobUtils;
 import com.uren.kuranezan.Utils.Config;
 
-import java.util.Calendar;
-import java.util.Date;
-import java.util.HashMap;
 
-import butterknife.BindArray;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+
+import static com.uren.kuranezan.Constants.NumericConstants.PRAYER_TIME_AKSAM;
+import static com.uren.kuranezan.Constants.NumericConstants.PRAYER_TIME_GUNES;
+import static com.uren.kuranezan.Constants.NumericConstants.PRAYER_TIME_IKINDI;
+import static com.uren.kuranezan.Constants.NumericConstants.PRAYER_TIME_IMSAK;
+import static com.uren.kuranezan.Constants.NumericConstants.PRAYER_TIME_OGLE;
+import static com.uren.kuranezan.Constants.NumericConstants.PRAYER_TIME_YATSI;
 
 public class SettingsFragment extends BaseFragment
         implements View.OnClickListener {
 
     View mView;
-    private int numberOfCallback;
 
     @BindView(R.id.txtToolbarTitle)
     TextView txtToolbarTitle;
@@ -67,8 +37,32 @@ public class SettingsFragment extends BaseFragment
     //@BindView(R.id.adView)
     //AdView adView;
 
-    @BindView(R.id.btnNotif)
-    Button btnNotif;
+    @BindView(R.id.llImsak)
+    LinearLayout llImsak;
+    @BindView(R.id.llGunes)
+    LinearLayout llGunes;
+    @BindView(R.id.llOgle)
+    LinearLayout llOgle;
+    @BindView(R.id.llIkindi)
+    LinearLayout llIkindi;
+    @BindView(R.id.llAksam)
+    LinearLayout llAksam;
+    @BindView(R.id.llYatsi)
+    LinearLayout llYatsi;
+
+    @BindView(R.id.txtImsakNotifDetail)
+    TextView txtImsakNotifDetail;
+    @BindView(R.id.txtGunesNotifDetail)
+    TextView txtGunesNotifDetail;
+    @BindView(R.id.txtOgleNotifDetail)
+    TextView txtOgleNotifDetail;
+    @BindView(R.id.txtIkindiNotifDetail)
+    TextView txtIkindiNotifDetail;
+    @BindView(R.id.txtAksamNotifDetail)
+    TextView txtAksamNotifDetail;
+    @BindView(R.id.txtYatsiNotifDetail)
+    TextView txtYatsiNotifDetail;
+
 
     public static SettingsFragment newInstance() {
         Bundle args = new Bundle();
@@ -109,15 +103,96 @@ public class SettingsFragment extends BaseFragment
         return mView;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        setUI();
+    }
+
     private void getItemsFromBundle() {
         Bundle args = getArguments();
         if (args != null) {
-            numberOfCallback = (Integer) args.getInt(ARGS_INSTANCE);
+
         }
     }
 
     private void setToolbar() {
         txtToolbarTitle.setText(getString(R.string.options));
+    }
+
+    private void setUI() {
+
+        txtImsakNotifDetail.setText(setNotifInfo(PRAYER_TIME_IMSAK));
+        txtGunesNotifDetail.setText(setNotifInfo(PRAYER_TIME_GUNES));
+        txtOgleNotifDetail.setText(setNotifInfo(PRAYER_TIME_OGLE));
+        txtIkindiNotifDetail.setText(setNotifInfo(PRAYER_TIME_IKINDI));
+        txtAksamNotifDetail.setText(setNotifInfo(PRAYER_TIME_AKSAM));
+        txtYatsiNotifDetail.setText(setNotifInfo(PRAYER_TIME_YATSI));
+
+
+    }
+
+    private String setNotifInfo(int request) {
+
+        String val1 = getString(R.string.disabled);
+        String val2 = getString(R.string.disabled);
+
+        if (request == PRAYER_TIME_IMSAK) {
+            if (Config.notifBeforeImsak) {
+                val1 = String.valueOf(Config.timeBeforeImsak) + " " + getString(R.string.minutes);
+            }
+            if (Config.notifExactImsak) {
+                val2 = getString(R.string.enabled);
+            }
+        }
+
+        if (request == PRAYER_TIME_GUNES) {
+            if (Config.notifBeforeGunes) {
+                val1 = String.valueOf(Config.timeBeforeAksam) + " " + getString(R.string.minutes);
+            }
+            if (Config.notifExactGunes) {
+                val2 = getString(R.string.enabled);
+            }
+        }
+
+        if (request == PRAYER_TIME_OGLE) {
+            if (Config.notifBeforeOgle) {
+                val1 = String.valueOf(Config.timeBeforeOgle) + " " + getString(R.string.minutes);
+            }
+            if (Config.notifExactOgle) {
+                val2 = getString(R.string.enabled);
+            }
+        }
+
+        if (request == PRAYER_TIME_IKINDI) {
+            if (Config.notifBeforeIkindi) {
+                val1 = String.valueOf(Config.timeBeforeIkindi) + " " + getString(R.string.minutes);
+            }
+            if (Config.notifExactIkindi) {
+                val2 = getString(R.string.enabled);
+            }
+        }
+
+        if (request == PRAYER_TIME_AKSAM) {
+            if (Config.notifBeforeAksam) {
+                val1 = String.valueOf(Config.timeBeforeAksam) + " " + getString(R.string.minutes);
+            }
+            if (Config.notifExactAksam) {
+                val2 = getString(R.string.enabled);
+            }
+        }
+
+        if (request == PRAYER_TIME_YATSI) {
+            if (Config.notifBeforeYatsi) {
+                val1 = String.valueOf(Config.timeBeforeYatsi) + " " + getString(R.string.minutes);
+            }
+            if (Config.notifExactYatsi) {
+                val2 = getString(R.string.enabled);
+            }
+        }
+
+        return getString(R.string.before) + " " + val1 + " " + getString(R.string.seperator) + " " + getString(R.string.exactime) + " " + val2;
+
     }
 
     private void init() {
@@ -126,8 +201,13 @@ public class SettingsFragment extends BaseFragment
         //AdMobUtils.loadInterstitialAd(getContext());
         imgBack.setVisibility(View.VISIBLE);
         imgBack.setOnClickListener(this);
-        btnNotif.setOnClickListener(this);
 
+        llImsak.setOnClickListener(this);
+        llGunes.setOnClickListener(this);
+        llOgle.setOnClickListener(this);
+        llIkindi.setOnClickListener(this);
+        llAksam.setOnClickListener(this);
+        llYatsi.setOnClickListener(this);
 
     }
 
@@ -138,59 +218,34 @@ public class SettingsFragment extends BaseFragment
             getActivity().onBackPressed();
         }
 
-        if (view == btnNotif) {
-            notifEnabledClicked();
+        if (view == llImsak) {
+            int prayerTime = PRAYER_TIME_IMSAK;
+            mFragmentNavigation.pushFragment(NotifDetailFragment.newInstance(prayerTime));
         }
 
-    }
+        if (view == llGunes) {
+            int prayerTime = PRAYER_TIME_GUNES;
+            mFragmentNavigation.pushFragment(NotifDetailFragment.newInstance(prayerTime));
+        }
 
-    private void notifEnabledClicked() {
+        if (view == llOgle) {
+            int prayerTime = PRAYER_TIME_OGLE;
+            mFragmentNavigation.pushFragment(NotifDetailFragment.newInstance(prayerTime));
+        }
 
-        Boolean dailyNotify = true;
-        PackageManager pm = getContext().getPackageManager();
-        //ComponentName receiver = new ComponentName(getContext(), DeviceBootReceiver.class);
-        Intent alarmIntent = new Intent(getActivity(), NotificationReceiver.class);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(getActivity(), 0, alarmIntent, 0);
-        AlarmManager manager = (AlarmManager) getContext().getSystemService(Context.ALARM_SERVICE);
+        if (view == llIkindi) {
+            int prayerTime = PRAYER_TIME_IKINDI;
+            mFragmentNavigation.pushFragment(NotifDetailFragment.newInstance(prayerTime));
+        }
 
-// if user enabled daily notifications
-        if (dailyNotify) {
-            //region Enable Daily Notifications
-            Calendar calendar = Calendar.getInstance();
-            calendar.setTimeInMillis(Config.notifTime);
-/*
-            calendar.set(Calendar.HOUR_OF_DAY, calendar.get(Calendar.HOUR_OF_DAY));
-            calendar.set(Calendar.MINUTE, calendar.get(Calendar.MINUTE) +1);
-            calendar.set(Calendar.SECOND, calendar.get(Calendar.SECOND));
-*/
-            // if notification time is before selected time, send notification the next day
-            if (calendar.before(Calendar.getInstance())) {
-                calendar.add(Calendar.DATE, 1);
-            }
-            if (manager != null) {
-                manager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),
-                        0, pendingIntent);
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                    manager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
-                }
-            }
-            //To enable Boot Receiver class
-            /*
-            pm.setComponentEnabledSetting(receiver,
-                    PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
-                    PackageManager.DONT_KILL_APP);
-                    */
-            //endregion
-        } else { //Disable Daily Notifications
-            if (PendingIntent.getBroadcast(getActivity(), 0, alarmIntent, 0) != null && manager != null) {
-                manager.cancel(pendingIntent);
-                //Toast.makeText(this,"Notifications were disabled",Toast.LENGTH_SHORT).show();
-            }
-            /*
-            pm.setComponentEnabledSetting(receiver,
-                    PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
-                    PackageManager.DONT_KILL_APP);
-                    */
+        if (view == llAksam) {
+            int prayerTime = PRAYER_TIME_AKSAM;
+            mFragmentNavigation.pushFragment(NotifDetailFragment.newInstance(prayerTime));
+        }
+
+        if (view == llYatsi) {
+            int prayerTime = PRAYER_TIME_YATSI;
+            mFragmentNavigation.pushFragment(NotifDetailFragment.newInstance(prayerTime));
         }
 
     }

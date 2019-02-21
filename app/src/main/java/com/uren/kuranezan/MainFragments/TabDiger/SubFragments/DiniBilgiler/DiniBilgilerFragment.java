@@ -1,39 +1,22 @@
 package com.uren.kuranezan.MainFragments.TabDiger.SubFragments.DiniBilgiler;
 
 
-import android.graphics.Bitmap;
-import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
-import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.AnimationUtils;
-import android.widget.Button;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
-import android.widget.SeekBar;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
 import com.uren.kuranezan.MainFragments.BaseFragment;
-import com.uren.kuranezan.MainFragments.TabDiger.SubFragments.CumaMesajlari.CumaMesajiPhotoFragment;
-import com.uren.kuranezan.MainFragments.TabDiger.SubFragments.CumaMesajlari.CumaMesajlariContent;
-import com.uren.kuranezan.MainFragments.TabDiger.SubFragments.CumaMesajlariFragment;
 import com.uren.kuranezan.R;
 import com.uren.kuranezan.Utils.AdMobUtil.AdMobUtils;
-import com.uren.kuranezan.Utils.BitmapConversion;
-import com.uren.kuranezan.Utils.ShapeUtil;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-
-import static com.uren.kuranezan.Constants.StringConstants.file_ibadet_nedir;
 
 public class DiniBilgilerFragment extends BaseFragment
         implements View.OnClickListener {
@@ -229,7 +212,7 @@ public class DiniBilgilerFragment extends BaseFragment
 
         if (view == llislam) {
             startBilgiContentFragment(getResources().getString(R.string.ISLAM_NEDIR),
-                    R.raw.islam);
+                    R.raw.notif_islam);
         }
 
         if (view == llNamaz) {

@@ -124,6 +124,32 @@
     <string name="imsakiye">Full List</string>
     <string name="selectLocation">Choose Location</string>
     <string name="alarm">Alarm</string>
+    <string name="timeNotifications">Prayer Time Notifications</string>
+    <string name="imsakNotifSettings">Fajr Notifications</string>
+    <string name="gunesNotifSettings">Sunrise Notifications</string>
+    <string name="ogleNotifSettings">Dhuhr Notifications</string>
+    <string name="ikindiNotifSettings">Asr Notifications</string>
+    <string name="aksamNotifSettings">Maghrib Notifications</string>
+    <string name="yatsiNotifSettings">Isha Notifications</string>
+    <string name="before">Before:</string>
+    <string name="exactime">At time:</string>
+    <string name="seperator">---</string>
+    <string name="enabled">Enabled</string>
+    <string name="disabled">Disabled</string>
+
+    <string name="notifSituation">Situation</string>
+    <string name="notifTime">Notification Time</string>
+    <string name="notifMelody">Notification Melody</string>
+    <string name="adjustNotificationDetail">Adjust Notification Detail</string>
+    <string name="headerTextBefore">Before Notification</string>
+    <string name="headerTextExact">Exact Notification</string>
+    <string name="minutes">minutes</string>
+    <string name="time">time</string>
+    <string name="minutesRemain">minutes remain</string>
+    <string name="dismiss">Dismiss</string>
+    <string name="display">Display</string>
+    <string name="remainder">Remainder</string>
+
 
     <string-array name="prayerTimes">
         <item>Fajr</item>
@@ -149,6 +175,26 @@
         <item>December</item>
     </string-array>
 
+    <string-array name="sounds">
+        <item>Default</item>
+        <item>Melody 1</item>
+        <item>Bird Chirping</item>
+        <item>Beautiful Islam 1</item>
+        <item>Beautiful Islam 2</item>
+        <item>Al Habib</item>
+        <item>Allahu Allahu</item>
+        <item>Ayat Al Kursi</item>
+        <item>Bismillah 1</item>
+        <item>Bismillah 2</item>
+        <item>Bismillahillezi</item>
+        <item>Adhan 1</item>
+        <item>Adhan 2</item>
+        <item>Adhan 3</item>
+        <item>Fajr Alarm</item>
+        <item>Haj Labbaik</item>
+        <item>99 Names</item>
+        <item>Quran</item>
+    </string-array>
 
     <string-array name="arabic_font">
         <item>Amiri</item>
