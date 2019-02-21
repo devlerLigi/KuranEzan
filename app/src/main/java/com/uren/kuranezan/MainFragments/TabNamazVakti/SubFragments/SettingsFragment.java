@@ -1,20 +1,30 @@
 package com.uren.kuranezan.MainFragments.TabNamazVakti.SubFragments;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import android.view.ViewTreeObserver;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.Switch;
 import android.widget.TextView;
 
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
 import com.uren.kuranezan.MainFragments.BaseFragment;
+import com.uren.kuranezan.MainFragments.TabNamazVakti.Notify.NotifyMe;
 import com.uren.kuranezan.R;
+import com.uren.kuranezan.Utils.AdMobUtil.AdMobUtils;
 import com.uren.kuranezan.Utils.Config;
 
 
+import butterknife.BindDimen;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -34,8 +44,8 @@ public class SettingsFragment extends BaseFragment
     TextView txtToolbarTitle;
     @BindView(R.id.imgLeft)
     ImageView imgBack;
-    //@BindView(R.id.adView)
-    //AdView adView;
+    @BindView(R.id.adView)
+    AdView adView;
 
     @BindView(R.id.llImsak)
     LinearLayout llImsak;
@@ -62,6 +72,14 @@ public class SettingsFragment extends BaseFragment
     TextView txtAksamNotifDetail;
     @BindView(R.id.txtYatsiNotifDetail)
     TextView txtYatsiNotifDetail;
+
+    @BindView(R.id.txtNotifSituation)
+    TextView txtNotifSituation;
+    @BindView(R.id.switchNotificaitons)
+    Switch switchNotificaitons;
+
+    @BindView(R.id.llNotif)
+    LinearLayout llNotif;
 
 
     public static SettingsFragment newInstance() {
@@ -122,15 +140,66 @@ public class SettingsFragment extends BaseFragment
 
     private void setUI() {
 
-        txtImsakNotifDetail.setText(setNotifInfo(PRAYER_TIME_IMSAK));
-        txtGunesNotifDetail.setText(setNotifInfo(PRAYER_TIME_GUNES));
-        txtOgleNotifDetail.setText(setNotifInfo(PRAYER_TIME_OGLE));
-        txtIkindiNotifDetail.setText(setNotifInfo(PRAYER_TIME_IKINDI));
-        txtAksamNotifDetail.setText(setNotifInfo(PRAYER_TIME_AKSAM));
-        txtYatsiNotifDetail.setText(setNotifInfo(PRAYER_TIME_YATSI));
-
+        setNotifSituation();
+        setSwitchListener();
 
     }
+
+    private void setSwitchListener() {
+        switchNotificaitons.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                if (isChecked) {
+                    Config.notifEnabled = true;
+                    setNotifSituation();
+                } else {
+                    Config.notifEnabled = false;
+                    setNotifSituation();
+                }
+                Config.updateNotif(getContext());
+                NotifyMe.setNotifications(getContext());
+            }
+        });
+    }
+
+    private void setNotifSituation() {
+
+        if (Config.notifEnabled) {
+            switchNotificaitons.setChecked(true);
+            txtNotifSituation.setText(getString(R.string.enabled));
+            txtNotifSituation.setTextColor(getResources().getColor(R.color.style_color_accent));
+            llNotif.setBackgroundColor(getResources().getColor(R.color.style_color_accent));
+
+            txtImsakNotifDetail.setText(setNotifInfo(PRAYER_TIME_IMSAK));
+            txtGunesNotifDetail.setText(setNotifInfo(PRAYER_TIME_GUNES));
+            txtOgleNotifDetail.setText(setNotifInfo(PRAYER_TIME_OGLE));
+            txtIkindiNotifDetail.setText(setNotifInfo(PRAYER_TIME_IKINDI));
+            txtAksamNotifDetail.setText(setNotifInfo(PRAYER_TIME_AKSAM));
+            txtYatsiNotifDetail.setText(setNotifInfo(PRAYER_TIME_YATSI));
+
+        } else {
+            switchNotificaitons.setChecked(false);
+            txtNotifSituation.setText(getString(R.string.disabled));
+            txtNotifSituation.setTextColor(getResources().getColor(R.color.red));
+            llNotif.setBackgroundColor(getResources().getColor(R.color.red));
+
+            txtImsakNotifDetail.setText(setNotifInfo(-1));
+            txtGunesNotifDetail.setText(setNotifInfo(-1));
+            txtOgleNotifDetail.setText(setNotifInfo(-1));
+            txtIkindiNotifDetail.setText(setNotifInfo(-1));
+            txtAksamNotifDetail.setText(setNotifInfo(-1));
+            txtYatsiNotifDetail.setText(setNotifInfo(-1));
+        }
+
+        llImsak.setClickable(Config.notifEnabled);
+        llGunes.setClickable(Config.notifEnabled);
+        llOgle.setClickable(Config.notifEnabled);
+        llIkindi.setClickable(Config.notifEnabled);
+        llAksam.setClickable(Config.notifEnabled);
+        llYatsi.setClickable(Config.notifEnabled);
+
+    }
+
 
     private String setNotifInfo(int request) {
 
@@ -196,9 +265,9 @@ public class SettingsFragment extends BaseFragment
     }
 
     private void init() {
-        //MobileAds.initialize(getContext(), getActivity().getResources().getString(R.string.ADMOB_APP_ID));
-        //AdMobUtils.loadBannerAd(adView);
-        //AdMobUtils.loadInterstitialAd(getContext());
+        MobileAds.initialize(getContext(), getActivity().getResources().getString(R.string.ADMOB_APP_ID));
+        AdMobUtils.loadBannerAd(adView);
+        AdMobUtils.loadInterstitialAd(getContext());
         imgBack.setVisibility(View.VISIBLE);
         imgBack.setOnClickListener(this);
 

@@ -1,4 +1,4 @@
-package com.uren.kuranezan.MainFragments.TabNamazVakti.AlarmManagement.NotifyMe;
+package com.uren.kuranezan.MainFragments.TabNamazVakti.Notify;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -6,7 +6,7 @@ import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
-import static com.uren.kuranezan.MainFragments.TabNamazVakti.AlarmManagement.NotifyMe.Notification.NotificationEntry.TABLE_NAME;
+import static com.uren.kuranezan.MainFragments.TabNamazVakti.Notify.Notification.NotificationEntry.TABLE_NAME;
 
 public class DeletePendingIntent extends BroadcastReceiver {
 

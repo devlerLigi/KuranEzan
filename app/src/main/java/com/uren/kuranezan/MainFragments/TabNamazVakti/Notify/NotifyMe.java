@@ -1,4 +1,4 @@
-package com.uren.kuranezan.MainFragments.TabNamazVakti.AlarmManagement.NotifyMe;
+package com.uren.kuranezan.MainFragments.TabNamazVakti.Notify;
 
 import android.app.AlarmManager;
 import android.app.NotificationManager;
@@ -15,7 +15,6 @@ import android.util.Log;
 
 import com.uren.kuranezan.Interfaces.CompleteCallback;
 import com.uren.kuranezan.MainActivity;
-import com.uren.kuranezan.MainFragments.TabNamazVakti.AlarmManagement.RepeatingActivity;
 import com.uren.kuranezan.Models.PrayerTimeModels.PrayerTimes;
 import com.uren.kuranezan.R;
 import com.uren.kuranezan.Singleton.PrayerTimesList;
@@ -56,20 +55,20 @@ import static com.uren.kuranezan.Constants.StringConstants.key_prayerTimeIkindi;
 import static com.uren.kuranezan.Constants.StringConstants.key_prayerTimeImsak;
 import static com.uren.kuranezan.Constants.StringConstants.key_prayerTimeOgle;
 import static com.uren.kuranezan.Constants.StringConstants.key_prayerTimeYatsi;
-import static com.uren.kuranezan.MainFragments.TabNamazVakti.AlarmManagement.NotifyMe.Notification.NotificationEntry.NOTIFICATION_ACTIONS;
-import static com.uren.kuranezan.MainFragments.TabNamazVakti.AlarmManagement.NotifyMe.Notification.NotificationEntry.NOTIFICATION_ACTIONS_COLLAPSE;
-import static com.uren.kuranezan.MainFragments.TabNamazVakti.AlarmManagement.NotifyMe.Notification.NotificationEntry.NOTIFICATION_ACTIONS_DISMISS;
-import static com.uren.kuranezan.MainFragments.TabNamazVakti.AlarmManagement.NotifyMe.Notification.NotificationEntry.NOTIFICATION_ACTIONS_TEXT;
-import static com.uren.kuranezan.MainFragments.TabNamazVakti.AlarmManagement.NotifyMe.Notification.NotificationEntry.NOTIFICATION_COLOR;
-import static com.uren.kuranezan.MainFragments.TabNamazVakti.AlarmManagement.NotifyMe.Notification.NotificationEntry.NOTIFICATION_CONTENT_TEXT;
-import static com.uren.kuranezan.MainFragments.TabNamazVakti.AlarmManagement.NotifyMe.Notification.NotificationEntry.NOTIFICATION_CUSTOM_ID;
-import static com.uren.kuranezan.MainFragments.TabNamazVakti.AlarmManagement.NotifyMe.Notification.NotificationEntry.NOTIFICATION_LARGE_ICON;
-import static com.uren.kuranezan.MainFragments.TabNamazVakti.AlarmManagement.NotifyMe.Notification.NotificationEntry.NOTIFICATION_LED_COLOR;
-import static com.uren.kuranezan.MainFragments.TabNamazVakti.AlarmManagement.NotifyMe.Notification.NotificationEntry.NOTIFICATION_SMALL_ICON;
-import static com.uren.kuranezan.MainFragments.TabNamazVakti.AlarmManagement.NotifyMe.Notification.NotificationEntry.NOTIFICATION_TIME;
-import static com.uren.kuranezan.MainFragments.TabNamazVakti.AlarmManagement.NotifyMe.Notification.NotificationEntry.NOTIFICATION_TITLE_TEXT;
-import static com.uren.kuranezan.MainFragments.TabNamazVakti.AlarmManagement.NotifyMe.Notification.NotificationEntry.TABLE_NAME;
-import static com.uren.kuranezan.MainFragments.TabNamazVakti.AlarmManagement.NotifyMe.NotificationPublisher.NOTIFICATION_ID;
+import static com.uren.kuranezan.MainFragments.TabNamazVakti.Notify.Notification.NotificationEntry.NOTIFICATION_ACTIONS;
+import static com.uren.kuranezan.MainFragments.TabNamazVakti.Notify.Notification.NotificationEntry.NOTIFICATION_ACTIONS_COLLAPSE;
+import static com.uren.kuranezan.MainFragments.TabNamazVakti.Notify.Notification.NotificationEntry.NOTIFICATION_ACTIONS_DISMISS;
+import static com.uren.kuranezan.MainFragments.TabNamazVakti.Notify.Notification.NotificationEntry.NOTIFICATION_ACTIONS_TEXT;
+import static com.uren.kuranezan.MainFragments.TabNamazVakti.Notify.Notification.NotificationEntry.NOTIFICATION_COLOR;
+import static com.uren.kuranezan.MainFragments.TabNamazVakti.Notify.Notification.NotificationEntry.NOTIFICATION_CONTENT_TEXT;
+import static com.uren.kuranezan.MainFragments.TabNamazVakti.Notify.Notification.NotificationEntry.NOTIFICATION_CUSTOM_ID;
+import static com.uren.kuranezan.MainFragments.TabNamazVakti.Notify.Notification.NotificationEntry.NOTIFICATION_LARGE_ICON;
+import static com.uren.kuranezan.MainFragments.TabNamazVakti.Notify.Notification.NotificationEntry.NOTIFICATION_LED_COLOR;
+import static com.uren.kuranezan.MainFragments.TabNamazVakti.Notify.Notification.NotificationEntry.NOTIFICATION_SMALL_ICON;
+import static com.uren.kuranezan.MainFragments.TabNamazVakti.Notify.Notification.NotificationEntry.NOTIFICATION_TIME;
+import static com.uren.kuranezan.MainFragments.TabNamazVakti.Notify.Notification.NotificationEntry.NOTIFICATION_TITLE_TEXT;
+import static com.uren.kuranezan.MainFragments.TabNamazVakti.Notify.Notification.NotificationEntry.TABLE_NAME;
+import static com.uren.kuranezan.MainFragments.TabNamazVakti.Notify.NotificationPublisher.NOTIFICATION_ID;
 
 /**
  * Created by jbonk on 6/16/2018.
@@ -355,9 +354,10 @@ public class NotifyMe {
         Config config = new Config();
         config.load(context);
 
-        if (Config.notifBeforeImsak || Config.notifExactImsak || Config.notifBeforeGunes || Config.notifExactGunes ||
-                Config.notifBeforeOgle || Config.notifExactOgle || Config.notifBeforeIkindi || Config.notifExactIkindi ||
-                Config.notifBeforeAksam || Config.notifExactAksam || Config.notifBeforeYatsi || Config.notifExactYatsi) {
+        if (Config.notifEnabled &&
+                (Config.notifBeforeImsak || Config.notifExactImsak || Config.notifBeforeGunes || Config.notifExactGunes ||
+                        Config.notifBeforeOgle || Config.notifExactOgle || Config.notifBeforeIkindi || Config.notifExactIkindi ||
+                        Config.notifBeforeAksam || Config.notifExactAksam || Config.notifBeforeYatsi || Config.notifExactYatsi)) {
             Log.i("notifSituation", "open");
             if (!Config.countyCode.equals("")) {
                 getPrayerTimesFromLocal(context);
@@ -858,7 +858,9 @@ public class NotifyMe {
         Log.i("TAKIP_NOTIFTARIHI", now.toString());
 
         Intent intent = new Intent(context, MainActivity.class);
-        intent.putExtra("test", "I am a String");
+        intent.putExtra("Extra", "Ezan Kuran");
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         NotifyMe notifyMe = new NotifyMe.Builder(context)
                 .title(title)
                 .content(content)
@@ -866,8 +868,8 @@ public class NotifyMe {
                 .led_color(255, 255, 255, 255)
                 .time(now)
                 .key(key)
-                .addAction(intent,actionDisplay,true,false)
-                .addAction(new Intent(), actionDismiss, false, false)
+                .addAction(new Intent(), actionDismiss, true, false)
+                .addAction(intent, actionDisplay)
                 .large_icon(R.mipmap.app_icon)
                 .build();
 
@@ -1002,6 +1004,37 @@ public class NotifyMe {
                 };
 
         return rawID[soundId];
+
+    }
+
+    public static void setDummyNotif(Context context) {
+
+        Calendar now = Calendar.getInstance();
+        now.add(Calendar.MINUTE, 1);
+
+        String title = context.getResources().getString(R.string.remainder);
+        String actionDismiss = context.getResources().getString(R.string.dismiss);
+        String actionDisplay = context.getResources().getString(R.string.display);
+
+        Log.i("dummyNotif", "ok");
+
+        Intent intent = new Intent(context, MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.putExtra("test", "I am a String");
+        NotifyMe notifyMe = new NotifyMe.Builder(context)
+                .title(title)
+                .content("Dummy Notif")
+                .color(255, 0, 0, 255)
+                .led_color(255, 255, 255, 255)
+                .time(now)
+                .key("dummy")
+
+                .addAction(new Intent(), actionDismiss, true, false)
+                .addAction(intent, actionDisplay)
+
+                .large_icon(R.mipmap.app_icon)
+                .build();
 
     }
 

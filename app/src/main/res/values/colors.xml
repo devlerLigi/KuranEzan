@@ -4,11 +4,14 @@
     <color name="colorPrimaryDark">@color/grey_trans</color>
     <color name="colorAccent">#FF4081</color>
 
-    <color name="style_color_primary">#43a047</color>
-    <color name="style_color_primary_dark">#2e7d32</color>
+    <color name="style_color_primary">#16A48C</color>
+    <color name="style_color_primary_dark">#139D8D</color>
     <color name="style_color_accent">#01bcd5</color>
     <color name="fab_color_pressed">#007787</color>
     <color name="fab_color_shadow">#44000000</color>
+    <color name="style_color_accent_nonedit">#01bcd5</color>
+    <color name="fab_color_pressed_nonedit">#007787</color>
+    <color name="fab_color_shadow_nonedit">#44000000</color>
 
 
     <color name="yellow">#F6A623</color>
@@ -341,6 +344,7 @@
     <color name="metalic">#B2B2B2</color>
     <color name="darkMetalic">#999999</color>
     <color name="lightMetalic">#E5E5E5</color>
+    <color name="lightGray">#e0e0e0</color>
 
     <integer-array name="gplus_colors">
         <item>@color/gplus_color_1</item>

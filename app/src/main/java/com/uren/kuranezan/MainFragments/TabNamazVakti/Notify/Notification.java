@@ -1,4 +1,4 @@
-package com.uren.kuranezan.MainFragments.TabNamazVakti.AlarmManagement.NotifyMe;
+package com.uren.kuranezan.MainFragments.TabNamazVakti.Notify;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;

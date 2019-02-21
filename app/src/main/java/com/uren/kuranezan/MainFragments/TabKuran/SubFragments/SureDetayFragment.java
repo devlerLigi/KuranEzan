@@ -79,8 +79,8 @@ public class SureDetayFragment extends BaseFragment
     TextView txtDot;
     @BindView(R.id.llExplanation)
     LinearLayout llExplanation;
-    @BindView(R.id.adView)
-    AdView adView;
+    //@BindView(R.id.adView)
+    //AdView adView;
 
     ArrayList<Ayahs> ayahOriginalList = new ArrayList<Ayahs>();
     ArrayList<Ayahs> ayahTransliterationlList = new ArrayList<Ayahs>();
@@ -363,7 +363,7 @@ public class SureDetayFragment extends BaseFragment
 
     private void init() {
         MobileAds.initialize(getContext(), getActivity().getResources().getString(R.string.ADMOB_APP_ID));
-        AdMobUtils.loadBannerAd(adView);
+        //AdMobUtils.loadBannerAd(adView);
         imgBack.setVisibility(View.VISIBLE);
         imgBack.setOnClickListener(this);
         imgOptions.setVisibility(View.VISIBLE);

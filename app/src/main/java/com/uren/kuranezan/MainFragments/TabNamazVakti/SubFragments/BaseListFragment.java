@@ -14,6 +14,8 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
 import com.google.gson.Gson;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
@@ -30,6 +32,7 @@ import com.uren.kuranezan.Models.LocationModels.Ulke;
 import com.uren.kuranezan.Models.PrayerTimeModels.PrayerTimes;
 import com.uren.kuranezan.R;
 import com.uren.kuranezan.Singleton.PrayerTimesList;
+import com.uren.kuranezan.Utils.AdMobUtil.AdMobUtils;
 import com.uren.kuranezan.Utils.Config;
 import com.uren.kuranezan.Utils.DialogBoxUtil.DialogBoxUtil;
 import com.uren.kuranezan.Utils.DialogBoxUtil.Interfaces.YesNoDialogBoxCallback;
@@ -79,6 +82,10 @@ public class BaseListFragment extends BaseFragment
     ProgressBar progressBar;
     @BindView(R.id.imgLeft)
     ImageView imgBack;
+    @BindView(R.id.adView)
+    AdView adView;
+
+    AsyncTask<Void, Void, Void> asyncInsertData;
 
     public static BaseListFragment newInstance(int itemType, int requestedId, String toolbarTitle) {
         Bundle args = new Bundle();
@@ -98,7 +105,7 @@ public class BaseListFragment extends BaseFragment
 
     @Override
     public void onStart() {
-        getActivity().findViewById(R.id.tabMainLayout).setVisibility(View.VISIBLE);
+        getActivity().findViewById(R.id.tabMainLayout).setVisibility(View.GONE);
         super.onStart();
     }
 
@@ -123,6 +130,9 @@ public class BaseListFragment extends BaseFragment
     }
 
     private void init() {
+        MobileAds.initialize(getContext(), getActivity().getResources().getString(R.string.ADMOB_APP_ID));
+        AdMobUtils.loadBannerAd(adView);
+        AdMobUtils.loadInterstitialAd(getContext());
         imgBack.setVisibility(View.VISIBLE);
         imgBack.setOnClickListener(this);
         recyclerView.setVisibility(View.GONE);
@@ -154,7 +164,7 @@ public class BaseListFragment extends BaseFragment
     }
 
     private void setUpRecyclerView() {
-        new AsyncInsertData(itemType).execute();
+        asyncInsertData = new AsyncInsertData(itemType).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
     }
 
     private void setList(ArrayList<Object> objectList) {
@@ -168,26 +178,33 @@ public class BaseListFragment extends BaseFragment
     }
 
     @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-    }
-
-    @Override
     public void onListItemClick(Object object, int clickedPosition) {
 
         if (object instanceof Ilce) {
             Ilce ilce = (Ilce) object;
-            SELECTED_COUNTY = ilce.getIlceAdiEn();
+            if (Config.transliterationlang.equals(Config.defaultTransliterationLang)) {
+                SELECTED_COUNTY = ilce.getIlceAdi();
+            } else {
+                SELECTED_COUNTY = ilce.getIlceAdiEn();
+            }
             SELECTED_COUNTY_CODE = ilce.getIlceID();
             setLocation(ilce);
         } else if (object instanceof Sehir) {
             Sehir sehir = (Sehir) object;
-            SELECTED_CITY = sehir.getSehirAdiEn();
+            if (Config.transliterationlang.equals(Config.defaultTransliterationLang)) {
+                SELECTED_CITY = sehir.getSehirAdi();
+            } else {
+                SELECTED_CITY = sehir.getSehirAdiEn();
+            }
             String title = getString(R.string.county);
             mFragmentNavigation.pushFragment(BaseListFragment.newInstance(ITEM_TYPE_ILCE, Integer.parseInt(sehir.getSehirID()), title));
         } else if (object instanceof Ulke) {
             Ulke ulke = (Ulke) object;
-            SELECTED_COUNTRY = ulke.getUlkeAdiEn();
+            if (Config.transliterationlang.equals(Config.defaultTransliterationLang)) {
+                SELECTED_COUNTRY = ulke.getUlkeAdi();
+            } else {
+                SELECTED_COUNTRY = ulke.getUlkeAdiEn();
+            }
             String title = getString(R.string.city);
             mFragmentNavigation.pushFragment(BaseListFragment.newInstance(ITEM_TYPE_SEHIR, Integer.parseInt(ulke.getUlkeID()), title));
         } else {
@@ -204,7 +221,7 @@ public class BaseListFragment extends BaseFragment
             @Override
             public void yesClick() {
                 requestedId = Integer.parseInt(ilce.getIlceID());
-                new AsyncInsertData(ITEM_TYPE_NAMAZ_VAKITLERI).execute();
+                asyncInsertData = new AsyncInsertData(ITEM_TYPE_NAMAZ_VAKITLERI).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
             }
 
             @Override
@@ -493,6 +510,33 @@ public class BaseListFragment extends BaseFragment
             return SELECTED_COUNTY_CODE;
         }
 
+    }
+
+    @Override
+    public void onPause() {
+        Log.i("onPause", "ok");
+        super.onPause();
+    }
+
+    @Override
+    public void onStop() {
+        Log.i("onStop", "ok");
+        super.onStop();
+    }
+
+    @Override
+    public void onDestroy() {
+        //Fragment tamamen kill edildigi zaman cagrilir.
+        if (asyncInsertData != null)
+            asyncInsertData.cancel(true);
+        Log.i("onDestroy", "ok");
+        super.onDestroy();
+    }
+
+    @Override
+    public void onDestroyView() {
+        Log.i("onDestroyView", "ok");
+        super.onDestroyView();
     }
 
 }

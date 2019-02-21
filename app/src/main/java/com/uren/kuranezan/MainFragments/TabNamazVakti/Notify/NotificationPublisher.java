@@ -1,4 +1,4 @@
-package com.uren.kuranezan.MainFragments.TabNamazVakti.AlarmManagement.NotifyMe;
+package com.uren.kuranezan.MainFragments.TabNamazVakti.Notify;
 
 import android.app.Notification;
 import android.app.NotificationChannel;
@@ -20,33 +20,20 @@ import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
 import com.uren.kuranezan.R;
-import com.uren.kuranezan.Utils.Config;
 
 import static android.provider.BaseColumns._ID;
-import static com.uren.kuranezan.Constants.StringConstants.key_prayerTimeAksam;
-import static com.uren.kuranezan.Constants.StringConstants.key_prayerTimeBeforeGunes;
-import static com.uren.kuranezan.Constants.StringConstants.key_prayerTimeBeforeIkindi;
-import static com.uren.kuranezan.Constants.StringConstants.key_prayerTimeBeforeImsak;
-import static com.uren.kuranezan.Constants.StringConstants.key_prayerTimeBeforeOgle;
-import static com.uren.kuranezan.Constants.StringConstants.key_prayerTimeBeforeAksam;
-import static com.uren.kuranezan.Constants.StringConstants.key_prayerTimeBeforeYatsi;
-import static com.uren.kuranezan.Constants.StringConstants.key_prayerTimeGunes;
-import static com.uren.kuranezan.Constants.StringConstants.key_prayerTimeIkindi;
-import static com.uren.kuranezan.Constants.StringConstants.key_prayerTimeImsak;
-import static com.uren.kuranezan.Constants.StringConstants.key_prayerTimeOgle;
-import static com.uren.kuranezan.Constants.StringConstants.key_prayerTimeYatsi;
-import static com.uren.kuranezan.MainFragments.TabNamazVakti.AlarmManagement.NotifyMe.Notification.NotificationEntry.NOTIFICATION_ACTIONS;
-import static com.uren.kuranezan.MainFragments.TabNamazVakti.AlarmManagement.NotifyMe.Notification.NotificationEntry.NOTIFICATION_ACTIONS_COLLAPSE;
-import static com.uren.kuranezan.MainFragments.TabNamazVakti.AlarmManagement.NotifyMe.Notification.NotificationEntry.NOTIFICATION_ACTIONS_DISMISS;
-import static com.uren.kuranezan.MainFragments.TabNamazVakti.AlarmManagement.NotifyMe.Notification.NotificationEntry.NOTIFICATION_ACTIONS_TEXT;
-import static com.uren.kuranezan.MainFragments.TabNamazVakti.AlarmManagement.NotifyMe.Notification.NotificationEntry.NOTIFICATION_COLOR;
-import static com.uren.kuranezan.MainFragments.TabNamazVakti.AlarmManagement.NotifyMe.Notification.NotificationEntry.NOTIFICATION_CONTENT_TEXT;
-import static com.uren.kuranezan.MainFragments.TabNamazVakti.AlarmManagement.NotifyMe.Notification.NotificationEntry.NOTIFICATION_CUSTOM_ID;
-import static com.uren.kuranezan.MainFragments.TabNamazVakti.AlarmManagement.NotifyMe.Notification.NotificationEntry.NOTIFICATION_LARGE_ICON;
-import static com.uren.kuranezan.MainFragments.TabNamazVakti.AlarmManagement.NotifyMe.Notification.NotificationEntry.NOTIFICATION_LED_COLOR;
-import static com.uren.kuranezan.MainFragments.TabNamazVakti.AlarmManagement.NotifyMe.Notification.NotificationEntry.NOTIFICATION_SMALL_ICON;
-import static com.uren.kuranezan.MainFragments.TabNamazVakti.AlarmManagement.NotifyMe.Notification.NotificationEntry.NOTIFICATION_TITLE_TEXT;
-import static com.uren.kuranezan.MainFragments.TabNamazVakti.AlarmManagement.NotifyMe.Notification.NotificationEntry.TABLE_NAME;
+import static com.uren.kuranezan.MainFragments.TabNamazVakti.Notify.Notification.NotificationEntry.NOTIFICATION_ACTIONS;
+import static com.uren.kuranezan.MainFragments.TabNamazVakti.Notify.Notification.NotificationEntry.NOTIFICATION_ACTIONS_COLLAPSE;
+import static com.uren.kuranezan.MainFragments.TabNamazVakti.Notify.Notification.NotificationEntry.NOTIFICATION_ACTIONS_DISMISS;
+import static com.uren.kuranezan.MainFragments.TabNamazVakti.Notify.Notification.NotificationEntry.NOTIFICATION_ACTIONS_TEXT;
+import static com.uren.kuranezan.MainFragments.TabNamazVakti.Notify.Notification.NotificationEntry.NOTIFICATION_COLOR;
+import static com.uren.kuranezan.MainFragments.TabNamazVakti.Notify.Notification.NotificationEntry.NOTIFICATION_CONTENT_TEXT;
+import static com.uren.kuranezan.MainFragments.TabNamazVakti.Notify.Notification.NotificationEntry.NOTIFICATION_CUSTOM_ID;
+import static com.uren.kuranezan.MainFragments.TabNamazVakti.Notify.Notification.NotificationEntry.NOTIFICATION_LARGE_ICON;
+import static com.uren.kuranezan.MainFragments.TabNamazVakti.Notify.Notification.NotificationEntry.NOTIFICATION_LED_COLOR;
+import static com.uren.kuranezan.MainFragments.TabNamazVakti.Notify.Notification.NotificationEntry.NOTIFICATION_SMALL_ICON;
+import static com.uren.kuranezan.MainFragments.TabNamazVakti.Notify.Notification.NotificationEntry.NOTIFICATION_TITLE_TEXT;
+import static com.uren.kuranezan.MainFragments.TabNamazVakti.Notify.Notification.NotificationEntry.TABLE_NAME;
 
 /**
  * Created by jbonk on 6/16/2018.
@@ -61,7 +48,7 @@ public class NotificationPublisher extends BroadcastReceiver {
     public void onReceive(final Context context, Intent intent) {
         String notificationId = intent.getStringExtra(NOTIFICATION_ID);
         Log.i("notificationId-OnRe", notificationId);
-        com.uren.kuranezan.MainFragments.TabNamazVakti.AlarmManagement.NotifyMe.Notification.NotificationDBHelper mDbHelper = new com.uren.kuranezan.MainFragments.TabNamazVakti.AlarmManagement.NotifyMe.Notification.NotificationDBHelper(context);
+        com.uren.kuranezan.MainFragments.TabNamazVakti.Notify.Notification.NotificationDBHelper mDbHelper = new com.uren.kuranezan.MainFragments.TabNamazVakti.Notify.Notification.NotificationDBHelper(context);
         SQLiteDatabase db = mDbHelper.getWritableDatabase();
 
         Cursor data = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE " + _ID + " = " + notificationId, null);

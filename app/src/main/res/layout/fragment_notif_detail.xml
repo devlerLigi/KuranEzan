@@ -37,7 +37,7 @@
                         <!-- BEFORE HEADER -->
                         <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="50dp"
+                            android:layout_height="40dp"
                             android:background="@color/metalic"
                             android:gravity="bottom">
 
@@ -47,9 +47,9 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginBottom="5dp"
                                 android:layout_marginStart="10dp"
-                                android:gravity="bottom|center_horizontal"
+                                android:gravity="bottom|center_vertical"
                                 android:textColor="@color/white"
-                                android:textSize="20sp" />
+                                android:textSize="15sp" />
 
 
                         </LinearLayout>
@@ -215,8 +215,8 @@
                         <!-- NOTIFICATION OPTIONS -->
                         <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="50dp"
-                            android:background="@color/darkMetalic"
+                            android:layout_height="40dp"
+                            android:background="@color/metalic"
                             android:gravity="bottom">
 
                             <TextView
@@ -225,9 +225,9 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginBottom="5dp"
                                 android:layout_marginStart="10dp"
-                                android:gravity="bottom|center_horizontal"
+                                android:gravity="bottom|center_vertical"
                                 android:textColor="@color/white"
-                                android:textSize="20sp" />
+                                android:textSize="15sp" />
 
 
                         </LinearLayout>
@@ -332,16 +332,17 @@
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
                         android:layout_marginTop="30dp"
-                        android:textSize="20sp"
                         android:background="@color/style_color_accent"
                         android:text="@string/apply"
-                        android:textColor="@color/white" />
+                        android:textColor="@color/white"
+                        android:textSize="20sp"
+                        android:visibility="gone" />
 
                 </LinearLayout>
 
             </android.support.v4.widget.NestedScrollView>
 
-            <!--RelativeLayout
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1">
@@ -355,7 +356,7 @@
                     ads:adSize="SMART_BANNER"
                     ads:adUnitId="@string/ADMOB_BANNER_AD_UNIT_ID"></com.google.android.gms.ads.AdView>
 
-            </RelativeLayout-->
+            </RelativeLayout>
 
         </LinearLayout>
 

@@ -1,5 +1,10 @@
 [
   {
+    "UlkeAdi": "TÜRKİYE",
+    "UlkeAdiEn": "TURKEY",
+    "UlkeID": "2"
+  },
+  {
     "UlkeAdi": "ABD",
     "UlkeAdiEn": "USA",
     "UlkeID": "33"
@@ -923,11 +928,6 @@
     "UlkeAdi": "TUNUS",
     "UlkeAdiEn": "TUNUSIA",
     "UlkeID": "118"
-  },
-  {
-    "UlkeAdi": "TÜRKİYE",
-    "UlkeAdiEn": "TURKEY",
-    "UlkeID": "2"
   },
   {
     "UlkeAdi": "TURKMENISTAN",

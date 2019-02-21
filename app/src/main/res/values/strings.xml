@@ -149,6 +149,7 @@
     <string name="dismiss">Dismiss</string>
     <string name="display">Display</string>
     <string name="remainder">Remainder</string>
+    <string name="notifications">Notifications:</string>
 
 
     <string-array name="prayerTimes">

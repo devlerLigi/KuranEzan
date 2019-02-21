@@ -4,12 +4,12 @@ import android.app.Dialog;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.StrictMode;
-import android.support.design.button.MaterialButton;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -19,11 +19,12 @@ import android.widget.ScrollView;
 import android.widget.Switch;
 import android.widget.TextView;
 
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
 import com.uren.kuranezan.MainFragments.BaseFragment;
-import com.uren.kuranezan.MainFragments.TabNamazVakti.AlarmManagement.NotifyMe.NotifyMe;
-import com.uren.kuranezan.Models.TranslationModels.Translations;
+import com.uren.kuranezan.MainFragments.TabNamazVakti.Notify.NotifyMe;
 import com.uren.kuranezan.R;
-import com.uren.kuranezan.Singleton.TranslationList;
+import com.uren.kuranezan.Utils.AdMobUtil.AdMobUtils;
 import com.uren.kuranezan.Utils.Config;
 
 
@@ -54,6 +55,8 @@ public class NotifDetailFragment extends BaseFragment
     TextView txtToolbarTitle;
     @BindView(R.id.imgLeft)
     ImageView imgBack;
+    @BindView(R.id.adView)
+    AdView adView;
 
     @BindView(R.id.txtBeforeNotifTime)
     TextView txtBeforeNotifTime;
@@ -229,9 +232,9 @@ public class NotifDetailFragment extends BaseFragment
     }
 
     private void init() {
-        //MobileAds.initialize(getContext(), getActivity().getResources().getString(R.string.ADMOB_APP_ID));
-        //AdMobUtils.loadBannerAd(adView);
-        //AdMobUtils.loadInterstitialAd(getContext());
+        MobileAds.initialize(getContext(), getActivity().getResources().getString(R.string.ADMOB_APP_ID));
+        AdMobUtils.loadBannerAd(adView);
+        AdMobUtils.loadInterstitialAd(getContext());
         imgBack.setVisibility(View.VISIBLE);
         imgBack.setOnClickListener(this);
 
@@ -239,6 +242,26 @@ public class NotifDetailFragment extends BaseFragment
         llNotifyMelody1.setOnClickListener(this);
         llNotifyMelody2.setOnClickListener(this);
         btnApply.setOnClickListener(this);
+
+        setSwitchListeners();
+    }
+
+    private void setSwitchListeners() {
+
+        switchBeforeTime.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                applyChanges();
+            }
+        });
+
+        switchExactTime.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                applyChanges();
+            }
+        });
+
     }
 
     @Override
@@ -263,7 +286,8 @@ public class NotifDetailFragment extends BaseFragment
         }
 
         if (view == btnApply) {
-            applyClicked();
+            applyChanges();
+            //getActivity().onBackPressed();
         }
 
     }
@@ -279,12 +303,11 @@ public class NotifDetailFragment extends BaseFragment
         showRadioGroupForMelodies(i);
     }
 
-    private void applyClicked() {
+    private void applyChanges() {
         progressBar.setVisibility(View.VISIBLE);
         updateConfig();
         NotifyMe.setNotifications(getContext());
         progressBar.setVisibility(View.GONE);
-        getActivity().onBackPressed();
     }
 
     private void updateConfig() {
@@ -398,6 +421,8 @@ public class NotifDetailFragment extends BaseFragment
                 String text = String.valueOf(timeBefore) + " " + getString(R.string.minutes);
                 txtBeforeNotifTime.setText(text);
                 dialog.dismiss();
+
+                applyChanges();
             }
         });
 
@@ -481,6 +506,8 @@ public class NotifDetailFragment extends BaseFragment
                 if (mediaPlayer != null) {
                     mediaPlayer.reset();// stops any current playing song
                 }
+
+                applyChanges();
             }
         });
     }

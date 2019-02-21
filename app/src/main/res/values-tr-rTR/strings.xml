@@ -10,7 +10,7 @@
 
     <string name="quran">Kuran</string>
     <string name="prayer">Imsakiye</string>
-    <string name="others">Daha Fazla</string>
+    <string name="more">Daha Fazla</string>
 
     //More items
     <string name="zikirmatik">Zikirmatik</string>
@@ -148,6 +148,7 @@
     <string name="remainder">Hatırlatma</string>
     <string name="dismiss">Kapat</string>
     <string name="display">Görüntüle</string>
+    <string name="notifications">Bildirimler:</string>
 
     <string-array name="prayerTimes">
         <item>İmsak</item>

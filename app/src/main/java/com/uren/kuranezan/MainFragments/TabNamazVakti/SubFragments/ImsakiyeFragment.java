@@ -13,6 +13,8 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
 import com.google.gson.Gson;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
@@ -30,6 +32,7 @@ import com.uren.kuranezan.Models.LocationModels.Ulke;
 import com.uren.kuranezan.Models.PrayerTimeModels.PrayerTimes;
 import com.uren.kuranezan.R;
 import com.uren.kuranezan.Singleton.PrayerTimesList;
+import com.uren.kuranezan.Utils.AdMobUtil.AdMobUtils;
 import com.uren.kuranezan.Utils.Config;
 import com.uren.kuranezan.Utils.DialogBoxUtil.DialogBoxUtil;
 import com.uren.kuranezan.Utils.DialogBoxUtil.Interfaces.YesNoDialogBoxCallback;
@@ -83,9 +86,14 @@ public class ImsakiyeFragment extends BaseFragment
     ProgressBar progressBar;
     @BindView(R.id.imgLeft)
     ImageView imgBack;
+    @BindView(R.id.adView)
+    AdView adView;
 
     @BindArray(R.array.months)
     String[] aylar;
+
+    AsyncTask<Void, Void, Void> asyncInsertData;
+
     public static ImsakiyeFragment newInstance(String toolbarTitle) {
         Bundle args = new Bundle();
         args.putString("toolbarTitle", toolbarTitle);
@@ -102,7 +110,7 @@ public class ImsakiyeFragment extends BaseFragment
 
     @Override
     public void onStart() {
-        getActivity().findViewById(R.id.tabMainLayout).setVisibility(View.VISIBLE);
+        getActivity().findViewById(R.id.tabMainLayout).setVisibility(View.GONE);
         super.onStart();
     }
 
@@ -119,14 +127,16 @@ public class ImsakiyeFragment extends BaseFragment
             init();
 
             initRecyclerView();
-            new AsyncInsertData().execute();
-
+            asyncInsertData = new AsyncInsertData().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
         }
 
         return mView;
     }
 
     private void init() {
+        MobileAds.initialize(getContext(), getActivity().getResources().getString(R.string.ADMOB_APP_ID));
+        AdMobUtils.loadBannerAd(adView);
+        AdMobUtils.loadInterstitialAd(getContext());
         imgBack.setVisibility(View.VISIBLE);
         imgBack.setOnClickListener(this);
     }
@@ -158,10 +168,6 @@ public class ImsakiyeFragment extends BaseFragment
         txtToolbarTitle.setText(Config.county.toUpperCase() + " " + toolbarTitle);
     }
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-    }
 
     @Override
     public void onListItemClick(Object object, int clickedPosition) {
@@ -244,5 +250,33 @@ public class ImsakiyeFragment extends BaseFragment
 
     }
 
+    /*****************************************************/
 
+    @Override
+    public void onPause() {
+        Log.i("onPause", "ok");
+        super.onPause();
+    }
+
+    @Override
+    public void onStop() {
+        Log.i("onStop", "ok");
+        super.onStop();
+    }
+
+    @Override
+    public void onDestroy() {
+
+        //Fragment tamamen kill edildigi zaman cagrilir.
+        if (asyncInsertData != null)
+            asyncInsertData.cancel(true);
+        Log.i("onDestroy", "ok");
+        super.onDestroy();
+    }
+
+    @Override
+    public void onDestroyView() {
+        Log.i("onDestroyView", "ok");
+        super.onDestroyView();
+    }
 }

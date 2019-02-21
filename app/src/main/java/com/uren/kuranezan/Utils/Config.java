@@ -28,9 +28,9 @@ public class Config {
     public static final String CITY = "city";
     public static final String COUNTY = "county";
     public static final String COUNTY_CODE = "countyCode";
-    public static final String NOTIF_TIME = "notifTime";
     public static final String TARGET_PRAYER_TIME = "targetPrayerTime";
 
+    public static final String NOTIF_ENABLED = "notifEnabled";
     public static final String NOTIF_BEFORE_IMSAK = "notifBeforeImsak";
     public static final String NOTIF_EXACT_IMSAK = "notifExactImsak";
     public static final String NOTIF_BEFORE_GUNES = "notifBeforeGunes";
@@ -76,9 +76,9 @@ public class Config {
     public static final String defaultCity = "";
     public static final String defaultCounty = "";
     public static final String defaultCountyCode = "";
-    public static final long defaultNotifTime = 0;
     public static final int defaultTargetPrayerTime = 0;
 
+    public static final boolean defaultNotifEnabled = false;
     public static final boolean defaultNotifBefore = false;
     public static final boolean defaultNotifExact = false;
     public static final int defaultTimeBefore = 5;
@@ -97,9 +97,9 @@ public class Config {
     public static String city;
     public static String county;
     public static String countyCode;
-    public static long notifTime;
     public static int targetPrayerTime;
 
+    public static boolean notifEnabled;
     public static boolean notifBeforeImsak;
     public static boolean notifExactImsak;
     public static boolean notifBeforeGunes;
@@ -152,17 +152,17 @@ public class Config {
             city = sp.getString(Config.CITY, Config.defaultCity);
             county = sp.getString(Config.COUNTY, Config.defaultCounty);
             countyCode = sp.getString(Config.COUNTY_CODE, Config.defaultCountyCode);
-            notifTime = sp.getLong(Config.NOTIF_TIME, Config.defaultNotifTime);
             targetPrayerTime = sp.getInt(Config.TARGET_PRAYER_TIME, Config.defaultTargetPrayerTime);
 
             //Notif items
+            notifEnabled = sp.getBoolean(Config.NOTIF_ENABLED, Config.defaultNotifEnabled);
+
             notifBeforeImsak = sp.getBoolean(Config.NOTIF_BEFORE_IMSAK, Config.defaultNotifBefore);
             notifBeforeGunes = sp.getBoolean(Config.NOTIF_BEFORE_GUNES, Config.defaultNotifBefore);
             notifBeforeOgle = sp.getBoolean(Config.NOTIF_BEFORE_OGLE, Config.defaultNotifBefore);
             notifBeforeIkindi = sp.getBoolean(Config.NOTIF_BEFORE_IKINDI, Config.defaultNotifBefore);
             notifBeforeAksam = sp.getBoolean(Config.NOTIF_BEFORE_AKSAM, Config.defaultNotifBefore);
             notifBeforeYatsi = sp.getBoolean(Config.NOTIF_BEFORE_YATSI, Config.defaultNotifBefore);
-
             notifExactImsak = sp.getBoolean(Config.NOTIF_EXACT_IMSAK, Config.defaultNotifExact);
             notifExactGunes = sp.getBoolean(Config.NOTIF_EXACT_GUNES_, Config.defaultNotifExact);
             notifExactOgle = sp.getBoolean(Config.NOTIF_EXACT_OGLE, Config.defaultNotifExact);
@@ -211,7 +211,6 @@ public class Config {
         city = defaultCity;
         county = defaultCounty;
         countyCode = defaultCountyCode;
-        notifTime = defaultNotifTime;
         targetPrayerTime = defaultTargetPrayerTime;
     }
 
@@ -237,9 +236,9 @@ public class Config {
     public static void updateNotif(Context context) {
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(Config.context);
         SharedPreferences.Editor ed = sp.edit();
-        ed.putLong(NOTIF_TIME, notifTime);
         ed.putInt(TARGET_PRAYER_TIME, targetPrayerTime);
 
+        ed.putBoolean(NOTIF_ENABLED, notifEnabled);
         ed.putBoolean(NOTIF_BEFORE_IMSAK, notifBeforeImsak);
         ed.putBoolean(NOTIF_BEFORE_GUNES, notifBeforeGunes);
         ed.putBoolean(NOTIF_BEFORE_OGLE, notifBeforeOgle);
@@ -273,7 +272,6 @@ public class Config {
         ed.putInt(MELODY_AKSAM, melodyAksam);
         ed.putInt(MELODY_BEFORE_YATSI, melodyBeforeYatsi);
         ed.putInt(MELODY_YATSI, melodyYatsi);
-
 
         ed.commit();
     }

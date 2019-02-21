@@ -1,12 +1,5 @@
 package com.uren.kuranezan.MainFragments.TabNamazVakti;
 
-import android.app.AlarmManager;
-import android.app.PendingIntent;
-import android.content.ComponentName;
-import android.content.Context;
-import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.util.Log;
@@ -15,17 +8,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.uren.kuranezan.Interfaces.CompleteCallback;
 import com.uren.kuranezan.Interfaces.NamazVaktiCallback;
 import com.uren.kuranezan.MainFragments.BaseFragment;
-import com.uren.kuranezan.MainFragments.TabNamazVakti.AlarmManagement.DeviceBootReceiver;
-import com.uren.kuranezan.MainFragments.TabNamazVakti.AlarmManagement.NotificationReceiver;
-import com.uren.kuranezan.MainFragments.TabNamazVakti.AlarmManagement.NotifyMe.NotifyMe;
-import com.uren.kuranezan.MainFragments.TabNamazVakti.AlarmManagement.RepeatingActivity;
+import com.uren.kuranezan.MainFragments.TabNamazVakti.Notify.NotifyMe;
 import com.uren.kuranezan.MainFragments.TabNamazVakti.JavaClasses.NamazHelper;
 import com.uren.kuranezan.MainFragments.TabNamazVakti.SubFragments.BaseListFragment;
 import com.uren.kuranezan.MainFragments.TabNamazVakti.SubFragments.ImsakiyeFragment;
@@ -33,18 +22,14 @@ import com.uren.kuranezan.MainFragments.TabNamazVakti.SubFragments.SettingsFragm
 import com.uren.kuranezan.Models.PrayerTimeModels.PrayerTimes;
 import com.uren.kuranezan.R;
 import com.uren.kuranezan.Singleton.PrayerTimesList;
-import com.uren.kuranezan.Utils.ClickableImage.ClickableImageView;
 import com.uren.kuranezan.Utils.Config;
 
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
-import butterknife.BindArray;
-import butterknife.BindDimen;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -163,55 +148,6 @@ public class NamazVaktiFragment extends BaseFragment
         }
 
         return mView;
-    }
-
-    private void setNotif() {
-        Boolean dailyNotify = true;
-        PackageManager pm = getContext().getPackageManager();
-        ComponentName receiver = new ComponentName(getContext(), DeviceBootReceiver.class);
-        Intent alarmIntent = new Intent(getActivity(), NotificationReceiver.class);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(getActivity(), 0, alarmIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-        AlarmManager manager = (AlarmManager) getContext().getSystemService(Context.ALARM_SERVICE);
-
-// if user enabled daily notifications
-        if (dailyNotify) {
-            //region Enable Daily Notifications
-            Calendar calendar = Calendar.getInstance();
-            calendar.setTimeInMillis(Config.notifTime);
-/*
-            calendar.set(Calendar.HOUR_OF_DAY, calendar.get(Calendar.HOUR_OF_DAY));
-            calendar.set(Calendar.MINUTE, calendar.get(Calendar.MINUTE) +1);
-            calendar.set(Calendar.SECOND, calendar.get(Calendar.SECOND));
-*/
-            // if notification time is before selected time, send notification the next day
-            if (calendar.before(Calendar.getInstance())) {
-                calendar.add(Calendar.DATE, 1);
-            }
-            if (manager != null) {
-                manager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),
-                        0, pendingIntent);
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                    manager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
-                }
-            }
-            //To enable Boot Receiver class
-
-            pm.setComponentEnabledSetting(receiver,
-                    PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
-                    PackageManager.DONT_KILL_APP);
-
-            //endregion
-        } else { //Disable Daily Notifications
-            if (PendingIntent.getBroadcast(getActivity(), 0, alarmIntent, PendingIntent.FLAG_UPDATE_CURRENT) != null && manager != null) {
-                manager.cancel(pendingIntent);
-                //Toast.makeText(this,"Notifications were disabled",Toast.LENGTH_SHORT).show();
-            }
-
-            pm.setComponentEnabledSetting(receiver,
-                    PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
-                    PackageManager.DONT_KILL_APP);
-
-        }
     }
 
     @Override
@@ -458,7 +394,6 @@ public class NamazVaktiFragment extends BaseFragment
         mFragmentNavigation.pushFragment(SettingsFragment.newInstance());
     }
 
-
     private void updateCountDown() {
 
         PrayerTimes prayerTimes = getCurrentPrayerTime();
@@ -470,33 +405,11 @@ public class NamazVaktiFragment extends BaseFragment
             startTimer();
         }
 
-
-        /*
-        if(targetPrayerTime == PRAYER_TIME_IMSAK){
-
-        }else if(targetPrayerTime == PRAYER_TIME_GUNES){
-
-        }else if(targetPrayerTime == PRAYER_TIME_OGLE){
-
-        }else if(targetPrayerTime == PRAYER_TIME_IKINDI){
-
-        }else if(targetPrayerTime == PRAYER_TIME_AKSAM){
-
-        }else if(targetPrayerTime == PRAYER_TIME_YATSI){
-
-        }else if(targetPrayerTime == PRAYER_TIME_ERTESI_GUN_IMSAK){
-
-        }else{
-            //..
-        }
-        */
-
     }
 
     private int getNextPrayerTime(PrayerTimes currentPrayerTime) {
 
         int target = 0;
-        long nextPrayerTimeInMillis = 0;
 
         String pattern = "dd.MM.yyyy HH:mm";
         SimpleDateFormat dateFormat = new SimpleDateFormat(pattern);
@@ -517,27 +430,23 @@ public class NamazVaktiFragment extends BaseFragment
                 target = PRAYER_TIME_GUNES; //gunes
                 relGunes.setBackgroundColor(getResources().getColor(R.color.style_color_accent));
                 targetDifference = prayer2.getTime() - currentDate.getTime();
-                nextPrayerTimeInMillis = prayer2.getTime();
+
             } else if (currentDate.compareTo(prayer2) > 0 && currentDate.compareTo(prayer3) <= 0) {
                 target = PRAYER_TIME_OGLE; // ogle
                 relOgle.setBackgroundColor(getResources().getColor(R.color.style_color_accent));
                 targetDifference = prayer3.getTime() - currentDate.getTime();
-                nextPrayerTimeInMillis = prayer3.getTime();
             } else if (currentDate.compareTo(prayer3) > 0 && currentDate.compareTo(prayer4) <= 0) {
                 target = PRAYER_TIME_IKINDI; //ikindi
                 relIkindi.setBackgroundColor(getResources().getColor(R.color.style_color_accent));
                 targetDifference = prayer4.getTime() - currentDate.getTime();
-                nextPrayerTimeInMillis = prayer4.getTime();
             } else if (currentDate.compareTo(prayer4) > 0 && currentDate.compareTo(prayer5) <= 0) {
                 target = PRAYER_TIME_AKSAM; //aksam
                 relAksam.setBackgroundColor(getResources().getColor(R.color.style_color_accent));
                 targetDifference = prayer5.getTime() - currentDate.getTime();
-                nextPrayerTimeInMillis = prayer5.getTime();
             } else if (currentDate.compareTo(prayer5) > 0 && currentDate.compareTo(prayer6) <= 0) {
                 target = PRAYER_TIME_YATSI; //yatsi
                 relYatsi.setBackgroundColor(getResources().getColor(R.color.style_color_accent));
                 targetDifference = prayer6.getTime() - currentDate.getTime();
-                nextPrayerTimeInMillis = prayer6.getTime();
             } else if (currentDate.compareTo(prayer6) > 0) {
                 target = PRAYER_TIME_ERTESI_GUN_IMSAK; // ertesi gun imsak
                 relYatsi.setBackgroundColor(getResources().getColor(R.color.style_color_accent));
@@ -547,7 +456,6 @@ public class NamazVaktiFragment extends BaseFragment
                 if (nextDayPrayerTimes != null) {
                     Date prayerNextDayImsak = dateFormat.parse(nextDayPrayerTimes.getMiladiTarihKisa() + " " + nextDayPrayerTimes.getImsak());
                     targetDifference = prayerNextDayImsak.getTime() - currentDate.getTime();
-                    nextPrayerTimeInMillis = prayerNextDayImsak.getTime();
                 } else {
                     if (!downloadedFromServer) {
                         getPrayerTimesFromServer();
@@ -558,14 +466,10 @@ public class NamazVaktiFragment extends BaseFragment
                 target = PRAYER_TIME_IMSAK; //imsak
                 relImsak.setBackgroundColor(getResources().getColor(R.color.style_color_accent));
                 targetDifference = prayer1.getTime() - currentDate.getTime();
-                nextPrayerTimeInMillis = prayer1.getTime();
             }
 
-            Config.notifTime = nextPrayerTimeInMillis;
             Config.updateNotif(getContext());
-            //Log.i("notifTime", String.valueOf(Config.notifTime));
-            //setNotif();
-            setNotif2();
+            setNotif();
 
         } catch (ParseException e) {
             Log.e("parseError", e.toString());
@@ -575,39 +479,9 @@ public class NamazVaktiFragment extends BaseFragment
 
     }
 
-    private void setNotif2() {
-
-        Calendar now = Calendar.getInstance();
-        now.setTimeInMillis(Config.notifTime);
-
+    private void setNotif() {
         NotifyMe.setNotifications(getContext());
-
-        //NotifyMe.setNotif(getContext(), Config.notifTime);
-
-        //Log.i("notifTime", String.valueOf(now));
-
-        //NotifyMe.isValid(getContext(), 3);
-        //NotifyMe.isValid(getContext(), 4);
-        //NotifyMe.update(getContext());
-        //NotifyMe.getAll(getContext(), "");
-/*
-
-        Intent intent = new Intent(getContext(), RepeatingActivity.class);
-        intent.putExtra("test", "I am a String");
-        NotifyMe notifyMe = new NotifyMe.Builder(getContext())
-                .title("Başlık1")
-                .content("İçerik 1")
-                .color(255, 0, 0, 255)
-                .led_color(255, 255, 255, 255)
-                .time(now)
-                .addAction(intent, "Snooze", false)
-                .key("test")
-                .addAction(new Intent(), "Dismiss", true, false)
-                .addAction(intent, "Done")
-                .large_icon(R.mipmap.ic_launcher_round)
-                .build();
-*/
-
+        //NotifyMe.setDummyNotif(getContext());
     }
 
     private PrayerTimes getNextDayPrayerTimes() {
