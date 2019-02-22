@@ -32,6 +32,7 @@ import com.uren.kuranezan.R;
 import com.uren.kuranezan.Utils.AdMobUtil.AdMobUtils;
 import com.uren.kuranezan.Utils.BitmapConversion;
 import com.uren.kuranezan.Utils.ClickableImage.ClickableImageView;
+import com.uren.kuranezan.Utils.CommonUtils;
 import com.uren.kuranezan.Utils.ShapeUtil;
 
 import butterknife.BindView;
@@ -269,6 +270,7 @@ public class CumaMesajlariFragment extends BaseFragment
         }
 
         if(view == finishButton){
+            CommonUtils.hideKeyBoard(getContext());
             progressBar.setVisibility(View.VISIBLE);
             if(edittext.getVisibility() == View.VISIBLE){
                 messageTv.setText(edittext.getText().toString());
