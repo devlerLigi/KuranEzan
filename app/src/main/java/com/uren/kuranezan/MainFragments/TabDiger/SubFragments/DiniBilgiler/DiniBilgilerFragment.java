@@ -72,6 +72,8 @@ public class DiniBilgilerFragment extends BaseFragment
     LinearLayout llAdak;
     @BindView(R.id.llEsmaulHusna)
     LinearLayout llEsmaulHusna;
+    @BindView(R.id.llCumaNamazi)
+    LinearLayout llCumaNamazi;
 
     @BindView(R.id.adView)
     AdView adView;
@@ -136,6 +138,7 @@ public class DiniBilgilerFragment extends BaseFragment
         llZekat.setOnClickListener(this);
         llAdak.setOnClickListener(this);
         llEsmaulHusna.setOnClickListener(this);
+        llCumaNamazi.setOnClickListener(this);
     }
 
     @Override
@@ -238,6 +241,11 @@ public class DiniBilgilerFragment extends BaseFragment
         if(view == llEsmaulHusna){
             startBilgiContentFragment(getResources().getString(R.string.ESMAUL_HUSNA),
                     R.raw.esmaul_husna);
+        }
+
+        if(view == llCumaNamazi){
+            startBilgiContentFragment(getResources().getString(R.string.CUMA_NAMAZI),
+                    R.raw.cuma_namazi);
         }
     }
 

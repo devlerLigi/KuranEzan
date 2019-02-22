@@ -23,7 +23,22 @@ public class CumaMesajlariContent {
             "Güzellikler İçinizi Aydınlatsın, Yüzünüzden ve Yüreğinizden Tebessüm Eksilmesin. Rabbim Sevdiği Kullarından Eylesin.",
             "Cuma Günü Öyle Bir An Vardır Ki, O Anda Edilen Dualar Geri Çevrilmez.",
             "Cuma Günleri, Müslümanlara Hayır, Bereket, İyilik Vardır.",
-            "İnsan 'niyet' ile 'nasip' arasında bir çizgide yaşar. Rabbim niyetimizi 'salih' nasibimizi 'hayr' eylesin."
+            "İnsan 'niyet' ile 'nasip' arasında bir çizgide yaşar. Rabbim niyetimizi 'salih' nasibimizi 'hayr' eylesin.",
+            "Makbul, dua ve tövbelerimizi kabul, sağlığımızı daim, kazancımızı bereketli, kalplerimizi ve evlerimizi huzurla doldursun İnşallah.",
+            "Sevdiğiniz için bir kere mutlu olup, bin kere pişman olacağınız bir sevgiyi yaşamamanız dileğimle! Düşleriniz gerçek olsun ama gerçeğiniz asla düş olmasın.",
+            "Allah'ım! Akşama ulaştığımız gibi sabaha, sabah ulaştığımız gibi de akşama ulaşmayı nasip eyle. Sağlımızı koru ve hastalara şifa ver.",
+            "Allah'ım, habibin Muhammed Mustafa'ya, ailesine ve dostlarına rahmet eyle ve onların katındaki hürmeti için dualarımıza icabet et. ",
+            "Sağanak sağanak rahmet yağsın yuvanıza, her gün Resülullah girsin rüyanıza, melekler amin desin dualarınıza! Dualarda buluşmak dileğiyle...",
+            "Ey Rabbim, bize Cennetin kokusunu duyur ve onun nimetlerinden nasiplendir. Bize ateşin kokusunu duyurma. Amin.",
+            "Rabbim, sevginle dopdolu yüreklerle sana kavuşmayı ve sevdiklerimizle sonsuzlukta buluşmayı nasip eyle, amin.",
+            "Ey Rabbim! Evimizden bereketi, dilimizden duayı, kalbimizden senin ve Resulünün sevgisini eksik etme. Dualarımızı kabul, ömrümüzü nurlu kıl. Amin.",
+            "Güzellikler içinizi aydınlatsın, yüzünüzden ve yüreğinizden tebessüm eksilmesin. Rabbim, sevdiği kullarından eylesin sizleri ve tabi ki bizleri. ",
+            "Bizi dostlarına dost, düşmanlarına düşman olanlardan ve sabreden ve şükredenlerden eyle! İşinde sebat eden, nimetine şükreden, ibadetini güzel yapan, doğru konuşanlardan eyle Ya Rabbim. Amin.",
+            "Ben, beni seven ümmetimi almadan cennete girmem.' Diyen Sevgilinin (S.A.V) ümmeti olmanın hakkını verebilmek duası ile...",
+            "Allah'ım, 'kin, kibir ve kim ne der' hastalıklarından sana sığınırım. Bu güzel cuma gününü senin rızan için sevgi ve muhabbet içinde geçirmeyi nasip eyle. Amin.",
+            "Ömrümüzün hikayesini yazan en büyük ve en güzel yazıcı olan Rabbim, gönlünüzden geçen güzellikleri alnımıza kader diye yazsın. Amin.",
+            "Bir gül kurur, kalpteki sevgi kurumaz. Yağan yağmur durur, gönüldeki fırtına durmaz. Her şey unutulur ama sevilen insanlar unutulmaz.",
+            "Dünyada bir olan sende bin olsun, kainatta damla olan sende okyanus olsun. El açıp dua etiğin her şey bugün kabul olsun, amin! "
     };
 
     int[] FRIDAY_IMAGES = new int[]{

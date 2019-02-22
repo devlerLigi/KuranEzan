@@ -862,6 +862,45 @@
                         android:alpha="0.5"
                         android:background="@color/gray" />
 
+                    <!-- Cuma Namazi -->
+                    <LinearLayout
+                        android:id="@+id/llCumaNamazi"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginBottom="5dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_weight="5"
+                        android:background="?attr/selectableItemBackground"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="10dp"
+                            android:layout_weight="4"
+                            android:gravity="center_vertical"
+                            android:text="@string/CUMA_NAMAZI"
+                            android:textColor="@color/black"
+                            android:textSize="17sp" />
+
+                        <ImageView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginRight="10dp"
+                            android:layout_weight="0.5"
+                            android:padding="12dp"
+                            android:src="@drawable/icon_forward" />
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="20dp"
+                        android:alpha="0.5"
+                        android:background="@color/gray" />
+
                 </LinearLayout>
 
             </android.support.v4.widget.NestedScrollView>
