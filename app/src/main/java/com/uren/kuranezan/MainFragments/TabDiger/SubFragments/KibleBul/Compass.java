@@ -6,13 +6,9 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 
+import com.uren.kuranezan.MainFragments.TabDiger.SubFragments.Interfaces.CompassListener;
+
 public class Compass implements SensorEventListener {
-
-    public interface CompassListener {
-        void onNewAzimuth(float azimuth);
-    }
-
-    private CompassListener listener;
 
     private SensorManager sensorManager;
     private Sensor gsensor;
@@ -25,12 +21,24 @@ public class Compass implements SensorEventListener {
 
     private float azimuth;
     private float azimuthFix;
+    private CompassListener compassListener;
+    private boolean sensorError = false;
 
-    public Compass(Context context) {
-        sensorManager = (SensorManager) context
-                .getSystemService(Context.SENSOR_SERVICE);
+    public Compass(Context context, CompassListener compassListener) {
+        this.compassListener = compassListener;
+        sensorManager = (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
+
         gsensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+        if(gsensor == null){
+            sensorError = true;
+            compassListener.onAccelometerExist(false);
+        }
+
         msensor = sensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD);
+        if(msensor == null){
+            sensorError = true;
+            compassListener.onMagneticFieldExist(false);
+        }
     }
 
     public void start() {
@@ -52,9 +60,9 @@ public class Compass implements SensorEventListener {
         setAzimuthFix(0);
     }
 
-    public void setListener(CompassListener l) {
-        listener = l;
-    }
+    /*public void setListener(CompassListener l) {
+        compassListener = l;
+    }*/
 
     @Override
     public void onSensorChanged(SensorEvent event) {
@@ -89,8 +97,8 @@ public class Compass implements SensorEventListener {
                 azimuth = (float) Math.toDegrees(orientation[0]); // orientation
                 azimuth = (azimuth + azimuthFix + 360) % 360;
 
-                if (listener != null)
-                    listener.onNewAzimuth(azimuth);
+                if (compassListener != null && sensorError == false)
+                    compassListener.onNewAzimuth(azimuth);
             }
         }
     }

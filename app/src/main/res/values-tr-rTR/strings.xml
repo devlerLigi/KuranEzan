@@ -48,6 +48,7 @@
     <string name="CUMA_MSG_COLOR">Mesaj rengi</string>
     <string name="CUMA_MSG_SIZE">Mesaj boyutu</string>
     <string name="CUMA_MSG_KENDIN_YAZ">Kendin yaz</string>
+    <string name="HOLD_PARALLEL">Lütfen telefonu yere paralel tutunuz</string>
 
     <string name="ayah">Ayet</string>
     <string name="options">Seçenekler</string>
@@ -149,6 +150,8 @@
     <string name="dismiss">Kapat</string>
     <string name="display">Görüntüle</string>
     <string name="notifications">Bildirimler:</string>
+    <string name="no_accelometer_sensor">Cihazda ivme sensörü bulunmuyor</string>
+    <string name="no_magnetic_field_sensor">Cihazda manyetik alan sensörü bulunmuyor</string>
 
     <string-array name="prayerTimes">
         <item>İmsak</item>

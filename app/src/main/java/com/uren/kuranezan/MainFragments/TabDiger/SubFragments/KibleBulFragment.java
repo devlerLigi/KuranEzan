@@ -30,6 +30,7 @@ import com.bumptech.glide.request.RequestOptions;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
 import com.uren.kuranezan.MainFragments.BaseFragment;
+import com.uren.kuranezan.MainFragments.TabDiger.SubFragments.Interfaces.CompassListener;
 import com.uren.kuranezan.MainFragments.TabDiger.SubFragments.KibleBul.Compass;
 import com.uren.kuranezan.MainFragments.TabDiger.SubFragments.KibleBul.GPSTracker;
 import com.uren.kuranezan.R;
@@ -103,7 +104,7 @@ public class KibleBulFragment extends BaseFragment {
         getActivity().getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         arrowViewQiblat.setVisibility(INVISIBLE);
         arrowViewQiblat.setVisibility(View.GONE);
-        setupCompass();
+        checkPermission();
     }
 
     private void setImages(){
@@ -159,7 +160,7 @@ public class KibleBulFragment extends BaseFragment {
         }
     }
 
-    private void setupCompass() {
+    private void checkPermission() {
 
         if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) ==
                 PackageManager.PERMISSION_GRANTED) {
@@ -172,8 +173,16 @@ public class KibleBulFragment extends BaseFragment {
             }
         }
 
-        compass = new Compass(getContext());
-        Compass.CompassListener cl = new Compass.CompassListener() {
+        /*setupCompass();*/
+
+        /*compass = new Compass(getContext(), new CompassListener() {
+            @Override
+            public void onNewAzimuth(float azimuth) {
+                adjustGambarDial(azimuth);
+                adjustArrowQiblat(azimuth);
+            }
+        });*/
+        /*Compass.CompassListener cl = new Compass.CompassListener() {
 
             @Override
             public void onNewAzimuth(float azimuth) {
@@ -181,7 +190,39 @@ public class KibleBulFragment extends BaseFragment {
                 adjustArrowQiblat(azimuth);
             }
         };
-        compass.setListener(cl);
+        compass.setListener(cl);*/
+    }
+
+    private void setupCompass(){
+        /*compass = new Compass(getContext(), new CompassListener() {
+            @Override
+            public void onNewAzimuth(float azimuth) {
+                adjustGambarDial(azimuth);
+                adjustArrowQiblat(azimuth);
+            }
+        });*/
+
+        compass = new Compass(getContext(), new CompassListener() {
+            @Override
+            public void onNewAzimuth(float azimuth) {
+                adjustGambarDial(azimuth);
+                adjustArrowQiblat(azimuth);
+            }
+
+            @Override
+            public void onAccelometerExist(boolean value) {
+                if (value == false){
+                    locDescTv.setText(getResources().getString(R.string.no_accelometer_sensor));
+                }
+            }
+
+            @Override
+            public void onMagneticFieldExist(boolean value) {
+                if (value == false){
+                    locDescTv.setText(getResources().getString(R.string.no_magnetic_field_sensor));
+                }
+            }
+        });
     }
 
     public void adjustGambarDial(float azimuth) {

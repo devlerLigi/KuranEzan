@@ -48,6 +48,7 @@
     <string name="CUMA_MSG_COLOR">Message color</string>
     <string name="CUMA_MSG_SIZE">Message size</string>
     <string name="CUMA_MSG_KENDIN_YAZ">Write yourself</string>
+    <string name="HOLD_PARALLEL">Please keep the phone parallel to the ground</string>
 
     <string name="ayah">Ayah</string>
     <string name="options">Options</string>
@@ -150,6 +151,8 @@
     <string name="display">Display</string>
     <string name="remainder">Remainder</string>
     <string name="notifications">Notifications:</string>
+    <string name="no_accelometer_sensor">Device has no acceleration sensor</string>
+    <string name="no_magnetic_field_sensor">Device does not have magnetic field sensor</string>
 
 
     <string-array name="prayerTimes">
@@ -350,13 +353,13 @@
 
 
     <string name="ADMOB_APP_ID">ca-app-pub-7227467199436307~8280076787</string>
-    <!--<string name="ADMOB_BANNER_AD_UNIT_ID">ca-app-pub-7227467199436307/9074283706</string>
-    <string name="ADMOB_INTERSITITIAL_AD_UNIT_ID">ca-app-pub-7227467199436307/6220765946</string>-->
+    <string name="ADMOB_BANNER_AD_UNIT_ID">ca-app-pub-7227467199436307/9074283706</string>
+    <string name="ADMOB_INTERSITITIAL_AD_UNIT_ID">ca-app-pub-7227467199436307/6220765946</string>
 
 
     <!--Test-->
-    <string name="ADMOB_BANNER_AD_UNIT_ID">ca-app-pub-3940256099942544/6300978111</string>
-    <string name="ADMOB_INTERSITITIAL_AD_UNIT_ID">ca-app-pub-3940256099942544/1033173712</string>
+    <!--<string name="ADMOB_BANNER_AD_UNIT_ID">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="ADMOB_INTERSITITIAL_AD_UNIT_ID">ca-app-pub-3940256099942544/1033173712</string>-->
 
 
 </resources>
