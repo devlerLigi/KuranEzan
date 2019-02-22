@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Ezan Kuran</string>
+    <string name="app_name">Kuran Ezan</string>
 
     <array name="tab_name">
         <item>Kuran</item>
@@ -54,7 +54,7 @@
     <string name="viewOptions">Gösterim Seçenekleri</string>
     <string name="textOptions">Metin Ayarları</string>
     <string name="language">Dil</string>
-    <string name="translation">Meal dili</string>
+    <string name="translationLanguage">Meal dili</string>
     <string name="showTransliteration">Okunuşu Göster</string>
     <string name="showTranslation">Meali Göster</string>
     <string name="fontArabic">Arapça yazı tipi</string>

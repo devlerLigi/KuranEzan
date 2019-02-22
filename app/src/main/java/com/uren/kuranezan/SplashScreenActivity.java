@@ -35,7 +35,7 @@ public class SplashScreenActivity extends AppCompatActivity {
     private void setImage() {
         imageView = findViewById(R.id.imageView);
         Glide.with(SplashScreenActivity.this)
-                .load(R.mipmap.app_icon)
+                .load(R.mipmap.app_icon_old)
                 .apply(RequestOptions.fitCenterTransform())
                 .into(imageView);
     }

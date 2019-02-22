@@ -132,16 +132,16 @@ public class PrayerAsyncProcess extends AsyncTask<Context, Void, PrayerTimes[]> 
             fis = context.openFileInput(fileName);
             Reader rd = new BufferedReader(new InputStreamReader(fis));
             // Now do the magic.
-            return new Gson().fromJson(rd, PrayerTimes[].class);
-/*
+            //return new Gson().fromJson(rd, PrayerTimes[].class);
+
             try {
                 PrayerTimes[] prayerTimes = mapper.readValue(rd, PrayerTimes[].class);
                 return prayerTimes;
             } catch (IOException e) {
                 e.printStackTrace();
+                Log.e("readPrayerTimes", e.toString() );
             }
             return null;
-            */
 
         } catch (Exception e) {
             e.printStackTrace();

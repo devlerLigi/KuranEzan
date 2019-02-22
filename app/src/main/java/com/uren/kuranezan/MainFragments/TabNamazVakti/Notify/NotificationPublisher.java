@@ -47,35 +47,53 @@ public class NotificationPublisher extends BroadcastReceiver {
     @Override
     public void onReceive(final Context context, Intent intent) {
         String notificationId = intent.getStringExtra(NOTIFICATION_ID);
-        Log.i("notificationId-OnRe", notificationId);
-        com.uren.kuranezan.MainFragments.TabNamazVakti.Notify.Notification.NotificationDBHelper mDbHelper = new com.uren.kuranezan.MainFragments.TabNamazVakti.Notify.Notification.NotificationDBHelper(context);
-        SQLiteDatabase db = mDbHelper.getWritableDatabase();
+        Log.i("OnReceive", notificationId);
 
-        Cursor data = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE " + _ID + " = " + notificationId, null);
-        data.moveToFirst();
-        String title = data.getString(data.getColumnIndex(NOTIFICATION_TITLE_TEXT));
-        String content = data.getString(data.getColumnIndex(NOTIFICATION_CONTENT_TEXT));
-        String str_actions = data.getString(data.getColumnIndex(NOTIFICATION_ACTIONS));
-        String str_actions_text = data.getString(data.getColumnIndex(NOTIFICATION_ACTIONS_TEXT));
-        String str_actions_dismiss = data.getString(data.getColumnIndex(NOTIFICATION_ACTIONS_DISMISS));
-        String str_actions_collapse = data.getString(data.getColumnIndex(NOTIFICATION_ACTIONS_COLLAPSE));
-        String key = data.getString(data.getColumnIndex(NOTIFICATION_CUSTOM_ID));
-        int led_color = data.getInt(data.getColumnIndex(NOTIFICATION_LED_COLOR));
-        int small_icon = data.getInt(data.getColumnIndex(NOTIFICATION_SMALL_ICON));
-        int large_icon = data.getInt(data.getColumnIndex(NOTIFICATION_LARGE_ICON));
-        int color = data.getInt(data.getColumnIndex(NOTIFICATION_COLOR));
-        String[] actions = NotifyMe.convertStringToArray(str_actions);
-        String[] actions_text = NotifyMe.convertStringToArray(str_actions_text);
-        String[] actions_dismiss = NotifyMe.convertStringToArray(str_actions_dismiss);
-        String[] actions_collapse = NotifyMe.convertStringToArray(str_actions_collapse);
-        data.close();
-        db.close();
+        String title = null;
+        String content = null;
+        String key = null;
+        int led_color = 0;
+        int small_icon = 0;
+        int large_icon = 0;
+        int color = 0;
+        String[] actions = new String[0];
+        String[] actions_text = new String[0];
+        String[] actions_dismiss = new String[0];
+        String[] actions_collapse = new String[0];
+        try {
+            com.uren.kuranezan.MainFragments.TabNamazVakti.Notify.Notification.NotificationDBHelper mDbHelper = new com.uren.kuranezan.MainFragments.TabNamazVakti.Notify.Notification.NotificationDBHelper(context);
+            SQLiteDatabase db = mDbHelper.getWritableDatabase();
+
+            Cursor data = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE " + _ID + " = " + notificationId, null);
+            data.moveToFirst();
+            title = data.getString(data.getColumnIndex(NOTIFICATION_TITLE_TEXT));
+            content = data.getString(data.getColumnIndex(NOTIFICATION_CONTENT_TEXT));
+            String str_actions = data.getString(data.getColumnIndex(NOTIFICATION_ACTIONS));
+            String str_actions_text = data.getString(data.getColumnIndex(NOTIFICATION_ACTIONS_TEXT));
+            String str_actions_dismiss = data.getString(data.getColumnIndex(NOTIFICATION_ACTIONS_DISMISS));
+            String str_actions_collapse = data.getString(data.getColumnIndex(NOTIFICATION_ACTIONS_COLLAPSE));
+            key = data.getString(data.getColumnIndex(NOTIFICATION_CUSTOM_ID));
+            led_color = data.getInt(data.getColumnIndex(NOTIFICATION_LED_COLOR));
+            small_icon = data.getInt(data.getColumnIndex(NOTIFICATION_SMALL_ICON));
+            large_icon = data.getInt(data.getColumnIndex(NOTIFICATION_LARGE_ICON));
+            color = data.getInt(data.getColumnIndex(NOTIFICATION_COLOR));
+            actions = NotifyMe.convertStringToArray(str_actions);
+            actions_text = NotifyMe.convertStringToArray(str_actions_text);
+            actions_dismiss = NotifyMe.convertStringToArray(str_actions_dismiss);
+            actions_collapse = NotifyMe.convertStringToArray(str_actions_collapse);
+            data.close();
+            db.close();
+        } catch (Exception e) {
+            Log.e("OnReceive-Fail", e.toString());
+            e.printStackTrace();
+            return;
+        }
 
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(context, notificationId);
         if (small_icon != -1) {
             mBuilder.setSmallIcon(small_icon);
         } else {
-            mBuilder.setSmallIcon(R.mipmap.app_icon);
+            mBuilder.setSmallIcon(R.drawable.app_icon);
         }
         if (large_icon != -1) {
             Bitmap largeIcon = BitmapFactory.decodeResource(context.getResources(), large_icon);
@@ -95,7 +113,7 @@ public class NotificationPublisher extends BroadcastReceiver {
                 tent.putExtra("collapse", Boolean.parseBoolean(actions_collapse[i]));
                 tent.putExtra("dismiss", Boolean.parseBoolean(actions_dismiss[i]));
                 PendingIntent pendingIntent = PendingIntent.getBroadcast(context, Integer.parseInt(notificationId) * 3 + i, tent, PendingIntent.FLAG_UPDATE_CURRENT);
-                mBuilder.addAction(R.mipmap.app_icon, actions_text[i], pendingIntent);
+                mBuilder.addAction(R.drawable.app_icon, actions_text[i], pendingIntent);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -104,6 +122,12 @@ public class NotificationPublisher extends BroadcastReceiver {
 
         int soundId = NotifyMe.getSound(context, key);
         int soundRawId = NotifyMe.getRawItem(soundId);
+
+        Log.i("key", key);
+        Log.i("soundId", String.valueOf(soundId));
+        Log.i("soundRawId", String.valueOf(soundRawId));
+
+
         Uri uri;
         if (soundRawId == 0) {
             uri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
@@ -127,16 +151,22 @@ public class NotificationPublisher extends BroadcastReceiver {
         NotificationManager mNotificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            NotificationChannel nc = new NotificationChannel(notificationId, notificationId, NotificationManager.IMPORTANCE_HIGH);
-            nc.enableLights(true);
-            nc.setLightColor(led_color);
+            try {
+                NotificationChannel nc = new NotificationChannel(notificationId, notificationId, NotificationManager.IMPORTANCE_HIGH);
+                nc.enableLights(true);
+                nc.setLightColor(led_color);
 
-            AudioAttributes attributes = new AudioAttributes.Builder()
-                    .setUsage(AudioAttributes.USAGE_NOTIFICATION)
-                    .build();
+                AudioAttributes attributes = new AudioAttributes.Builder()
+                        .setUsage(AudioAttributes.USAGE_NOTIFICATION)
+                        .build();
 
-            nc.setSound(uri, attributes); // Sound
-            mNotificationManager.createNotificationChannel(nc);
+                nc.setSound(uri, attributes); // Sound
+                Log.i("sound", "set edildi");
+                mNotificationManager.createNotificationChannel(nc);
+            } catch (Exception e) {
+                Log.e("channelError", e.toString());
+                e.printStackTrace();
+            }
         }
         mNotificationManager.notify(Integer.parseInt(notificationId), notification);
 
@@ -144,7 +174,7 @@ public class NotificationPublisher extends BroadcastReceiver {
     }
 
     private void setAnotherNotification(Context context) {
-
+        Log.i("COMING_FROM", "NotificationPublisher");
         NotifyMe.setNotifications(context);
 
     }

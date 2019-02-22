@@ -1,42 +1,43 @@
 package com.uren.kuranezan.Models.PrayerTimeModels;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.io.Serializable;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class PrayerTimes implements Serializable {
-
+    @JsonProperty
     private String MiladiTarihKisaIso8601;
-
+    @JsonProperty
     private String MiladiTarihKisa;
-
+    @JsonProperty
     private String GunesDogus;
-
+    @JsonProperty
     private String HicriTarihKisa;
-
+    @JsonProperty
     private String KibleSaati;
-
+    @JsonProperty
     private String Ikindi;
-
+    @JsonProperty
     private String MiladiTarihUzunIso8601;
-
+    @JsonProperty
     private String HicriTarihUzun;
-
+    @JsonProperty
     private String Imsak;
-
+    @JsonProperty
     private String Gunes;
-
+    @JsonProperty
     private String MiladiTarihUzun;
-
+    @JsonProperty
     private String Aksam;
-
+    @JsonProperty
     private String Ogle;
-
+    @JsonProperty
     private String Yatsi;
-
+    @JsonProperty
     private String GunesBatis;
-
+    @JsonProperty
     private String AyinSekliURL;
 
     public String getMiladiTarihKisaIso8601() {

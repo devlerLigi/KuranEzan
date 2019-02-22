@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -306,6 +307,7 @@ public class NotifDetailFragment extends BaseFragment
     private void applyChanges() {
         progressBar.setVisibility(View.VISIBLE);
         updateConfig();
+        Log.i("COMING_FROM", "NotifDetailFragment");
         NotifyMe.setNotifications(getContext());
         progressBar.setVisibility(View.GONE);
     }

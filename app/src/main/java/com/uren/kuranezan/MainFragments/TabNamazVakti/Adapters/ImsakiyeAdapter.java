@@ -109,7 +109,7 @@ public class ImsakiyeAdapter extends RecyclerView.Adapter {
 
                 setDate();
                 txtImsak.setText(prayerTimes.getImsak());
-                txtGunes.setText(prayerTimes.getOgle());
+                txtGunes.setText(prayerTimes.getGunes());
                 txtOgle.setText(prayerTimes.getOgle());
                 txtIkindi.setText(prayerTimes.getIkindi());
                 txtAksam.setText(prayerTimes.getAksam());

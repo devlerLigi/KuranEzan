@@ -132,7 +132,7 @@ public class NamazVaktiFragment extends BaseFragment
         if (mView == null) {
             mView = inflater.inflate(R.layout.fragment_main_namaz_vakti, container, false);
             ButterKnife.bind(this, mView);
-
+            Log.i("NamazFragment", "olusturuldu");
             setUI();
             init();
 
@@ -159,12 +159,8 @@ public class NamazVaktiFragment extends BaseFragment
     @Override
     public void onResume() {
         super.onResume();
-
         if (prayerTimesSet) {
-
         }
-
-
     }
 
     private void setUI() {
@@ -391,7 +387,9 @@ public class NamazVaktiFragment extends BaseFragment
     }
 
     private void settingsClicked() {
-        mFragmentNavigation.pushFragment(SettingsFragment.newInstance());
+        if (PrayerTimesList.getInstance() != null && PrayerTimesList.getInstance().getPrayerTimes() != null) {
+            mFragmentNavigation.pushFragment(SettingsFragment.newInstance());
+        }
     }
 
     private void updateCountDown() {
@@ -480,6 +478,7 @@ public class NamazVaktiFragment extends BaseFragment
     }
 
     private void setNotif() {
+        Log.i("COMING_FROM", "NamazFragment");
         NotifyMe.setNotifications(getContext());
         //NotifyMe.setDummyNotif(getContext());
     }

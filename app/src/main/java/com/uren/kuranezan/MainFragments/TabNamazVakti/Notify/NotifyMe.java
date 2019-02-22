@@ -369,7 +369,7 @@ public class NotifyMe {
             Log.i("notifSituation", "closed");
         }
 
-        printActiveNotifications(context);
+        //printActiveNotifications(context);
 
     }
 
@@ -457,6 +457,8 @@ public class NotifyMe {
                 convertNextDatePrayerTimesToDate(context);
 
                 adjustNotificationTimes(context);
+
+                printActiveNotifications(context);
             }
 
         }
@@ -861,7 +863,7 @@ public class NotifyMe {
         intent.putExtra("Extra", "Ezan Kuran");
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        NotifyMe notifyMe = new NotifyMe.Builder(context)
+        NotifyMe notifyMe = new Builder(context)
                 .title(title)
                 .content(content)
                 .color(255, 0, 0, 255)
@@ -870,7 +872,8 @@ public class NotifyMe {
                 .key(key)
                 .addAction(new Intent(), actionDismiss, true, false)
                 .addAction(intent, actionDisplay)
-                .large_icon(R.mipmap.app_icon)
+                .large_icon(R.drawable.app_icon)
+                .small_icon(R.drawable.app_icon)
                 .build();
 
     }
@@ -972,7 +975,7 @@ public class NotifyMe {
         } else if (key.equals(key_prayerTimeBeforeYatsi)) {
             soundId = Config.melodyBeforeYatsi;
         } else if (key.equals(key_prayerTimeYatsi)) {
-            soundId = Config.melodyBeforeYatsi;
+            soundId = Config.melodyYatsi;
         } else {
             soundId = 0;
         }
@@ -1033,7 +1036,7 @@ public class NotifyMe {
                 .addAction(new Intent(), actionDismiss, true, false)
                 .addAction(intent, actionDisplay)
 
-                .large_icon(R.mipmap.app_icon)
+                .large_icon(R.mipmap.app_icon_old)
                 .build();
 
     }

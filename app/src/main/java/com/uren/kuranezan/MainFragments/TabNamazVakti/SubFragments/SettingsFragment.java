@@ -3,6 +3,7 @@ package com.uren.kuranezan.MainFragments.TabNamazVakti.SubFragments;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -157,6 +158,7 @@ public class SettingsFragment extends BaseFragment
                     setNotifSituation();
                 }
                 Config.updateNotif(getContext());
+                Log.i("COMING_FROM", "SettingsFragment");
                 NotifyMe.setNotifications(getContext());
             }
         });
