@@ -37,7 +37,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true"
                     android:layout_centerHorizontal="true"
-                    android:layout_marginBottom="70dp"
+                    android:layout_marginBottom="150dp"
                     android:orientation="vertical">
 
 
@@ -49,13 +49,13 @@
                         android:layout_marginBottom="30dp"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
-                        android:gravity="center"
-                        android:textColor="@color/White"
-                        android:textStyle="bold"
                         android:background="@null"
-                        android:visibility="gone"
+                        android:gravity="center"
                         android:hint="@string/WRITE_SOMETHING"
-                        android:textColorHint="@color/White"/>
+                        android:textColor="@color/White"
+                        android:textColorHint="@color/White"
+                        android:textStyle="bold"
+                        android:visibility="gone" />
 
 
                     <TextView
@@ -69,7 +69,7 @@
                         android:gravity="center"
                         android:textColor="@color/White"
                         android:textStyle="bold"
-                        android:visibility="visible"/>
+                        android:visibility="visible" />
 
                     <TextView
                         android:id="@+id/fridayMessageTv"
