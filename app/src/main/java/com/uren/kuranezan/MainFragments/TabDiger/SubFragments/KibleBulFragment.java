@@ -173,7 +173,7 @@ public class KibleBulFragment extends BaseFragment {
             }
         }
 
-        /*setupCompass();*/
+        setupCompass();
 
         /*compass = new Compass(getContext(), new CompassListener() {
             @Override
